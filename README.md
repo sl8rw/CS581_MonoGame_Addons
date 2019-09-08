@@ -7,6 +7,7 @@
   * https://github.com/MonoGame/MonoGame/issues/6679
   * https://github.com/MonoGame/MonoGame/issues/5616
   * https://github.com/MonoGame/MonoGame/issues/5745
+  * Possible replacement issue: https://github.com/MonoGame/MonoGame/issues/6811
 * Josiah
 
 
