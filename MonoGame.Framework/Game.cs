@@ -203,8 +203,8 @@ namespace Microsoft.Xna.Framework
             {
                 if (value < TimeSpan.Zero)
                     throw new ArgumentOutOfRangeException("The time must be positive.", default(Exception));
-                if (value < _targetElapsedTime)
-                    throw new ArgumentOutOfRangeException("The time must be at least TargetElapsedTime", default(Exception));
+                //if (value < _targetElapsedTime)
+                //    throw new ArgumentOutOfRangeException("The time must be at least TargetElapsedTime", default(Exception));
 
                 _maxElapsedTime = value;
             }
@@ -238,6 +238,12 @@ namespace Microsoft.Xna.Framework
                 {
                     _targetElapsedTime = value;
                     Platform.TargetElapsedTimeChanged();
+                }
+
+                if(value >= _maxElapsedTime) //slater's mod
+                {
+                    throw new ArgumentOutOfRangeException(
+                       "TargetElapsedTime cannot be bigger than MaxElapsedTime (slater edit, as there was a silent fix imposed)", default(Exception));
                 }
             }
         }
