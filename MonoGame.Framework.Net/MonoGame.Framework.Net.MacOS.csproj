@@ -5,7 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1B738549-0449-4504-B978-7BFC347E3F3C}</ProjectGuid>
+    <ProjectGuid>{1294038B-66C2-4359-AFE9-EA06A758CA94}</ProjectGuid>
+    <ProjectTypeGuids>{A3F8F2AB-B479-4A4A-A458-A89E7DC349F1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <RootNamespace>Microsoft.Xna.Framework</RootNamespace>
     <AssemblyName>MonoGame.Framework.Net</AssemblyName>
@@ -19,28 +20,41 @@
     <DebugSymbols>true</DebugSymbols>
     <Optimize>false</Optimize>
     <DebugType>full</DebugType>
-    <OutputPath>bin\Linux\AnyCPU\Debug</OutputPath>
-    <IntermediateOutputPath>obj\Linux\AnyCPU\Debug</IntermediateOutputPath>
-    <DocumentationFile>bin\Linux\AnyCPU\Debug\MonoGame.Framework.Net.xml</DocumentationFile>
-    <DefineConstants>DEBUG;TRACE;LINUX;OPENGL;OPENAL;NET;DESKTOPGL</DefineConstants>
+    <OutputPath>bin\MacOS\AnyCPU\Debug</OutputPath>
+    <IntermediateOutputPath>obj\MacOS\AnyCPU\Debug</IntermediateOutputPath>
+    <DocumentationFile>bin\MacOS\AnyCPU\Debug\MonoGame.Framework.Net.xml</DocumentationFile>
+    <DefineConstants>DEBUG;MONOMAC;OPENGL;OPENAL;NET</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <EnableCodeSigning>False</EnableCodeSigning>
+    <CreatePackage>False</CreatePackage>
+    <EnablePackageSigning>False</EnablePackageSigning>
+    <IncludeMonoRuntime>False</IncludeMonoRuntime>
+    <UseSGen>False</UseSGen>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <DebugType>none</DebugType>
-    <OutputPath>bin\Linux\AnyCPU\Release</OutputPath>
-    <IntermediateOutputPath>obj\Linux\AnyCPU\Release</IntermediateOutputPath>
-    <DocumentationFile>bin\Linux\AnyCPU\Release\MonoGame.Framework.Net.xml</DocumentationFile>
-    <DefineConstants>TRACE;LINUX;OPENGL;OPENAL;NET;DESKTOPGL</DefineConstants>
+    <OutputPath>bin\MacOS\AnyCPU\Release</OutputPath>
+    <IntermediateOutputPath>obj\MacOS\AnyCPU\Release</IntermediateOutputPath>
+    <DocumentationFile>bin\MacOS\AnyCPU\Release\MonoGame.Framework.Net.xml</DocumentationFile>
+    <DefineConstants>MONOMAC;OPENGL;OPENAL;NET</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <EnableCodeSigning>False</EnableCodeSigning>
+    <CreatePackage>False</CreatePackage>
+    <EnablePackageSigning>False</EnablePackageSigning>
+    <IncludeMonoRuntime>False</IncludeMonoRuntime>
+    <UseSGen>False</UseSGen>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Xamarin.Mac" />
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -165,14 +179,20 @@
     <Compile Include="Net\SendDataOptions.cs">
       <ExcludePlatforms>WindowsUniversal</ExcludePlatforms>
     </Compile>
-    <Compile Include="Platform\DesktopGL\GamerServices\Guide.cs">
-      <Platforms>WindowsGL,Linux</Platforms>
+    <Compile Include="Platform\MacOS\GamerServices\Guide.cs">
+      <Platforms>MacOS</Platforms>
     </Compile>
-    <Compile Include="Platform\DesktopGL\GamerServices\MonoGameGamerServicesHelper.cs">
-      <Platforms>WindowsGL,Linux</Platforms>
+    <Compile Include="Platform\MacOS\GamerServices\MonoGameGamerServicesHelper.cs">
+      <Platforms>MacOS</Platforms>
     </Compile>
-    <Compile Include="Platform\DesktopGL\GamerServices\SignedInGamer.cs">
-      <Platforms>WindowsGL,Linux</Platforms>
+    <Compile Include="Platform\MacOS\GamerServices\MonoGameLocalGamerProfile.cs">
+      <Platforms>MacOS</Platforms>
+    </Compile>
+    <Compile Include="Platform\MacOS\GamerServices\SignedInGamer.cs">
+      <Platforms>MacOS</Platforms>
+    </Compile>
+    <Compile Include="Platform\MacOS\GamerServices\SigninController.cs">
+      <Platforms>MacOS</Platforms>
     </Compile>
   </ItemGroup>
   <ItemGroup />
@@ -192,7 +212,7 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <PropertyGroup>
     <_PostBuildHookTimestamp>@(IntermediateAssembly-&gt;'%(FullPath).timestamp')</_PostBuildHookTimestamp>
     <_PostBuildHookHostPlatform>$(Platform)</_PostBuildHookHostPlatform>
@@ -201,13 +221,13 @@
     <Touch Files="$(_PostBuildHookTimestamp)" AlwaysCreate="True" />
   </Target>
   <ItemGroup>
-    <ProjectReference Include="..\ThirdParty\Lidgren.Network\Lidgren.Network.Linux.csproj">
-      <Project>{758CB33D-6EBD-41EA-BB0C-55B1C97A325F}</Project>
-      <Name>Lidgren.Network.Linux</Name>
+    <ProjectReference Include="..\ThirdParty\Lidgren.Network\Lidgren.Network.MacOS.csproj">
+      <Project>{5C3DC4FF-FE5A-4B94-B4A6-6F79E63F3130}</Project>
+      <Name>Lidgren.Network.MacOS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MonoGame.Framework\MonoGame.Framework.Linux.csproj">
-      <Project>{35253CE1-C864-4CD3-8249-4D1319748E8F}</Project>
-      <Name>MonoGame.Framework.Linux</Name>
+    <ProjectReference Include="..\MonoGame.Framework\MonoGame.Framework.MacOS.csproj">
+      <Project>{36C538E6-C32A-4A8D-A39C-566173D7118E}</Project>
+      <Name>MonoGame.Framework.MacOS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
