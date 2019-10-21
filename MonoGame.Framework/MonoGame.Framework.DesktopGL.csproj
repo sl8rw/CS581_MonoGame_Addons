@@ -132,8 +132,8 @@ This package provides you with MonoGame Framework that uses OpenGL for rendering
 
   <ItemGroup>
     <PackageReference Include="docfx.console" Version="2.46.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
   <Import Project="Platform\OpenGL.targets" />
