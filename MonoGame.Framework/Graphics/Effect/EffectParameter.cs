@@ -428,6 +428,10 @@ namespace Microsoft.Xna.Framework.Graphics
 		}
         */
 
+        /// <summary>
+        ///  This function was edited by SHW in order to account for the user setting a float parameter
+        ///  but using an int
+        /// </summary>
         public void SetValue(int value)
         {
             float newValue;
