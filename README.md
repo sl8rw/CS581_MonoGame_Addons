@@ -1,19 +1,19 @@
 ﻿# MonoGame CS581 Slater, Mike, and Josiah Additions:
 
 - Slater
+
   - ~https://github.com/MonoGame/MonoGame/issues/6679~
   - ~https://github.com/MonoGame/MonoGame/issues/6899~
   - https://github.com/MonoGame/MonoGame/issues/6909
   - https://github.com/MonoGame/MonoGame/issues/5616
   - https://github.com/MonoGame/MonoGame/issues/5745
   - Possible replacement issue: https://github.com/MonoGame/MonoGame/issues/6811
-- ~Mike~
 
+- Josiah
+- Mike
   - https://github.com/MonoGame/MonoGame/issues/5000
   - https://github.com/MonoGame/MonoGame/issues/6633
   - https://github.com/MonoGame/MonoGame/issues/6603
-
-- ~Josiah~
 
 # MonoGame (Original Readme)
 
