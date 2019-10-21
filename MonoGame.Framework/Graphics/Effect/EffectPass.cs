@@ -64,6 +64,10 @@ namespace Microsoft.Xna.Framework.Graphics
         {
             // Set/get the correct shader handle/cleanups.
 
+            if (_effect.CurrentTechnique == null)
+            {
+                throw new System.ArgumentException("invalid effect parameter string.");
+            }
             var current = _effect.CurrentTechnique;
             _effect.OnApply();
             if (_effect.CurrentTechnique != current)
