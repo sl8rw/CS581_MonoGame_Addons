@@ -4,6 +4,7 @@
 
   - ~https://github.com/MonoGame/MonoGame/issues/6679~
   - ~https://github.com/MonoGame/MonoGame/issues/6899~
+  - https://github.com/MonoGame/MonoGame/issues/3578
   - https://github.com/MonoGame/MonoGame/issues/6909
   - https://github.com/MonoGame/MonoGame/issues/5616
   - https://github.com/MonoGame/MonoGame/issues/5745
