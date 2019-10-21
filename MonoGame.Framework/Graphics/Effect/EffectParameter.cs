@@ -431,18 +431,23 @@ namespace Microsoft.Xna.Framework.Graphics
         public void SetValue(int value)
         {
             float newValue;
-            if (ParameterClass != EffectParameterClass.Scalar || ParameterType != EffectParameterType.Int32)
+            if (ParameterClass != EffectParameterClass.Scalar || ParameterType != EffectParameterType.Int32 || ParameterType != EffectParameterType.Single)
             {
-                
-                newValue = Convert.ToSingle(value);
-                Console.WriteLine(newValue.GetType());
-                SetValue(newValue);
+                throw new InvalidCastException("Check your parameter type in effect.fx file");
             }
 
-
-            else
+            if (ParameterType == EffectParameterType.Single)
             {
-                Console.WriteLine(value.GetType());
+
+                newValue = Convert.ToSingle(value);
+                //Console.WriteLine(newValue.GetType());
+                SetValue(newValue);
+            }
+            
+
+            else //parameter type is int
+            {
+                //Console.WriteLine(value.GetType());
 
 #if OPENGL
 
