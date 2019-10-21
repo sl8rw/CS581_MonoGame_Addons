@@ -431,9 +431,9 @@ namespace Microsoft.Xna.Framework.Graphics
         public void SetValue(int value)
         {
             float newValue;
-            if (ParameterClass != EffectParameterClass.Scalar || ParameterType != EffectParameterType.Int32 || ParameterType != EffectParameterType.Single)
+            if (ParameterClass != EffectParameterClass.Scalar || ParameterType != EffectParameterType.Int32 && ParameterType != EffectParameterType.Single)
             {
-                throw new InvalidCastException("Check your parameter type in effect.fx file");
+                throw new InvalidCastException();
             }
 
             if (ParameterType == EffectParameterType.Single)
