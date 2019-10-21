@@ -10,6 +10,9 @@ namespace Microsoft.Xna.Framework.Graphics
 {
 	public class Effect : GraphicsResource
     {
+        private EffectTechnique _currentTechnique = null;
+
+
         struct MGFXHeader 
         {
             /// <summary>
@@ -38,7 +41,25 @@ namespace Microsoft.Xna.Framework.Graphics
 
         public EffectTechniqueCollection Techniques { get; private set; }
 
-        public EffectTechnique CurrentTechnique { get; set; }
+        public EffectTechnique CurrentTechnique
+        {
+            get
+            {
+                return _currentTechnique;
+            }
+
+            set //https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/exceptions/creating-and-throwing-exceptions
+            {
+                if (value == null)
+                    throw new System.ArgumentException("sl8r: 54 invalid effect parameter string.");
+                else
+                {
+                    _currentTechnique = value;
+                }
+            }
+        }
+                    
+
   
         internal ConstantBuffer[] ConstantBuffers { get; private set; }
 
