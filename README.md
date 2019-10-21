@@ -9,7 +9,7 @@
   - ~https://github.com/MonoGame/MonoGame/issues/6679~
   - ~https://github.com/MonoGame/MonoGame/issues/6899~
   - ~https://github.com/MonoGame/MonoGame/issues/3578~
-  - **DocFX IMPORTANT:**https://github.com/MonoGame/MonoGame/issues/5559 _ref:_ https://github.com/dotnet/docfx/projects/1 for v3 of docFX
+  - ~**DocFX IMPORTANT:**https://github.com/MonoGame/MonoGame/issues/5559 _ref:_ https://github.com/dotnet/docfx/projects/1 for v3 of docFX~ **cancelled due to v3 release date in a few months**
   - https://github.com/MonoGame/MonoGame/issues/5745
   - https://github.com/MonoGame/MonoGame/issues/6909
   - https://github.com/MonoGame/MonoGame/issues/5616
