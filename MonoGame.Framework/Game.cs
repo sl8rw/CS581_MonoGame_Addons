@@ -337,8 +337,11 @@ namespace Microsoft.Xna.Framework
         public void ResetElapsedTime()
         {
             Platform.ResetElapsedTime();
-            _gameTimer.Reset();
-            _gameTimer.Start();
+            if (_gameTimer != null)
+            {
+                _gameTimer.Reset();
+                _gameTimer.Start();
+            }
             _accumulatedElapsedTime = TimeSpan.Zero;
             _gameTime.ElapsedGameTime = TimeSpan.Zero;
             _previousTicks = 0L;
@@ -417,7 +420,7 @@ namespace Microsoft.Xna.Framework
 
         private TimeSpan _accumulatedElapsedTime;
         private readonly GameTime _gameTime = new GameTime();
-        private Stopwatch _gameTimer;
+        private Stopwatch _gameTimer = new Stopwatch();
         private long _previousTicks = 0;
         private int _updateFrameLag;
 #if WINDOWS_UAP
@@ -444,6 +447,10 @@ namespace Microsoft.Xna.Framework
             }
 
             // Advance the accumulated elapsed time.
+            if (_gameTimer == null)
+            {
+                throw new NullReferenceException();
+            }
             var currentTicks = _gameTimer.Elapsed.Ticks;
             _accumulatedElapsedTime += TimeSpan.FromTicks(currentTicks - _previousTicks);
             _previousTicks = currentTicks;
