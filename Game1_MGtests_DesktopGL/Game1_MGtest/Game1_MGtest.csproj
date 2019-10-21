@@ -106,13 +106,13 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CS581_MonoGame_Addons\MonoGame.Framework\MonoGame.Framework.DesktopGL.csproj">
-      <Project>{46746280-a113-4ef2-9c90-225eda3d7c46}</Project>
-      <Name>MonoGame.Framework.DesktopGL</Name>
-    </ProjectReference>
+    <Content Include="Content\4jA0ZsP.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\4jA0ZsP.png" />
+    <ProjectReference Include="..\..\MonoGame.Framework\MonoGame.Framework.DesktopGL.csproj">
+      <Project>{76f4701e-675d-47d4-b1b6-19c44b17135c}</Project>
+      <Name>MonoGame.Framework.DesktopGL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
