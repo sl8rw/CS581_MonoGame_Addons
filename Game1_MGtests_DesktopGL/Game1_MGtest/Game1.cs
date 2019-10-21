@@ -49,10 +49,11 @@ namespace Game1_MGtest
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
+            ResetElapsedTime();
             spriteBatch = new SpriteBatch(GraphicsDevice);
             texture = Content.Load<Texture2D>("graphics/4jA0ZsP");
             effect = Content.Load<Effect>("testeffect");
-
+            ResetElapsedTime();
 
             // TODO: use this.Content to load your game content here
         }
