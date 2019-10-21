@@ -28,6 +28,10 @@
 - Add an assembly reference to this too
 - Build as usual (this will use your local monogame edits so you can step into)
 
+# MonoGame Documentation
+
+- **possible documentation software change**: If using a mac, download docfx using Homebrew: `brew install docfx`
+
 # MonoGame (Original Readme)
 
 One framework for creating powerful cross-platform games. The spiritual successor to XNA with thousands of titles shipped across desktop, mobile, and console platforms. [MonoGame](http://www.monogame.net/) is a fully managed .NET open source game framework without any black boxes. Create, develop and distribute your games your way.
@@ -37,6 +41,7 @@ One framework for creating powerful cross-platform games. The spiritual successo
 - [MonoGame Trello Board for our 581 group:](#monogame-trello-board-for-our-581-group)
 - [MonoGame CS581 Slater, Mike, and Josiah Additions:](#monogame-cs581-slater-mike-and-josiah-additions)
 - [MonoGame How To Test Locally](#monogame-how-to-test-locally)
+- [MonoGame Documentation](#monogame-documentation)
 - [MonoGame (Original Readme)](#monogame-original-readme)
   - [Build Status](#build-status)
   - [Supported Platforms](#supported-platforms)
