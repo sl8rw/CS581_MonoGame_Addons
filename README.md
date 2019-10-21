@@ -32,7 +32,7 @@
 
 # MonoGame Documentation
 
-- **possible documentation software change**: If using a mac, download docfx using Homebrew: `brew install docfx`
+- **possible documentation software change**: If using a mac, download docfx using Homebrew: `brew install docfx as this will install _v2.46_
 
 # MonoGame (Original Readme)
 
