@@ -1,4 +1,8 @@
-﻿# MonoGame CS581 Slater, Mike, and Josiah Additions:
+﻿# MonoGame Trello Board for our 581 group:
+
+- https://trello.com/invite/b/9iFK5BR2/8c4fcccd4155f47c2dcfa7818ca526ce/cs581-monogame
+
+# MonoGame CS581 Slater, Mike, and Josiah Additions:
 
 - Slater
 
@@ -30,6 +34,7 @@ One framework for creating powerful cross-platform games. The spiritual successo
 
 [![Join the chat at https://gitter.im/MonoGame/MonoGame](https://badges.gitter.im/MonoGame/MonoGame.svg)](https://gitter.im/MonoGame/MonoGame?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
+- [MonoGame Trello Board for our 581 group:](#monogame-trello-board-for-our-581-group)
 - [MonoGame CS581 Slater, Mike, and Josiah Additions:](#monogame-cs581-slater-mike-and-josiah-additions)
 - [MonoGame How To Test Locally](#monogame-how-to-test-locally)
 - [MonoGame (Original Readme)](#monogame-original-readme)
