@@ -19,10 +19,6 @@
   - Possible replacement issue: https://github.com/MonoGame/MonoGame/issues/6811
 
 - Josiah
-- Mike
-  - https://github.com/MonoGame/MonoGame/issues/5000
-  - https://github.com/MonoGame/MonoGame/issues/6633
-  - https://github.com/MonoGame/MonoGame/issues/6603
 
 # MonoGame How To Test Locally
 
