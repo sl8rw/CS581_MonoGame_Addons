@@ -1,4 +1,4 @@
-﻿// MIT License - Copyright (C) The Mono.Xna Team
+// MIT License - Copyright (C) The Mono.Xna Team
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
@@ -54,13 +54,19 @@ namespace Microsoft.Xna.Framework
         }
 
         // adapted from http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-7-intersecting-simple-shapes/ray-box-intersection/
-        // Above link no longer works. Believe page to have moved.  Now referencing:
-        // https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection
+
+        // further adaptation which does multiplication instead of division https://www.dotnetperls.com/reciprocal
+
         public float? Intersects(BoundingBox box)
         {
             const float Epsilon = 1e-6f;
 
             float? tMin = null, tMax = null;
+            //Direction is a vector
+            Vector3 inverseDirection=new Vector3();
+            Vector3 oneVector = new Vector3(1, 1, 1);
+            inverseDirection = Vector3.Divide(oneVector, Direction);
+            Console.WriteLine("inverse dir:", inverseDirection);
 
             if (Math.Abs(Direction.X) < Epsilon)
             {
@@ -69,8 +75,8 @@ namespace Microsoft.Xna.Framework
             }
             else
             {
-                tMin = (box.Min.X - Position.X) / Direction.X;
-                tMax = (box.Max.X - Position.X) / Direction.X;
+                tMin = (box.Min.X - Position.X) * inverseDirection.X;
+                tMax = (box.Max.X - Position.X) * inverseDirection.X;
 
                 if (tMin > tMax)
                 {
@@ -87,8 +93,8 @@ namespace Microsoft.Xna.Framework
             }
             else
             {
-                var tMinY = (box.Min.Y - Position.Y) / Direction.Y;
-                var tMaxY = (box.Max.Y - Position.Y) / Direction.Y;
+                var tMinY = (box.Min.Y - Position.Y) * inverseDirection.Y;
+                var tMaxY = (box.Max.Y - Position.Y) * inverseDirection.Y;
 
                 if (tMinY > tMaxY)
                 {
@@ -111,8 +117,8 @@ namespace Microsoft.Xna.Framework
             }
             else
             {
-                var tMinZ = (box.Min.Z - Position.Z) / Direction.Z;
-                var tMaxZ = (box.Max.Z - Position.Z) / Direction.Z;
+                var tMinZ = (box.Min.Z - Position.Z) / inverseDirection.Z;
+                var tMaxZ = (box.Max.Z - Position.Z) / inverseDirection.Z; ;
 
                 if (tMinZ > tMaxZ)
                 {
