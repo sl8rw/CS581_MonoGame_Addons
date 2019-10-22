@@ -142,6 +142,8 @@ namespace Microsoft.Xna.Framework.Graphics
                 throw new ArgumentNullException("texture");
             if (!_beginCalled)
                 throw new InvalidOperationException("Draw was called, but Begin has not yet been called. Begin must be called successfully before you can call Draw.");
+            if (Array.Exists(GraphicsDevice.GetRenderTargets(), element => element == texture));
+                throw new System.ArgumentException("RenderTarget2D self reference error.");
         }
 
         void CheckValid(SpriteFont spriteFont, string text)
