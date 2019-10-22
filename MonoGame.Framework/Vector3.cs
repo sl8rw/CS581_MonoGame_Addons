@@ -1038,7 +1038,7 @@ namespace Microsoft.Xna.Framework
         /// Creates a new <see cref="Vector3"/> that contains a transformation of 3d-vector by the specified <see cref="Matrix"/>.
         /// </summary>
         /// <param name="position">Source <see cref="Vector3"/>.</param>
-        /// <param name="matrix">The transformation <see cref="Matrix"/>.</param>
+        /// <param name="matrix">The transformation <see cref="Matrix"/>.  Does not use 4th column.</param>
         /// <returns>Transformed <see cref="Vector3"/>.</returns>
         public static Vector3 Transform(Vector3 position, Matrix matrix)
         {
@@ -1050,7 +1050,7 @@ namespace Microsoft.Xna.Framework
         /// Creates a new <see cref="Vector3"/> that contains a transformation of 3d-vector by the specified <see cref="Matrix"/>.
         /// </summary>
         /// <param name="position">Source <see cref="Vector3"/>.</param>
-        /// <param name="matrix">The transformation <see cref="Matrix"/>.</param>
+        /// <param name="matrix">The transformation <see cref="Matrix"/>.  Does not use 4th column.</param>
         /// <param name="result">Transformed <see cref="Vector3"/> as an output parameter.</param>
         public static void Transform(ref Vector3 position, ref Matrix matrix, out Vector3 result)
         {
@@ -1097,7 +1097,7 @@ namespace Microsoft.Xna.Framework
         /// </summary>
         /// <param name="sourceArray">Source array.</param>
         /// <param name="sourceIndex">The starting index of transformation in the source array.</param>
-        /// <param name="matrix">The transformation <see cref="Matrix"/>.</param>
+        /// <param name="matrix">The transformation <see cref="Matrix"/>.  Does not use 4th column.</param>
         /// <param name="destinationArray">Destination array.</param>
         /// <param name="destinationIndex">The starting index in the destination array, where the first <see cref="Vector3"/> should be written.</param>
         /// <param name="length">The number of vectors to be transformed.</param>
@@ -1167,7 +1167,7 @@ namespace Microsoft.Xna.Framework
         /// Apply transformation on all vectors within array of <see cref="Vector3"/> by the specified <see cref="Matrix"/> and places the results in an another array.
         /// </summary>
         /// <param name="sourceArray">Source array.</param>
-        /// <param name="matrix">The transformation <see cref="Matrix"/>.</param>
+        /// <param name="matrix">The transformation <see cref="Matrix"/>.  Does not use 4th column.</param>
         /// <param name="destinationArray">Destination array.</param>
         public static void Transform(Vector3[] sourceArray, ref Matrix matrix, Vector3[] destinationArray)
         {
