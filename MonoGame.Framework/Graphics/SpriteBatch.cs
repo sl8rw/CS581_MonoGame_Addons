@@ -142,6 +142,7 @@ namespace Microsoft.Xna.Framework.Graphics
                 throw new ArgumentNullException("texture");
             if (!_beginCalled)
                 throw new InvalidOperationException("Draw was called, but Begin has not yet been called. Begin must be called successfully before you can call Draw.");
+            
         }
 
         void CheckValid(SpriteFont spriteFont, string text)
@@ -474,6 +475,9 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <param name="color">A color mask.</param>
 		public void Draw (Texture2D texture, Rectangle destinationRectangle, Rectangle? sourceRectangle, Color color)
 		{
+            if (Array.Exists(GraphicsDevice.GetRenderTargets(), element => element.RenderTarget == texture)) 
+                throw new System.ArgumentException("RenderTarget2D self reference error.");
+
             CheckValid(texture);
             
 			var item = _batcher.CreateBatchItem();
@@ -516,7 +520,10 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <param name="color">A color mask.</param>
 		public void Draw (Texture2D texture, Vector2 position, Color color)
 		{
-			CheckValid(texture);
+            if (Array.Exists(GraphicsDevice.GetRenderTargets(), element => element.RenderTarget == texture))
+                throw new System.ArgumentException("RenderTarget2D self reference error.");
+
+            CheckValid(texture);
             
 			var item = _batcher.CreateBatchItem();
 			item.Texture = texture;
@@ -544,6 +551,8 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <param name="color">A color mask.</param>
         public void Draw(Texture2D texture, Rectangle destinationRectangle, Color color)
 		{
+            if (Array.Exists(GraphicsDevice.GetRenderTargets(), element => element.RenderTarget == texture))
+                throw new System.ArgumentException("RenderTarget2D self reference error.");
             CheckValid(texture);
             
             var item = _batcher.CreateBatchItem();
