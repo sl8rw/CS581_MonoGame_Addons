@@ -10,7 +10,7 @@
   - ~https://github.com/MonoGame/MonoGame/issues/6899~ **_COMPLETED_**
   - ~https://github.com/MonoGame/MonoGame/issues/3578~ **_COMPLETED_**
   - ~https://github.com/MonoGame/MonoGame/issues/6112~ **_COMPLETED_**
-  - Exam Fix: Implement a change for vectors preventing division by 0 _ref:_ https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection
+  - ~Exam Fix: Implement a change for vectors preventing division by 0 _ref:_ https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection~
   - ~**DocFX IMPORTANT:**https://github.com/MonoGame/MonoGame/issues/5559 _ref:_ https://github.com/dotnet/docfx/projects/1 for v3 of docFX~ **cancelled due to v3 release date in a few months**
   - https://github.com/MonoGame/MonoGame/issues/5745
   - https://github.com/MonoGame/MonoGame/issues/6909
@@ -28,6 +28,10 @@
 
 - Make a MG project using the MG templates you can download with MG installed from [here](http://www.monogame.net/downloads/)
 - Delete the MG assembly reference
+- **Make sure to run the following before adding csproj file:**
+  - `git submodule update --init`
+  - if the above fails (_server does not..._) then run `git submodule sync` and then rerun `git submodule update --init`
+  - Windows: `.\Protobuild.exe --generate $PLATFORM`
 - Right click your solution project and add existing project. Find the csproj file in the MonoGame.Framework directory
 - Add an assembly reference to this too
 - Build as usual (this will use your local monogame edits so you can step into)
