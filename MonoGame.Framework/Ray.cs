@@ -1,4 +1,4 @@
-﻿// MIT License - Copyright (C) The Mono.Xna Team
+// MIT License - Copyright (C) The Mono.Xna Team
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
@@ -54,7 +54,9 @@ namespace Microsoft.Xna.Framework
         }
 
         // adapted from http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-7-intersecting-simple-shapes/ray-box-intersection/
+
         // further adaptation which does multiplication instead of division https://www.dotnetperls.com/reciprocal
+
         public float? Intersects(BoundingBox box)
         {
             const float Epsilon = 1e-6f;
@@ -132,11 +134,11 @@ namespace Microsoft.Xna.Framework
                 if (!tMax.HasValue || tMaxZ < tMax) tMax = tMaxZ;
             }
 
-            // having a positive tMin and a negative tMax means the ray is inside the box
+            // having a negative tMin and a positive tMax means the ray is inside the box
             // we expect the intesection distance to be 0 in that case
             if ((tMin.HasValue && tMin < 0) && tMax > 0) return 0;
 
-            // a negative tMin means that the intersection point is behind the ray's origin
+            // a negative tMin without a positive tMax means that the intersection point is behind the ray's origin
             // we discard these as not hitting the AABB
             if (tMin < 0) return null;
 
