@@ -54,6 +54,8 @@ namespace Microsoft.Xna.Framework
         }
 
         // adapted from http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-7-intersecting-simple-shapes/ray-box-intersection/
+        // Above link no longer works. Believe page to have moved.  Now referencing:
+        // https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection
         public float? Intersects(BoundingBox box)
         {
             const float Epsilon = 1e-6f;
@@ -126,11 +128,11 @@ namespace Microsoft.Xna.Framework
                 if (!tMax.HasValue || tMaxZ < tMax) tMax = tMaxZ;
             }
 
-            // having a positive tMin and a negative tMax means the ray is inside the box
+            // having a negative tMin and a positive tMax means the ray is inside the box
             // we expect the intesection distance to be 0 in that case
             if ((tMin.HasValue && tMin < 0) && tMax > 0) return 0;
 
-            // a negative tMin means that the intersection point is behind the ray's origin
+            // a negative tMin without a positive tMax means that the intersection point is behind the ray's origin
             // we discard these as not hitting the AABB
             if (tMin < 0) return null;
 
