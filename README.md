@@ -24,8 +24,8 @@
 2. Delete the MG assembly reference
 3. `git submodule update --init`
    - if the above _fails_ (server does not...):
-     i. `git submodule sync`
-     ii. `git submodule update --init`
+     1. `git submodule sync`
+     2. `git submodule update --init`
 4. Windows: `.\Protobuild.exe --generate $PLATFORM`
 5. Right click your solution project and add existing project. Find the csproj file in the MonoGame.Framework directory
 6. Add an assembly reference to this too
