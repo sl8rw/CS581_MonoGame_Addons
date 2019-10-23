@@ -520,6 +520,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <param name="color">A color mask.</param>
 		public void Draw (Texture2D texture, Vector2 position, Color color)
 		{
+            //This test is to prevent trying to draw a texture that is also a target.
             if (Array.Exists(GraphicsDevice.GetRenderTargets(), element => element.RenderTarget == texture))
                 throw new System.ArgumentException("RenderTarget2D self reference error.");
 
@@ -551,6 +552,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <param name="color">A color mask.</param>
         public void Draw(Texture2D texture, Rectangle destinationRectangle, Color color)
 		{
+            //This test is to prevent trying to draw a texture that is also a target.
             if (Array.Exists(GraphicsDevice.GetRenderTargets(), element => element.RenderTarget == texture))
                 throw new System.ArgumentException("RenderTarget2D self reference error.");
             CheckValid(texture);
