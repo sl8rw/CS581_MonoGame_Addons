@@ -29,7 +29,7 @@
 
 # MonoGame Documentation
 
-- **possible documentation software change**: If using a mac, download docfx using Homebrew: `brew install docfx as this will install _v2.46_
+- Currently using SharpDoc and XML Documentation Comments: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/
 
 # MonoGame (Original Readme)
 
