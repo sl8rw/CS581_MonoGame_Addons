@@ -11,7 +11,7 @@
   - [issue 3578](https://github.com/MonoGame/MonoGame/issues/3578) **_COMPLETED_**
   - [issue 6112](https://github.com/MonoGame/MonoGame/issues/6112) **_COMPLETED_**
   - **Custom Issue:** Implement a change for vectors that optimizes the runtime efficiency and prevents division by possible 0 **_COMPLETED_**
-    - [ref](https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection)
+    - Use this as a [reference](https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection)
 
 - Josiah
 
