@@ -48,10 +48,10 @@ namespace Microsoft.Xna.Framework
         private bool _initialized = false;
         private bool _isFixedTimeStep = true;
 
-        private TimeSpan _targetElapsedTime = TimeSpan.FromMilliseconds(0); // i edited this too so that both are the same
+        private TimeSpan _targetElapsedTime = TimeSpan.FromTicks(166667); // 60fps
         private TimeSpan _inactiveSleepTime = TimeSpan.FromSeconds(0.02);
 
-        private TimeSpan _maxElapsedTime = TimeSpan.FromMilliseconds(0); //i edited this so i can try my flag
+        private TimeSpan _maxElapsedTime = TimeSpan.FromMilliseconds(500);
 
         private bool _shouldExit;
         private bool _suppressDraw;
@@ -205,7 +205,6 @@ namespace Microsoft.Xna.Framework
                     throw new ArgumentOutOfRangeException("The time must be positive.", default(Exception));
                 if (value < _targetElapsedTime)
                     throw new ArgumentOutOfRangeException("The time must be at least TargetElapsedTime", default(Exception));
-                
 
                 _maxElapsedTime = value;
             }
@@ -234,19 +233,14 @@ namespace Microsoft.Xna.Framework
                 if (value <= TimeSpan.Zero)
                     throw new ArgumentOutOfRangeException(
                         "The time must be positive and non-zero.", default(Exception));
-
+                if(value>MaxElapsedTime) //clamps the targetElapsedTime by the MaxElapsedTime
+                    throw new ArgumentOutOfRangeException("The time cannot be greater than the MaxElapsedTime", default(Exception));
+                
                 if (value != _targetElapsedTime)
                 {
                     _targetElapsedTime = value;
                     Platform.TargetElapsedTimeChanged();
                 }
-
-                if (value > _maxElapsedTime && _maxElapsedTime!=TimeSpan.FromMilliseconds(0)) //slater's mod
-                {
-                    throw new ArgumentOutOfRangeException(
-                       "TargetElapsedTime cannot be bigger than MaxElapsedTime (slater edit, as there was a silent fix imposed)", default(Exception));
-                }
-
             }
         }
 
