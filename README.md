@@ -14,6 +14,7 @@
     - [ref](https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection)
 
 - Josiah
+
   - [issue 4921](https://github.com/MonoGame/MonoGame/issues/4921) **_COMPLETED_**
   - [issue 4586](https://github.com/MonoGame/MonoGame/issues/4586) **_COMPLETED_**
   - [issue 6396](https://github.com/MonoGame/MonoGame/issues/6396) **_COMPLETED_**
