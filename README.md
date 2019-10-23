@@ -1,8 +1,8 @@
-﻿# MonoGame: Trello Board:
+﻿# MonoGame: Trello Board
 
 - [Trello Board](https://trello.com/invite/b/9iFK5BR2/8c4fcccd4155f47c2dcfa7818ca526ce/cs581-monogame)
 
-# MonoGame: CS581 Slater and Josiah Additions:
+# MonoGame: CS581 Slater and Josiah Additions
 
 - Slater
 
@@ -43,8 +43,8 @@ One framework for creating powerful cross-platform games. The spiritual successo
 
 [![Join the chat at https://gitter.im/MonoGame/MonoGame](https://badges.gitter.im/MonoGame/MonoGame.svg)](https://gitter.im/MonoGame/MonoGame?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-- [MonoGame: Trello Board:](#monogame-trello-board)
-- [MonoGame: CS581 Slater and Josiah Additions:](#monogame-cs581-slater-and-josiah-additions)
+- [MonoGame: Trello Board](#monogame-trello-board)
+- [MonoGame: CS581 Slater and Josiah Additions](#monogame-cs581-slater-and-josiah-additions)
 - [MonoGame: How To Test Locally](#monogame-how-to-test-locally)
 - [MonoGame: Documentation](#monogame-documentation)
 - [MonoGame: Original Readme](#monogame-original-readme)
