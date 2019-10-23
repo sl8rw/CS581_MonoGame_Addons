@@ -2,7 +2,7 @@
 
 - [Trello Board](https://trello.com/invite/b/9iFK5BR2/8c4fcccd4155f47c2dcfa7818ca526ce/cs581-monogame)
 
-# MonoGame CS581 Slater, Mike, and Josiah Additions:
+# MonoGame: CS581 Slater and Josiah Additions:
 
 - Slater
 
@@ -19,7 +19,7 @@
   - [issue 4586](https://github.com/MonoGame/MonoGame/issues/4586) **_COMPLETED_**
   - [issue 6396](https://github.com/MonoGame/MonoGame/issues/6396) **_COMPLETED_**
 
-# MonoGame How To Test Locally
+# MonoGame: How To Test Locally
 
 1. Make a MG project using the MG templates you can download with MG installed from [here](http://www.monogame.net/downloads/)
 2. Delete the MG assembly reference
@@ -32,22 +32,22 @@
 6. Add an assembly reference to this too
 7. Build as usual (this will use your local MonoGame edits so you can step through it)
 
-# MonoGame Documentation
+# MonoGame: Documentation
 
 - Currently using SharpDoc and XML Documentation Comments: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/
 - They want to move to DocFX but they are currently _waiting_ for v3.0
 
-# MonoGame (Original Readme)
+# MonoGame: Original Readme
 
 One framework for creating powerful cross-platform games. The spiritual successor to XNA with thousands of titles shipped across desktop, mobile, and console platforms. [MonoGame](http://www.monogame.net/) is a fully managed .NET open source game framework without any black boxes. Create, develop and distribute your games your way.
 
 [![Join the chat at https://gitter.im/MonoGame/MonoGame](https://badges.gitter.im/MonoGame/MonoGame.svg)](https://gitter.im/MonoGame/MonoGame?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 - [MonoGame Trello Board for our 581 group:](#monogame-trello-board-for-our-581-group)
-- [MonoGame CS581 Slater, Mike, and Josiah Additions:](#monogame-cs581-slater-mike-and-josiah-additions)
-- [MonoGame How To Test Locally](#monogame-how-to-test-locally)
-- [MonoGame Documentation](#monogame-documentation)
-- [MonoGame (Original Readme)](#monogame-original-readme)
+- [MonoGame: CS581 Slater and Josiah Additions:](#monogame-cs581-slater-and-josiah-additions)
+- [MonoGame: How To Test Locally](#monogame-how-to-test-locally)
+- [MonoGame: Documentation](#monogame-documentation)
+- [MonoGame: Original Readme](#monogame-original-readme)
   - [Build Status](#build-status)
   - [Supported Platforms](#supported-platforms)
   - [Support and Contributions](#support-and-contributions)
