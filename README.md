@@ -10,13 +10,8 @@
   - ~https://github.com/MonoGame/MonoGame/issues/6899~ **_COMPLETED_**
   - ~https://github.com/MonoGame/MonoGame/issues/3578~ **_COMPLETED_**
   - ~https://github.com/MonoGame/MonoGame/issues/6112~ **_COMPLETED_**
-  - ~Exam Fix: Implement a change for vectors preventing division by 0 _ref:_ https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection~
+  - ~Exam Fix: Implement a change for vectors preventing division by 0 _ref:_ https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection~ **_COMPLETED_**
   - ~**DocFX IMPORTANT:**https://github.com/MonoGame/MonoGame/issues/5559 _ref:_ https://github.com/dotnet/docfx/projects/1 for v3 of docFX~ **cancelled due to v3 release date in a few months**
-  - https://github.com/MonoGame/MonoGame/issues/5745
-  - https://github.com/MonoGame/MonoGame/issues/6909
-  - https://github.com/MonoGame/MonoGame/issues/5616
-  - https://github.com/MonoGame/MonoGame/issues/5745
-  - Possible replacement issue: https://github.com/MonoGame/MonoGame/issues/6811
 
 - Josiah
 
