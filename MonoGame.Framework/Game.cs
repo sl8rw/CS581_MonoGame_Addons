@@ -221,6 +221,10 @@ namespace Microsoft.Xna.Framework
             set { Platform.IsMouseVisible = value; }
         }
 
+        /// <summary>
+        /// The target amount of time we will frameskip over and only perform Update calls with no Draw calls.  This value can never be greater than the MaxElapsedTime
+        /// MonoGame extension.
+        /// </summary>
         public TimeSpan TargetElapsedTime
         {
             get { return _targetElapsedTime; }
