@@ -41,6 +41,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         public EffectTechniqueCollection Techniques { get; private set; }
 
+        //The setter has been modified so that in the event a user inserts an incorrect effect parameter name, the exception will be thrown
         public EffectTechnique CurrentTechnique
         {
             get
@@ -48,10 +49,10 @@ namespace Microsoft.Xna.Framework.Graphics
                 return _currentTechnique;
             }
 
-            set //https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/exceptions/creating-and-throwing-exceptions
+            set
             {
                 if (value == null)
-                    throw new System.ArgumentException("sl8r: 54 invalid effect parameter string.");
+                    throw new System.ArgumentException("invalid effect parameter string.");
                 else
                 {
                     _currentTechnique = value;
