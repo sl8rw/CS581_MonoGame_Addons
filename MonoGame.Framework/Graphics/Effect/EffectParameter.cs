@@ -428,6 +428,7 @@ namespace Microsoft.Xna.Framework.Graphics
 		}
         */
 
+        //This has been modified to account for a user passing an int when a float was needed.  It calls the correct SetValue overload.
         public void SetValue(int value)
         {
             float newValue;
