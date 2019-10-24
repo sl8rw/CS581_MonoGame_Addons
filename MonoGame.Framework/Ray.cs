@@ -54,9 +54,12 @@ namespace Microsoft.Xna.Framework
         }
 
         // adapted from http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-7-intersecting-simple-shapes/ray-box-intersection/
+        // further adaptation which does multiplication instead of division https://www.dotnetperls.com/reciprocal and https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection
 
-        // further adaptation which does multiplication instead of division https://www.dotnetperls.com/reciprocal
-
+        /// <summary>
+        /// Used for determining collisions
+        /// Optimized intersection code using multiplication and one vector divison call
+        /// </summary>
         public float? Intersects(BoundingBox box)
         {
             const float Epsilon = 1e-6f;
@@ -64,9 +67,9 @@ namespace Microsoft.Xna.Framework
             float? tMin = null, tMax = null;
             //Direction is a vector
             Vector3 inverseDirection=new Vector3();
-            Vector3 oneVector = new Vector3(1, 1, 1);
-            inverseDirection = Vector3.Divide(oneVector, Direction);
-            Console.WriteLine("inverse dir:", inverseDirection);
+            Vector3 oneVector = new Vector3(1, 1, 1); //initialized one vector used for calculating the reciprocal
+            inverseDirection = Vector3.Divide(oneVector, Direction); //reciprocal
+            //Console.WriteLine("inverse dir:", inverseDirection);
 
             if (Math.Abs(Direction.X) < Epsilon)
             {
@@ -75,7 +78,7 @@ namespace Microsoft.Xna.Framework
             }
             else
             {
-                tMin = (box.Min.X - Position.X) * inverseDirection.X;
+                tMin = (box.Min.X - Position.X) * inverseDirection.X; //multiplication by the reciprocal to increase runtime efficiency
                 tMax = (box.Max.X - Position.X) * inverseDirection.X;
 
                 if (tMin > tMax)
@@ -118,7 +121,7 @@ namespace Microsoft.Xna.Framework
             else
             {
                 var tMinZ = (box.Min.Z - Position.Z) / inverseDirection.Z;
-                var tMaxZ = (box.Max.Z - Position.Z) / inverseDirection.Z; ;
+                var tMaxZ = (box.Max.Z - Position.Z) / inverseDirection.Z; 
 
                 if (tMinZ > tMaxZ)
                 {
