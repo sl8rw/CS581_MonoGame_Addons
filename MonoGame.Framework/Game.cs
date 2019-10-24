@@ -332,10 +332,12 @@ namespace Microsoft.Xna.Framework
             _suppressDraw = true;
         }
 
+        //as _gameTimer was throwing a NullReferenceException, a null check is performed to prevent this.
+        //in the future, the testing method for this AssertDoesNotThrow should be removed to match standard XNA (per nkast)
         public void ResetElapsedTime()
         {
             Platform.ResetElapsedTime();
-            if (_gameTimer != null)
+            if (_gameTimer != null) 
             {
                 _gameTimer.Reset();
                 _gameTimer.Start();
