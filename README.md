@@ -1,6 +1,6 @@
 ﻿# MonoGame: Trello Board
 
-- [Trello Board](https://trello.com/invite/b/9iFK5BR2/8c4fcccd4155f47c2dcfa7818ca526ce/cs581-monogame)
+- [Trello Board](https://trello.com/invite/b/9iFK5BR2/8c4fcccd4155f47c2dcfa7818ca526ce/cs581-monogame) and can be joined [here](https://trello.com/invite/b/9iFK5BR2/8c4fcccd4155f47c2dcfa7818ca526ce/cs581-monogame)
 
 # MonoGame: CS581 Slater and Josiah Additions
 
