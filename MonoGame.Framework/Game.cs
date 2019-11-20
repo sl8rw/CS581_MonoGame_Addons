@@ -476,6 +476,24 @@ namespace Microsoft.Xna.Framework
             if (_accumulatedElapsedTime > _maxElapsedTime)
                 _accumulatedElapsedTime = _maxElapsedTime;
 
+            DoTick();
+
+            // Draw unless the update suppressed it.
+            if (_suppressDraw)
+                _suppressDraw = false;
+            else
+            {
+                DoDraw(_gameTime);
+            }
+
+            if (_shouldExit)
+            {
+                Platform.Exit();
+                _shouldExit = false; //prevents perpetual exiting on platforms supporting resume.
+            }
+        }
+        private void DoTick()
+        {
             if (IsFixedTimeStep)
             {
                 _gameTime.ElapsedGameTime = TargetElapsedTime;
@@ -522,20 +540,6 @@ namespace Microsoft.Xna.Framework
                 _accumulatedElapsedTime = TimeSpan.Zero;
 
                 DoUpdate(_gameTime);
-            }
-
-            // Draw unless the update suppressed it.
-            if (_suppressDraw)
-                _suppressDraw = false;
-            else
-            {
-                DoDraw(_gameTime);
-            }
-
-            if (_shouldExit)
-            {
-                Platform.Exit();
-                _shouldExit = false; //prevents perpetual exiting on platforms supporting resume.
             }
         }
 
