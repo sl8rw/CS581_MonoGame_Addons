@@ -65,7 +65,7 @@ namespace MonoGame.Utilities
 
             while (l <= r)
             {
-                var m = (l + r)/2;
+                var m = (l + r) / 2;
                 var buffer = _freeBuffers[m];
                 if (buffer.Length < size)
                 {

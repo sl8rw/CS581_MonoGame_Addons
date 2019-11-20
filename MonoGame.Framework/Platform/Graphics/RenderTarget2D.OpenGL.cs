@@ -4,7 +4,6 @@
 
 using MonoGame.OpenGL;
 using System;
-using System.Collections.Generic;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
@@ -36,8 +35,8 @@ namespace Microsoft.Xna.Framework.Graphics
             {
                 graphicsDevice.PlatformCreateRenderTarget(this, width, height, mipMap, this.Format, preferredDepthFormat, preferredMultiSampleCount, usage);
             });
-            
-            
+
+
         }
 
         private void PlatformGraphicsDeviceResetting()

@@ -2,15 +2,14 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
-using System.IO;
-using System.Runtime.InteropServices;
 using MonoGame.OpenGL;
+using System;
+using System.Runtime.InteropServices;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
-	public partial class Texture3D : Texture
-	{
+    public partial class Texture3D : Texture
+    {
 
         private void PlatformConstruct(GraphicsDevice graphicsDevice, int width, int height, int depth, bool mipMap, SurfaceFormat format, bool renderTarget)
         {
@@ -67,6 +66,6 @@ namespace Microsoft.Xna.Framework.Graphics
 
             throw new NotImplementedException();
         }
-	}
+    }
 }
 

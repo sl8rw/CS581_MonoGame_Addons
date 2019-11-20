@@ -2,17 +2,17 @@ using System;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
-	public sealed class ModelMeshPart
-	{
+    public sealed class ModelMeshPart
+    {
         private Effect _effect;
 
-        public Effect Effect 
+        public Effect Effect
         {
-            get 
+            get
             {
                 return _effect;
             }
-            set 
+            set
             {
                 if (value == _effect)
                     return;
@@ -36,34 +36,34 @@ namespace Microsoft.Xna.Framework.Graphics
 
                 // Set the new effect.
                 _effect = value;
-                
-                if (_effect != null && !parent.Effects.Contains(_effect))                
+
+                if (_effect != null && !parent.Effects.Contains(_effect))
                     parent.Effects.Add(_effect);
             }
         }
 
-		public IndexBuffer IndexBuffer { get; set; }
+        public IndexBuffer IndexBuffer { get; set; }
 
-		public int NumVertices { get; set; }
+        public int NumVertices { get; set; }
 
-		public int PrimitiveCount { get; set; }
+        public int PrimitiveCount { get; set; }
 
-		public int StartIndex { get; set; }
+        public int StartIndex { get; set; }
 
-		public object Tag { get; set; }
+        public object Tag { get; set; }
 
-		public VertexBuffer VertexBuffer { get; set; }
+        public VertexBuffer VertexBuffer { get; set; }
 
-		public int VertexOffset { get; set; }
+        public int VertexOffset { get; set; }
 
-		internal int VertexBufferIndex { get; set; }
+        internal int VertexBufferIndex { get; set; }
 
-		internal int IndexBufferIndex { get; set; }
+        internal int IndexBufferIndex { get; set; }
 
-		internal int EffectIndex { get; set; }
-		
-		internal ModelMesh parent;
-        
+        internal int EffectIndex { get; set; }
+
+        internal ModelMesh parent;
+
         internal ModelMeshPart() { }
-	}
+    }
 }

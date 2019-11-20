@@ -5,7 +5,7 @@
 using System;
 
 namespace Microsoft.Xna.Framework
-{   
+{
     public class GameComponent : IGameComponent, IUpdateable, IComparable<GameComponent>, IDisposable
     {
         bool _enabled = true;
@@ -70,7 +70,7 @@ namespace Microsoft.Xna.Framework
         /// Shuts down the component.
         /// </summary>
         protected virtual void Dispose(bool disposing) { }
-        
+
         /// <summary>
         /// Shuts down the component.
         /// </summary>

@@ -2,8 +2,8 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Microsoft.Xna.Framework.Content
 {
@@ -14,9 +14,9 @@ namespace Microsoft.Xna.Framework.Content
         {
             TextureCube textureCube = null;
 
-			SurfaceFormat surfaceFormat = (SurfaceFormat)reader.ReadInt32();
-			int size = reader.ReadInt32();
-			int levels = reader.ReadInt32();
+            SurfaceFormat surfaceFormat = (SurfaceFormat)reader.ReadInt32();
+            int size = reader.ReadInt32();
+            int levels = reader.ReadInt32();
 
             if (existingInstance == null)
                 textureCube = new TextureCube(reader.GraphicsDevice, size, levels > 1, surfaceFormat);
@@ -41,7 +41,7 @@ namespace Microsoft.Xna.Framework.Content
             });
 #endif
 
-             return textureCube;
+            return textureCube;
         }
     }
 }

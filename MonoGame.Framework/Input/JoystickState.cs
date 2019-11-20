@@ -34,7 +34,7 @@ namespace Microsoft.Xna.Framework.Input
         /// Gets the joystick hat values.
         /// </summary>
         /// <value>An array list of <see cref="JoystickHat"/> that indicate hat values.</value>
-        public JoystickHat[] Hats{ get; internal set; }
+        public JoystickHat[] Hats { get; internal set; }
 
         /// <summary>
         /// Determines whether a specified instance of <see cref="Microsoft.Xna.Framework.Input.JoystickState"/> is
@@ -114,7 +114,7 @@ namespace Microsoft.Xna.Framework.Input
             {
                 ret.Append(", Axes=");
                 foreach (var axis in Axes)
-                    ret.Append((axis > 0 ? "+" : "") + axis.ToString("00000") + " ");
+                    ret.Append((axis > 0 ? "+" : string.Empty) + axis.ToString("00000") + " ");
                 ret.Length--;
 
                 ret.Append(", Buttons=");

@@ -15,9 +15,9 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 
         private static UInt16 Pack(float x, float y, float z)
         {
-            return (UInt16) ((((int) Math.Round(MathHelper.Clamp(x, 0, 1) * 31.0f) & 0x1F) << 11) |
-                (((int) Math.Round(MathHelper.Clamp(y, 0, 1) * 63.0f) & 0x3F) << 5) |
-                ((int) Math.Round(MathHelper.Clamp(z, 0, 1) * 31.0f) & 0x1F));
+            return (UInt16)((((int)Math.Round(MathHelper.Clamp(x, 0, 1) * 31.0f) & 0x1F) << 11) |
+                (((int)Math.Round(MathHelper.Clamp(y, 0, 1) * 63.0f) & 0x3F) << 5) |
+                ((int)Math.Round(MathHelper.Clamp(z, 0, 1) * 31.0f) & 0x1F));
         }
 
         /// <summary>
@@ -62,9 +62,9 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// <returns>The packed vector in Vector3 format</returns>
         public Vector3 ToVector3()
         {
-            return new Vector3((float)(((_packedValue >> 11) & 0x1F) * (1.0f / 31.0f)),
-                (float)(((_packedValue >> 5) & 0x3F) * (1.0f / 63.0f)),
-                (float)((_packedValue & 0x1F) * (1.0f / 31.0f))
+            return new Vector3((((_packedValue >> 11) & 0x1F) * (1.0f / 31.0f)),
+(((_packedValue >> 5) & 0x3F) * (1.0f / 63.0f)),
+((_packedValue & 0x1F) * (1.0f / 31.0f))
                 );
         }
 

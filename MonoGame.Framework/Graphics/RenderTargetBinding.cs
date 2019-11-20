@@ -44,17 +44,17 @@ using System;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
-	// http://msdn.microsoft.com/en-us/library/ff434403.aspx
-	public struct RenderTargetBinding
-	{
+    // http://msdn.microsoft.com/en-us/library/ff434403.aspx
+    public struct RenderTargetBinding
+    {
         private readonly Texture _renderTarget;
         private readonly int _arraySlice;
         private DepthFormat _depthFormat;
 
-		public Texture RenderTarget 
+        public Texture RenderTarget
         {
-			get { return _renderTarget; }
-		}
+            get { return _renderTarget; }
+        }
 
         public int ArraySlice
         {
@@ -66,15 +66,15 @@ namespace Microsoft.Xna.Framework.Graphics
             get { return _depthFormat; }
         }
 
-		public RenderTargetBinding(RenderTarget2D renderTarget)
-		{
-			if (renderTarget == null) 
-				throw new ArgumentNullException("renderTarget");
+        public RenderTargetBinding(RenderTarget2D renderTarget)
+        {
+            if (renderTarget == null)
+                throw new ArgumentNullException("renderTarget");
 
-			_renderTarget = renderTarget;
+            _renderTarget = renderTarget;
             _arraySlice = (int)CubeMapFace.PositiveX;
             _depthFormat = renderTarget.DepthStencilFormat;
-		}
+        }
 
         public RenderTargetBinding(RenderTargetCube renderTarget, CubeMapFace cubeMapFace)
         {
@@ -141,5 +141,5 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 
 #endif
-	}
+    }
 }

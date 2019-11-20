@@ -252,7 +252,7 @@ namespace MonoGame.Utilities.Deflate
         /// <returns>Z_OK if all goes well.</returns>
         public int InitializeInflate(int windowBits)
         {
-            this.WindowBits = windowBits;            
+            this.WindowBits = windowBits;
             return InitializeInflate(windowBits, true);
         }
 
@@ -671,10 +671,10 @@ namespace MonoGame.Utilities.Deflate
 
             Array.Copy(dstate.pending, dstate.nextPending, OutputBuffer, NextOut, len);
 
-            NextOut             += len;
-            dstate.nextPending  += len;
-            TotalBytesOut       += len;
-            AvailableBytesOut   -= len;
+            NextOut += len;
+            dstate.nextPending += len;
+            TotalBytesOut += len;
+            AvailableBytesOut -= len;
             dstate.pendingCount -= len;
             if (dstate.pendingCount == 0)
             {

@@ -3,7 +3,6 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using System;
-using System.ComponentModel;
 using System.Runtime.Serialization;
 
 namespace Microsoft.Xna.Framework
@@ -103,14 +102,14 @@ namespace Microsoft.Xna.Framework
         {
             if (_keys.Count == 0)
             {
-            	return 0f;
+                return 0f;
             }
-						
+
             if (_keys.Count == 1)
             {
-            	return _keys[0].Value;
+                return _keys[0].Value;
             }
-			
+
             CurveKey first = _keys[0];
             CurveKey last = _keys[_keys.Count - 1];
 
@@ -195,23 +194,23 @@ namespace Microsoft.Xna.Framework
         /// Computes tangents for all keys in the collection.
         /// </summary>
         /// <param name="tangentType">The tangent type for both in and out.</param>
-		public void ComputeTangents (CurveTangent tangentType)
-		{
-		    ComputeTangents(tangentType, tangentType);
-		}
-		
+		public void ComputeTangents(CurveTangent tangentType)
+        {
+            ComputeTangents(tangentType, tangentType);
+        }
+
         /// <summary>
         /// Computes tangents for all keys in the collection.
         /// </summary>
         /// <param name="tangentInType">The tangent in-type. <see cref="CurveKey.TangentIn"/> for more details.</param>
         /// <param name="tangentOutType">The tangent out-type. <see cref="CurveKey.TangentOut"/> for more details.</param>
-		public void ComputeTangents(CurveTangent tangentInType, CurveTangent tangentOutType)
-		{
+        public void ComputeTangents(CurveTangent tangentInType, CurveTangent tangentOutType)
+        {
             for (var i = 0; i < Keys.Count; ++i)
             {
                 ComputeTangent(i, tangentInType, tangentOutType);
             }
-		}
+        }
 
         /// <summary>
         /// Computes tangent for the specific key in the collection.
@@ -241,13 +240,13 @@ namespace Microsoft.Xna.Framework
             float v0, v, v1;
             v0 = v = v1 = key.Value;
 
-            if ( keyIndex > 0 )
+            if (keyIndex > 0)
             {
                 p0 = _keys[keyIndex - 1].Position;
                 v0 = _keys[keyIndex - 1].Value;
             }
 
-            if (keyIndex < _keys.Count-1)
+            if (keyIndex < _keys.Count - 1)
             {
                 p1 = _keys[keyIndex + 1].Position;
                 v1 = _keys[keyIndex + 1].Value;
@@ -288,7 +287,7 @@ namespace Microsoft.Xna.Framework
             }
         }
 
-	    #endregion
+        #endregion
 
         #region Private Methods
 

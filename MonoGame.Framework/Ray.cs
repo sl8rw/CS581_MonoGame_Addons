@@ -16,7 +16,7 @@ namespace Microsoft.Xna.Framework
 
         [DataMember]
         public Vector3 Direction;
-      
+
         [DataMember]
         public Vector3 Position;
 
@@ -41,13 +41,13 @@ namespace Microsoft.Xna.Framework
             return (obj is Ray) ? this.Equals((Ray)obj) : false;
         }
 
-        
+
         public bool Equals(Ray other)
         {
             return this.Position.Equals(other.Position) && this.Direction.Equals(other.Direction);
         }
 
-        
+
         public override int GetHashCode()
         {
             return Position.GetHashCode() ^ Direction.GetHashCode();
@@ -66,7 +66,7 @@ namespace Microsoft.Xna.Framework
 
             float? tMin = null, tMax = null;
             //Direction is a vector
-            Vector3 inverseDirection=new Vector3();
+            Vector3 inverseDirection = new Vector3();
             Vector3 oneVector = new Vector3(1, 1, 1); //initialized one vector used for calculating the reciprocal
             inverseDirection = Vector3.Divide(oneVector, Direction); //reciprocal
             //Console.WriteLine("inverse dir:", inverseDirection);
@@ -121,7 +121,7 @@ namespace Microsoft.Xna.Framework
             else
             {
                 var tMinZ = (box.Min.Z - Position.Z) / inverseDirection.Z;
-                var tMaxZ = (box.Max.Z - Position.Z) / inverseDirection.Z; 
+                var tMaxZ = (box.Max.Z - Position.Z) / inverseDirection.Z;
 
                 if (tMinZ > tMaxZ)
                 {
@@ -151,7 +151,7 @@ namespace Microsoft.Xna.Framework
 
         public void Intersects(ref BoundingBox box, out float? result)
         {
-			result = Intersects(box);
+            result = Intersects(box);
         }
 
         /*

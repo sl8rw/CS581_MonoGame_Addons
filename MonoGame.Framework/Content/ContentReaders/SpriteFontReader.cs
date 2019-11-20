@@ -2,11 +2,9 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Microsoft.Xna.Framework.Content
 {
@@ -22,7 +20,7 @@ namespace Microsoft.Xna.Framework.Content
             {
                 // Read the texture into the existing texture instance
                 input.ReadObject<Texture2D>(existingInstance.Texture);
-                
+
                 // discard the rest of the SpriteFont data as we are only reloading GPU resources for now
                 input.ReadObject<List<Rectangle>>();
                 input.ReadObject<List<Rectangle>>();

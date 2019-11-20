@@ -2,10 +2,9 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Microsoft.Xna.Framework.Audio;
 using System;
 using System.IO;
-using Microsoft.Xna.Framework.Audio;
-using MonoGame.OpenAL;
 
 namespace Microsoft.Xna.Framework.Media
 {
@@ -24,14 +23,14 @@ namespace Microsoft.Xna.Framework.Media
 
             _duration = stream.GetLength();
         }
-        
+
         internal void SetEventHandler(FinishedPlayingHandler handler) { }
 
         internal void OnFinishedPlaying()
         {
             MediaPlayer.OnSongFinishedPlaying(null, null);
         }
-		
+
         void PlatformDispose(bool disposing)
         {
             if (stream == null)
@@ -84,7 +83,7 @@ namespace Microsoft.Xna.Framework.Media
             {
                 if (stream == null)
                     return 0.0f;
-                return _volume; 
+                return _volume;
             }
             set
             {

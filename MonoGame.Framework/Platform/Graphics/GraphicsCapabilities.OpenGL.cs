@@ -84,7 +84,7 @@ namespace Microsoft.Xna.Framework.Graphics
             int anisotropy = 0;
             if (SupportsTextureFilterAnisotropic)
             {
-                GL.GetInteger((GetPName)GetParamName.MaxTextureMaxAnisotropyExt, out anisotropy);
+                GL.GetInteger(GetParamName.MaxTextureMaxAnisotropyExt, out anisotropy);
                 GraphicsExtensions.CheckGLError();
             }
             MaxTextureAnisotropy = anisotropy;
@@ -98,8 +98,8 @@ namespace Microsoft.Xna.Framework.Graphics
 #else
             SupportsSRgb = GL.Extensions.Contains("GL_EXT_texture_sRGB") && GL.Extensions.Contains("GL_EXT_framebuffer_sRGB");
             SupportsFloatTextures = GL.BoundApi == GL.RenderApi.GL && (device.glMajorVersion >= 3 || GL.Extensions.Contains("GL_ARB_texture_float"));
-            SupportsHalfFloatTextures = GL.BoundApi == GL.RenderApi.GL && (device.glMajorVersion >= 3 || GL.Extensions.Contains("GL_ARB_half_float_pixel"));;
-            SupportsNormalized = GL.BoundApi == GL.RenderApi.GL && (device.glMajorVersion >= 3 || GL.Extensions.Contains("GL_EXT_texture_norm16"));;
+            SupportsHalfFloatTextures = GL.BoundApi == GL.RenderApi.GL && (device.glMajorVersion >= 3 || GL.Extensions.Contains("GL_ARB_half_float_pixel")); ;
+            SupportsNormalized = GL.BoundApi == GL.RenderApi.GL && (device.glMajorVersion >= 3 || GL.Extensions.Contains("GL_EXT_texture_norm16")); ;
 #endif
 
             // TODO: Implement OpenGL support for texture arrays
@@ -111,7 +111,7 @@ namespace Microsoft.Xna.Framework.Graphics
             SupportsVertexTextures = false; // For now, until we implement vertex textures in OpenGL.
 
 
-            GL.GetInteger((GetPName)GetParamName.MaxSamples, out _maxMultiSampleCount);
+            GL.GetInteger(GetParamName.MaxSamples, out _maxMultiSampleCount);
 
             SupportsInstancing = GL.VertexAttribDivisor != null;
 
