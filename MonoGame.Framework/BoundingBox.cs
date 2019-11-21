@@ -388,6 +388,7 @@ namespace Microsoft.Xna.Framework
             {
                 throw new ArgumentOutOfRangeException("corners", "Not Enought Corners");
             }
+
             corners[0].X = this.Min.X;
             corners[0].Y = this.Max.Y;
             corners[0].Z = this.Max.Z;

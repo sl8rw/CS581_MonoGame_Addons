@@ -372,55 +372,7 @@ namespace Microsoft.Xna.Framework.Audio
                 ++sampleOffset;
 
                 if (channels == 2)
-                {
-                    channel1.predictor = buffer[offset++];
-                    channel1.predictor |= buffer[offset++] << 8;
-                    if ((channel1.predictor & 0x8000) != 0)
-                        channel1.predictor -= 0x10000;
-                    channel1.stepIndex = buffer[offset++];
-                    if (channel1.stepIndex > 88)
-                        channel1.stepIndex = 88;
-                    offset++;
-                    index = sampleOffset * 2;
-                    samples[index] = (byte)channel1.predictor;
-                    samples[index + 1] = (byte)(channel1.predictor >> 8);
-                    ++sampleOffset;
-                }
-
-                if (channels == 2)
-                {
-                    for (int nibbles = 2 * (blockSize - 8); nibbles > 0; nibbles -= 16)
-                    {
-                        for (int i = 0; i < 4; i++)
-                        {
-                            index = (sampleOffset + i * 4) * 2;
-                            int sample = AdpcmImaWavExpandNibble(ref channel0, buffer[offset + i] & 0x0f);
-                            samples[index] = (byte)sample;
-                            samples[index + 1] = (byte)(sample >> 8);
-
-                            index = (sampleOffset + i * 4 + 2) * 2;
-                            sample = AdpcmImaWavExpandNibble(ref channel0, buffer[offset + i] >> 4);
-                            samples[index] = (byte)sample;
-                            samples[index + 1] = (byte)(sample >> 8);
-                        }
-                        offset += 4;
-
-                        for (int i = 0; i < 4; i++)
-                        {
-                            index = (sampleOffset + i * 4 + 1) * 2;
-                            int sample = AdpcmImaWavExpandNibble(ref channel1, buffer[offset + i] & 0x0f);
-                            samples[index] = (byte)sample;
-                            samples[index + 1] = (byte)(sample >> 8);
-
-                            index = (sampleOffset + i * 4 + 3) * 2;
-                            sample = AdpcmImaWavExpandNibble(ref channel1, buffer[offset + i] >> 4);
-                            samples[index] = (byte)sample;
-                            samples[index + 1] = (byte)(sample >> 8);
-                        }
-                        offset += 4;
-                        sampleOffset += 16;
-                    }
-                }
+                    AdjustAudioForIma4ToPcmChannels(buffer, ref offset, ref channel0, out channel1, samples, ref sampleOffset, blockSize, out index);
                 else
                 {
                     for (int nibbles = 2 * (blockSize - 4); nibbles > 0; nibbles -= 2)
@@ -442,6 +394,55 @@ namespace Microsoft.Xna.Framework.Audio
             }
 
             return samples;
+        }
+
+        private static void AdjustAudioForIma4ToPcmChannels(byte[] buffer, ref int offset, ref ImaState channel0, out ImaState channel1, byte[] samples, ref int sampleOffset, int blockSize, out int index)
+        {
+            channel1.predictor = buffer[offset++];
+            channel1.predictor |= buffer[offset++] << 8;
+            if ((channel1.predictor & 0x8000) != 0)
+                channel1.predictor -= 0x10000;
+            channel1.stepIndex = buffer[offset++];
+            if (channel1.stepIndex > 88)
+                channel1.stepIndex = 88;
+            offset++;
+            index = sampleOffset * 2;
+            samples[index] = (byte)channel1.predictor;
+            samples[index + 1] = (byte)(channel1.predictor >> 8);
+            ++sampleOffset;
+
+            for (int nibbles = 2 * (blockSize - 8); nibbles > 0; nibbles -= 16)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    index = (sampleOffset + i * 4) * 2;
+                    int sample = AdpcmImaWavExpandNibble(ref channel0, buffer[offset + i] & 0x0f);
+                    samples[index] = (byte)sample;
+                    samples[index + 1] = (byte)(sample >> 8);
+
+                    index = (sampleOffset + i * 4 + 2) * 2;
+                    sample = AdpcmImaWavExpandNibble(ref channel0, buffer[offset + i] >> 4);
+                    samples[index] = (byte)sample;
+                    samples[index + 1] = (byte)(sample >> 8);
+                }
+                offset += 4;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    index = (sampleOffset + i * 4 + 1) * 2;
+                    int sample = AdpcmImaWavExpandNibble(ref channel1, buffer[offset + i] & 0x0f);
+                    samples[index] = (byte)sample;
+                    samples[index + 1] = (byte)(sample >> 8);
+
+                    index = (sampleOffset + i * 4 + 3) * 2;
+                    sample = AdpcmImaWavExpandNibble(ref channel1, buffer[offset + i] >> 4);
+                    samples[index] = (byte)sample;
+                    samples[index + 1] = (byte)(sample >> 8);
+                }
+                offset += 4;
+                sampleOffset += 16;
+
+            }
         }
 
         #endregion
