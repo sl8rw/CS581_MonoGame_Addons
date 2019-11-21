@@ -17,15 +17,15 @@ namespace MonoGame.Utilities
 
     internal static class CurrentPlatform
     {
-        private static bool init = false;
-        private static OS os;
+        private static bool _init = false;
+        private static OS _os;
 
         [DllImport("libc")]
         static extern int uname(IntPtr buf);
 
         private static void Init()
         {
-            if (!init)
+            if (!_init)
             {
                 PlatformID pid = Environment.OSVersion.Platform;
 
@@ -35,10 +35,10 @@ namespace MonoGame.Utilities
                     case PlatformID.Win32S:
                     case PlatformID.Win32Windows:
                     case PlatformID.WinCE:
-                        os = OS.Windows;
+                        _os = OS.Windows;
                         break;
                     case PlatformID.MacOSX:
-                        os = OS.MacOSX;
+                        _os = OS.MacOSX;
                         break;
                     case PlatformID.Unix:
 
@@ -53,7 +53,7 @@ namespace MonoGame.Utilities
                                 string sos = Marshal.PtrToStringAnsi(buf);
                                 if (sos == "Darwin")
                                 {
-                                    os = OS.MacOSX;
+                                    _os = OS.MacOSX;
                                     return;
                                 }
                             }
@@ -67,14 +67,14 @@ namespace MonoGame.Utilities
                                 Marshal.FreeHGlobal(buf);
                         }
 
-                        os = OS.Linux;
+                        _os = OS.Linux;
                         break;
                     default:
-                        os = OS.Unknown;
+                        _os = OS.Unknown;
                         break;
                 }
 
-                init = true;
+                _init = true;
             }
         }
 
@@ -83,7 +83,7 @@ namespace MonoGame.Utilities
             get
             {
                 Init();
-                return os;
+                return _os;
             }
         }
     }

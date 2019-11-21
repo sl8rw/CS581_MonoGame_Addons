@@ -487,7 +487,7 @@ namespace Microsoft.Xna.Framework
         /// <returns><see cref="String"/> representation of this <see cref="Rectangle"/>.</returns>
         public override string ToString()
         {
-            return "{X:" + X + " Y:" + Y + " Width:" + Width + " Height:" + Height + "}";
+            return string.Format("{{X:{0} Y:{1} Width:{2} Height:{3}}}", X, Y, Width, Height);
         }
 
         /// <summary>

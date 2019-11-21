@@ -901,7 +901,7 @@ internal static class Sdl
             RightY,
             TriggerLeft,
             TriggerRight,
-            Max,
+            Max
         }
 
         public enum Button
@@ -922,7 +922,7 @@ internal static class Sdl
             DpadDown,
             DpadLeft,
             DpadRight,
-            Max,
+            Max
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1007,7 +1007,7 @@ internal static class Sdl
     {
         // For some reason, different game controllers have different maximum value supported
         // Also, the more the value is close to their limit, the more they tend to randomly ignore it
-        // Hence, we're setting an abitrary safe value as a maximum
+        // Hence, we're setting an arbitrary safe value as a maximum
         public const uint Infinity = 1000000U;
 
         public enum EffectId : ushort
@@ -1028,7 +1028,7 @@ internal static class Sdl
         public struct Effect
         {
             [FieldOffset(0)] public EffectId type;
-            [FieldOffset(0)] public LeftRight leftright;
+            [FieldOffset(0)] public LeftRight leftRight;
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
