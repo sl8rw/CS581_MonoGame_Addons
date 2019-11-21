@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 #endif
+
 using Microsoft.Xna.Framework.Input.Touch;
 using System;
 using System.Collections.Generic;
@@ -29,22 +30,22 @@ namespace Microsoft.Xna.Framework
         internal GamePlatform Platform;
 
         private SortingFilteringCollection<IDrawable> _drawables =
-            new SortingFilteringCollection<IDrawable>(
-                d => d.Visible,
-                (d, handler) => d.VisibleChanged += handler,
-                (d, handler) => d.VisibleChanged -= handler,
-                (d1, d2) => Comparer<int>.Default.Compare(d1.DrawOrder, d2.DrawOrder),
-                (d, handler) => d.DrawOrderChanged += handler,
-                (d, handler) => d.DrawOrderChanged -= handler);
+            new SortingFilteringCollection<IDrawable>(d => d.Visible,
+                                                      (d, handler) => d.VisibleChanged += handler,
+                                                      (d, handler) => d.VisibleChanged -= handler,
+                                                      (d1, d2) => Comparer<int>.Default
+            .Compare(d1.DrawOrder, d2.DrawOrder),
+                                                      (d, handler) => d.DrawOrderChanged += handler,
+                                                      (d, handler) => d.DrawOrderChanged -= handler);
 
         private SortingFilteringCollection<IUpdateable> _updateables =
-            new SortingFilteringCollection<IUpdateable>(
-                u => u.Enabled,
-                (u, handler) => u.EnabledChanged += handler,
-                (u, handler) => u.EnabledChanged -= handler,
-                (u1, u2) => Comparer<int>.Default.Compare(u1.UpdateOrder, u2.UpdateOrder),
-                (u, handler) => u.UpdateOrderChanged += handler,
-                (u, handler) => u.UpdateOrderChanged -= handler);
+            new SortingFilteringCollection<IUpdateable>(u => u.Enabled,
+                                                        (u, handler) => u.EnabledChanged += handler,
+                                                        (u, handler) => u.EnabledChanged -= handler,
+                                                        (u1, u2) => Comparer<int>.Default
+            .Compare(u1.UpdateOrder, u2.UpdateOrder),
+                                                        (u, handler) => u.UpdateOrderChanged += handler,
+                                                        (u, handler) => u.UpdateOrderChanged -= handler);
 
         private IGraphicsDeviceManager _graphicsDeviceManager;
         private IGraphicsDeviceService _graphicsDeviceService;
@@ -81,23 +82,21 @@ namespace Microsoft.Xna.Framework
 
             // Allow some optional per-platform construction to occur too.
             PlatformConstruct();
-
         }
 
-        ~Game()
-        {
-            Dispose(false);
-        }
+        ~Game() { Dispose(false); }
 
         [System.Diagnostics.Conditional("DEBUG")]
         internal void Log(string Message)
         {
-            if (Platform != null) Platform.Log(Message);
+            if(Platform != null)
+                Platform.Log(Message);
         }
 
         #region IDisposable Implementation
 
         private bool _isDisposed;
+
         public void Dispose()
         {
             Dispose(true);
@@ -107,32 +106,32 @@ namespace Microsoft.Xna.Framework
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!_isDisposed)
+            if(!_isDisposed)
             {
-                if (disposing)
+                if(disposing)
                 {
                     // Dispose loaded game components
-                    for (int i = 0; i < _components.Count; i++)
+                    for(int i = 0; i < _components.Count; i++)
                     {
                         var disposable = _components[i] as IDisposable;
-                        if (disposable != null)
+                        if(disposable != null)
                             disposable.Dispose();
                     }
                     _components = null;
 
-                    if (_content != null)
+                    if(_content != null)
                     {
                         _content.Dispose();
                         _content = null;
                     }
 
-                    if (_graphicsDeviceManager != null)
+                    if(_graphicsDeviceManager != null)
                     {
                         (_graphicsDeviceManager as GraphicsDeviceManager).Dispose();
                         _graphicsDeviceManager = null;
                     }
 
-                    if (Platform != null)
+                    if(Platform != null)
                     {
                         Platform.Activated -= OnActivated;
                         Platform.Deactivated -= OnDeactivated;
@@ -144,12 +143,13 @@ namespace Microsoft.Xna.Framework
 
                     ContentTypeReaderManager.ClearTypeCreators();
 
-                    if (SoundEffect._systemState == SoundEffect.SoundSystemState.Initialized)
+                    if(SoundEffect._systemState == SoundEffect.SoundSystemState.Initialized)
                         SoundEffect.PlatformShutdown();
                 }
 #if ANDROID
                 Activity = null;
 #endif
+
                 _isDisposed = true;
                 _instance = null;
             }
@@ -158,38 +158,34 @@ namespace Microsoft.Xna.Framework
         [System.Diagnostics.DebuggerNonUserCode]
         private void AssertNotDisposed()
         {
-            if (_isDisposed)
+            if(_isDisposed)
             {
                 string name = GetType().Name;
-                throw new ObjectDisposedException(
-                    name, string.Format("The {0} object was used after being Disposed.", name));
+                throw new ObjectDisposedException(name, $"The {name} object was used after being Disposed.");
             }
         }
 
         #endregion IDisposable Implementation
 
         #region Properties
-
 #if ANDROID
         [CLSCompliant(false)]
         public static AndroidGameActivity Activity { get; internal set; }
 #endif
         private static Game _instance = null;
+
         internal static Game Instance { get { return Game._instance; } }
 
         public LaunchParameters LaunchParameters { get; private set; }
 
-        public GameComponentCollection Components
-        {
-            get { return _components; }
-        }
+        public GameComponentCollection Components { get { return _components; } }
 
         public TimeSpan InactiveSleepTime
         {
             get { return _inactiveSleepTime; }
             set
             {
-                if (value < TimeSpan.Zero)
+                if(value < TimeSpan.Zero)
                     throw new ArgumentOutOfRangeException("The time must be positive.", default(Exception));
 
                 _inactiveSleepTime = value;
@@ -197,37 +193,31 @@ namespace Microsoft.Xna.Framework
         }
 
         /// <summary>
-        /// The maximum amount of time we will frameskip over and only perform Update calls with no Draw calls.
-        /// MonoGame extension.
+        /// The maximum amount of time we will frameskip over and only perform Update calls with no Draw calls. MonoGame
+        /// extension.
         /// </summary>
         public TimeSpan MaxElapsedTime
         {
             get { return _maxElapsedTime; }
             set
             {
-                if (value < TimeSpan.Zero)
+                if(value < TimeSpan.Zero)
                     throw new ArgumentOutOfRangeException("The time must be positive.", default(Exception));
-                if (value < _targetElapsedTime)
-                    throw new ArgumentOutOfRangeException("The time must be at least TargetElapsedTime", default(Exception));
+                if(value < _targetElapsedTime)
+                    throw new ArgumentOutOfRangeException("The time must be at least TargetElapsedTime",
+                                                          default(Exception));
 
                 _maxElapsedTime = value;
             }
         }
 
-        public bool IsActive
-        {
-            get { return Platform.IsActive; }
-        }
+        public bool IsActive { get { return Platform.IsActive; } }
 
-        public bool IsMouseVisible
-        {
-            get { return Platform.IsMouseVisible; }
-            set { Platform.IsMouseVisible = value; }
-        }
+        public bool IsMouseVisible { get { return Platform.IsMouseVisible; } set { Platform.IsMouseVisible = value; } }
 
         /// <summary>
-        /// The target amount of time we will frameskip over and only perform Update calls with no Draw calls.  This value can never be greater than the MaxElapsedTime
-        /// MonoGame extension.
+        /// The target amount of time we will frameskip over and only perform Update calls with no Draw calls.  This
+        /// value can never be greater than the MaxElapsedTime MonoGame extension.
         /// </summary>
         public TimeSpan TargetElapsedTime
         {
@@ -238,13 +228,13 @@ namespace Microsoft.Xna.Framework
                 // the new value.
                 value = Platform.TargetElapsedTimeChanging(value);
 
-                if (value <= TimeSpan.Zero)
-                    throw new ArgumentOutOfRangeException(
-                        "The time must be positive and non-zero.", default(Exception));
-                if (value > MaxElapsedTime) //clamps the targetElapsedTime by the MaxElapsedTime
-                    throw new ArgumentOutOfRangeException("The time cannot be greater than the MaxElapsedTime", default(Exception));
+                if(value <= TimeSpan.Zero)
+                    throw new ArgumentOutOfRangeException("The time must be positive and non-zero.", default(Exception));
+                if(value > MaxElapsedTime) //clamps the targetElapsedTime by the MaxElapsedTime
+                    throw new ArgumentOutOfRangeException("The time cannot be greater than the MaxElapsedTime",
+                                                          default(Exception));
 
-                if (value != _targetElapsedTime)
+                if(value != _targetElapsedTime)
                 {
                     _targetElapsedTime = value;
                     Platform.TargetElapsedTimeChanged();
@@ -252,23 +242,16 @@ namespace Microsoft.Xna.Framework
             }
         }
 
-        public bool IsFixedTimeStep
-        {
-            get { return _isFixedTimeStep; }
-            set { _isFixedTimeStep = value; }
-        }
+        public bool IsFixedTimeStep { get { return _isFixedTimeStep; } set { _isFixedTimeStep = value; } }
 
-        public GameServiceContainer Services
-        {
-            get { return _services; }
-        }
+        public GameServiceContainer Services { get { return _services; } }
 
         public ContentManager Content
         {
             get { return _content; }
             set
             {
-                if (value == null)
+                if(value == null)
                     throw new ArgumentNullException();
 
                 _content = value;
@@ -279,12 +262,12 @@ namespace Microsoft.Xna.Framework
         {
             get
             {
-                if (_graphicsDeviceService == null)
+                if(_graphicsDeviceService == null)
                 {
                     _graphicsDeviceService = (IGraphicsDeviceService)
                         Services.GetService(typeof(IGraphicsDeviceService));
 
-                    if (_graphicsDeviceService == null)
+                    if(_graphicsDeviceService == null)
                         throw new InvalidOperationException("No Graphics Device Service");
                 }
                 return _graphicsDeviceService.GraphicsDevice;
@@ -292,10 +275,7 @@ namespace Microsoft.Xna.Framework
         }
 
         [CLSCompliant(false)]
-        public GameWindow Window
-        {
-            get { return Platform.Window; }
-        }
+        public GameWindow Window { get { return Platform.Window; } }
 
         #endregion Properties
 
@@ -305,18 +285,18 @@ namespace Microsoft.Xna.Framework
         // Currently Game.Initialized is used by the Mac game window class to
         // determine whether to raise DeviceResetting and DeviceReset on
         // GraphicsDeviceManager.
-        internal bool Initialized
-        {
-            get { return _initialized; }
-        }
+        internal bool Initialized { get { return _initialized; } }
 
         #endregion Internal Properties
 
         #region Events
 
         public event EventHandler<EventArgs> Activated;
+
         public event EventHandler<EventArgs> Deactivated;
+
         public event EventHandler<EventArgs> Disposed;
+
         public event EventHandler<EventArgs> Exiting;
 
 #if WINDOWS_UAP
@@ -327,7 +307,6 @@ namespace Microsoft.Xna.Framework
         #endregion
 
         #region Public Methods
-
 #if IOS
         [Obsolete("This platform's policy does not allow programmatically closing.", true)]
 #endif
@@ -342,7 +321,7 @@ namespace Microsoft.Xna.Framework
         public void ResetElapsedTime()
         {
             Platform.ResetElapsedTime();
-            if (_gameTimer != null)
+            if(_gameTimer != null)
             {
                 _gameTimer.Reset();
                 _gameTimer.Start();
@@ -352,20 +331,17 @@ namespace Microsoft.Xna.Framework
             _previousTicks = 0L;
         }
 
-        public void SuppressDraw()
-        {
-            _suppressDraw = true;
-        }
+        public void SuppressDraw() { _suppressDraw = true; }
 
         public void RunOneFrame()
         {
-            if (Platform == null)
+            if(Platform == null)
                 return;
 
-            if (!Platform.BeforeRun())
+            if(!Platform.BeforeRun())
                 return;
 
-            if (!_initialized)
+            if(!_initialized)
             {
                 DoInitialize();
                 _gameTimer = Stopwatch.StartNew();
@@ -378,25 +354,21 @@ namespace Microsoft.Xna.Framework
             Tick();
 
             EndRun();
-
         }
 
-        public void Run()
-        {
-            Run(Platform.DefaultRunBehavior);
-        }
+        public void Run() { Run(Platform.DefaultRunBehavior); }
 
         public void Run(GameRunBehavior runBehavior)
         {
             AssertNotDisposed();
-            if (!Platform.BeforeRun())
+            if(!Platform.BeforeRun())
             {
                 BeginRun();
                 _gameTimer = Stopwatch.StartNew();
                 return;
             }
 
-            if (!_initialized)
+            if(!_initialized)
             {
                 DoInitialize();
                 _initialized = true;
@@ -404,7 +376,7 @@ namespace Microsoft.Xna.Framework
 
             BeginRun();
             _gameTimer = Stopwatch.StartNew();
-            switch (runBehavior)
+            switch(runBehavior)
             {
                 case GameRunBehavior.Asynchronous:
                     Platform.AsyncRunLoopEnded += Platform_AsyncRunLoopEnded;
@@ -419,8 +391,7 @@ namespace Microsoft.Xna.Framework
                     DoExiting();
                     break;
                 default:
-                    throw new ArgumentException(string.Format(
-                        "Handling for the run behavior {0} is not implemented.", runBehavior));
+                    throw new ArgumentException($"Handling for the run behavior {runBehavior} is not implemented.");
             }
         }
 
@@ -429,31 +400,32 @@ namespace Microsoft.Xna.Framework
         private Stopwatch _gameTimer = new Stopwatch();
         private long _previousTicks = 0;
         private int _updateFrameLag;
+
 #if WINDOWS_UAP
         private readonly object _locker = new object();
 #endif
 
         public void Tick()
         {
-        // NOTE: This code is very sensitive and can break very badly
-        // with even what looks like a safe change.  Be sure to test 
-        // any change fully in both the fixed and variable timestep 
-        // modes across multiple devices and platforms.
+            // NOTE: This code is very sensitive and can break very badly
+            // with even what looks like a safe change.  Be sure to test 
+            // any change fully in both the fixed and variable timestep 
+            // modes across multiple devices and platforms.
 
-        RetryTick:
+            RetryTick:
 
-            if (!IsActive && (InactiveSleepTime.TotalMilliseconds >= 1.0))
-            {
+if(!IsActive && (InactiveSleepTime.TotalMilliseconds >= 1.0))
+{
 #if WINDOWS_UAP
                 lock (_locker)
                     System.Threading.Monitor.Wait(_locker, (int)InactiveSleepTime.TotalMilliseconds);
 #else
-                System.Threading.Thread.Sleep((int)InactiveSleepTime.TotalMilliseconds);
+    System.Threading.Thread.Sleep((int)InactiveSleepTime.TotalMilliseconds);
 #endif
-            }
+}
 
             // Advance the accumulated elapsed time.
-            if (_gameTimer == null)
+            if(_gameTimer == null)
             {
                 throw new NullReferenceException();
             }
@@ -461,7 +433,7 @@ namespace Microsoft.Xna.Framework
             _accumulatedElapsedTime += TimeSpan.FromTicks(currentTicks - _previousTicks);
             _previousTicks = currentTicks;
 
-            if (IsFixedTimeStep && _accumulatedElapsedTime < TargetElapsedTime)
+            if(IsFixedTimeStep && _accumulatedElapsedTime < TargetElapsedTime)
             {
 #if WINDOWS && !DESKTOPGL
                 // Sleep for as long as possible without overshooting the update time
@@ -473,34 +445,35 @@ namespace Microsoft.Xna.Framework
             }
 
             // Do not allow any update to take longer than our maximum.
-            if (_accumulatedElapsedTime > _maxElapsedTime)
+            if(_accumulatedElapsedTime > _maxElapsedTime)
                 _accumulatedElapsedTime = _maxElapsedTime;
 
             DoTick();
 
             // Draw unless the update suppressed it.
-            if (_suppressDraw)
+            if(_suppressDraw)
                 _suppressDraw = false;
             else
             {
                 DoDraw(_gameTime);
             }
 
-            if (_shouldExit)
+            if(_shouldExit)
             {
                 Platform.Exit();
                 _shouldExit = false; //prevents perpetual exiting on platforms supporting resume.
             }
         }
+
         private void DoTick()
         {
-            if (IsFixedTimeStep)
+            if(IsFixedTimeStep)
             {
                 _gameTime.ElapsedGameTime = TargetElapsedTime;
                 var stepCount = 0;
 
                 // Perform as many full fixed length time steps as we can.
-                while (_accumulatedElapsedTime >= TargetElapsedTime && !_shouldExit)
+                while(_accumulatedElapsedTime >= TargetElapsedTime && !_shouldExit)
                 {
                     _gameTime.TotalGameTime += TargetElapsedTime;
                     _accumulatedElapsedTime -= TargetElapsedTime;
@@ -513,26 +486,24 @@ namespace Microsoft.Xna.Framework
                 _updateFrameLag += Math.Max(0, stepCount - 1);
 
                 //If we think we are running slowly, wait until the lag clears before resetting it
-                if (_gameTime.IsRunningSlowly)
+                if(_gameTime.IsRunningSlowly)
                 {
-                    if (_updateFrameLag == 0)
+                    if(_updateFrameLag == 0)
                         _gameTime.IsRunningSlowly = false;
-                }
-                else if (_updateFrameLag >= 5)
+                } else if(_updateFrameLag >= 5)
                 {
                     //If we lag more than 5 frames, start thinking we are running slowly
                     _gameTime.IsRunningSlowly = true;
                 }
 
                 //Every time we just do one update and one draw, then we are not running slowly, so decrease the lag
-                if (stepCount == 1 && _updateFrameLag > 0)
+                if(stepCount == 1 && _updateFrameLag > 0)
                     _updateFrameLag--;
 
                 // Draw needs to know the total elapsed time
                 // that occured for the fixed length updates.
                 _gameTime.ElapsedGameTime = TimeSpan.FromTicks(TargetElapsedTime.Ticks * stepCount);
-            }
-            else
+            } else
             {
                 // Perform a single variable length update.
                 _gameTime.ElapsedGameTime = _accumulatedElapsedTime;
@@ -548,10 +519,7 @@ namespace Microsoft.Xna.Framework
         #region Protected Methods
 
         protected virtual bool BeginDraw() { return true; }
-        protected virtual void EndDraw()
-        {
-            Platform.Present();
-        }
+        protected virtual void EndDraw() { Platform.Present(); }
 
         protected virtual void BeginRun() { }
         protected virtual void EndRun() { }
@@ -576,34 +544,21 @@ namespace Microsoft.Xna.Framework
             _graphicsDeviceService = (IGraphicsDeviceService)
                 Services.GetService(typeof(IGraphicsDeviceService));
 
-            if (_graphicsDeviceService != null &&
-                _graphicsDeviceService.GraphicsDevice != null)
+            if(_graphicsDeviceService != null && _graphicsDeviceService.GraphicsDevice != null)
             {
                 LoadContent();
             }
         }
 
-        private static readonly Action<IDrawable, GameTime> DrawAction =
-            (drawable, gameTime) => drawable.Draw(gameTime);
+        private static readonly Action<IDrawable, GameTime> DrawAction =(drawable, gameTime) => drawable.Draw(gameTime);
 
-        protected virtual void Draw(GameTime gameTime)
-        {
+        protected virtual void Draw(GameTime gameTime) { _drawables.ForEachFilteredItem(DrawAction, gameTime); }
 
-            _drawables.ForEachFilteredItem(DrawAction, gameTime);
-        }
+        private static readonly Action<IUpdateable, GameTime> UpdateAction =(updateable, gameTime) => updateable.Update(gameTime);
 
-        private static readonly Action<IUpdateable, GameTime> UpdateAction =
-            (updateable, gameTime) => updateable.Update(gameTime);
+        protected virtual void Update(GameTime gameTime) { _updateables.ForEachFilteredItem(UpdateAction, gameTime); }
 
-        protected virtual void Update(GameTime gameTime)
-        {
-            _updateables.ForEachFilteredItem(UpdateAction, gameTime);
-        }
-
-        protected virtual void OnExiting(object sender, EventArgs args)
-        {
-            EventHelpers.Raise(sender, Exiting, args);
-        }
+        protected virtual void OnExiting(object sender, EventArgs args) { EventHelpers.Raise(sender, Exiting, args); }
 
         protected virtual void OnActivated(object sender, EventArgs args)
         {
@@ -621,8 +576,7 @@ namespace Microsoft.Xna.Framework
 
         #region Event Handlers
 
-        private void Components_ComponentAdded(
-            object sender, GameComponentCollectionEventArgs e)
+        private void Components_ComponentAdded(object sender, GameComponentCollectionEventArgs e)
         {
             // Since we only subscribe to ComponentAdded after the graphics
             // devices are set up, it is safe to just blindly call Initialize.
@@ -630,11 +584,8 @@ namespace Microsoft.Xna.Framework
             CategorizeComponent(e.GameComponent);
         }
 
-        private void Components_ComponentRemoved(
-            object sender, GameComponentCollectionEventArgs e)
-        {
-            DecategorizeComponent(e.GameComponent);
-        }
+        private void Components_ComponentRemoved(object sender, GameComponentCollectionEventArgs e)
+        { DecategorizeComponent(e.GameComponent); }
 
         private void Platform_AsyncRunLoopEnded(object sender, EventArgs e)
         {
@@ -659,11 +610,12 @@ namespace Microsoft.Xna.Framework
         {
             Platform.BeginScreenDeviceChange(GraphicsDevice.PresentationParameters.IsFullScreen);
 
-            if (GraphicsDevice.PresentationParameters.IsFullScreen)
+            if(GraphicsDevice.PresentationParameters.IsFullScreen)
                 Platform.EnterFullScreen();
             else
                 Platform.ExitFullScreen();
-            var viewport = new Viewport(0, 0,
+            var viewport = new Viewport(0,
+                                        0,
                                         GraphicsDevice.PresentationParameters.BackBufferWidth,
                                         GraphicsDevice.PresentationParameters.BackBufferHeight);
 
@@ -675,7 +627,7 @@ namespace Microsoft.Xna.Framework
         internal void DoUpdate(GameTime gameTime)
         {
             AssertNotDisposed();
-            if (Platform.BeforeUpdate(gameTime))
+            if(Platform.BeforeUpdate(gameTime))
             {
                 FrameworkDispatcher.Update();
 
@@ -692,7 +644,7 @@ namespace Microsoft.Xna.Framework
             // Draw and EndDraw should not be called if BeginDraw returns false.
             // http://stackoverflow.com/questions/4054936/manual-control-over-when-to-redraw-the-screen/4057180#4057180
             // http://stackoverflow.com/questions/4235439/xna-3-1-to-4-0-requires-constant-redraw-or-will-display-a-purple-screen
-            if (Platform.BeforeDraw(gameTime) && BeginDraw())
+            if(Platform.BeforeDraw(gameTime) && BeginDraw())
             {
                 Draw(gameTime);
                 EndDraw();
@@ -702,7 +654,7 @@ namespace Microsoft.Xna.Framework
         internal void DoInitialize()
         {
             AssertNotDisposed();
-            if (GraphicsDevice == null && graphicsDeviceManager != null)
+            if(GraphicsDevice == null && graphicsDeviceManager != null)
                 _graphicsDeviceManager.CreateDevice();
 
             Platform.BeforeInitialize();
@@ -730,7 +682,7 @@ namespace Microsoft.Xna.Framework
         {
             get
             {
-                if (_graphicsDeviceManager == null)
+                if(_graphicsDeviceManager == null)
                 {
                     _graphicsDeviceManager = (IGraphicsDeviceManager)
                         Services.GetService(typeof(IGraphicsDeviceManager));
@@ -739,7 +691,7 @@ namespace Microsoft.Xna.Framework
             }
             set
             {
-                if (_graphicsDeviceManager != null)
+                if(_graphicsDeviceManager != null)
                     throw new InvalidOperationException("GraphicsDeviceManager already registered for this Game object");
                 _graphicsDeviceManager = value;
             }
@@ -752,14 +704,14 @@ namespace Microsoft.Xna.Framework
         //       Components.ComponentAdded.
         private void InitializeExistingComponents()
         {
-            for (int i = 0; i < Components.Count; ++i)
+            for(int i = 0; i < Components.Count; ++i)
                 Components[i].Initialize();
         }
 
         private void CategorizeComponents()
         {
             DecategorizeComponents();
-            for (int i = 0; i < Components.Count; ++i)
+            for(int i = 0; i < Components.Count; ++i)
                 CategorizeComponent(Components[i]);
         }
 
@@ -773,9 +725,9 @@ namespace Microsoft.Xna.Framework
 
         private void CategorizeComponent(IGameComponent component)
         {
-            if (component is IUpdateable)
+            if(component is IUpdateable)
                 _updateables.Add((IUpdateable)component);
-            if (component is IDrawable)
+            if(component is IDrawable)
                 _drawables.Add((IDrawable)component);
         }
 
@@ -783,16 +735,15 @@ namespace Microsoft.Xna.Framework
         //        opposite of CategorizeComponent.
         private void DecategorizeComponent(IGameComponent component)
         {
-            if (component is IUpdateable)
+            if(component is IUpdateable)
                 _updateables.Remove((IUpdateable)component);
-            if (component is IDrawable)
+            if(component is IDrawable)
                 _drawables.Remove((IDrawable)component);
         }
 
         /// <summary>
-        /// The SortingFilteringCollection class provides efficient, reusable
-        /// sorting and filtering based on a configurable sort comparer, filter
-        /// predicate, and associate change events.
+        /// The SortingFilteringCollection class provides efficient, reusable sorting and filtering based on a
+        /// configurable sort comparer, filter predicate, and associate change events.
         /// </summary>
         class SortingFilteringCollection<T> : ICollection<T>
         {
@@ -810,13 +761,12 @@ namespace Microsoft.Xna.Framework
             private readonly Action<T, EventHandler<EventArgs>> _sortChangedSubscriber;
             private readonly Action<T, EventHandler<EventArgs>> _sortChangedUnsubscriber;
 
-            public SortingFilteringCollection(
-                Predicate<T> filter,
-                Action<T, EventHandler<EventArgs>> filterChangedSubscriber,
-                Action<T, EventHandler<EventArgs>> filterChangedUnsubscriber,
-                Comparison<T> sort,
-                Action<T, EventHandler<EventArgs>> sortChangedSubscriber,
-                Action<T, EventHandler<EventArgs>> sortChangedUnsubscriber)
+            public SortingFilteringCollection(Predicate<T> filter,
+                                              Action<T, EventHandler<EventArgs>> filterChangedSubscriber,
+                                              Action<T, EventHandler<EventArgs>> filterChangedUnsubscriber,
+                                              Comparison<T> sort,
+                                              Action<T, EventHandler<EventArgs>> sortChangedSubscriber,
+                                              Action<T, EventHandler<EventArgs>> sortChangedUnsubscriber)
             {
                 _items = new List<T>();
                 _addJournal = new List<AddJournalEntry<T>>();
@@ -837,34 +787,34 @@ namespace Microsoft.Xna.Framework
             private int CompareAddJournalEntry(AddJournalEntry<T> x, AddJournalEntry<T> y)
             {
                 int result = _sort(x.Item, y.Item);
-                if (result != 0)
+                if(result != 0)
                     return result;
                 return x.Order - y.Order;
             }
 
             public void ForEachFilteredItem<TUserData>(Action<T, TUserData> action, TUserData userData)
             {
-                if (_shouldRebuildCache)
+                if(_shouldRebuildCache)
                 {
                     ProcessRemoveJournal();
                     ProcessAddJournal();
 
                     // Rebuild the cache
                     _cachedFilteredItems.Clear();
-                    for (int i = 0; i < _items.Count; ++i)
-                        if (_filter(_items[i]))
+                    for(int i = 0; i < _items.Count; ++i)
+                        if(_filter(_items[i]))
                             _cachedFilteredItems.Add(_items[i]);
 
                     _shouldRebuildCache = false;
                 }
 
-                for (int i = 0; i < _cachedFilteredItems.Count; ++i)
+                for(int i = 0; i < _cachedFilteredItems.Count; ++i)
                     action(_cachedFilteredItems[i], userData);
 
                 // If the cache was invalidated as a result of processing items,
                 // now is a good time to clear it and give the GC (more of) a
                 // chance to do its thing.
-                if (_shouldRebuildCache)
+                if(_shouldRebuildCache)
                     _cachedFilteredItems.Clear();
             }
 
@@ -878,11 +828,11 @@ namespace Microsoft.Xna.Framework
 
             public bool Remove(T item)
             {
-                if (_addJournal.Remove(AddJournalEntry<T>.CreateKey(item)))
+                if(_addJournal.Remove(AddJournalEntry<T>.CreateKey(item)))
                     return true;
 
                 var index = _items.IndexOf(item);
-                if (index >= 0)
+                if(index >= 0)
                 {
                     UnsubscribeFromItemEvents(item);
                     _removeJournal.Add(index);
@@ -894,7 +844,7 @@ namespace Microsoft.Xna.Framework
 
             public void Clear()
             {
-                for (int i = 0; i < _items.Count; ++i)
+                for(int i = 0; i < _items.Count; ++i)
                 {
                     _filterChangedUnsubscriber(_items[i], Item_FilterPropertyChanged);
                     _sortChangedUnsubscriber(_items[i], Item_SortPropertyChanged);
@@ -907,55 +857,39 @@ namespace Microsoft.Xna.Framework
                 InvalidateCache();
             }
 
-            public bool Contains(T item)
-            {
-                return _items.Contains(item);
-            }
+            public bool Contains(T item) { return _items.Contains(item); }
 
-            public void CopyTo(T[] array, int arrayIndex)
-            {
-                _items.CopyTo(array, arrayIndex);
-            }
+            public void CopyTo(T[] array, int arrayIndex) { _items.CopyTo(array, arrayIndex); }
 
-            public int Count
-            {
-                get { return _items.Count; }
-            }
+            public int Count { get { return _items.Count; } }
 
-            public bool IsReadOnly
-            {
-                get { return false; }
-            }
+            public bool IsReadOnly { get { return false; } }
 
-            public IEnumerator<T> GetEnumerator()
-            {
-                return _items.GetEnumerator();
-            }
+            public IEnumerator<T> GetEnumerator() { return _items.GetEnumerator(); }
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-            {
-                return ((System.Collections.IEnumerable)_items).GetEnumerator();
-            }
+            { return ((System.Collections.IEnumerable)_items).GetEnumerator(); }
 
-            private static readonly Comparison<int> RemoveJournalSortComparison =
-                (x, y) => Comparer<int>.Default.Compare(y, x); // Sort high to low
+            private static readonly Comparison<int> RemoveJournalSortComparison =(x, y) => Comparer<int>.Default
+                .Compare(y, x); // Sort high to low
+
             private void ProcessRemoveJournal()
             {
-                if (_removeJournal.Count == 0)
+                if(_removeJournal.Count == 0)
                     return;
 
                 // Remove items in reverse.  (Technically there exist faster
                 // ways to bulk-remove from a variable-length array, but List<T>
                 // does not provide such a method.)
                 _removeJournal.Sort(RemoveJournalSortComparison);
-                for (int i = 0; i < _removeJournal.Count; ++i)
+                for(int i = 0; i < _removeJournal.Count; ++i)
                     _items.RemoveAt(_removeJournal[i]);
                 _removeJournal.Clear();
             }
 
             private void ProcessAddJournal()
             {
-                if (_addJournal.Count == 0)
+                if(_addJournal.Count == 0)
                     return;
 
                 // Prepare the _addJournal to be merge-sorted with _items.
@@ -965,12 +899,12 @@ namespace Microsoft.Xna.Framework
                 int iAddJournal = 0;
                 int iItems = 0;
 
-                while (iItems < _items.Count && iAddJournal < _addJournal.Count)
+                while(iItems < _items.Count && iAddJournal < _addJournal.Count)
                 {
                     var addJournalItem = _addJournal[iAddJournal].Item;
                     // If addJournalItem is less than (belongs before)
                     // _items[iItems], insert it.
-                    if (_sort(addJournalItem, _items[iItems]) < 0)
+                    if(_sort(addJournalItem, _items[iItems]) < 0)
                     {
                         SubscribeToItemEvents(addJournalItem);
                         _items.Insert(iItems, addJournalItem);
@@ -983,7 +917,7 @@ namespace Microsoft.Xna.Framework
                 }
 
                 // If _addJournal had any "tail" items, append them all now.
-                for (; iAddJournal < _addJournal.Count; ++iAddJournal)
+                for(; iAddJournal < _addJournal.Count; ++iAddJournal)
                 {
                     var addJournalItem = _addJournal[iAddJournal].Item;
                     SubscribeToItemEvents(addJournalItem);
@@ -1005,15 +939,9 @@ namespace Microsoft.Xna.Framework
                 _sortChangedUnsubscriber(item, Item_SortPropertyChanged);
             }
 
-            private void InvalidateCache()
-            {
-                _shouldRebuildCache = true;
-            }
+            private void InvalidateCache() { _shouldRebuildCache = true; }
 
-            private void Item_FilterPropertyChanged(object sender, EventArgs e)
-            {
-                InvalidateCache();
-            }
+            private void Item_FilterPropertyChanged(object sender, EventArgs e) { InvalidateCache(); }
 
             private void Item_SortPropertyChanged(object sender, EventArgs e)
             {
@@ -1041,19 +969,13 @@ namespace Microsoft.Xna.Framework
                 Item = item;
             }
 
-            public static AddJournalEntry<T> CreateKey(T item)
-            {
-                return new AddJournalEntry<T>(-1, item);
-            }
+            public static AddJournalEntry<T> CreateKey(T item) { return new AddJournalEntry<T>(-1, item); }
 
-            public override int GetHashCode()
-            {
-                return Item.GetHashCode();
-            }
+            public override int GetHashCode() { return Item.GetHashCode(); }
 
             public override bool Equals(object obj)
             {
-                if (!(obj is AddJournalEntry<T>))
+                if(!(obj is AddJournalEntry<T>))
                     return false;
 
                 return object.Equals(Item, ((AddJournalEntry<T>)obj).Item);

@@ -12,18 +12,15 @@ namespace Microsoft.Xna.Framework
     {
         Dictionary<Type, object> services;
 
-        public GameServiceContainer()
-        {
-            services = new Dictionary<Type, object>();
-        }
+        public GameServiceContainer() { services = new Dictionary<Type, object>(); }
 
         public void AddService(Type type, object provider)
         {
-            if (type == null)
-                throw new ArgumentNullException("type");
-            if (provider == null)
-                throw new ArgumentNullException("provider");
-            if (!ReflectionHelpers.IsAssignableFrom(type, provider))
+            if(type == null)
+                throw new ArgumentNullException(nameof(type));
+            if(provider == null)
+                throw new ArgumentNullException(nameof(provider));
+            if(!ReflectionHelpers.IsAssignableFrom(type, provider))
                 throw new ArgumentException("The provider does not match the specified service type!");
 
             services.Add(type, provider);
@@ -31,11 +28,11 @@ namespace Microsoft.Xna.Framework
 
         public object GetService(Type type)
         {
-            if (type == null)
-                throw new ArgumentNullException("type");
+            if(type == null)
+                throw new ArgumentNullException(nameof(type));
 
             object service;
-            if (services.TryGetValue(type, out service))
+            if(services.TryGetValue(type, out service))
                 return service;
 
             return null;
@@ -43,22 +40,20 @@ namespace Microsoft.Xna.Framework
 
         public void RemoveService(Type type)
         {
-            if (type == null)
-                throw new ArgumentNullException("type");
+            if(type == null)
+                throw new ArgumentNullException(nameof(type));
 
             services.Remove(type);
         }
 
-        public void AddService<T>(T provider)
-        {
-            AddService(typeof(T), provider);
-        }
+        public void AddService<T>(T provider) { AddService(typeof(T), provider); }
 
-        public T GetService<T>() where T : class
+        public T GetService<T>()
+            where T : class
         {
             var service = GetService(typeof(T));
 
-            if (service == null)
+            if(service == null)
                 return null;
 
             return (T)service;

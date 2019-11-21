@@ -13,17 +13,14 @@ namespace Microsoft.Xna.Framework
         private int _drawOrder;
         private bool _visible = true;
 
-        public Graphics.GraphicsDevice GraphicsDevice
-        {
-            get { return this.Game.GraphicsDevice; }
-        }
+        public Graphics.GraphicsDevice GraphicsDevice { get { return this.Game.GraphicsDevice; } }
 
         public int DrawOrder
         {
             get { return _drawOrder; }
             set
             {
-                if (_drawOrder != value)
+                if(_drawOrder != value)
                 {
                     _drawOrder = value;
                     OnDrawOrderChanged(this, EventArgs.Empty);
@@ -36,7 +33,7 @@ namespace Microsoft.Xna.Framework
             get { return _visible; }
             set
             {
-                if (_visible != value)
+                if(_visible != value)
                 {
                     _visible = value;
                     OnVisibleChanged(this, EventArgs.Empty);
@@ -45,16 +42,14 @@ namespace Microsoft.Xna.Framework
         }
 
         public event EventHandler<EventArgs> DrawOrderChanged;
+
         public event EventHandler<EventArgs> VisibleChanged;
 
-        public DrawableGameComponent(Game game)
-            : base(game)
-        {
-        }
+        public DrawableGameComponent(Game game) : base(game) { }
 
         public override void Initialize()
         {
-            if (!_initialized)
+            if(!_initialized)
             {
                 _initialized = true;
                 LoadContent();
@@ -63,7 +58,7 @@ namespace Microsoft.Xna.Framework
 
         protected override void Dispose(bool disposing)
         {
-            if (!_disposed)
+            if(!_disposed)
             {
                 _disposed = true;
                 UnloadContent();
@@ -77,13 +72,9 @@ namespace Microsoft.Xna.Framework
         public virtual void Draw(GameTime gameTime) { }
 
         protected virtual void OnVisibleChanged(object sender, EventArgs args)
-        {
-            EventHelpers.Raise(sender, VisibleChanged, args);
-        }
+        { EventHelpers.Raise(sender, VisibleChanged, args); }
 
         protected virtual void OnDrawOrderChanged(object sender, EventArgs args)
-        {
-            EventHelpers.Raise(sender, DrawOrderChanged, args);
-        }
+        { EventHelpers.Raise(sender, DrawOrderChanged, args); }
     }
 }

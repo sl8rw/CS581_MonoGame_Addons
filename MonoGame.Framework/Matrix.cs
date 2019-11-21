@@ -9,7 +9,8 @@ using System.Runtime.Serialization;
 namespace Microsoft.Xna.Framework
 {
     /// <summary>
-    /// Represents the right-handed 4x4 floating point matrix, which can store translation, scale and rotation information.
+    /// Represents the right-handed 4x4 floating point matrix, which can store translation, scale and rotation
+    /// information.
     /// </summary>
     [DataContract]
     [DebuggerDisplay("{DebugDisplayString,nq}")]
@@ -18,8 +19,8 @@ namespace Microsoft.Xna.Framework
         #region Public Constructors
 
         /// <summary>
-        /// Constructs a matrix.
-        /// </summary>
+/// Constructs a matrix.
+/// </summary>
         /// <param name="m11">A first row and first column value.</param>
         /// <param name="m12">A first row and second column value.</param>
         /// <param name="m13">A first row and third column value.</param>
@@ -36,8 +37,22 @@ namespace Microsoft.Xna.Framework
         /// <param name="m42">A fourth row and second column value.</param>
         /// <param name="m43">A fourth row and third column value.</param>
         /// <param name="m44">A fourth row and fourth column value.</param>
-        public Matrix(float m11, float m12, float m13, float m14, float m21, float m22, float m23, float m24, float m31,
-                      float m32, float m33, float m34, float m41, float m42, float m43, float m44)
+        public Matrix(float m11,
+                      float m12,
+                      float m13,
+                      float m14,
+                      float m21,
+                      float m22,
+                      float m23,
+                      float m24,
+                      float m31,
+                      float m32,
+                      float m33,
+                      float m34,
+                      float m41,
+                      float m42,
+                      float m43,
+                      float m44)
         {
             this.M11 = m11;
             this.M12 = m12;
@@ -89,8 +104,8 @@ namespace Microsoft.Xna.Framework
         #region Public Fields
 
         /// <summary>
-        /// A first row and first column value.
-        /// </summary>
+/// A first row and first column value.
+/// </summary>
         [DataMember]
         public float M11;
 
@@ -192,86 +207,121 @@ namespace Microsoft.Xna.Framework
         {
             get
             {
-                switch (index)
+                switch(index)
                 {
-                    case 0: return M11;
-                    case 1: return M12;
-                    case 2: return M13;
-                    case 3: return M14;
-                    case 4: return M21;
-                    case 5: return M22;
-                    case 6: return M23;
-                    case 7: return M24;
-                    case 8: return M31;
-                    case 9: return M32;
-                    case 10: return M33;
-                    case 11: return M34;
-                    case 12: return M41;
-                    case 13: return M42;
-                    case 14: return M43;
-                    case 15: return M44;
+                    case 0:
+                        return M11;
+                    case 1:
+                        return M12;
+                    case 2:
+                        return M13;
+                    case 3:
+                        return M14;
+                    case 4:
+                        return M21;
+                    case 5:
+                        return M22;
+                    case 6:
+                        return M23;
+                    case 7:
+                        return M24;
+                    case 8:
+                        return M31;
+                    case 9:
+                        return M32;
+                    case 10:
+                        return M33;
+                    case 11:
+                        return M34;
+                    case 12:
+                        return M41;
+                    case 13:
+                        return M42;
+                    case 14:
+                        return M43;
+                    case 15:
+                        return M44;
                 }
                 throw new ArgumentOutOfRangeException();
             }
 
             set
             {
-                switch (index)
+                switch(index)
                 {
-                    case 0: M11 = value; break;
-                    case 1: M12 = value; break;
-                    case 2: M13 = value; break;
-                    case 3: M14 = value; break;
-                    case 4: M21 = value; break;
-                    case 5: M22 = value; break;
-                    case 6: M23 = value; break;
-                    case 7: M24 = value; break;
-                    case 8: M31 = value; break;
-                    case 9: M32 = value; break;
-                    case 10: M33 = value; break;
-                    case 11: M34 = value; break;
-                    case 12: M41 = value; break;
-                    case 13: M42 = value; break;
-                    case 14: M43 = value; break;
-                    case 15: M44 = value; break;
-                    default: throw new ArgumentOutOfRangeException();
+                    case 0:
+                        M11 = value;
+                        break;
+                    case 1:
+                        M12 = value;
+                        break;
+                    case 2:
+                        M13 = value;
+                        break;
+                    case 3:
+                        M14 = value;
+                        break;
+                    case 4:
+                        M21 = value;
+                        break;
+                    case 5:
+                        M22 = value;
+                        break;
+                    case 6:
+                        M23 = value;
+                        break;
+                    case 7:
+                        M24 = value;
+                        break;
+                    case 8:
+                        M31 = value;
+                        break;
+                    case 9:
+                        M32 = value;
+                        break;
+                    case 10:
+                        M33 = value;
+                        break;
+                    case 11:
+                        M34 = value;
+                        break;
+                    case 12:
+                        M41 = value;
+                        break;
+                    case 13:
+                        M42 = value;
+                        break;
+                    case 14:
+                        M43 = value;
+                        break;
+                    case 15:
+                        M44 = value;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
         }
 
-        public float this[int row, int column]
-        {
-            get
-            {
-                return this[(row * 4) + column];
-            }
-
-            set
-            {
-                this[(row * 4) + column] = value;
-            }
-        }
+        public float this[int row, int column] { get { return this[(row * 4) + column]; } set
+                                                                                          {
+                                                                                              this[(row * 4) + column] = value;
+                                                                                          } }
 
         #endregion
 
         #region Private Members
-        private static Matrix identity = new Matrix(1f, 0f, 0f, 0f,
-                                                    0f, 1f, 0f, 0f,
-                                                    0f, 0f, 1f, 0f,
-                                                    0f, 0f, 0f, 1f);
+        private static Matrix identity = new Matrix(1f, 0f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1f);
         #endregion
 
         #region Public Properties
 
         /// <summary>
-        /// The backward vector formed from the third row M31, M32, M33 elements.
-        /// </summary>
+/// The backward vector formed from the third row M31, M32, M33 elements.
+/// </summary>
         public Vector3 Backward
         {
-            get
-            {
-                return new Vector3(this.M31, this.M32, this.M33);
-            }
+            get { return new Vector3(this.M31, this.M32, this.M33); }
             set
             {
                 this.M31 = value.X;
@@ -285,10 +335,7 @@ namespace Microsoft.Xna.Framework
         /// </summary>
         public Vector3 Down
         {
-            get
-            {
-                return new Vector3(-this.M21, -this.M22, -this.M23);
-            }
+            get { return new Vector3(-this.M21, -this.M22, -this.M23); }
             set
             {
                 this.M21 = -value.X;
@@ -302,10 +349,7 @@ namespace Microsoft.Xna.Framework
         /// </summary>
         public Vector3 Forward
         {
-            get
-            {
-                return new Vector3(-this.M31, -this.M32, -this.M33);
-            }
+            get { return new Vector3(-this.M31, -this.M32, -this.M33); }
             set
             {
                 this.M31 = -value.X;
@@ -317,20 +361,14 @@ namespace Microsoft.Xna.Framework
         /// <summary>
         /// Returns the identity matrix.
         /// </summary>
-        public static Matrix Identity
-        {
-            get { return identity; }
-        }
+        public static Matrix Identity { get { return identity; } }
 
         /// <summary>
         /// The left vector formed from the first row -M11, -M12, -M13 elements.
         /// </summary>
         public Vector3 Left
         {
-            get
-            {
-                return new Vector3(-this.M11, -this.M12, -this.M13);
-            }
+            get { return new Vector3(-this.M11, -this.M12, -this.M13); }
             set
             {
                 this.M11 = -value.X;
@@ -344,10 +382,7 @@ namespace Microsoft.Xna.Framework
         /// </summary>
         public Vector3 Right
         {
-            get
-            {
-                return new Vector3(this.M11, this.M12, this.M13);
-            }
+            get { return new Vector3(this.M11, this.M12, this.M13); }
             set
             {
                 this.M11 = value.X;
@@ -361,10 +396,7 @@ namespace Microsoft.Xna.Framework
         /// </summary>
         public Vector3 Translation
         {
-            get
-            {
-                return new Vector3(this.M41, this.M42, this.M43);
-            }
+            get { return new Vector3(this.M41, this.M42, this.M43); }
             set
             {
                 this.M41 = value.X;
@@ -378,10 +410,7 @@ namespace Microsoft.Xna.Framework
         /// </summary>
         public Vector3 Up
         {
-            get
-            {
-                return new Vector3(this.M21, this.M22, this.M23);
-            }
+            get { return new Vector3(this.M21, this.M22, this.M23); }
             set
             {
                 this.M21 = value.X;
@@ -394,8 +423,8 @@ namespace Microsoft.Xna.Framework
         #region Public Methods
 
         /// <summary>
-        /// Creates a new <see cref="Matrix"/> which contains sum of two matrixes.
-        /// </summary>
+/// Creates a new <see cref="Matrix"/> which contains sum of two matrixes.
+/// </summary>
         /// <param name="matrix1">The first matrix to add.</param>
         /// <param name="matrix2">The second matrix to add.</param>
         /// <returns>The result of the matrix addition.</returns>
@@ -444,7 +473,6 @@ namespace Microsoft.Xna.Framework
             result.M42 = matrix1.M42 + matrix2.M42;
             result.M43 = matrix1.M43 + matrix2.M43;
             result.M44 = matrix1.M44 + matrix2.M44;
-
         }
 
         /// <summary>
@@ -455,8 +483,10 @@ namespace Microsoft.Xna.Framework
         /// <param name="cameraUpVector">The camera up vector.</param>
         /// <param name="cameraForwardVector">Optional camera forward vector.</param>
         /// <returns>The <see cref="Matrix"/> for spherical billboarding.</returns>
-        public static Matrix CreateBillboard(Vector3 objectPosition, Vector3 cameraPosition,
-            Vector3 cameraUpVector, Nullable<Vector3> cameraForwardVector)
+        public static Matrix CreateBillboard(Vector3 objectPosition,
+                                             Vector3 cameraPosition,
+                                             Vector3 cameraUpVector,
+                                             Nullable<Vector3> cameraForwardVector)
         {
             Matrix result;
 
@@ -474,8 +504,11 @@ namespace Microsoft.Xna.Framework
         /// <param name="cameraUpVector">The camera up vector.</param>
         /// <param name="cameraForwardVector">Optional camera forward vector.</param>
         /// <param name="result">The <see cref="Matrix"/> for spherical billboarding as an output parameter.</param>
-        public static void CreateBillboard(ref Vector3 objectPosition, ref Vector3 cameraPosition,
-            ref Vector3 cameraUpVector, Vector3? cameraForwardVector, out Matrix result)
+        public static void CreateBillboard(ref Vector3 objectPosition,
+                                           ref Vector3 cameraPosition,
+                                           ref Vector3 cameraUpVector,
+                                           Vector3? cameraForwardVector,
+                                           out Matrix result)
         {
             Vector3 vector;
             Vector3 vector2;
@@ -484,11 +517,10 @@ namespace Microsoft.Xna.Framework
             vector.Y = objectPosition.Y - cameraPosition.Y;
             vector.Z = objectPosition.Z - cameraPosition.Z;
             float num = vector.LengthSquared();
-            if (num < 0.0001f)
+            if(num < 0.0001f)
             {
                 vector = cameraForwardVector.HasValue ? -cameraForwardVector.Value : Vector3.Forward;
-            }
-            else
+            } else
             {
                 Vector3.Multiply(ref vector, (1f / ((float)Math.Sqrt((double)num))), out vector);
             }
@@ -522,12 +554,19 @@ namespace Microsoft.Xna.Framework
         /// <param name="cameraForwardVector">Optional camera forward vector.</param>
         /// <param name="objectForwardVector">Optional object forward vector.</param>
         /// <returns>The <see cref="Matrix"/> for cylindrical billboarding.</returns>
-        public static Matrix CreateConstrainedBillboard(Vector3 objectPosition, Vector3 cameraPosition,
-            Vector3 rotateAxis, Nullable<Vector3> cameraForwardVector, Nullable<Vector3> objectForwardVector)
+        public static Matrix CreateConstrainedBillboard(Vector3 objectPosition,
+                                                        Vector3 cameraPosition,
+                                                        Vector3 rotateAxis,
+                                                        Nullable<Vector3> cameraForwardVector,
+                                                        Nullable<Vector3> objectForwardVector)
         {
             Matrix result;
-            CreateConstrainedBillboard(ref objectPosition, ref cameraPosition, ref rotateAxis,
-                cameraForwardVector, objectForwardVector, out result);
+            CreateConstrainedBillboard(ref objectPosition,
+                                       ref cameraPosition,
+                                       ref rotateAxis,
+                                       cameraForwardVector,
+                                       objectForwardVector,
+                                       out result);
             return result;
         }
 
@@ -540,8 +579,12 @@ namespace Microsoft.Xna.Framework
         /// <param name="cameraForwardVector">Optional camera forward vector.</param>
         /// <param name="objectForwardVector">Optional object forward vector.</param>
         /// <param name="result">The <see cref="Matrix"/> for cylindrical billboarding as an output parameter.</param>
-        public static void CreateConstrainedBillboard(ref Vector3 objectPosition, ref Vector3 cameraPosition,
-            ref Vector3 rotateAxis, Vector3? cameraForwardVector, Vector3? objectForwardVector, out Matrix result)
+        public static void CreateConstrainedBillboard(ref Vector3 objectPosition,
+                                                      ref Vector3 cameraPosition,
+                                                      ref Vector3 rotateAxis,
+                                                      Vector3? cameraForwardVector,
+                                                      Vector3? objectForwardVector,
+                                                      out Matrix result)
         {
             float num;
             Vector3 vector;
@@ -551,39 +594,38 @@ namespace Microsoft.Xna.Framework
             vector2.Y = objectPosition.Y - cameraPosition.Y;
             vector2.Z = objectPosition.Z - cameraPosition.Z;
             float num2 = vector2.LengthSquared();
-            if (num2 < 0.0001f)
+            if(num2 < 0.0001f)
             {
                 vector2 = cameraForwardVector.HasValue ? -cameraForwardVector.Value : Vector3.Forward;
-            }
-            else
+            } else
             {
                 Vector3.Multiply(ref vector2, (1f / ((float)Math.Sqrt((double)num2))), out vector2);
             }
             Vector3 vector4 = rotateAxis;
             Vector3.Dot(ref rotateAxis, ref vector2, out num);
-            if (Math.Abs(num) > 0.9982547f)
+            if(Math.Abs(num) > 0.9982547f)
             {
-                if (objectForwardVector.HasValue)
+                if(objectForwardVector.HasValue)
                 {
                     vector = objectForwardVector.Value;
                     Vector3.Dot(ref rotateAxis, ref vector, out num);
-                    if (Math.Abs(num) > 0.9982547f)
+                    if(Math.Abs(num) > 0.9982547f)
                     {
-                        num = ((rotateAxis.X * Vector3.Forward.X) + (rotateAxis.Y * Vector3.Forward.Y)) + (rotateAxis.Z * Vector3.Forward.Z);
+                        num = ((rotateAxis.X * Vector3.Forward.X) + (rotateAxis.Y * Vector3.Forward.Y)) +
+                            (rotateAxis.Z * Vector3.Forward.Z);
                         vector = (Math.Abs(num) > 0.9982547f) ? Vector3.Right : Vector3.Forward;
                     }
-                }
-                else
+                } else
                 {
-                    num = ((rotateAxis.X * Vector3.Forward.X) + (rotateAxis.Y * Vector3.Forward.Y)) + (rotateAxis.Z * Vector3.Forward.Z);
+                    num = ((rotateAxis.X * Vector3.Forward.X) + (rotateAxis.Y * Vector3.Forward.Y)) +
+                        (rotateAxis.Z * Vector3.Forward.Z);
                     vector = (Math.Abs(num) > 0.9982547f) ? Vector3.Right : Vector3.Forward;
                 }
                 Vector3.Cross(ref rotateAxis, ref vector, out vector3);
                 vector3.Normalize();
                 Vector3.Cross(ref vector3, ref rotateAxis, out vector);
                 vector.Normalize();
-            }
-            else
+            } else
             {
                 Vector3.Cross(ref rotateAxis, ref vector2, out vector3);
                 vector3.Normalize();
@@ -606,7 +648,6 @@ namespace Microsoft.Xna.Framework
             result.M42 = objectPosition.Y;
             result.M43 = objectPosition.Z;
             result.M44 = 1;
-
         }
 
         /// <summary>
@@ -712,9 +753,10 @@ namespace Microsoft.Xna.Framework
         /// <param name="pitch">The pitch rotation value in radians.</param>
         /// <param name="roll">The roll rotation value in radians.</param>
         /// <returns>The rotation <see cref="Matrix"/>.</returns>
-        /// <remarks>For more information about yaw, pitch and roll visit http://en.wikipedia.org/wiki/Euler_angles.
+        /// <remarks>
+        /// For more information about yaw, pitch and roll visit http://en.wikipedia.org/wiki/Euler_angles.
         /// </remarks>
-		public static Matrix CreateFromYawPitchRoll(float yaw, float pitch, float roll)
+        public static Matrix CreateFromYawPitchRoll(float yaw, float pitch, float roll)
         {
             Matrix matrix;
             CreateFromYawPitchRoll(yaw, pitch, roll, out matrix);
@@ -728,9 +770,10 @@ namespace Microsoft.Xna.Framework
         /// <param name="pitch">The pitch rotation value in radians.</param>
         /// <param name="roll">The roll rotation value in radians.</param>
         /// <param name="result">The rotation <see cref="Matrix"/> as an output parameter.</param>
-        /// <remarks>For more information about yaw, pitch and roll visit http://en.wikipedia.org/wiki/Euler_angles.
+        /// <remarks>
+        /// For more information about yaw, pitch and roll visit http://en.wikipedia.org/wiki/Euler_angles.
         /// </remarks>
-		public static void CreateFromYawPitchRoll(float yaw, float pitch, float roll, out Matrix result)
+        public static void CreateFromYawPitchRoll(float yaw, float pitch, float roll, out Matrix result)
         {
             Quaternion quaternion;
             Quaternion.CreateFromYawPitchRoll(yaw, pitch, roll, out quaternion);
@@ -758,7 +801,10 @@ namespace Microsoft.Xna.Framework
         /// <param name="cameraTarget">Lookup vector of the camera.</param>
         /// <param name="cameraUpVector">The direction of the upper edge of the camera.</param>
         /// <param name="result">The viewing <see cref="Matrix"/> as an output parameter.</param>
-        public static void CreateLookAt(ref Vector3 cameraPosition, ref Vector3 cameraTarget, ref Vector3 cameraUpVector, out Matrix result)
+        public static void CreateLookAt(ref Vector3 cameraPosition,
+                                        ref Vector3 cameraTarget,
+                                        ref Vector3 cameraUpVector,
+                                        out Matrix result)
         {
             var vector = Vector3.Normalize(cameraPosition - cameraTarget);
             var vector2 = Vector3.Normalize(Vector3.Cross(cameraUpVector, vector));
@@ -804,7 +850,11 @@ namespace Microsoft.Xna.Framework
         /// <param name="zNearPlane">Depth of the near plane.</param>
         /// <param name="zFarPlane">Depth of the far plane.</param>
         /// <param name="result">The new projection <see cref="Matrix"/> for orthographic view as an output parameter.</param>
-        public static void CreateOrthographic(float width, float height, float zNearPlane, float zFarPlane, out Matrix result)
+        public static void CreateOrthographic(float width,
+                                              float height,
+                                              float zNearPlane,
+                                              float zFarPlane,
+                                              out Matrix result)
         {
             result.M11 = 2f / width;
             result.M12 = result.M13 = result.M14 = 0f;
@@ -827,7 +877,12 @@ namespace Microsoft.Xna.Framework
         /// <param name="zNearPlane">Depth of the near plane.</param>
         /// <param name="zFarPlane">Depth of the far plane.</param>
         /// <returns>The new projection <see cref="Matrix"/> for customized orthographic view.</returns>
-        public static Matrix CreateOrthographicOffCenter(float left, float right, float bottom, float top, float zNearPlane, float zFarPlane)
+        public static Matrix CreateOrthographicOffCenter(float left,
+                                                         float right,
+                                                         float bottom,
+                                                         float top,
+                                                         float zNearPlane,
+                                                         float zFarPlane)
         {
             Matrix matrix;
             CreateOrthographicOffCenter(left, right, bottom, top, zNearPlane, zFarPlane, out matrix);
@@ -844,7 +899,13 @@ namespace Microsoft.Xna.Framework
         public static Matrix CreateOrthographicOffCenter(Rectangle viewingVolume, float zNearPlane, float zFarPlane)
         {
             Matrix matrix;
-            CreateOrthographicOffCenter(viewingVolume.Left, viewingVolume.Right, viewingVolume.Bottom, viewingVolume.Top, zNearPlane, zFarPlane, out matrix);
+            CreateOrthographicOffCenter(viewingVolume.Left,
+                                        viewingVolume.Right,
+                                        viewingVolume.Bottom,
+                                        viewingVolume.Top,
+                                        zNearPlane,
+                                        zFarPlane,
+                                        out matrix);
             return matrix;
         }
 
@@ -858,7 +919,13 @@ namespace Microsoft.Xna.Framework
         /// <param name="zNearPlane">Depth of the near plane.</param>
         /// <param name="zFarPlane">Depth of the far plane.</param>
         /// <param name="result">The new projection <see cref="Matrix"/> for customized orthographic view as an output parameter.</param>
-        public static void CreateOrthographicOffCenter(float left, float right, float bottom, float top, float zNearPlane, float zFarPlane, out Matrix result)
+        public static void CreateOrthographicOffCenter(float left,
+                                                       float right,
+                                                       float bottom,
+                                                       float top,
+                                                       float zNearPlane,
+                                                       float zFarPlane,
+                                                       out Matrix result)
         {
             result.M11 = (float)(2.0 / ((double)right - (double)left));
             result.M12 = 0.0f;
@@ -886,7 +953,10 @@ namespace Microsoft.Xna.Framework
         /// <param name="nearPlaneDistance">Distance to the near plane.</param>
         /// <param name="farPlaneDistance">Distance to the far plane.</param>
         /// <returns>The new projection <see cref="Matrix"/> for perspective view.</returns>
-        public static Matrix CreatePerspective(float width, float height, float nearPlaneDistance, float farPlaneDistance)
+        public static Matrix CreatePerspective(float width,
+                                               float height,
+                                               float nearPlaneDistance,
+                                               float farPlaneDistance)
         {
             Matrix matrix;
             CreatePerspective(width, height, nearPlaneDistance, farPlaneDistance, out matrix);
@@ -901,17 +971,21 @@ namespace Microsoft.Xna.Framework
         /// <param name="nearPlaneDistance">Distance to the near plane.</param>
         /// <param name="farPlaneDistance">Distance to the far plane.</param>
         /// <param name="result">The new projection <see cref="Matrix"/> for perspective view as an output parameter.</param>
-        public static void CreatePerspective(float width, float height, float nearPlaneDistance, float farPlaneDistance, out Matrix result)
+        public static void CreatePerspective(float width,
+                                             float height,
+                                             float nearPlaneDistance,
+                                             float farPlaneDistance,
+                                             out Matrix result)
         {
-            if (nearPlaneDistance <= 0f)
+            if(nearPlaneDistance <= 0f)
             {
                 throw new ArgumentException("nearPlaneDistance <= 0");
             }
-            if (farPlaneDistance <= 0f)
+            if(farPlaneDistance <= 0f)
             {
                 throw new ArgumentException("farPlaneDistance <= 0");
             }
-            if (nearPlaneDistance >= farPlaneDistance)
+            if(nearPlaneDistance >= farPlaneDistance)
             {
                 throw new ArgumentException("nearPlaneDistance >= farPlaneDistance");
             }
@@ -934,7 +1008,10 @@ namespace Microsoft.Xna.Framework
         /// <param name="nearPlaneDistance">Distance to the near plane.</param>
         /// <param name="farPlaneDistance">Distance to the far plane.</param>
         /// <returns>The new projection <see cref="Matrix"/> for perspective view with FOV.</returns>
-        public static Matrix CreatePerspectiveFieldOfView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
+        public static Matrix CreatePerspectiveFieldOfView(float fieldOfView,
+                                                          float aspectRatio,
+                                                          float nearPlaneDistance,
+                                                          float farPlaneDistance)
         {
             Matrix result;
             CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, nearPlaneDistance, farPlaneDistance, out result);
@@ -949,21 +1026,25 @@ namespace Microsoft.Xna.Framework
         /// <param name="nearPlaneDistance">Distance of the near plane.</param>
         /// <param name="farPlaneDistance">Distance of the far plane.</param>
         /// <param name="result">The new projection <see cref="Matrix"/> for perspective view with FOV as an output parameter.</param>
-        public static void CreatePerspectiveFieldOfView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance, out Matrix result)
+        public static void CreatePerspectiveFieldOfView(float fieldOfView,
+                                                        float aspectRatio,
+                                                        float nearPlaneDistance,
+                                                        float farPlaneDistance,
+                                                        out Matrix result)
         {
-            if ((fieldOfView <= 0f) || (fieldOfView >= 3.141593f))
+            if((fieldOfView <= 0f) || (fieldOfView >= 3.141593f))
             {
                 throw new ArgumentException("fieldOfView <= 0 or >= PI");
             }
-            if (nearPlaneDistance <= 0f)
+            if(nearPlaneDistance <= 0f)
             {
                 throw new ArgumentException("nearPlaneDistance <= 0");
             }
-            if (farPlaneDistance <= 0f)
+            if(farPlaneDistance <= 0f)
             {
                 throw new ArgumentException("farPlaneDistance <= 0");
             }
-            if (nearPlaneDistance >= farPlaneDistance)
+            if(nearPlaneDistance >= farPlaneDistance)
             {
                 throw new ArgumentException("nearPlaneDistance >= farPlaneDistance");
             }
@@ -990,12 +1071,18 @@ namespace Microsoft.Xna.Framework
         /// <param name="nearPlaneDistance">Distance to the near plane.</param>
         /// <param name="farPlaneDistance">Distance to the far plane.</param>
         /// <returns>The new <see cref="Matrix"/> for customized perspective view.</returns>
-        public static Matrix CreatePerspectiveOffCenter(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance)
+        public static Matrix CreatePerspectiveOffCenter(float left,
+                                                        float right,
+                                                        float bottom,
+                                                        float top,
+                                                        float nearPlaneDistance,
+                                                        float farPlaneDistance)
         {
             Matrix result;
             CreatePerspectiveOffCenter(left, right, bottom, top, nearPlaneDistance, farPlaneDistance, out result);
             return result;
         }
+
         /// <summary>
         /// Creates a new projection <see cref="Matrix"/> for customized perspective view.
         /// </summary>
@@ -1003,10 +1090,18 @@ namespace Microsoft.Xna.Framework
         /// <param name="nearPlaneDistance">Distance to the near plane.</param>
         /// <param name="farPlaneDistance">Distance to the far plane.</param>
         /// <returns>The new <see cref="Matrix"/> for customized perspective view.</returns>
-        public static Matrix CreatePerspectiveOffCenter(Rectangle viewingVolume, float nearPlaneDistance, float farPlaneDistance)
+        public static Matrix CreatePerspectiveOffCenter(Rectangle viewingVolume,
+                                                        float nearPlaneDistance,
+                                                        float farPlaneDistance)
         {
             Matrix result;
-            CreatePerspectiveOffCenter(viewingVolume.Left, viewingVolume.Right, viewingVolume.Bottom, viewingVolume.Top, nearPlaneDistance, farPlaneDistance, out result);
+            CreatePerspectiveOffCenter(viewingVolume.Left,
+                                       viewingVolume.Right,
+                                       viewingVolume.Bottom,
+                                       viewingVolume.Top,
+                                       nearPlaneDistance,
+                                       farPlaneDistance,
+                                       out result);
             return result;
         }
 
@@ -1020,17 +1115,23 @@ namespace Microsoft.Xna.Framework
         /// <param name="nearPlaneDistance">Distance to the near plane.</param>
         /// <param name="farPlaneDistance">Distance to the far plane.</param>
         /// <param name="result">The new <see cref="Matrix"/> for customized perspective view as an output parameter.</param>
-        public static void CreatePerspectiveOffCenter(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance, out Matrix result)
+        public static void CreatePerspectiveOffCenter(float left,
+                                                      float right,
+                                                      float bottom,
+                                                      float top,
+                                                      float nearPlaneDistance,
+                                                      float farPlaneDistance,
+                                                      out Matrix result)
         {
-            if (nearPlaneDistance <= 0f)
+            if(nearPlaneDistance <= 0f)
             {
                 throw new ArgumentException("nearPlaneDistance <= 0");
             }
-            if (farPlaneDistance <= 0f)
+            if(farPlaneDistance <= 0f)
             {
                 throw new ArgumentException("farPlaneDistance <= 0");
             }
-            if (nearPlaneDistance >= farPlaneDistance)
+            if(nearPlaneDistance >= farPlaneDistance)
             {
                 throw new ArgumentException("nearPlaneDistance >= farPlaneDistance");
             }
@@ -1153,10 +1254,7 @@ namespace Microsoft.Xna.Framework
         /// </summary>
         /// <param name="scale">Scale value for all three axises.</param>
         /// <param name="result">The scaling <see cref="Matrix"/> as an output parameter.</param>
-        public static void CreateScale(float scale, out Matrix result)
-        {
-            CreateScale(scale, scale, scale, out result);
-        }
+        public static void CreateScale(float scale, out Matrix result) { CreateScale(scale, scale, scale, out result); }
 
         /// <summary>
         /// Creates a new scaling <see cref="Matrix"/>.
@@ -1238,11 +1336,15 @@ namespace Microsoft.Xna.Framework
 
 
         /// <summary>
-        /// Creates a new <see cref="Matrix"/> that flattens geometry into a specified <see cref="Plane"/> as if casting a shadow from a specified light source. 
+        /// Creates a new <see cref="Matrix"/> that flattens geometry into a specified <see cref="Plane"/> as if casting
+        /// a shadow from a specified light source.
         /// </summary>
         /// <param name="lightDirection">A vector specifying the direction from which the light that will cast the shadow is coming.</param>
         /// <param name="plane">The plane onto which the new matrix should flatten geometry so as to cast a shadow.</param>
-        /// <returns>A <see cref="Matrix"/> that can be used to flatten geometry onto the specified plane from the specified direction. </returns>
+        /// <returns>
+        /// A <see cref="Matrix"/> that can be used to flatten geometry onto the specified plane from the specified
+        /// direction.
+        /// </returns>
         public static Matrix CreateShadow(Vector3 lightDirection, Plane plane)
         {
             Matrix result;
@@ -1252,14 +1354,20 @@ namespace Microsoft.Xna.Framework
 
 
         /// <summary>
-        /// Creates a new <see cref="Matrix"/> that flattens geometry into a specified <see cref="Plane"/> as if casting a shadow from a specified light source. 
+        /// Creates a new <see cref="Matrix"/> that flattens geometry into a specified <see cref="Plane"/> as if casting
+        /// a shadow from a specified light source.
         /// </summary>
         /// <param name="lightDirection">A vector specifying the direction from which the light that will cast the shadow is coming.</param>
         /// <param name="plane">The plane onto which the new matrix should flatten geometry so as to cast a shadow.</param>
-        /// <param name="result">A <see cref="Matrix"/> that can be used to flatten geometry onto the specified plane from the specified direction as an output parameter.</param>
+        /// <param name="result">
+        /// A <see cref="Matrix"/> that can be used to flatten geometry onto the specified plane from the specified
+        /// direction as an output parameter.
+        /// </param>
         public static void CreateShadow(ref Vector3 lightDirection, ref Plane plane, out Matrix result)
         {
-            float dot = (plane.Normal.X * lightDirection.X) + (plane.Normal.Y * lightDirection.Y) + (plane.Normal.Z * lightDirection.Z);
+            float dot = (plane.Normal.X * lightDirection.X) +
+                (plane.Normal.Y * lightDirection.Y) +
+                (plane.Normal.Z * lightDirection.Z);
             float x = -plane.Normal.X;
             float y = -plane.Normal.Y;
             float z = -plane.Normal.Z;
@@ -1445,7 +1553,8 @@ namespace Microsoft.Xna.Framework
         }
 
         /// <summary>
-        /// Decomposes this matrix to translation, rotation and scale elements. Returns <c>true</c> if matrix can be decomposed; <c>false</c> otherwise.
+        /// Decomposes this matrix to translation, rotation and scale elements. Returns <c>true</c> if matrix can be
+        /// decomposed; <c>false</c> otherwise.
         /// </summary>
         /// <param name="scale">Scale vector as an output parameter.</param>
         /// <param name="rotation">Rotation quaternion as an output parameter.</param>
@@ -1465,16 +1574,28 @@ namespace Microsoft.Xna.Framework
             scale.Y = ys * (float)Math.Sqrt(this.M21 * this.M21 + this.M22 * this.M22 + this.M23 * this.M23);
             scale.Z = zs * (float)Math.Sqrt(this.M31 * this.M31 + this.M32 * this.M32 + this.M33 * this.M33);
 
-            if (scale.X == 0.0 || scale.Y == 0.0 || scale.Z == 0.0)
+            if(scale.X == 0.0 || scale.Y == 0.0 || scale.Z == 0.0)
             {
                 rotation = Quaternion.Identity;
                 return false;
             }
 
-            Matrix m1 = new Matrix(this.M11 / scale.X, M12 / scale.X, M13 / scale.X, 0,
-                                   this.M21 / scale.Y, M22 / scale.Y, M23 / scale.Y, 0,
-                                   this.M31 / scale.Z, M32 / scale.Z, M33 / scale.Z, 0,
-                                   0, 0, 0, 1);
+            Matrix m1 = new Matrix(this.M11 / scale.X,
+                                   M12 / scale.X,
+                                   M13 / scale.X,
+                                   0,
+                                   this.M21 / scale.Y,
+                                   M22 / scale.Y,
+                                   M23 / scale.Y,
+                                   0,
+                                   this.M31 / scale.Z,
+                                   M32 / scale.Z,
+                                   M33 / scale.Z,
+                                   0,
+                                   0,
+                                   0,
+                                   0,
+                                   1);
 
             rotation = Quaternion.CreateFromRotationMatrix(m1);
             return true;
@@ -1484,7 +1605,8 @@ namespace Microsoft.Xna.Framework
         /// Returns a determinant of this <see cref="Matrix"/>.
         /// </summary>
         /// <returns>Determinant of this <see cref="Matrix"/></returns>
-        /// <remarks>See more about determinant here - http://en.wikipedia.org/wiki/Determinant.
+        /// <remarks>
+        /// See more about determinant here - http://en.wikipedia.org/wiki/Determinant.
         /// </remarks>
         public float Determinant()
         {
@@ -1510,7 +1632,10 @@ namespace Microsoft.Xna.Framework
             float num15 = (num8 * num) - (num5 * num4);
             float num14 = (num8 * num2) - (num6 * num4);
             float num13 = (num8 * num3) - (num7 * num4);
-            return ((((num22 * (((num11 * num18) - (num10 * num17)) + (num9 * num16))) - (num21 * (((num12 * num18) - (num10 * num15)) + (num9 * num14)))) + (num20 * (((num12 * num17) - (num11 * num15)) + (num9 * num13)))) - (num19 * (((num12 * num16) - (num11 * num14)) + (num10 * num13))));
+            return ((((num22 * (((num11 * num18) - (num10 * num17)) + (num9 * num16))) -
+                        (num21 * (((num12 * num18) - (num10 * num15)) + (num9 * num14)))) +
+                    (num20 * (((num12 * num17) - (num11 * num15)) + (num9 * num13)))) -
+                (num19 * (((num12 * num16) - (num11 * num14)) + (num10 * num13))));
         }
 
         /// <summary>
@@ -1628,7 +1753,14 @@ namespace Microsoft.Xna.Framework
         /// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
         public bool Equals(Matrix other)
         {
-            return ((((((this.M11 == other.M11) && (this.M22 == other.M22)) && ((this.M33 == other.M33) && (this.M44 == other.M44))) && (((this.M12 == other.M12) && (this.M13 == other.M13)) && ((this.M14 == other.M14) && (this.M21 == other.M21)))) && ((((this.M23 == other.M23) && (this.M24 == other.M24)) && ((this.M31 == other.M31) && (this.M32 == other.M32))) && (((this.M34 == other.M34) && (this.M41 == other.M41)) && (this.M42 == other.M42)))) && (this.M43 == other.M43));
+            return ((((((this.M11 == other.M11) && (this.M22 == other.M22)) &&
+                            ((this.M33 == other.M33) && (this.M44 == other.M44))) &&
+                        (((this.M12 == other.M12) && (this.M13 == other.M13)) &&
+                            ((this.M14 == other.M14) && (this.M21 == other.M21)))) &&
+                    ((((this.M23 == other.M23) && (this.M24 == other.M24)) &&
+                            ((this.M31 == other.M31) && (this.M32 == other.M32))) &&
+                        (((this.M34 == other.M34) && (this.M41 == other.M41)) && (this.M42 == other.M42)))) &&
+                (this.M43 == other.M43));
         }
 
         /// <summary>
@@ -1639,7 +1771,7 @@ namespace Microsoft.Xna.Framework
         public override bool Equals(object obj)
         {
             bool flag = false;
-            if (obj is Matrix)
+            if(obj is Matrix)
             {
                 flag = this.Equals((Matrix)obj);
             }
@@ -1652,11 +1784,24 @@ namespace Microsoft.Xna.Framework
         /// <returns>Hash code of this <see cref="Matrix"/>.</returns>
         public override int GetHashCode()
         {
-            return (((((((((((((((this.M11.GetHashCode() + this.M12.GetHashCode()) + this.M13.GetHashCode()) + this.M14.GetHashCode()) + this.M21.GetHashCode()) + this.M22.GetHashCode()) + this.M23.GetHashCode()) + this.M24.GetHashCode()) + this.M31.GetHashCode()) + this.M32.GetHashCode()) + this.M33.GetHashCode()) + this.M34.GetHashCode()) + this.M41.GetHashCode()) + this.M42.GetHashCode()) + this.M43.GetHashCode()) + this.M44.GetHashCode());
+            return (((((((((((((((this.M11.GetHashCode() + this.M12.GetHashCode()) + this.M13.GetHashCode()) +
+                                                                this.M14.GetHashCode()) +
+                                                            this.M21.GetHashCode()) +
+                                                        this.M22.GetHashCode()) +
+                                                    this.M23.GetHashCode()) +
+                                                this.M24.GetHashCode()) +
+                                            this.M31.GetHashCode()) +
+                                        this.M32.GetHashCode()) +
+                                    this.M33.GetHashCode()) +
+                                this.M34.GetHashCode()) +
+                            this.M41.GetHashCode()) +
+                        this.M42.GetHashCode()) +
+                    this.M43.GetHashCode()) +
+                this.M44.GetHashCode());
         }
 
         /// <summary>
-        /// Creates a new <see cref="Matrix"/> which contains inversion of the specified matrix. 
+        /// Creates a new <see cref="Matrix"/> which contains inversion of the specified matrix.
         /// </summary>
         /// <param name="matrix">Source <see cref="Matrix"/>.</param>
         /// <returns>The inverted matrix.</returns>
@@ -1668,7 +1813,7 @@ namespace Microsoft.Xna.Framework
         }
 
         /// <summary>
-        /// Creates a new <see cref="Matrix"/> which contains inversion of the specified matrix. 
+        /// Creates a new <see cref="Matrix"/> which contains inversion of the specified matrix.
         /// </summary>
         /// <param name="matrix">Source <see cref="Matrix"/>.</param>
         /// <param name="result">The inverted matrix as output parameter.</param>
@@ -1696,40 +1841,140 @@ namespace Microsoft.Xna.Framework
             float num20 = (float)((double)num9 * (double)num16 - (double)num12 * (double)num13);
             float num21 = (float)((double)num9 * (double)num15 - (double)num11 * (double)num13);
             float num22 = (float)((double)num9 * (double)num14 - (double)num10 * (double)num13);
-            float num23 = (float)((double)num6 * (double)num17 - (double)num7 * (double)num18 + (double)num8 * (double)num19);
-            float num24 = (float)-((double)num5 * (double)num17 - (double)num7 * (double)num20 + (double)num8 * (double)num21);
-            float num25 = (float)((double)num5 * (double)num18 - (double)num6 * (double)num20 + (double)num8 * (double)num22);
-            float num26 = (float)-((double)num5 * (double)num19 - (double)num6 * (double)num21 + (double)num7 * (double)num22);
-            float num27 = (float)(1.0 / ((double)num1 * (double)num23 + (double)num2 * (double)num24 + (double)num3 * (double)num25 + (double)num4 * (double)num26));
+            float num23 = (float)((double)num6 *
+                (double)num17 -
+                (double)num7 *
+                (double)num18 +
+                (double)num8 *
+                (double)num19);
+            float num24 = (float)-((double)num5 *
+                (double)num17 -
+                (double)num7 *
+                (double)num20 +
+                (double)num8 *
+                (double)num21);
+            float num25 = (float)((double)num5 *
+                (double)num18 -
+                (double)num6 *
+                (double)num20 +
+                (double)num8 *
+                (double)num22);
+            float num26 = (float)-((double)num5 *
+                (double)num19 -
+                (double)num6 *
+                (double)num21 +
+                (double)num7 *
+                (double)num22);
+            float num27 = (float)(1.0 /
+                ((double)num1 *
+                    (double)num23 +
+                    (double)num2 *
+                    (double)num24 +
+                    (double)num3 *
+                    (double)num25 +
+                    (double)num4 *
+                    (double)num26));
 
             result.M11 = num23 * num27;
             result.M21 = num24 * num27;
             result.M31 = num25 * num27;
             result.M41 = num26 * num27;
-            result.M12 = (float)-((double)num2 * (double)num17 - (double)num3 * (double)num18 + (double)num4 * (double)num19) * num27;
-            result.M22 = (float)((double)num1 * (double)num17 - (double)num3 * (double)num20 + (double)num4 * (double)num21) * num27;
-            result.M32 = (float)-((double)num1 * (double)num18 - (double)num2 * (double)num20 + (double)num4 * (double)num22) * num27;
-            result.M42 = (float)((double)num1 * (double)num19 - (double)num2 * (double)num21 + (double)num3 * (double)num22) * num27;
+            result.M12 = (float)-((double)num2 *
+                    (double)num17 -
+                    (double)num3 *
+                    (double)num18 +
+                    (double)num4 *
+                    (double)num19) *
+                num27;
+            result.M22 = (float)((double)num1 *
+                    (double)num17 -
+                    (double)num3 *
+                    (double)num20 +
+                    (double)num4 *
+                    (double)num21) *
+                num27;
+            result.M32 = (float)-((double)num1 *
+                    (double)num18 -
+                    (double)num2 *
+                    (double)num20 +
+                    (double)num4 *
+                    (double)num22) *
+                num27;
+            result.M42 = (float)((double)num1 *
+                    (double)num19 -
+                    (double)num2 *
+                    (double)num21 +
+                    (double)num3 *
+                    (double)num22) *
+                num27;
             float num28 = (float)((double)num7 * (double)num16 - (double)num8 * (double)num15);
             float num29 = (float)((double)num6 * (double)num16 - (double)num8 * (double)num14);
             float num30 = (float)((double)num6 * (double)num15 - (double)num7 * (double)num14);
             float num31 = (float)((double)num5 * (double)num16 - (double)num8 * (double)num13);
             float num32 = (float)((double)num5 * (double)num15 - (double)num7 * (double)num13);
             float num33 = (float)((double)num5 * (double)num14 - (double)num6 * (double)num13);
-            result.M13 = (float)((double)num2 * (double)num28 - (double)num3 * (double)num29 + (double)num4 * (double)num30) * num27;
-            result.M23 = (float)-((double)num1 * (double)num28 - (double)num3 * (double)num31 + (double)num4 * (double)num32) * num27;
-            result.M33 = (float)((double)num1 * (double)num29 - (double)num2 * (double)num31 + (double)num4 * (double)num33) * num27;
-            result.M43 = (float)-((double)num1 * (double)num30 - (double)num2 * (double)num32 + (double)num3 * (double)num33) * num27;
+            result.M13 = (float)((double)num2 *
+                    (double)num28 -
+                    (double)num3 *
+                    (double)num29 +
+                    (double)num4 *
+                    (double)num30) *
+                num27;
+            result.M23 = (float)-((double)num1 *
+                    (double)num28 -
+                    (double)num3 *
+                    (double)num31 +
+                    (double)num4 *
+                    (double)num32) *
+                num27;
+            result.M33 = (float)((double)num1 *
+                    (double)num29 -
+                    (double)num2 *
+                    (double)num31 +
+                    (double)num4 *
+                    (double)num33) *
+                num27;
+            result.M43 = (float)-((double)num1 *
+                    (double)num30 -
+                    (double)num2 *
+                    (double)num32 +
+                    (double)num3 *
+                    (double)num33) *
+                num27;
             float num34 = (float)((double)num7 * (double)num12 - (double)num8 * (double)num11);
             float num35 = (float)((double)num6 * (double)num12 - (double)num8 * (double)num10);
             float num36 = (float)((double)num6 * (double)num11 - (double)num7 * (double)num10);
             float num37 = (float)((double)num5 * (double)num12 - (double)num8 * (double)num9);
             float num38 = (float)((double)num5 * (double)num11 - (double)num7 * (double)num9);
             float num39 = (float)((double)num5 * (double)num10 - (double)num6 * (double)num9);
-            result.M14 = (float)-((double)num2 * (double)num34 - (double)num3 * (double)num35 + (double)num4 * (double)num36) * num27;
-            result.M24 = (float)((double)num1 * (double)num34 - (double)num3 * (double)num37 + (double)num4 * (double)num38) * num27;
-            result.M34 = (float)-((double)num1 * (double)num35 - (double)num2 * (double)num37 + (double)num4 * (double)num39) * num27;
-            result.M44 = (float)((double)num1 * (double)num36 - (double)num2 * (double)num38 + (double)num3 * (double)num39) * num27;
+            result.M14 = (float)-((double)num2 *
+                    (double)num34 -
+                    (double)num3 *
+                    (double)num35 +
+                    (double)num4 *
+                    (double)num36) *
+                num27;
+            result.M24 = (float)((double)num1 *
+                    (double)num34 -
+                    (double)num3 *
+                    (double)num37 +
+                    (double)num4 *
+                    (double)num38) *
+                num27;
+            result.M34 = (float)-((double)num1 *
+                    (double)num35 -
+                    (double)num2 *
+                    (double)num37 +
+                    (double)num4 *
+                    (double)num39) *
+                num27;
+            result.M44 = (float)((double)num1 *
+                    (double)num36 -
+                    (double)num2 *
+                    (double)num38 +
+                    (double)num3 *
+                    (double)num39) *
+                num27;
 
 
             /*
@@ -1769,8 +2014,7 @@ namespace Microsoft.Xna.Framework
             ret.M44 = (matrix.M31*det4 - matrix.M32*det2 + matrix.M33*det1) * invDetMatrix;
             
             result = ret;
-            */
-        }
+            */        }
 
         /// <summary>
         /// Creates a new <see cref="Matrix"/> that contains linear interpolation of the values in specified matrixes.
@@ -1835,22 +2079,38 @@ namespace Microsoft.Xna.Framework
         /// <returns>Result of the matrix multiplication.</returns>
         public static Matrix Multiply(Matrix matrix1, Matrix matrix2)
         {
-            var m11 = (((matrix1.M11 * matrix2.M11) + (matrix1.M12 * matrix2.M21)) + (matrix1.M13 * matrix2.M31)) + (matrix1.M14 * matrix2.M41);
-            var m12 = (((matrix1.M11 * matrix2.M12) + (matrix1.M12 * matrix2.M22)) + (matrix1.M13 * matrix2.M32)) + (matrix1.M14 * matrix2.M42);
-            var m13 = (((matrix1.M11 * matrix2.M13) + (matrix1.M12 * matrix2.M23)) + (matrix1.M13 * matrix2.M33)) + (matrix1.M14 * matrix2.M43);
-            var m14 = (((matrix1.M11 * matrix2.M14) + (matrix1.M12 * matrix2.M24)) + (matrix1.M13 * matrix2.M34)) + (matrix1.M14 * matrix2.M44);
-            var m21 = (((matrix1.M21 * matrix2.M11) + (matrix1.M22 * matrix2.M21)) + (matrix1.M23 * matrix2.M31)) + (matrix1.M24 * matrix2.M41);
-            var m22 = (((matrix1.M21 * matrix2.M12) + (matrix1.M22 * matrix2.M22)) + (matrix1.M23 * matrix2.M32)) + (matrix1.M24 * matrix2.M42);
-            var m23 = (((matrix1.M21 * matrix2.M13) + (matrix1.M22 * matrix2.M23)) + (matrix1.M23 * matrix2.M33)) + (matrix1.M24 * matrix2.M43);
-            var m24 = (((matrix1.M21 * matrix2.M14) + (matrix1.M22 * matrix2.M24)) + (matrix1.M23 * matrix2.M34)) + (matrix1.M24 * matrix2.M44);
-            var m31 = (((matrix1.M31 * matrix2.M11) + (matrix1.M32 * matrix2.M21)) + (matrix1.M33 * matrix2.M31)) + (matrix1.M34 * matrix2.M41);
-            var m32 = (((matrix1.M31 * matrix2.M12) + (matrix1.M32 * matrix2.M22)) + (matrix1.M33 * matrix2.M32)) + (matrix1.M34 * matrix2.M42);
-            var m33 = (((matrix1.M31 * matrix2.M13) + (matrix1.M32 * matrix2.M23)) + (matrix1.M33 * matrix2.M33)) + (matrix1.M34 * matrix2.M43);
-            var m34 = (((matrix1.M31 * matrix2.M14) + (matrix1.M32 * matrix2.M24)) + (matrix1.M33 * matrix2.M34)) + (matrix1.M34 * matrix2.M44);
-            var m41 = (((matrix1.M41 * matrix2.M11) + (matrix1.M42 * matrix2.M21)) + (matrix1.M43 * matrix2.M31)) + (matrix1.M44 * matrix2.M41);
-            var m42 = (((matrix1.M41 * matrix2.M12) + (matrix1.M42 * matrix2.M22)) + (matrix1.M43 * matrix2.M32)) + (matrix1.M44 * matrix2.M42);
-            var m43 = (((matrix1.M41 * matrix2.M13) + (matrix1.M42 * matrix2.M23)) + (matrix1.M43 * matrix2.M33)) + (matrix1.M44 * matrix2.M43);
-            var m44 = (((matrix1.M41 * matrix2.M14) + (matrix1.M42 * matrix2.M24)) + (matrix1.M43 * matrix2.M34)) + (matrix1.M44 * matrix2.M44);
+            var m11 = (((matrix1.M11 * matrix2.M11) + (matrix1.M12 * matrix2.M21)) + (matrix1.M13 * matrix2.M31)) +
+                (matrix1.M14 * matrix2.M41);
+            var m12 = (((matrix1.M11 * matrix2.M12) + (matrix1.M12 * matrix2.M22)) + (matrix1.M13 * matrix2.M32)) +
+                (matrix1.M14 * matrix2.M42);
+            var m13 = (((matrix1.M11 * matrix2.M13) + (matrix1.M12 * matrix2.M23)) + (matrix1.M13 * matrix2.M33)) +
+                (matrix1.M14 * matrix2.M43);
+            var m14 = (((matrix1.M11 * matrix2.M14) + (matrix1.M12 * matrix2.M24)) + (matrix1.M13 * matrix2.M34)) +
+                (matrix1.M14 * matrix2.M44);
+            var m21 = (((matrix1.M21 * matrix2.M11) + (matrix1.M22 * matrix2.M21)) + (matrix1.M23 * matrix2.M31)) +
+                (matrix1.M24 * matrix2.M41);
+            var m22 = (((matrix1.M21 * matrix2.M12) + (matrix1.M22 * matrix2.M22)) + (matrix1.M23 * matrix2.M32)) +
+                (matrix1.M24 * matrix2.M42);
+            var m23 = (((matrix1.M21 * matrix2.M13) + (matrix1.M22 * matrix2.M23)) + (matrix1.M23 * matrix2.M33)) +
+                (matrix1.M24 * matrix2.M43);
+            var m24 = (((matrix1.M21 * matrix2.M14) + (matrix1.M22 * matrix2.M24)) + (matrix1.M23 * matrix2.M34)) +
+                (matrix1.M24 * matrix2.M44);
+            var m31 = (((matrix1.M31 * matrix2.M11) + (matrix1.M32 * matrix2.M21)) + (matrix1.M33 * matrix2.M31)) +
+                (matrix1.M34 * matrix2.M41);
+            var m32 = (((matrix1.M31 * matrix2.M12) + (matrix1.M32 * matrix2.M22)) + (matrix1.M33 * matrix2.M32)) +
+                (matrix1.M34 * matrix2.M42);
+            var m33 = (((matrix1.M31 * matrix2.M13) + (matrix1.M32 * matrix2.M23)) + (matrix1.M33 * matrix2.M33)) +
+                (matrix1.M34 * matrix2.M43);
+            var m34 = (((matrix1.M31 * matrix2.M14) + (matrix1.M32 * matrix2.M24)) + (matrix1.M33 * matrix2.M34)) +
+                (matrix1.M34 * matrix2.M44);
+            var m41 = (((matrix1.M41 * matrix2.M11) + (matrix1.M42 * matrix2.M21)) + (matrix1.M43 * matrix2.M31)) +
+                (matrix1.M44 * matrix2.M41);
+            var m42 = (((matrix1.M41 * matrix2.M12) + (matrix1.M42 * matrix2.M22)) + (matrix1.M43 * matrix2.M32)) +
+                (matrix1.M44 * matrix2.M42);
+            var m43 = (((matrix1.M41 * matrix2.M13) + (matrix1.M42 * matrix2.M23)) + (matrix1.M43 * matrix2.M33)) +
+                (matrix1.M44 * matrix2.M43);
+            var m44 = (((matrix1.M41 * matrix2.M14) + (matrix1.M42 * matrix2.M24)) + (matrix1.M43 * matrix2.M34)) +
+                (matrix1.M44 * matrix2.M44);
             matrix1.M11 = m11;
             matrix1.M12 = m12;
             matrix1.M13 = m13;
@@ -1878,22 +2138,38 @@ namespace Microsoft.Xna.Framework
         /// <param name="result">Result of the matrix multiplication as an output parameter.</param>
         public static void Multiply(ref Matrix matrix1, ref Matrix matrix2, out Matrix result)
         {
-            var m11 = (((matrix1.M11 * matrix2.M11) + (matrix1.M12 * matrix2.M21)) + (matrix1.M13 * matrix2.M31)) + (matrix1.M14 * matrix2.M41);
-            var m12 = (((matrix1.M11 * matrix2.M12) + (matrix1.M12 * matrix2.M22)) + (matrix1.M13 * matrix2.M32)) + (matrix1.M14 * matrix2.M42);
-            var m13 = (((matrix1.M11 * matrix2.M13) + (matrix1.M12 * matrix2.M23)) + (matrix1.M13 * matrix2.M33)) + (matrix1.M14 * matrix2.M43);
-            var m14 = (((matrix1.M11 * matrix2.M14) + (matrix1.M12 * matrix2.M24)) + (matrix1.M13 * matrix2.M34)) + (matrix1.M14 * matrix2.M44);
-            var m21 = (((matrix1.M21 * matrix2.M11) + (matrix1.M22 * matrix2.M21)) + (matrix1.M23 * matrix2.M31)) + (matrix1.M24 * matrix2.M41);
-            var m22 = (((matrix1.M21 * matrix2.M12) + (matrix1.M22 * matrix2.M22)) + (matrix1.M23 * matrix2.M32)) + (matrix1.M24 * matrix2.M42);
-            var m23 = (((matrix1.M21 * matrix2.M13) + (matrix1.M22 * matrix2.M23)) + (matrix1.M23 * matrix2.M33)) + (matrix1.M24 * matrix2.M43);
-            var m24 = (((matrix1.M21 * matrix2.M14) + (matrix1.M22 * matrix2.M24)) + (matrix1.M23 * matrix2.M34)) + (matrix1.M24 * matrix2.M44);
-            var m31 = (((matrix1.M31 * matrix2.M11) + (matrix1.M32 * matrix2.M21)) + (matrix1.M33 * matrix2.M31)) + (matrix1.M34 * matrix2.M41);
-            var m32 = (((matrix1.M31 * matrix2.M12) + (matrix1.M32 * matrix2.M22)) + (matrix1.M33 * matrix2.M32)) + (matrix1.M34 * matrix2.M42);
-            var m33 = (((matrix1.M31 * matrix2.M13) + (matrix1.M32 * matrix2.M23)) + (matrix1.M33 * matrix2.M33)) + (matrix1.M34 * matrix2.M43);
-            var m34 = (((matrix1.M31 * matrix2.M14) + (matrix1.M32 * matrix2.M24)) + (matrix1.M33 * matrix2.M34)) + (matrix1.M34 * matrix2.M44);
-            var m41 = (((matrix1.M41 * matrix2.M11) + (matrix1.M42 * matrix2.M21)) + (matrix1.M43 * matrix2.M31)) + (matrix1.M44 * matrix2.M41);
-            var m42 = (((matrix1.M41 * matrix2.M12) + (matrix1.M42 * matrix2.M22)) + (matrix1.M43 * matrix2.M32)) + (matrix1.M44 * matrix2.M42);
-            var m43 = (((matrix1.M41 * matrix2.M13) + (matrix1.M42 * matrix2.M23)) + (matrix1.M43 * matrix2.M33)) + (matrix1.M44 * matrix2.M43);
-            var m44 = (((matrix1.M41 * matrix2.M14) + (matrix1.M42 * matrix2.M24)) + (matrix1.M43 * matrix2.M34)) + (matrix1.M44 * matrix2.M44);
+            var m11 = (((matrix1.M11 * matrix2.M11) + (matrix1.M12 * matrix2.M21)) + (matrix1.M13 * matrix2.M31)) +
+                (matrix1.M14 * matrix2.M41);
+            var m12 = (((matrix1.M11 * matrix2.M12) + (matrix1.M12 * matrix2.M22)) + (matrix1.M13 * matrix2.M32)) +
+                (matrix1.M14 * matrix2.M42);
+            var m13 = (((matrix1.M11 * matrix2.M13) + (matrix1.M12 * matrix2.M23)) + (matrix1.M13 * matrix2.M33)) +
+                (matrix1.M14 * matrix2.M43);
+            var m14 = (((matrix1.M11 * matrix2.M14) + (matrix1.M12 * matrix2.M24)) + (matrix1.M13 * matrix2.M34)) +
+                (matrix1.M14 * matrix2.M44);
+            var m21 = (((matrix1.M21 * matrix2.M11) + (matrix1.M22 * matrix2.M21)) + (matrix1.M23 * matrix2.M31)) +
+                (matrix1.M24 * matrix2.M41);
+            var m22 = (((matrix1.M21 * matrix2.M12) + (matrix1.M22 * matrix2.M22)) + (matrix1.M23 * matrix2.M32)) +
+                (matrix1.M24 * matrix2.M42);
+            var m23 = (((matrix1.M21 * matrix2.M13) + (matrix1.M22 * matrix2.M23)) + (matrix1.M23 * matrix2.M33)) +
+                (matrix1.M24 * matrix2.M43);
+            var m24 = (((matrix1.M21 * matrix2.M14) + (matrix1.M22 * matrix2.M24)) + (matrix1.M23 * matrix2.M34)) +
+                (matrix1.M24 * matrix2.M44);
+            var m31 = (((matrix1.M31 * matrix2.M11) + (matrix1.M32 * matrix2.M21)) + (matrix1.M33 * matrix2.M31)) +
+                (matrix1.M34 * matrix2.M41);
+            var m32 = (((matrix1.M31 * matrix2.M12) + (matrix1.M32 * matrix2.M22)) + (matrix1.M33 * matrix2.M32)) +
+                (matrix1.M34 * matrix2.M42);
+            var m33 = (((matrix1.M31 * matrix2.M13) + (matrix1.M32 * matrix2.M23)) + (matrix1.M33 * matrix2.M33)) +
+                (matrix1.M34 * matrix2.M43);
+            var m34 = (((matrix1.M31 * matrix2.M14) + (matrix1.M32 * matrix2.M24)) + (matrix1.M33 * matrix2.M34)) +
+                (matrix1.M34 * matrix2.M44);
+            var m41 = (((matrix1.M41 * matrix2.M11) + (matrix1.M42 * matrix2.M21)) + (matrix1.M43 * matrix2.M31)) +
+                (matrix1.M44 * matrix2.M41);
+            var m42 = (((matrix1.M41 * matrix2.M12) + (matrix1.M42 * matrix2.M22)) + (matrix1.M43 * matrix2.M32)) +
+                (matrix1.M44 * matrix2.M42);
+            var m43 = (((matrix1.M41 * matrix2.M13) + (matrix1.M42 * matrix2.M23)) + (matrix1.M43 * matrix2.M33)) +
+                (matrix1.M44 * matrix2.M43);
+            var m44 = (((matrix1.M41 * matrix2.M14) + (matrix1.M42 * matrix2.M24)) + (matrix1.M43 * matrix2.M34)) +
+                (matrix1.M44 * matrix2.M44);
             result.M11 = m11;
             result.M12 = m12;
             result.M13 = m13;
@@ -1963,7 +2239,6 @@ namespace Microsoft.Xna.Framework
             result.M42 = matrix1.M42 * scaleFactor;
             result.M43 = matrix1.M43 * scaleFactor;
             result.M44 = matrix1.M44 * scaleFactor;
-
         }
 
         /// <summary>
@@ -1976,12 +2251,25 @@ namespace Microsoft.Xna.Framework
         /// </remarks>
         public static float[] ToFloatArray(Matrix matrix)
         {
-            float[] matarray = {
-                                    matrix.M11, matrix.M12, matrix.M13, matrix.M14,
-                                    matrix.M21, matrix.M22, matrix.M23, matrix.M24,
-                                    matrix.M31, matrix.M32, matrix.M33, matrix.M34,
-                                    matrix.M41, matrix.M42, matrix.M43, matrix.M44
-                                };
+            float[] matarray =
+            {
+                matrix.M11,
+                matrix.M12,
+                matrix.M13,
+                matrix.M14,
+                matrix.M21,
+                matrix.M22,
+                matrix.M23,
+                matrix.M24,
+                matrix.M31,
+                matrix.M32,
+                matrix.M33,
+                matrix.M34,
+                matrix.M41,
+                matrix.M42,
+                matrix.M43,
+                matrix.M44
+            };
             return matarray;
         }
 
@@ -2126,8 +2414,7 @@ namespace Microsoft.Xna.Framework
         /// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
         public static bool operator ==(Matrix matrix1, Matrix matrix2)
         {
-            return (
-                matrix1.M11 == matrix2.M11 &&
+            return (matrix1.M11 == matrix2.M11 &&
                 matrix1.M12 == matrix2.M12 &&
                 matrix1.M13 == matrix2.M13 &&
                 matrix1.M14 == matrix2.M14 &&
@@ -2142,8 +2429,7 @@ namespace Microsoft.Xna.Framework
                 matrix1.M41 == matrix2.M41 &&
                 matrix1.M42 == matrix2.M42 &&
                 matrix1.M43 == matrix2.M43 &&
-                matrix1.M44 == matrix2.M44
-                );
+                matrix1.M44 == matrix2.M44);
         }
 
         /// <summary>
@@ -2154,8 +2440,7 @@ namespace Microsoft.Xna.Framework
         /// <returns><c>true</c> if the instances are not equal; <c>false</c> otherwise.</returns>
         public static bool operator !=(Matrix matrix1, Matrix matrix2)
         {
-            return (
-                matrix1.M11 != matrix2.M11 ||
+            return (matrix1.M11 != matrix2.M11 ||
                 matrix1.M12 != matrix2.M12 ||
                 matrix1.M13 != matrix2.M13 ||
                 matrix1.M14 != matrix2.M14 ||
@@ -2170,8 +2455,7 @@ namespace Microsoft.Xna.Framework
                 matrix1.M41 != matrix2.M41 ||
                 matrix1.M42 != matrix2.M42 ||
                 matrix1.M43 != matrix2.M43 ||
-                matrix1.M44 != matrix2.M44
-                );
+                matrix1.M44 != matrix2.M44);
         }
 
         /// <summary>
@@ -2185,22 +2469,38 @@ namespace Microsoft.Xna.Framework
         /// </remarks>
         public static Matrix operator *(Matrix matrix1, Matrix matrix2)
         {
-            var m11 = (((matrix1.M11 * matrix2.M11) + (matrix1.M12 * matrix2.M21)) + (matrix1.M13 * matrix2.M31)) + (matrix1.M14 * matrix2.M41);
-            var m12 = (((matrix1.M11 * matrix2.M12) + (matrix1.M12 * matrix2.M22)) + (matrix1.M13 * matrix2.M32)) + (matrix1.M14 * matrix2.M42);
-            var m13 = (((matrix1.M11 * matrix2.M13) + (matrix1.M12 * matrix2.M23)) + (matrix1.M13 * matrix2.M33)) + (matrix1.M14 * matrix2.M43);
-            var m14 = (((matrix1.M11 * matrix2.M14) + (matrix1.M12 * matrix2.M24)) + (matrix1.M13 * matrix2.M34)) + (matrix1.M14 * matrix2.M44);
-            var m21 = (((matrix1.M21 * matrix2.M11) + (matrix1.M22 * matrix2.M21)) + (matrix1.M23 * matrix2.M31)) + (matrix1.M24 * matrix2.M41);
-            var m22 = (((matrix1.M21 * matrix2.M12) + (matrix1.M22 * matrix2.M22)) + (matrix1.M23 * matrix2.M32)) + (matrix1.M24 * matrix2.M42);
-            var m23 = (((matrix1.M21 * matrix2.M13) + (matrix1.M22 * matrix2.M23)) + (matrix1.M23 * matrix2.M33)) + (matrix1.M24 * matrix2.M43);
-            var m24 = (((matrix1.M21 * matrix2.M14) + (matrix1.M22 * matrix2.M24)) + (matrix1.M23 * matrix2.M34)) + (matrix1.M24 * matrix2.M44);
-            var m31 = (((matrix1.M31 * matrix2.M11) + (matrix1.M32 * matrix2.M21)) + (matrix1.M33 * matrix2.M31)) + (matrix1.M34 * matrix2.M41);
-            var m32 = (((matrix1.M31 * matrix2.M12) + (matrix1.M32 * matrix2.M22)) + (matrix1.M33 * matrix2.M32)) + (matrix1.M34 * matrix2.M42);
-            var m33 = (((matrix1.M31 * matrix2.M13) + (matrix1.M32 * matrix2.M23)) + (matrix1.M33 * matrix2.M33)) + (matrix1.M34 * matrix2.M43);
-            var m34 = (((matrix1.M31 * matrix2.M14) + (matrix1.M32 * matrix2.M24)) + (matrix1.M33 * matrix2.M34)) + (matrix1.M34 * matrix2.M44);
-            var m41 = (((matrix1.M41 * matrix2.M11) + (matrix1.M42 * matrix2.M21)) + (matrix1.M43 * matrix2.M31)) + (matrix1.M44 * matrix2.M41);
-            var m42 = (((matrix1.M41 * matrix2.M12) + (matrix1.M42 * matrix2.M22)) + (matrix1.M43 * matrix2.M32)) + (matrix1.M44 * matrix2.M42);
-            var m43 = (((matrix1.M41 * matrix2.M13) + (matrix1.M42 * matrix2.M23)) + (matrix1.M43 * matrix2.M33)) + (matrix1.M44 * matrix2.M43);
-            var m44 = (((matrix1.M41 * matrix2.M14) + (matrix1.M42 * matrix2.M24)) + (matrix1.M43 * matrix2.M34)) + (matrix1.M44 * matrix2.M44);
+            var m11 = (((matrix1.M11 * matrix2.M11) + (matrix1.M12 * matrix2.M21)) + (matrix1.M13 * matrix2.M31)) +
+                (matrix1.M14 * matrix2.M41);
+            var m12 = (((matrix1.M11 * matrix2.M12) + (matrix1.M12 * matrix2.M22)) + (matrix1.M13 * matrix2.M32)) +
+                (matrix1.M14 * matrix2.M42);
+            var m13 = (((matrix1.M11 * matrix2.M13) + (matrix1.M12 * matrix2.M23)) + (matrix1.M13 * matrix2.M33)) +
+                (matrix1.M14 * matrix2.M43);
+            var m14 = (((matrix1.M11 * matrix2.M14) + (matrix1.M12 * matrix2.M24)) + (matrix1.M13 * matrix2.M34)) +
+                (matrix1.M14 * matrix2.M44);
+            var m21 = (((matrix1.M21 * matrix2.M11) + (matrix1.M22 * matrix2.M21)) + (matrix1.M23 * matrix2.M31)) +
+                (matrix1.M24 * matrix2.M41);
+            var m22 = (((matrix1.M21 * matrix2.M12) + (matrix1.M22 * matrix2.M22)) + (matrix1.M23 * matrix2.M32)) +
+                (matrix1.M24 * matrix2.M42);
+            var m23 = (((matrix1.M21 * matrix2.M13) + (matrix1.M22 * matrix2.M23)) + (matrix1.M23 * matrix2.M33)) +
+                (matrix1.M24 * matrix2.M43);
+            var m24 = (((matrix1.M21 * matrix2.M14) + (matrix1.M22 * matrix2.M24)) + (matrix1.M23 * matrix2.M34)) +
+                (matrix1.M24 * matrix2.M44);
+            var m31 = (((matrix1.M31 * matrix2.M11) + (matrix1.M32 * matrix2.M21)) + (matrix1.M33 * matrix2.M31)) +
+                (matrix1.M34 * matrix2.M41);
+            var m32 = (((matrix1.M31 * matrix2.M12) + (matrix1.M32 * matrix2.M22)) + (matrix1.M33 * matrix2.M32)) +
+                (matrix1.M34 * matrix2.M42);
+            var m33 = (((matrix1.M31 * matrix2.M13) + (matrix1.M32 * matrix2.M23)) + (matrix1.M33 * matrix2.M33)) +
+                (matrix1.M34 * matrix2.M43);
+            var m34 = (((matrix1.M31 * matrix2.M14) + (matrix1.M32 * matrix2.M24)) + (matrix1.M33 * matrix2.M34)) +
+                (matrix1.M34 * matrix2.M44);
+            var m41 = (((matrix1.M41 * matrix2.M11) + (matrix1.M42 * matrix2.M21)) + (matrix1.M43 * matrix2.M31)) +
+                (matrix1.M44 * matrix2.M41);
+            var m42 = (((matrix1.M41 * matrix2.M12) + (matrix1.M42 * matrix2.M22)) + (matrix1.M43 * matrix2.M32)) +
+                (matrix1.M44 * matrix2.M42);
+            var m43 = (((matrix1.M41 * matrix2.M13) + (matrix1.M42 * matrix2.M23)) + (matrix1.M43 * matrix2.M33)) +
+                (matrix1.M44 * matrix2.M43);
+            var m44 = (((matrix1.M41 * matrix2.M14) + (matrix1.M42 * matrix2.M24)) + (matrix1.M43 * matrix2.M34)) +
+                (matrix1.M44 * matrix2.M44);
             matrix1.M11 = m11;
             matrix1.M12 = m12;
             matrix1.M13 = m13;
@@ -2357,32 +2657,80 @@ namespace Microsoft.Xna.Framework
         {
             get
             {
-                if (this == Identity)
+                if(this == Identity)
                 {
                     return "Identity";
                 }
 
-                return string.Concat(
-                     "( ", this.M11.ToString(), "  ", this.M12.ToString(), "  ", this.M13.ToString(), "  ", this.M14.ToString(), " )  \r\n",
-                     "( ", this.M21.ToString(), "  ", this.M22.ToString(), "  ", this.M23.ToString(), "  ", this.M24.ToString(), " )  \r\n",
-                     "( ", this.M31.ToString(), "  ", this.M32.ToString(), "  ", this.M33.ToString(), "  ", this.M34.ToString(), " )  \r\n",
-                     "( ", this.M41.ToString(), "  ", this.M42.ToString(), "  ", this.M43.ToString(), "  ", this.M44.ToString(), " )");
+                return string.Concat("( ",
+                                     this.M11.ToString(),
+                                     "  ",
+                                     this.M12.ToString(),
+                                     "  ",
+                                     this.M13.ToString(),
+                                     "  ",
+                                     this.M14.ToString(),
+                                     " )  \r\n",
+                                     "( ",
+                                     this.M21.ToString(),
+                                     "  ",
+                                     this.M22.ToString(),
+                                     "  ",
+                                     this.M23.ToString(),
+                                     "  ",
+                                     this.M24.ToString(),
+                                     " )  \r\n",
+                                     "( ",
+                                     this.M31.ToString(),
+                                     "  ",
+                                     this.M32.ToString(),
+                                     "  ",
+                                     this.M33.ToString(),
+                                     "  ",
+                                     this.M34.ToString(),
+                                     " )  \r\n",
+                                     "( ",
+                                     this.M41.ToString(),
+                                     "  ",
+                                     this.M42.ToString(),
+                                     "  ",
+                                     this.M43.ToString(),
+                                     "  ",
+                                     this.M44.ToString(),
+                                     " )");
             }
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> representation of this <see cref="Matrix"/> in the format:
-        /// {M11:[<see cref="M11"/>] M12:[<see cref="M12"/>] M13:[<see cref="M13"/>] M14:[<see cref="M14"/>]}
-        /// {M21:[<see cref="M21"/>] M12:[<see cref="M22"/>] M13:[<see cref="M23"/>] M14:[<see cref="M24"/>]}
-        /// {M31:[<see cref="M31"/>] M32:[<see cref="M32"/>] M33:[<see cref="M33"/>] M34:[<see cref="M34"/>]}
-        /// {M41:[<see cref="M41"/>] M42:[<see cref="M42"/>] M43:[<see cref="M43"/>] M44:[<see cref="M44"/>]}
+        /// Returns a <see cref="String"/> representation of this <see cref="Matrix"/> in the format: {M11:[<see
+        /// cref="M11"/>] M12:[<see cref="M12"/>] M13:[<see cref="M13"/>] M14:[<see cref="M14"/>]} {M21:[<see
+        /// cref="M21"/>] M12:[<see cref="M22"/>] M13:[<see cref="M23"/>] M14:[<see cref="M24"/>]} {M31:[<see
+        /// cref="M31"/>] M32:[<see cref="M32"/>] M33:[<see cref="M33"/>] M34:[<see cref="M34"/>]} {M41:[<see
+        /// cref="M41"/>] M42:[<see cref="M42"/>] M43:[<see cref="M43"/>] M44:[<see cref="M44"/>]}
         /// </summary>
         /// <returns>A <see cref="String"/> representation of this <see cref="Matrix"/>.</returns>
         public override string ToString()
         {
-            return string.Format("{{M11:{0} M12:{1} M13:{2} M14:{3}}}" + " {{M21:{4} M22:{5} M23:{6} M24:{7}}}" +
-                                 " {{M31:{8} M32:{9} M33:{10} M34:{11}}}" + " {{M41:{12} M42:{13} M43:{14} M44:{15}}}",
-                                    M11, M12, M13, M14, M21, M22, M23, M24, M31, M32, M33, M34, M41, M42, M43, M44);
+            return string.Format("{{M11:{0} M12:{1} M13:{2} M14:{3}}}" +
+                " {{M21:{4} M22:{5} M23:{6} M24:{7}}}" +
+                " {{M31:{8} M32:{9} M33:{10} M34:{11}}}" +
+                " {{M41:{12} M42:{13} M43:{14} M44:{15}}}",
+                                 M11,
+                                 M12,
+                                 M13,
+                                 M14,
+                                 M21,
+                                 M22,
+                                 M23,
+                                 M24,
+                                 M31,
+                                 M32,
+                                 M33,
+                                 M34,
+                                 M41,
+                                 M42,
+                                 M43,
+                                 M44);
         }
 
         /// <summary>
@@ -2433,12 +2781,23 @@ namespace Microsoft.Xna.Framework
         #region Private Static Methods
 
         /// <summary>
-        /// Helper method for using the Laplace expansion theorem using two rows expansions to calculate major and 
-        /// minor determinants of a 4x4 matrix. This method is used for inverting a matrix.
-        /// </summary>
-        private static void FindDeterminants(ref Matrix matrix, out float major,
-                                             out float minor1, out float minor2, out float minor3, out float minor4, out float minor5, out float minor6,
-                                             out float minor7, out float minor8, out float minor9, out float minor10, out float minor11, out float minor12)
+/// Helper method for using the Laplace expansion theorem using two rows expansions to calculate major and 
+/// minor determinants of a 4x4 matrix. This method is used for inverting a matrix.
+/// </summary>
+        private static void FindDeterminants(ref Matrix matrix,
+                                             out float major,
+                                             out float minor1,
+                                             out float minor2,
+                                             out float minor3,
+                                             out float minor4,
+                                             out float minor5,
+                                             out float minor6,
+                                             out float minor7,
+                                             out float minor8,
+                                             out float minor9,
+                                             out float minor10,
+                                             out float minor11,
+                                             out float minor12)
         {
             double det1 = (double)matrix.M11 * (double)matrix.M22 - (double)matrix.M12 * (double)matrix.M21;
             double det2 = (double)matrix.M11 * (double)matrix.M23 - (double)matrix.M13 * (double)matrix.M21;
@@ -2467,7 +2826,6 @@ namespace Microsoft.Xna.Framework
             minor11 = (float)det11;
             minor12 = (float)det12;
         }
-
         #endregion
     }
 }

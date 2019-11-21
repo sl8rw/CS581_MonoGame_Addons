@@ -17,6 +17,7 @@ namespace Microsoft.Xna.Framework
             Character = character;
             Key = key;
         }
+
         public readonly char Character;
         public readonly Keys Key;
     }

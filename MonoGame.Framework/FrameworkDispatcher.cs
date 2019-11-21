@@ -11,8 +11,8 @@ namespace Microsoft.Xna.Framework
     /// Helper class for processing internal framework events.
     /// </summary>
     /// <remarks>
-    /// If you use <see cref="Game"/> class, <see cref="Update()"/> is called automatically.
-    /// Otherwise you must call it as part of your game loop.
+    /// If you use <see cref="Game"/> class, <see cref="Update()"/> is called automatically. Otherwise you must call it
+    /// as part of your game loop.
     /// </remarks>
     public static class FrameworkDispatcher
     {
@@ -23,7 +23,7 @@ namespace Microsoft.Xna.Framework
         /// </summary>
         public static void Update()
         {
-            if (!_initialized)
+            if(!_initialized)
                 Initialize();
 
             DoUpdate();
@@ -36,10 +36,7 @@ namespace Microsoft.Xna.Framework
             Microphone.UpdateMicrophones();
         }
 
-        private static void Initialize()
-        {
-            _initialized = true;
-        }
+        private static void Initialize() { _initialized = true; }
     }
 }
 

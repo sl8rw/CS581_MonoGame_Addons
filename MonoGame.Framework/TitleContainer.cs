@@ -27,12 +27,13 @@ namespace Microsoft.Xna.Framework
         /// <returns>A open stream or null if the file is not found.</returns>
         public static Stream OpenStream(string name)
         {
-            if (string.IsNullOrEmpty(name))
-                throw new ArgumentNullException("name");
+            if(string.IsNullOrEmpty(name))
+                throw new ArgumentNullException(nameof(name));
 
             // We do not accept absolute paths here.
-            if (Path.IsPathRooted(name))
-                throw new ArgumentException("Invalid filename. TitleContainer.OpenStream requires a relative path.", name);
+            if(Path.IsPathRooted(name))
+                throw new ArgumentException("Invalid filename. TitleContainer.OpenStream requires a relative path.",
+                                            name);
 
             // Normalize the file path.
             var safeName = NormalizeRelativePath(name);
@@ -43,14 +44,12 @@ namespace Microsoft.Xna.Framework
             try
             {
                 stream = PlatformOpenStream(safeName);
-                if (stream == null)
+                if(stream == null)
                     throw FileNotFoundException(name, null);
-            }
-            catch (FileNotFoundException)
+            } catch(FileNotFoundException)
             {
                 throw;
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 throw new FileNotFoundException(name, ex);
             }
@@ -59,13 +58,11 @@ namespace Microsoft.Xna.Framework
         }
 
         private static Exception FileNotFoundException(string name, Exception inner)
-        {
-            return new FileNotFoundException("Error loading \"" + name + "\". File not found.", inner);
-        }
+        { return new FileNotFoundException($"Error loading \"{name}\". File not found.", inner); }
 
         internal static string NormalizeRelativePath(string name)
         {
-            var uri = new Uri("file:///" + name);
+            var uri = new Uri($"file:///{name}");
             var path = uri.LocalPath;
             path = path.Substring(1);
             return path.Replace(FileHelpers.NotSeparator, FileHelpers.Separator);

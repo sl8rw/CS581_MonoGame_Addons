@@ -16,9 +16,7 @@ namespace Microsoft.Xna.Framework
         /// </summary>
         /// <param name="graphicsDeviceInformation">The default settings to be used in device creation.</param>
         public PreparingDeviceSettingsEventArgs(GraphicsDeviceInformation graphicsDeviceInformation)
-        {
-            GraphicsDeviceInformation = graphicsDeviceInformation;
-        }
+        { GraphicsDeviceInformation = graphicsDeviceInformation; }
 
         /// <summary>
         /// The default settings that will be used in device creation.

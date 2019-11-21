@@ -17,11 +17,10 @@ namespace Microsoft.Xna.Framework
 
         public void Add(T item)
         {
-            if (_list.Count > _listTop)
+            if(_list.Count > _listTop)
             {
                 _list[_listTop] = item;
-            }
-            else
+            } else
             {
                 _list.Add(item);
             }
@@ -29,19 +28,15 @@ namespace Microsoft.Xna.Framework
             _listTop++;
         }
 
-        public void Sort(IComparer<T> comparison)
-        {
-            _list.Sort(comparison);
-        }
+        public void Sort(IComparer<T> comparison) { _list.Sort(comparison); }
 
 
         public T GetNewItem()
         {
-            if (_listTop < _list.Count)
+            if(_listTop < _list.Count)
             {
                 return _list[_listTop++];
-            }
-            else
+            } else
             {
                 // Damm...Mono fails in this!
                 //return (T) Activator.CreateInstance(typeof(T));
@@ -53,22 +48,19 @@ namespace Microsoft.Xna.Framework
         {
             get
             {
-                if (index >= _listTop)
+                if(index >= _listTop)
                     throw new IndexOutOfRangeException();
                 return _list[index];
             }
             set
             {
-                if (index >= _listTop)
+                if(index >= _listTop)
                     throw new IndexOutOfRangeException();
                 _list[index] = value;
             }
         }
 
-        public void Clear()
-        {
-            _listTop = 0;
-        }
+        public void Clear() { _listTop = 0; }
 
         public void Reset()
         {
@@ -76,36 +68,15 @@ namespace Microsoft.Xna.Framework
             _list.Clear();
         }
 
-        public bool Contains(T item)
-        {
-            return _list.Contains(item);
-        }
+        public bool Contains(T item) { return _list.Contains(item); }
 
-        public void CopyTo(T[] array, int arrayIndex)
-        {
-            _list.CopyTo(array, arrayIndex);
-        }
+        public void CopyTo(T[] array, int arrayIndex) { _list.CopyTo(array, arrayIndex); }
 
-        public int Count
-        {
-            get
-            {
-                return _listTop;
-            }
-        }
+        public int Count { get { return _listTop; } }
 
-        public bool IsReadOnly
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsReadOnly { get { return false; } }
 
-        public bool Remove(T item)
-        {
-            throw new NotSupportedException();
-        }
+        public bool Remove(T item) { throw new NotSupportedException(); }
 
         #endregion
 
@@ -131,40 +102,25 @@ namespace Microsoft.Xna.Framework
 
         #region IEnumerator<T> Members
 
-        public T Current
-        {
-            get
-            {
-                return _list[_iteratorIndex];
-            }
-        }
+        public T Current { get { return _list[_iteratorIndex]; } }
 
         #endregion
 
         #region IDisposable Members
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         #endregion
 
         #region IEnumerator Members
 
-        object System.Collections.IEnumerator.Current
-        {
-            get
-            {
-                return _list[_iteratorIndex];
-            }
-        }
+        object System.Collections.IEnumerator.Current { get { return _list[_iteratorIndex]; } }
 
         public bool MoveNext()
         {
             _iteratorIndex++;
             return (_iteratorIndex < _listTop);
         }
-
         #endregion
     }
 }

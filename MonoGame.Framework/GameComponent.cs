@@ -18,7 +18,7 @@ namespace Microsoft.Xna.Framework
             get { return _enabled; }
             set
             {
-                if (_enabled != value)
+                if(_enabled != value)
                 {
                     _enabled = value;
                     OnEnabledChanged(this, EventArgs.Empty);
@@ -31,7 +31,7 @@ namespace Microsoft.Xna.Framework
             get { return _updateOrder; }
             set
             {
-                if (_updateOrder != value)
+                if(_updateOrder != value)
                 {
                     _updateOrder = value;
                     OnUpdateOrderChanged(this, EventArgs.Empty);
@@ -40,31 +40,22 @@ namespace Microsoft.Xna.Framework
         }
 
         public event EventHandler<EventArgs> EnabledChanged;
+
         public event EventHandler<EventArgs> UpdateOrderChanged;
 
-        public GameComponent(Game game)
-        {
-            this.Game = game;
-        }
+        public GameComponent(Game game) { this.Game = game; }
 
-        ~GameComponent()
-        {
-            Dispose(false);
-        }
+        ~GameComponent() { Dispose(false); }
 
         public virtual void Initialize() { }
 
         public virtual void Update(GameTime gameTime) { }
 
         protected virtual void OnUpdateOrderChanged(object sender, EventArgs args)
-        {
-            EventHelpers.Raise(sender, UpdateOrderChanged, args);
-        }
+        { EventHelpers.Raise(sender, UpdateOrderChanged, args); }
 
         protected virtual void OnEnabledChanged(object sender, EventArgs args)
-        {
-            EventHelpers.Raise(sender, EnabledChanged, args);
-        }
+        { EventHelpers.Raise(sender, EnabledChanged, args); }
 
         /// <summary>
         /// Shuts down the component.
@@ -82,11 +73,7 @@ namespace Microsoft.Xna.Framework
 
         #region IComparable<GameComponent> Members
         // TODO: Should be removed, as it is not part of XNA 4.0
-        public int CompareTo(GameComponent other)
-        {
-            return other.UpdateOrder - this.UpdateOrder;
-        }
-
+        public int CompareTo(GameComponent other) { return other.UpdateOrder - this.UpdateOrder; }
         #endregion
     }
 }
