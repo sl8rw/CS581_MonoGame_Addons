@@ -2,12 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
-using System.IO;
 using Microsoft.Xna.Framework.Content.Pipeline.Utilities.LZ4;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Framework.Content.Pipeline.Builder;
+using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler
 {
@@ -327,7 +327,7 @@ namespace Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler
                 var index = typeWriterMap[typeWriter.GetType()];
                 Write7BitEncodedInt(index + 1);
 
-                typeWriter.Write(this, value);                
+                typeWriter.Write(this, value);
             }
         }
 
