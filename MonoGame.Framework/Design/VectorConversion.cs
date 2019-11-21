@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics.PackedVector;
+using System;
 using System.ComponentModel;
 using System.Globalization;
-using Microsoft.Xna.Framework.Graphics.PackedVector;
 
 namespace Microsoft.Xna.Framework.Design
 {
@@ -36,5 +36,6 @@ namespace Microsoft.Xna.Framework.Design
                     return null;
             }
         }         
+
     }
 }

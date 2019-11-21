@@ -55,7 +55,9 @@ namespace Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler
         static void CalcIndices(Array array, int index, int[] indices)
         {
             if (array.Rank != indices.Length)
+            {
                 throw new Exception("indices");
+            }
 
             for (int d = 0; d < indices.Length; d++)
             {
@@ -69,7 +71,7 @@ namespace Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler
             }
 
             if (index != 0)
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException(nameof(index));
         }
     }
 }

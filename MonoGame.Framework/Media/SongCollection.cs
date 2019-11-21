@@ -8,10 +8,10 @@ using System.Collections.Generic;
 
 namespace Microsoft.Xna.Framework.Media
 {
-	public class SongCollection : ICollection<Song>, IEnumerable<Song>, IEnumerable, IDisposable
-	{
-		private bool isReadOnly = false;
-		private List<Song> innerlist = new List<Song>();
+    public class SongCollection : ICollection<Song>, IEnumerable<Song>, IEnumerable, IDisposable
+    {
+        private bool isReadOnly = false;
+        private List<Song> innerlist = new List<Song>();
 
         internal SongCollection()
         {
@@ -23,15 +23,15 @@ namespace Microsoft.Xna.Framework.Media
             this.innerlist = songs;
         }
 
-		public void Dispose()
+        public void Dispose()
         {
         }
-		
-		public IEnumerator<Song> GetEnumerator()
+
+        public IEnumerator<Song> GetEnumerator()
         {
             return innerlist.GetEnumerator();
         }
-		
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return innerlist.GetEnumerator();
@@ -41,27 +41,27 @@ namespace Microsoft.Xna.Framework.Media
         {
             get
             {
-				return innerlist.Count;
+                return innerlist.Count;
             }
         }
-		
-		public bool IsReadOnly
+
+        public bool IsReadOnly
         {
-		    get
-		    {
-		        return this.isReadOnly;
-		    }
+            get
+            {
+                return this.isReadOnly;
+            }
         }
 
         public Song this[int index]
         {
             get
             {
-				return this.innerlist[index];
+                return this.innerlist[index];
             }
         }
-		
-		public void Add(Song item)
+
+        public void Add(Song item)
         {
 
             if (item == null)
@@ -84,12 +84,12 @@ namespace Microsoft.Xna.Framework.Media
 
             this.innerlist.Add(item);
         }
-		
-		public void Clear()
+
+        public void Clear()
         {
             innerlist.Clear();
         }
-        
+
         public SongCollection Clone()
         {
             SongCollection sc = new SongCollection();
@@ -97,26 +97,26 @@ namespace Microsoft.Xna.Framework.Media
                 sc.Add(song);
             return sc;
         }
-        
+
         public bool Contains(Song item)
         {
             return innerlist.Contains(item);
         }
-        
+
         public void CopyTo(Song[] array, int arrayIndex)
         {
             innerlist.CopyTo(array, arrayIndex);
         }
-		
-		public int IndexOf(Song item)
+
+        public int IndexOf(Song item)
         {
             return innerlist.IndexOf(item);
         }
-        
+
         public bool Remove(Song item)
         {
             return innerlist.Remove(item);
         }
-	}
+    }
 }
 

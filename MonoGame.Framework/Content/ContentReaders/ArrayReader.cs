@@ -2,8 +2,8 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
 using MonoGame.Utilities;
+using System;
 
 namespace Microsoft.Xna.Framework.Content
 {
@@ -16,9 +16,9 @@ namespace Microsoft.Xna.Framework.Content
         }
 
         protected internal override void Initialize(ContentTypeReaderManager manager)
-		{
-			Type readerType = typeof(T);
-			elementReader = manager.GetTypeReader(readerType);
+        {
+            Type readerType = typeof(T);
+            elementReader = manager.GetTypeReader(readerType);
         }
 
         protected internal override T[] Read(ContentReader input, T[] existingInstance)
@@ -29,20 +29,20 @@ namespace Microsoft.Xna.Framework.Content
                 array = new T[count];
 
             if (ReflectionHelpers.IsValueType(typeof(T)))
-			{
+            {
                 for (uint i = 0; i < count; i++)
                 {
-                	array[i] = input.ReadObject<T>(elementReader);
+                    array[i] = input.ReadObject<T>(elementReader);
                 }
-			}
-			else
-			{
+            }
+            else
+            {
                 for (uint i = 0; i < count; i++)
                 {
                     var readerType = input.Read7BitEncodedInt();
-                	array[i] = readerType > 0 ? input.ReadObject<T>(input.TypeReaders[readerType - 1]) : default(T);
+                    array[i] = readerType > 0 ? input.ReadObject<T>(input.TypeReaders[readerType - 1]) : default(T);
                 }
-			}
+            }
             return array;
         }
     }

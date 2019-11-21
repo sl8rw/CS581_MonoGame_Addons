@@ -20,7 +20,7 @@ namespace Microsoft.Xna.Framework.Audio
 #else
     public sealed class InstancePlayLimitException : ExternalException
 #endif
-	{
-	}
+    {
+    }
 }
 

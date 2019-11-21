@@ -2,12 +2,11 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Utilities;
 using System;
 using System.IO;
 using System.Reflection;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using MonoGame.Utilities;
 
 namespace Microsoft.Xna.Framework
 {
@@ -95,7 +94,7 @@ namespace Microsoft.Xna.Framework
         public SdlGameWindow(Game game)
         {
             _game = game;
-            _screenDeviceName = "";
+            _screenDeviceName = string.Empty;
 
             Instance = this;
 
@@ -127,7 +126,7 @@ namespace Microsoft.Xna.Framework
                 }
             }
 
-            _handle = Sdl.Window.Create("", 0, 0,
+            _handle = Sdl.Window.Create(string.Empty, 0, 0,
                 GraphicsDeviceManager.DefaultBackBufferWidth, GraphicsDeviceManager.DefaultBackBufferHeight,
                 Sdl.Window.State.Hidden);
         }
@@ -249,7 +248,7 @@ namespace Microsoft.Xna.Framework
             {
                 // We need to get the display information again in case
                 // the resolution of it was changed.
-                Sdl.Display.GetBounds (displayIndex, out displayRect);
+                Sdl.Display.GetBounds(displayIndex, out displayRect);
 
                 // This centering only occurs when exiting fullscreen
                 // so it should center the window on the current display.
@@ -288,7 +287,8 @@ namespace Microsoft.Xna.Framework
             // SDL reports many resize events even if the Size didn't change.
             // Only call the code below if it actually changed.
             if (_game.GraphicsDevice.PresentationParameters.BackBufferWidth == width &&
-                _game.GraphicsDevice.PresentationParameters.BackBufferHeight == height) {
+                _game.GraphicsDevice.PresentationParameters.BackBufferHeight == height)
+            {
                 return;
             }
             _game.GraphicsDevice.PresentationParameters.BackBufferWidth = width;

@@ -2,15 +2,14 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
-using System.Runtime.InteropServices;
 using MonoGame.Utilities;
+using System;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
-	public partial class TextureCube : Texture
-	{
-		internal int size;
+    public partial class TextureCube : Texture
+    {
+        internal int size;
 
         /// <summary>
         /// Gets the width and height of the cube map face in pixels.
@@ -23,10 +22,10 @@ namespace Microsoft.Xna.Framework.Graphics
                 return size;
             }
         }
-		
-		public TextureCube (GraphicsDevice graphicsDevice, int size, bool mipMap, SurfaceFormat format)
+
+        public TextureCube(GraphicsDevice graphicsDevice, int size, bool mipMap, SurfaceFormat format)
             : this(graphicsDevice, size, mipMap, format, false)
-		{
+        {
         }
 
         internal TextureCube(GraphicsDevice graphicsDevice, int size, bool mipMap, SurfaceFormat format, bool renderTarget)
@@ -34,10 +33,10 @@ namespace Microsoft.Xna.Framework.Graphics
             if (graphicsDevice == null)
                 throw new ArgumentNullException("graphicsDevice", FrameworkResources.ResourceCreationWhenDeviceIsNull);
             if (size <= 0)
-                throw new ArgumentOutOfRangeException("size","Cube size must be greater than zero");
+                throw new ArgumentOutOfRangeException("size", "Cube size must be greater than zero");
 
             this.GraphicsDevice = graphicsDevice;
-			this.size = size;
+            this.size = size;
             this._format = format;
             this._levelCount = mipMap ? CalculateMipLevels(size) : 1;
 
@@ -57,36 +56,36 @@ namespace Microsoft.Xna.Framework.Graphics
             GetData(cubeMapFace, 0, null, data, 0, data.Length);
         }
 
-	    public void GetData<T>(CubeMapFace cubeMapFace, T[] data, int startIndex, int elementCount) where T : struct
-	    {
-	        GetData(cubeMapFace, 0, null, data, startIndex, elementCount);
-	    }
+        public void GetData<T>(CubeMapFace cubeMapFace, T[] data, int startIndex, int elementCount) where T : struct
+        {
+            GetData(cubeMapFace, 0, null, data, startIndex, elementCount);
+        }
 
-	    public void GetData<T>(CubeMapFace cubeMapFace, int level, Rectangle? rect, T[] data, int startIndex, int elementCount) where T : struct
-	    {
+        public void GetData<T>(CubeMapFace cubeMapFace, int level, Rectangle? rect, T[] data, int startIndex, int elementCount) where T : struct
+        {
             Rectangle checkedRect;
             ValidateParams(level, rect, data, startIndex, elementCount, out checkedRect);
-	        PlatformGetData(cubeMapFace, level, checkedRect, data, startIndex, elementCount);
-	    }
+            PlatformGetData(cubeMapFace, level, checkedRect, data, startIndex, elementCount);
+        }
 
-		public void SetData<T> (CubeMapFace face, T[] data) where T : struct
-		{
+        public void SetData<T>(CubeMapFace face, T[] data) where T : struct
+        {
             if (data == null)
                 throw new ArgumentNullException("data");
             SetData(face, 0, null, data, 0, data.Length);
-		}
+        }
 
         public void SetData<T>(CubeMapFace face, T[] data, int startIndex, int elementCount) where T : struct
-		{
+        {
             SetData(face, 0, null, data, startIndex, elementCount);
-		}
-		
+        }
+
         public void SetData<T>(CubeMapFace face, int level, Rectangle? rect, T[] data, int startIndex, int elementCount) where T : struct
         {
             Rectangle checkedRect;
             ValidateParams(level, rect, data, startIndex, elementCount, out checkedRect);
             PlatformSetData(face, level, checkedRect, data, startIndex, elementCount);
-		}
+        }
 
         private void ValidateParams<T>(int level, Rectangle? rect, T[] data, int startIndex,
             int elementCount, out Rectangle checkedRect) where T : struct
@@ -135,6 +134,6 @@ namespace Microsoft.Xna.Framework.Graphics
                                             "elementCount * sizeof(T) is {0}, but data size is {1}.",
                                             elementCount * tSize, dataByteSize), "elementCount");
         }
-	}
+    }
 }
 

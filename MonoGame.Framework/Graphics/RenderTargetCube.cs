@@ -41,9 +41,9 @@ namespace Microsoft.Xna.Framework.Graphics
             get { return size; }
         }
 
-		public bool IsContentLost { get { return false; } }
-		public event EventHandler<EventArgs> ContentLost;
-		
+        public bool IsContentLost { get { return false; } }
+        public event EventHandler<EventArgs> ContentLost;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RenderTargetCube"/> class.
         /// </summary>
@@ -54,7 +54,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <param name="preferredDepthFormat">The preferred format of the depth-stencil buffer.</param>
         public RenderTargetCube(GraphicsDevice graphicsDevice, int size, bool mipMap, SurfaceFormat preferredFormat, DepthFormat preferredDepthFormat)
             : this(graphicsDevice, size, mipMap, preferredFormat, preferredDepthFormat, 0, RenderTargetUsage.DiscardContents)
-        {            
+        {
         }
 
         /// <summary>
@@ -76,19 +76,19 @@ namespace Microsoft.Xna.Framework.Graphics
 
             PlatformConstruct(graphicsDevice, mipMap, preferredDepthFormat, preferredMultiSampleCount, usage);
         }
-        
+
         protected static SurfaceFormat QuerySelectedFormat(GraphicsDevice graphicsDevice, SurfaceFormat preferredFormat)
         {
-			SurfaceFormat selectedFormat = preferredFormat;
-			DepthFormat selectedDepthFormat;
-			int selectedMultiSampleCount;
+            SurfaceFormat selectedFormat = preferredFormat;
+            DepthFormat selectedDepthFormat;
+            int selectedMultiSampleCount;
 
             if (graphicsDevice != null)
             {
-                graphicsDevice.Adapter.QueryRenderTargetFormat(graphicsDevice.GraphicsProfile, preferredFormat, DepthFormat.None, 0, 
+                graphicsDevice.Adapter.QueryRenderTargetFormat(graphicsDevice.GraphicsProfile, preferredFormat, DepthFormat.None, 0,
                     out selectedFormat, out selectedDepthFormat, out selectedMultiSampleCount);
             }
-            
+
             return selectedFormat;
         }
     }

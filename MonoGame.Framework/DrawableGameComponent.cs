@@ -15,7 +15,7 @@ namespace Microsoft.Xna.Framework
 
         public Graphics.GraphicsDevice GraphicsDevice
         {
-            get { return this.Game.GraphicsDevice; } 
+            get { return this.Game.GraphicsDevice; }
         }
 
         public int DrawOrder
@@ -72,7 +72,7 @@ namespace Microsoft.Xna.Framework
 
         protected virtual void LoadContent() { }
 
-        protected virtual void UnloadContent () { }
+        protected virtual void UnloadContent() { }
 
         public virtual void Draw(GameTime gameTime) { }
 

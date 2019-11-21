@@ -2,16 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using MonoGame.Utilities;
 
 namespace MonoGame.Utilities.Png
 {
@@ -29,7 +25,7 @@ namespace MonoGame.Utilities.Png
         private Palette palette;
         private Texture2D texture;
         private Color[] data;
-        
+
         public PngReader()
         {
             chunks = new List<PngChunk>();
@@ -70,7 +66,7 @@ namespace MonoGame.Utilities.Png
         public static bool IsPngImage(Stream stream)
         {
             stream.Position = 0;
-            
+
             byte[] signature = new byte[8];
             stream.Read(signature, 0, 8);
 
@@ -178,20 +174,20 @@ namespace MonoGame.Utilities.Png
             for (int y = 0; y < scanlineCount; y++)
             {
                 result[y] = new byte[bytesPerScanline];
-                
+
                 for (int x = 0; x < bytesPerScanline; x++)
                 {
                     result[y][x] = pixelData[y * bytesPerScanline + x];
                 }
             }
-            
+
             return result;
         }
 
         private void DecodePixelData(byte[][] pixelData)
         {
             data = new Color[width * height];
-            
+
             byte[] previousScanline = new byte[bytesPerScanline];
 
             for (int y = 0; y < height; y++)
@@ -289,7 +285,7 @@ namespace MonoGame.Utilities.Png
                     for (int x = 0; x < width; x++)
                     {
                         int offset = 1 + (x * bytesPerPixel);
-                        
+
                         int red = defilteredScanline[offset];
                         int green = defilteredScanline[offset + bytesPerSample];
                         int blue = defilteredScanline[offset + 2 * bytesPerSample];

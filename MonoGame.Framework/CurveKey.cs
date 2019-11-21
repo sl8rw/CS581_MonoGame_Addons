@@ -3,7 +3,6 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using System;
-using System.ComponentModel;
 using System.Runtime.Serialization;
 
 namespace Microsoft.Xna.Framework
@@ -194,7 +193,7 @@ namespace Microsoft.Xna.Framework
         {
             return this._position.GetHashCode() ^ this._value.GetHashCode() ^ this._tangentIn.GetHashCode() ^
                 this._tangentOut.GetHashCode() ^ this._continuity.GetHashCode();
-        } 
+        }
 
         #endregion
     }

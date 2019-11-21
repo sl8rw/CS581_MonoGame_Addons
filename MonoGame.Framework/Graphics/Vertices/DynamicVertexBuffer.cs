@@ -2,12 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
 using MonoGame.Utilities;
+using System;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
-	public class DynamicVertexBuffer : VertexBuffer
+    public class DynamicVertexBuffer : VertexBuffer
     {
         /// <summary>
         /// Special offset used internally by GraphicsDevice.DrawUserXXX() methods.
@@ -20,8 +20,8 @@ namespace Microsoft.Xna.Framework.Graphics
             : base(graphicsDevice, vertexDeclaration, vertexCount, bufferUsage, true)
         {
         }
-		
-		public DynamicVertexBuffer(GraphicsDevice graphicsDevice, Type type, int vertexCount, BufferUsage bufferUsage)
+
+        public DynamicVertexBuffer(GraphicsDevice graphicsDevice, Type type, int vertexCount, BufferUsage bufferUsage)
             : base(graphicsDevice, VertexDeclaration.FromType(type), vertexCount, bufferUsage, true)
         {
         }

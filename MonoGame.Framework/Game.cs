@@ -2,9 +2,6 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 #if WINDOWS_UAP
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
@@ -12,7 +9,14 @@ using Windows.ApplicationModel.Activation;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+#if WINDOWS_UAP
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Activation;
+#endif
 using Microsoft.Xna.Framework.Input.Touch;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 
 namespace Microsoft.Xna.Framework
@@ -29,7 +33,7 @@ namespace Microsoft.Xna.Framework
                 d => d.Visible,
                 (d, handler) => d.VisibleChanged += handler,
                 (d, handler) => d.VisibleChanged -= handler,
-                (d1 ,d2) => Comparer<int>.Default.Compare(d1.DrawOrder, d2.DrawOrder),
+                (d1, d2) => Comparer<int>.Default.Compare(d1.DrawOrder, d2.DrawOrder),
                 (d, handler) => d.DrawOrderChanged += handler,
                 (d, handler) => d.DrawOrderChanged -= handler);
 
@@ -48,15 +52,15 @@ namespace Microsoft.Xna.Framework
         private bool _initialized = false;
         private bool _isFixedTimeStep = true;
 
-        private TimeSpan _targetElapsedTime = TimeSpan.FromMilliseconds(0); // i edited this too so that both are the same
+        private TimeSpan _targetElapsedTime = TimeSpan.FromTicks(166667); // 60fps
         private TimeSpan _inactiveSleepTime = TimeSpan.FromSeconds(0.02);
 
-        private TimeSpan _maxElapsedTime = TimeSpan.FromMilliseconds(0); //i edited this so i can try my flag
+        private TimeSpan _maxElapsedTime = TimeSpan.FromMilliseconds(500);
 
         private bool _shouldExit;
         private bool _suppressDraw;
 
-        partial void PlatformConstruct();       
+        partial void PlatformConstruct();
 
         public Game()
         {
@@ -85,11 +89,11 @@ namespace Microsoft.Xna.Framework
             Dispose(false);
         }
 
-		[System.Diagnostics.Conditional("DEBUG")]
-		internal void Log(string Message)
-		{
-			if (Platform != null) Platform.Log(Message);
-		}
+        [System.Diagnostics.Conditional("DEBUG")]
+        internal void Log(string Message)
+        {
+            if (Platform != null) Platform.Log(Message);
+        }
 
         #region IDisposable Implementation
 
@@ -205,7 +209,6 @@ namespace Microsoft.Xna.Framework
                     throw new ArgumentOutOfRangeException("The time must be positive.", default(Exception));
                 if (value < _targetElapsedTime)
                     throw new ArgumentOutOfRangeException("The time must be at least TargetElapsedTime", default(Exception));
-                
 
                 _maxElapsedTime = value;
             }
@@ -222,6 +225,10 @@ namespace Microsoft.Xna.Framework
             set { Platform.IsMouseVisible = value; }
         }
 
+        /// <summary>
+        /// The target amount of time we will frameskip over and only perform Update calls with no Draw calls.  This value can never be greater than the MaxElapsedTime
+        /// MonoGame extension.
+        /// </summary>
         public TimeSpan TargetElapsedTime
         {
             get { return _targetElapsedTime; }
@@ -234,19 +241,14 @@ namespace Microsoft.Xna.Framework
                 if (value <= TimeSpan.Zero)
                     throw new ArgumentOutOfRangeException(
                         "The time must be positive and non-zero.", default(Exception));
+                if (value > MaxElapsedTime) //clamps the targetElapsedTime by the MaxElapsedTime
+                    throw new ArgumentOutOfRangeException("The time cannot be greater than the MaxElapsedTime", default(Exception));
 
                 if (value != _targetElapsedTime)
                 {
                     _targetElapsedTime = value;
                     Platform.TargetElapsedTimeChanged();
                 }
-
-                if (value > _maxElapsedTime && _maxElapsedTime!=TimeSpan.FromMilliseconds(0)) //slater's mod
-                {
-                    throw new ArgumentOutOfRangeException(
-                       "TargetElapsedTime cannot be bigger than MaxElapsedTime (slater edit, as there was a silent fix imposed)", default(Exception));
-                }
-
             }
         }
 
@@ -256,7 +258,8 @@ namespace Microsoft.Xna.Framework
             set { _isFixedTimeStep = value; }
         }
 
-        public GameServiceContainer Services {
+        public GameServiceContainer Services
+        {
             get { return _services; }
         }
 
@@ -334,11 +337,16 @@ namespace Microsoft.Xna.Framework
             _suppressDraw = true;
         }
 
+        //as _gameTimer was throwing a NullReferenceException, a null check is performed to prevent this.
+        //in the future, the testing method for this AssertDoesNotThrow should be removed to match standard XNA (per nkast)
         public void ResetElapsedTime()
         {
             Platform.ResetElapsedTime();
-            _gameTimer.Reset();
-            _gameTimer.Start();
+            if (_gameTimer != null)
+            {
+                _gameTimer.Reset();
+                _gameTimer.Start();
+            }
             _accumulatedElapsedTime = TimeSpan.Zero;
             _gameTime.ElapsedGameTime = TimeSpan.Zero;
             _previousTicks = 0L;
@@ -348,7 +356,7 @@ namespace Microsoft.Xna.Framework
         {
             _suppressDraw = true;
         }
-        
+
         public void RunOneFrame()
         {
             if (Platform == null)
@@ -359,17 +367,17 @@ namespace Microsoft.Xna.Framework
 
             if (!_initialized)
             {
-                DoInitialize ();
+                DoInitialize();
                 _gameTimer = Stopwatch.StartNew();
                 _initialized = true;
             }
 
-            BeginRun();            
+            BeginRun();
 
             //Not quite right..
-            Tick ();
+            Tick();
 
-            EndRun ();
+            EndRun();
 
         }
 
@@ -388,8 +396,9 @@ namespace Microsoft.Xna.Framework
                 return;
             }
 
-            if (!_initialized) {
-                DoInitialize ();
+            if (!_initialized)
+            {
+                DoInitialize();
                 _initialized = true;
             }
 
@@ -397,27 +406,27 @@ namespace Microsoft.Xna.Framework
             _gameTimer = Stopwatch.StartNew();
             switch (runBehavior)
             {
-            case GameRunBehavior.Asynchronous:
-                Platform.AsyncRunLoopEnded += Platform_AsyncRunLoopEnded;
-                Platform.StartRunLoop();
-                break;
-            case GameRunBehavior.Synchronous:
-                // XNA runs one Update even before showing the window
-                DoUpdate(new GameTime());
+                case GameRunBehavior.Asynchronous:
+                    Platform.AsyncRunLoopEnded += Platform_AsyncRunLoopEnded;
+                    Platform.StartRunLoop();
+                    break;
+                case GameRunBehavior.Synchronous:
+                    // XNA runs one Update even before showing the window
+                    DoUpdate(new GameTime());
 
-                Platform.RunLoop();
-                EndRun();
-				DoExiting();
-                break;
-            default:
-                throw new ArgumentException(string.Format(
-                    "Handling for the run behavior {0} is not implemented.", runBehavior));
+                    Platform.RunLoop();
+                    EndRun();
+                    DoExiting();
+                    break;
+                default:
+                    throw new ArgumentException(string.Format(
+                        "Handling for the run behavior {0} is not implemented.", runBehavior));
             }
         }
 
         private TimeSpan _accumulatedElapsedTime;
         private readonly GameTime _gameTime = new GameTime();
-        private Stopwatch _gameTimer;
+        private Stopwatch _gameTimer = new Stopwatch();
         private long _previousTicks = 0;
         private int _updateFrameLag;
 #if WINDOWS_UAP
@@ -426,10 +435,10 @@ namespace Microsoft.Xna.Framework
 
         public void Tick()
         {
-            // NOTE: This code is very sensitive and can break very badly
-            // with even what looks like a safe change.  Be sure to test 
-            // any change fully in both the fixed and variable timestep 
-            // modes across multiple devices and platforms.
+        // NOTE: This code is very sensitive and can break very badly
+        // with even what looks like a safe change.  Be sure to test 
+        // any change fully in both the fixed and variable timestep 
+        // modes across multiple devices and platforms.
 
         RetryTick:
 
@@ -444,6 +453,10 @@ namespace Microsoft.Xna.Framework
             }
 
             // Advance the accumulated elapsed time.
+            if (_gameTimer == null)
+            {
+                throw new NullReferenceException();
+            }
             var currentTicks = _gameTimer.Elapsed.Ticks;
             _accumulatedElapsedTime += TimeSpan.FromTicks(currentTicks - _previousTicks);
             _previousTicks = currentTicks;
@@ -463,6 +476,24 @@ namespace Microsoft.Xna.Framework
             if (_accumulatedElapsedTime > _maxElapsedTime)
                 _accumulatedElapsedTime = _maxElapsedTime;
 
+            DoTick();
+
+            // Draw unless the update suppressed it.
+            if (_suppressDraw)
+                _suppressDraw = false;
+            else
+            {
+                DoDraw(_gameTime);
+            }
+
+            if (_shouldExit)
+            {
+                Platform.Exit();
+                _shouldExit = false; //prevents perpetual exiting on platforms supporting resume.
+            }
+        }
+        private void DoTick()
+        {
             if (IsFixedTimeStep)
             {
                 _gameTime.ElapsedGameTime = TargetElapsedTime;
@@ -509,20 +540,6 @@ namespace Microsoft.Xna.Framework
                 _accumulatedElapsedTime = TimeSpan.Zero;
 
                 DoUpdate(_gameTime);
-            }
-
-            // Draw unless the update suppressed it.
-            if (_suppressDraw)
-                _suppressDraw = false;
-            else
-            {
-                DoDraw(_gameTime);
-            }
-
-            if (_shouldExit)
-            {
-                Platform.Exit();
-                _shouldExit = false; //prevents perpetual exiting on platforms supporting resume.
             }
         }
 
@@ -581,24 +598,24 @@ namespace Microsoft.Xna.Framework
         protected virtual void Update(GameTime gameTime)
         {
             _updateables.ForEachFilteredItem(UpdateAction, gameTime);
-		}
+        }
 
         protected virtual void OnExiting(object sender, EventArgs args)
         {
             EventHelpers.Raise(sender, Exiting, args);
         }
-		
-		protected virtual void OnActivated(object sender, EventArgs args)
-		{
-			AssertNotDisposed();
+
+        protected virtual void OnActivated(object sender, EventArgs args)
+        {
+            AssertNotDisposed();
             EventHelpers.Raise(sender, Activated, args);
-		}
-		
-		protected virtual void OnDeactivated(object sender, EventArgs args)
-		{
-			AssertNotDisposed();
+        }
+
+        protected virtual void OnDeactivated(object sender, EventArgs args)
+        {
+            AssertNotDisposed();
             EventHelpers.Raise(sender, Deactivated, args);
-		}
+        }
 
         #endregion Protected Methods
 
@@ -626,7 +643,7 @@ namespace Microsoft.Xna.Framework
             var platform = (GamePlatform)sender;
             platform.AsyncRunLoopEnded -= Platform_AsyncRunLoopEnded;
             EndRun();
-			DoExiting();
+            DoExiting();
         }
 
         #endregion Event Handlers
@@ -640,18 +657,18 @@ namespace Microsoft.Xna.Framework
 #if !(WINDOWS && DIRECTX)
         internal void applyChanges(GraphicsDeviceManager manager)
         {
-			Platform.BeginScreenDeviceChange(GraphicsDevice.PresentationParameters.IsFullScreen);
+            Platform.BeginScreenDeviceChange(GraphicsDevice.PresentationParameters.IsFullScreen);
 
             if (GraphicsDevice.PresentationParameters.IsFullScreen)
                 Platform.EnterFullScreen();
             else
                 Platform.ExitFullScreen();
             var viewport = new Viewport(0, 0,
-			                            GraphicsDevice.PresentationParameters.BackBufferWidth,
-			                            GraphicsDevice.PresentationParameters.BackBufferHeight);
+                                        GraphicsDevice.PresentationParameters.BackBufferWidth,
+                                        GraphicsDevice.PresentationParameters.BackBufferHeight);
 
             GraphicsDevice.Viewport = viewport;
-			Platform.EndScreenDeviceChange(string.Empty, viewport.Width, viewport.Height);
+            Platform.EndScreenDeviceChange(string.Empty, viewport.Width, viewport.Height);
         }
 #endif
 
@@ -661,7 +678,7 @@ namespace Microsoft.Xna.Framework
             if (Platform.BeforeUpdate(gameTime))
             {
                 FrameworkDispatcher.Update();
-				
+
                 Update(gameTime);
 
                 //The TouchPanel needs to know the time for when touches arrive
@@ -701,11 +718,11 @@ namespace Microsoft.Xna.Framework
             _components.ComponentRemoved += Components_ComponentRemoved;
         }
 
-		internal void DoExiting()
-		{
-			OnExiting(this, EventArgs.Empty);
-			UnloadContent();
-		}
+        internal void DoExiting()
+        {
+            OnExiting(this, EventArgs.Empty);
+            UnloadContent();
+        }
 
         #endregion Internal Methods
 
@@ -735,7 +752,7 @@ namespace Microsoft.Xna.Framework
         //       Components.ComponentAdded.
         private void InitializeExistingComponents()
         {
-            for(int i = 0; i < Components.Count; ++i)
+            for (int i = 0; i < Components.Count; ++i)
                 Components[i].Initialize();
         }
 

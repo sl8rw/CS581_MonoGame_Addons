@@ -45,7 +45,7 @@ namespace Microsoft.Xna.Framework.Input
             foreach (var entry in Joysticks)
                 Sdl.Joystick.Close(entry.Value);
 
-            Joysticks.Clear ();
+            Joysticks.Clear();
         }
 
         private const bool PlatformIsSupported = true;
@@ -57,7 +57,7 @@ namespace Microsoft.Xna.Framework.Input
                 return new JoystickCapabilities
                 {
                     IsConnected = false,
-                    Identifier = "",
+                    Identifier = string.Empty,
                     IsGamepad = false,
                     AxisCount = 0,
                     ButtonCount = 0,

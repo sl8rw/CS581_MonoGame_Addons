@@ -2,12 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
-using System.IO;
 using Microsoft.Xna.Framework.Content.Pipeline.Utilities.LZ4;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Framework.Content.Pipeline.Builder;
+using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler
 {
@@ -295,10 +295,10 @@ namespace Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler
                 {
                     // Make sure the filename ends with .xnb
                     if (!fileName.EndsWith(".xnb"))
-                        throw new ArgumentException(string.Format("ExternalReference '{0}' must reference a .xnb file", fileName));
+                        throw new ArgumentException($"ExternalReference '{fileName}' must reference a .xnb file");
                     // Make sure it is in the same root directory
                     if (!fileName.StartsWith(rootDirectory, StringComparison.OrdinalIgnoreCase))
-                        throw new ArgumentException(string.Format("ExternalReference '{0}' must be in the root directory '{1}'", fileName, rootDirectory));
+                        throw new ArgumentException($"ExternalReference '{fileName}' must be in the root directory '{rootDirectory}'");
                     // Strip the .xnb extension
                     fileName = fileName.Substring(0, fileName.Length - 4);
                     // Get the relative directory
@@ -327,7 +327,7 @@ namespace Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler
                 var index = typeWriterMap[typeWriter.GetType()];
                 Write7BitEncodedInt(index + 1);
 
-                typeWriter.Write(this, value);                
+                typeWriter.Write(this, value);
             }
         }
 

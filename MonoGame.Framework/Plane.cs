@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.Xna.Framework
 {
-	internal class PlaneHelper
+    internal class PlaneHelper
     {
         /// <summary>
         /// Returns a value indicating what side (positive/negative) of a plane a point is
@@ -34,7 +34,7 @@ namespace Microsoft.Xna.Framework
                                     / Math.Sqrt(plane.Normal.X * plane.Normal.X + plane.Normal.Y * plane.Normal.Y + plane.Normal.Z * plane.Normal.Z));
         }
     }
-	
+
     [DataContract]
     [DebuggerDisplay("{DebugDisplayString,nq}")]
     public struct Plane : IEquatable<Plane>
@@ -194,22 +194,22 @@ namespace Microsoft.Xna.Framework
         public void Normalize()
         {
             float length = Normal.Length();
-            float factor =  1f / length;            
+            float factor = 1f / length;
             Vector3.Multiply(ref Normal, factor, out Normal);
             D = D * factor;
         }
 
         public static Plane Normalize(Plane value)
         {
-			Plane ret;
-			Normalize(ref value, out ret);
-			return ret;
+            Plane ret;
+            Normalize(ref value, out ret);
+            return ret;
         }
 
         public static void Normalize(ref Plane value, out Plane result)
         {
             float length = value.Normal.Length();
-            float factor =  1f / length;            
+            float factor = 1f / length;
             Vector3.Multiply(ref value.Normal, factor, out result.Normal);
             result.D = value.D * factor;
         }
@@ -246,7 +246,7 @@ namespace Microsoft.Xna.Framework
 
         public void Intersects(ref BoundingBox box, out PlaneIntersectionType result)
         {
-            box.Intersects (ref this, out result);
+            box.Intersects(ref this, out result);
         }
 
         public PlaneIntersectionType Intersects(BoundingFrustum frustum)

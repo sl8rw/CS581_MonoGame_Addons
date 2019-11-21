@@ -1,4 +1,4 @@
-﻿// MIT License - Copyright (C) The Mono.Xna Team
+// MIT License - Copyright (C) The Mono.Xna Team
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
@@ -16,7 +16,7 @@ namespace Microsoft.Xna.Framework
 
         [DataMember]
         public Vector3 Direction;
-      
+
         [DataMember]
         public Vector3 Position;
 
@@ -41,24 +41,35 @@ namespace Microsoft.Xna.Framework
             return (obj is Ray) ? this.Equals((Ray)obj) : false;
         }
 
-        
+
         public bool Equals(Ray other)
         {
             return this.Position.Equals(other.Position) && this.Direction.Equals(other.Direction);
         }
 
-        
+
         public override int GetHashCode()
         {
             return Position.GetHashCode() ^ Direction.GetHashCode();
         }
 
         // adapted from http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-7-intersecting-simple-shapes/ray-box-intersection/
+        // further adaptation which does multiplication instead of division https://www.dotnetperls.com/reciprocal and https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection
+
+        /// <summary>
+        /// Used for determining collisions
+        /// Optimized intersection code using multiplication and one vector divison call
+        /// </summary>
         public float? Intersects(BoundingBox box)
         {
             const float Epsilon = 1e-6f;
 
             float? tMin = null, tMax = null;
+            //Direction is a vector
+            Vector3 inverseDirection = new Vector3();
+            Vector3 oneVector = new Vector3(1, 1, 1); //initialized one vector used for calculating the reciprocal
+            inverseDirection = Vector3.Divide(oneVector, Direction); //reciprocal
+            //Console.WriteLine("inverse dir:", inverseDirection);
 
             if (Math.Abs(Direction.X) < Epsilon)
             {
@@ -67,8 +78,8 @@ namespace Microsoft.Xna.Framework
             }
             else
             {
-                tMin = (box.Min.X - Position.X) / Direction.X;
-                tMax = (box.Max.X - Position.X) / Direction.X;
+                tMin = (box.Min.X - Position.X) * inverseDirection.X; //multiplication by the reciprocal to increase runtime efficiency
+                tMax = (box.Max.X - Position.X) * inverseDirection.X;
 
                 if (tMin > tMax)
                 {
@@ -85,8 +96,8 @@ namespace Microsoft.Xna.Framework
             }
             else
             {
-                var tMinY = (box.Min.Y - Position.Y) / Direction.Y;
-                var tMaxY = (box.Max.Y - Position.Y) / Direction.Y;
+                var tMinY = (box.Min.Y - Position.Y) * inverseDirection.Y;
+                var tMaxY = (box.Max.Y - Position.Y) * inverseDirection.Y;
 
                 if (tMinY > tMaxY)
                 {
@@ -109,8 +120,8 @@ namespace Microsoft.Xna.Framework
             }
             else
             {
-                var tMinZ = (box.Min.Z - Position.Z) / Direction.Z;
-                var tMaxZ = (box.Max.Z - Position.Z) / Direction.Z;
+                var tMinZ = (box.Min.Z - Position.Z) / inverseDirection.Z;
+                var tMaxZ = (box.Max.Z - Position.Z) / inverseDirection.Z;
 
                 if (tMinZ > tMaxZ)
                 {
@@ -126,11 +137,11 @@ namespace Microsoft.Xna.Framework
                 if (!tMax.HasValue || tMaxZ < tMax) tMax = tMaxZ;
             }
 
-            // having a positive tMin and a negative tMax means the ray is inside the box
+            // having a negative tMin and a positive tMax means the ray is inside the box
             // we expect the intesection distance to be 0 in that case
             if ((tMin.HasValue && tMin < 0) && tMax > 0) return 0;
 
-            // a negative tMin means that the intersection point is behind the ray's origin
+            // a negative tMin without a positive tMax means that the intersection point is behind the ray's origin
             // we discard these as not hitting the AABB
             if (tMin < 0) return null;
 
@@ -140,7 +151,7 @@ namespace Microsoft.Xna.Framework
 
         public void Intersects(ref BoundingBox box, out float? result)
         {
-			result = Intersects(box);
+            result = Intersects(box);
         }
 
         /*

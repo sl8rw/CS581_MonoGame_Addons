@@ -2,9 +2,9 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using MonoGame.Utilities;
 using System;
 using System.IO;
-using MonoGame.Utilities;
 
 namespace Microsoft.Xna.Framework
 {
@@ -17,10 +17,10 @@ namespace Microsoft.Xna.Framework
             // Check for the package Resources Folder first. This is where the assets
             // will be bundled.
             if (CurrentPlatform.OS == OS.MacOSX)
-                Location = Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "..", "Resources");
-            if (!Directory.Exists (Location))
+                Location = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "Resources");
+            if (!Directory.Exists(Location))
 #endif
-            Location = AppDomain.CurrentDomain.BaseDirectory;
+                Location = AppDomain.CurrentDomain.BaseDirectory;
 #endif
         }
 

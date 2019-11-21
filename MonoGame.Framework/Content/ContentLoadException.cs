@@ -52,7 +52,7 @@ namespace Microsoft.Xna.Framework.Content
         {
         }
 
-        public ContentLoadException(string message, Exception innerException) : base(message,innerException)
+        public ContentLoadException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

@@ -4,8 +4,8 @@
 
 using System;
 using System.Diagnostics;
-using System.Text;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace Microsoft.Xna.Framework
 {
@@ -202,9 +202,9 @@ namespace Microsoft.Xna.Framework
             this.Y = value.Y;
             this.Z = z;
         }
-        
+
         #endregion
-        
+
         #region Public Methods
 
         /// <summary>
@@ -427,7 +427,7 @@ namespace Microsoft.Xna.Framework
         /// <returns>The squared distance between two vectors.</returns>
         public static float DistanceSquared(Vector3 value1, Vector3 value2)
         {
-            return  (value1.X - value2.X) * (value1.X - value2.X) +
+            return (value1.X - value2.X) * (value1.X - value2.X) +
                     (value1.Y - value2.Y) * (value1.Y - value2.Y) +
                     (value1.Z - value2.Z) * (value1.Z - value2.Z);
         }
@@ -534,7 +534,7 @@ namespace Microsoft.Xna.Framework
                 return false;
 
             var other = (Vector3)obj;
-            return  X == other.X &&
+            return X == other.X &&
                     Y == other.Y &&
                     Z == other.Z;
         }
@@ -546,7 +546,7 @@ namespace Microsoft.Xna.Framework
         /// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
         public bool Equals(Vector3 other)
         {
-            return  X == other.X && 
+            return X == other.X &&
                     Y == other.Y &&
                     Z == other.Z;
         }
@@ -590,7 +590,8 @@ namespace Microsoft.Xna.Framework
         /// Gets the hash code of this <see cref="Vector3"/>.
         /// </summary>
         /// <returns>Hash code of this <see cref="Vector3"/>.</returns>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             unchecked
             {
                 var hashCode = X.GetHashCode();
@@ -1038,7 +1039,7 @@ namespace Microsoft.Xna.Framework
         /// Creates a new <see cref="Vector3"/> that contains a transformation of 3d-vector by the specified <see cref="Matrix"/>.
         /// </summary>
         /// <param name="position">Source <see cref="Vector3"/>.</param>
-        /// <param name="matrix">The transformation <see cref="Matrix"/>.</param>
+        /// <param name="matrix">The transformation <see cref="Matrix"/>.  Does not use 4th column.</param>
         /// <returns>Transformed <see cref="Vector3"/>.</returns>
         public static Vector3 Transform(Vector3 position, Matrix matrix)
         {
@@ -1050,7 +1051,7 @@ namespace Microsoft.Xna.Framework
         /// Creates a new <see cref="Vector3"/> that contains a transformation of 3d-vector by the specified <see cref="Matrix"/>.
         /// </summary>
         /// <param name="position">Source <see cref="Vector3"/>.</param>
-        /// <param name="matrix">The transformation <see cref="Matrix"/>.</param>
+        /// <param name="matrix">The transformation <see cref="Matrix"/>.  Does not use 4th column.</param>
         /// <param name="result">Transformed <see cref="Vector3"/> as an output parameter.</param>
         public static void Transform(ref Vector3 position, ref Matrix matrix, out Vector3 result)
         {
@@ -1097,7 +1098,7 @@ namespace Microsoft.Xna.Framework
         /// </summary>
         /// <param name="sourceArray">Source array.</param>
         /// <param name="sourceIndex">The starting index of transformation in the source array.</param>
-        /// <param name="matrix">The transformation <see cref="Matrix"/>.</param>
+        /// <param name="matrix">The transformation <see cref="Matrix"/>.  Does not use 4th column.</param>
         /// <param name="destinationArray">Destination array.</param>
         /// <param name="destinationIndex">The starting index in the destination array, where the first <see cref="Vector3"/> should be written.</param>
         /// <param name="length">The number of vectors to be transformed.</param>
@@ -1167,7 +1168,7 @@ namespace Microsoft.Xna.Framework
         /// Apply transformation on all vectors within array of <see cref="Vector3"/> by the specified <see cref="Matrix"/> and places the results in an another array.
         /// </summary>
         /// <param name="sourceArray">Source array.</param>
-        /// <param name="matrix">The transformation <see cref="Matrix"/>.</param>
+        /// <param name="matrix">The transformation <see cref="Matrix"/>.  Does not use 4th column.</param>
         /// <param name="destinationArray">Destination array.</param>
         public static void Transform(Vector3[] sourceArray, ref Matrix matrix, Vector3[] destinationArray)
         {
@@ -1182,12 +1183,12 @@ namespace Microsoft.Xna.Framework
 
             for (var i = 0; i < sourceArray.Length; i++)
             {
-                var position = sourceArray[i];                
+                var position = sourceArray[i];
                 destinationArray[i] =
                     new Vector3(
-                        (position.X*matrix.M11) + (position.Y*matrix.M21) + (position.Z*matrix.M31) + matrix.M41,
-                        (position.X*matrix.M12) + (position.Y*matrix.M22) + (position.Z*matrix.M32) + matrix.M42,
-                        (position.X*matrix.M13) + (position.Y*matrix.M23) + (position.Z*matrix.M33) + matrix.M43);
+                        (position.X * matrix.M11) + (position.Y * matrix.M21) + (position.Z * matrix.M31) + matrix.M41,
+                        (position.X * matrix.M12) + (position.Y * matrix.M22) + (position.Z * matrix.M32) + matrix.M42,
+                        (position.X * matrix.M13) + (position.Y * matrix.M23) + (position.Z * matrix.M33) + matrix.M43);
             }
         }
 
@@ -1276,7 +1277,7 @@ namespace Microsoft.Xna.Framework
                 throw new ArgumentNullException("sourceArray");
             if (destinationArray == null)
                 throw new ArgumentNullException("destinationArray");
-            if(sourceArray.Length < sourceIndex + length)
+            if (sourceArray.Length < sourceIndex + length)
                 throw new ArgumentException("Source array length is lesser than sourceIndex + length");
             if (destinationArray.Length < destinationIndex + length)
                 throw new ArgumentException("Destination array length is lesser than destinationIndex + length");
@@ -1301,7 +1302,7 @@ namespace Microsoft.Xna.Framework
         /// <param name="destinationArray">Destination array.</param>
         public static void TransformNormal(Vector3[] sourceArray, ref Matrix matrix, Vector3[] destinationArray)
         {
-            if(sourceArray == null)
+            if (sourceArray == null)
                 throw new ArgumentNullException("sourceArray");
             if (destinationArray == null)
                 throw new ArgumentNullException("destinationArray");
@@ -1314,9 +1315,9 @@ namespace Microsoft.Xna.Framework
 
                 destinationArray[i] =
                     new Vector3(
-                        (normal.X*matrix.M11) + (normal.Y*matrix.M21) + (normal.Z*matrix.M31),
-                        (normal.X*matrix.M12) + (normal.Y*matrix.M22) + (normal.Z*matrix.M32),
-                        (normal.X*matrix.M13) + (normal.Y*matrix.M23) + (normal.Z*matrix.M33));
+                        (normal.X * matrix.M11) + (normal.Y * matrix.M21) + (normal.Z * matrix.M31),
+                        (normal.X * matrix.M12) + (normal.Y * matrix.M22) + (normal.Z * matrix.M32),
+                        (normal.X * matrix.M13) + (normal.Y * matrix.M23) + (normal.Z * matrix.M33));
             }
         }
 

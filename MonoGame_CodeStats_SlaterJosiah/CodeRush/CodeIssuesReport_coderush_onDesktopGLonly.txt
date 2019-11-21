@@ -1,0 +1,772 @@
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\AudioUtil.cs(6,5): info CRR0043: The 'AudioUtil' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\StbImageWriteSharp\src\StbImageWriteSharp\MemoryStats.cs(8,2): info CRR0043: The 'MemoryStats' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Utilities\FuncLoader.Desktop.cs(6,20): info CRR0047: Move the 'FuncLoader' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Shader\ShaderProgramCache.cs(10,20): info CRR0047: Move the 'ShaderProgram' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Utilities\ReflectionHelpers.Default.cs(8,35): info CRR0047: Move the 'ReflectionHelpers' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\UInt32Reader.cs(9,2): info CRR0043: The 'UInt32Reader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\UInt64Reader.cs(9,2): info CRR0043: The 'UInt64Reader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\DoubleReader.cs(9,2): info CRR0043: The 'DoubleReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\UInt16Reader.cs(9,2): info CRR0043: The 'UInt16Reader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\QuaternionReader.cs(9,5): info CRR0043: The 'QuaternionReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\PlaneReader.cs(9,5): info CRR0043: The 'PlaneReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\PlayWaveEvent.cs(10,10): info CRR0047: Move the 'VariationType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\VertexDeclarationReader.cs(8,5): info CRR0043: The 'VertexDeclarationReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\MultiArrayReader.cs(10,5): info CRR0043: The 'MultiArrayReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\ReusableItemList.cs(10,5): info CRR0043: The 'ReusableItemList' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Input\KeysHelper.cs(10,5): info CRR0043: The 'KeysHelper' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\Int64Reader.cs(11,2): info CRR0043: The 'Int64Reader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\Int16Reader.cs(11,2): info CRR0043: The 'Int16Reader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\TimeSpanReader.cs(11,2): info CRR0043: The 'TimeSpanReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Utilities\CurrentPlatform.cs(10,19): info CRR0047: Move the 'OS' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\TextureCubeReader.cs(10,5): info CRR0043: The 'TextureCubeReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\EnvironmentMapEffectReader.cs(10,5): info CRR0043: The 'EnvironmentMapEffectReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\Texture3DReader.cs(10,5): info CRR0043: The 'Texture3DReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\TextureReader.cs(10,5): info CRR0043: The 'TextureReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\DualTextureEffectReader.cs(11,5): info CRR0043: The 'DualTextureEffectReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\SkinnedEffectReader.cs(11,5): info CRR0043: The 'SkinnedEffectReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\DictionaryReader.cs(12,5): info CRR0043: The 'DictionaryReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Plane.cs(11,17): info CRR0047: Move the 'PlaneHelper' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\ColorReader.cs(12,2): info CRR0043: The 'ColorReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Media\MediaLibrary.Default.cs(11,35): info CRR0042: The 'progressCallback' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Vertices\VertexDeclaration.OpenGL.cs(11,26): info CRR0047: Move the 'VertexDeclaration' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\WaveBank.Default.cs(11,58): info CRR0042: The 'stream' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture2D.StbSharp.cs(12,26): info CRR0047: Move the 'Texture2D' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Input\GamePad.SDL.cs(12,26): info CRR0047: Move the 'GamePad' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Shader\ConstantBuffer.OpenGL.cs(12,31): info CRR0046: Remove the '_shaderProgram' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDL2.cs(12,23): info CRR0047: Move the 'Sdl' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDL2.cs(12,23): info CRR0048: Adjust the 'Sdl' type name in accordance with the 'SDL2' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(13,19): info CRR0047: Move the 'ALFormat' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(13,19): info CRR0048: Adjust the 'ALFormat' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Effect\Effect.cs(13,33): info CRR0046: Remove the '_currentTechnique' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Media\Song.cs(13,15): info CRR0046: Remove the '_playCount' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\ReflectiveReader.cs(14,5): info CRR0043: The 'ReflectiveReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\PointReader.cs(14,2): info CRR0043: The 'PointReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\BooleanReader.cs(14,2): info CRR0043: The 'BooleanReader' class appears to be never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Shader\Shader.cs(14,19): info CRR0047: Move the 'SamplerType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Shader\ConstantBufferCollection.cs(12,9): info CRR0026: The 'Stage' property is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(14,20): info CRR0047: Move the 'Palette' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(14,20): info CRR0048: Adjust the 'Palette' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Microphone.cs(14,17): info CRR0047: Move the 'MicrophoneState' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\SamplerStateCollection.OpenGL.cs(13,46): info CRR0042: The 'index' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\SoundEffectInstance.OpenAL.cs(13,16): info CRR0046: Remove the '_looped' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDLGameWindow.cs(14,20): info CRR0048: Adjust the 'SdlGameWindow' type name in accordance with the 'SDLGameWindow' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(15,40): info CRR0042: The 'graphicsDevice' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Media\SongCollection.cs(13,16): info CRR0046: Remove the 'isReadOnly' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Media\MediaPlayer.cs(13,22): info CRR0046: Remove the '_numSongsInQueuePlayed' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\NamespaceDocs.cs(11,11): info CRR0047: Move the 'NamespaceDoc' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\NamespaceDocs.cs(11,11): info CRR0048: Adjust the 'NamespaceDoc' type name in accordance with the 'NamespaceDocs' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\ReusableItemList.cs(13,21): info CRR0046: Remove the '_listTop' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Shader\ConstantBuffer.OpenGL.cs(15,31): info CRR0046: Remove the '_lastConstantBufferApplied' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Media\PlaylistCollection.cs(14,16): info CRR0046: Remove the 'isReadOnly' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsDevice.OpenGL.cs(18,26): info CRR0047: Move the 'GraphicsDevice' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Utilities\CurrentPlatform.cs(20,29): info CRR0046: Remove the 'init' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenALSoundController.cs(24,27): info CRR0047: Move the 'ALHelper' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDLGamePlatform.cs(16,20): info CRR0048: Adjust the 'SdlGamePlatform' type name in accordance with the 'SDLGamePlatform' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Vertices\IndexBuffer.OpenGL.cs(18,40): info CRR0042: The 'indexElementSize' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsDevice.OpenGL.FramebufferHelper.cs(18,19): info CRR0047: Move the 'GraphicsDevice' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(19,19): info CRR0047: Move the 'BufferAccess' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(19,19): info CRR0048: Adjust the 'BufferAccess' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\SoundEffectInstance.OpenAL.cs(17,23): info CRR0046: Remove the 'reverb' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(15,140): info CRR0042: The 'renderTarget' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\TextureCube.OpenGL.cs(16,40): info CRR0042: The 'graphicsDevice' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Vertices\IndexBuffer.OpenGL.cs(18,75): info CRR0042: The 'indexCount' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\SoundEffectInstance.OpenAL.cs(18,14): info CRR0046: Remove the 'applyFilter' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Shader\Shader.cs(22,21): info CRR0047: Move the 'SamplerInfo' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Input\Mouse.SDL.cs(19,53): info CRR0042: The 'windowHandle' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\GamePlatform.cs(18,24): info CRR0046: Remove the '_needsToResetElapsedTime' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Shader\ConstantBuffer.cs(22,9): info CRR0026: The 'Dirty' property is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(24,19): info CRR0047: Move the 'BufferUsageHint' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(24,19): info CRR0048: Adjust the 'BufferUsageHint' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\TextureCube.OpenGL.cs(16,116): info CRR0042: The 'renderTarget' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsAdapter.Legacy.cs(22,25): info CRR0047: Move the 'GraphicsAdapter' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Effect\EffectHelpers.cs(20,19): info CRR0047: Move the 'EffectDirtyFlags' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\SoundEffectInstance.cs(15,22): info CRR0046: Remove the '_isDisposed' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\Ogg\OggPageFlags.cs(13,10): info CRR0048: Adjust the 'PageFlags' type name in accordance with the 'OggPageFlags' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\RenderTarget2D.cs(21,9): info CRR0026: The 'SuppressEventHandlerWarningsUntilEventsAreProperlyImplemented' method is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\GamePlatform.cs(20,24): info CRR0046: Remove the 'InFullScreenMode' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\TextureCollection.OpenGL.cs(24,34): info CRR0042: The 'device' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\FrameworkDispatcher.cs(19,29): info CRR0046: Remove the '_initialized' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\GraphicsDeviceManager.cs(18,22): info CRR0046: Remove the '_initialized' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Shader\Shader.OpenGL.cs(25,40): info CRR0042: The 'isVertexShader' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\NamespaceDocs.cs(22,11): info CRR0047: Move the 'NamespaceDoc' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\NamespaceDocs.cs(22,11): info CRR0048: Adjust the 'NamespaceDoc' type name in accordance with the 'NamespaceDocs' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\Ogg\OggCrc.cs(15,11): info CRR0048: Adjust the 'Crc' type name in accordance with the 'OggCrc' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(30,19): info CRR0047: Move the 'StencilFace' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(30,19): info CRR0048: Adjust the 'StencilFace' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\Ogg\OggPacket.cs(16,11): info CRR0048: Adjust the 'Packet' type name in accordance with the 'OggPacket' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(27,19): info CRR0047: Move the 'ALError' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(27,19): info CRR0048: Adjust the 'ALError' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\Ogg\OggPacketReader.cs(16,11): info CRR0047: Move the 'PacketReader' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\Ogg\OggPacketReader.cs(16,11): info CRR0048: Adjust the 'PacketReader' type name in accordance with the 'OggPacketReader' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\SoundEffectInstance.OpenAL.cs(26,23): info CRR0046: Remove the 'HasSourceId' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(35,19): info CRR0047: Move the 'DrawBuffersEnum' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(35,19): info CRR0048: Adjust the 'DrawBuffersEnum' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture2D.OpenGL.cs(31,98): info CRR0042: The 'type' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\Ogg\OggContainerReader.cs(17,18): info CRR0047: Move the 'ContainerReader' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\Ogg\OggContainerReader.cs(17,18): info CRR0048: Adjust the 'ContainerReader' type name in accordance with the 'OggContainerReader' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture2D.OpenGL.cs(31,116): info CRR0042: The 'shared' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\SpriteBatch.cs(29,3): info CRR0026: The '_tempRect' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Shader\Shader.cs(34,21): info CRR0047: Move the 'VertexAttribute' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Effect\EffectAnnotationCollection.cs(32,10): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(41,19): info CRR0047: Move the 'ShaderType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(41,19): info CRR0048: Adjust the 'ShaderType' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Vertices\VertexPosition.cs(36,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(37,19): info CRR0047: Move the 'ALGetString' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(37,19): info CRR0048: Adjust the 'ALGetString' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Vertices\VertexPositionColor.cs(43,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\PresentationParameters.cs(34,9): info CRR0026: The 'disposed' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\NamespaceDocs.cs(33,11): info CRR0047: Move the 'NamespaceDoc' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\NamespaceDocs.cs(33,11): info CRR0048: Adjust the 'NamespaceDoc' type name in accordance with the 'NamespaceDocs' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenALSoundController.cs(36,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Effect\EffectPassCollection.cs(36,10): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\Microphone.OpenAL.cs(37,54): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(47,19): info CRR0047: Move the 'ShaderParameter' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(47,19): info CRR0048: Adjust the 'ShaderParameter' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\SoundEffect.OpenAL.cs(37,17): info CRR0045: The 'samplesPerBlock' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Vertices\VertexPositionTexture.cs(35,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(42,19): info CRR0047: Move the 'ALBufferi' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(42,19): info CRR0048: Adjust the 'ALBufferi' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibBaseStream.cs(33,19): info CRR0047: Move the 'ZlibStreamFlavor' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Media\Song.NVorbis.cs(35,30): info CRR0042: The 'disposing' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\StbImageSharp\src\StbImageSharp\StbImage.cs(44,15): info CRR0046: Remove the 'img_n' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\RenderTarget2D.OpenGL.cs(33,103): info CRR0042: The 'shared' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\StbImageSharp\src\StbImageSharp\StbImage.cs(45,15): info CRR0046: Remove the 'img_out_n' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(54,19): info CRR0047: Move the 'GetProgramParameterName' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(54,19): info CRR0048: Adjust the 'GetProgramParameterName' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(48,19): info CRR0047: Move the 'ALGetBufferi' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(48,19): info CRR0048: Adjust the 'ALGetBufferi' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\StbImageWriteSharp\src\StbImageWriteSharp\ImageWriter.cs(59,6): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Effect\EffectTechniqueCollection.cs(37,10): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\SoundEffect.cs(22,22): info CRR0046: Remove the '_isDisposed' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibBaseStream.cs(37,38): info CRR0046: Remove the '_z' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\GraphicsDeviceManager.cs(30,22): info CRR0046: Remove the '_preferHalfPixelOffset' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Vertices\VertexPositionColorTexture.cs(41,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\StbImageSharp\src\StbImageSharp\StbImage.cs(48,15): info CRR0046: Remove the 'read_from_callbacks' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Vertices\VertexPositionNormalTexture.cs(40,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(60,19): info CRR0047: Move the 'DrawElementsType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(60,19): info CRR0048: Adjust the 'DrawElementsType' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(55,19): info CRR0047: Move the 'ALSourceb' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(55,19): info CRR0048: Adjust the 'ALSourceb' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\StbImageSharp\src\StbImageSharp\StbImage.cs(49,15): info CRR0046: Remove the 'buflen' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(54,20): info CRR0047: Move the 'PngChunk' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(54,20): info CRR0048: Adjust the 'PngChunk' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(60,19): info CRR0047: Move the 'ALSourcei' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(60,19): info CRR0048: Adjust the 'ALSourcei' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(66,19): info CRR0047: Move the 'QueryTarget' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(66,19): info CRR0048: Adjust the 'QueryTarget' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\DspParameter.cs(44,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\SpriteBatcher.cs(34,3): info CRR0026: The 'InitialVertexArraySize' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenALSoundController.cs(50,27): info CRR0047: Move the 'AlcHelper' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(45,21): info CRR0046: Remove the 'falseflag' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Design\Vector2TypeConverter.cs(39,36): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(72,19): info CRR0047: Move the 'GetQueryObjectParam' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(72,19): info CRR0048: Adjust the 'GetQueryObjectParam' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Design\Vector4TypeConverter.cs(40,36): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(68,19): info CRR0047: Move the 'ALSourcef' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(68,19): info CRR0048: Adjust the 'ALSourcef' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Effect\EffectResource.cs(39,29): info CRR0025: This conditional's code block does not appear to be reachable
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(42,57): info CRR0042: The 'right' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Design\Vector3TypeConverter.cs(40,36): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(42,68): info CRR0042: The 'bottom' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\SoundEffect.OpenAL.cs(46,138): info CRR0042: The 'loopStart' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(42,91): info CRR0042: The 'back' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\SoundEffect.OpenAL.cs(46,153): info CRR0042: The 'loopLength' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(78,19): info CRR0047: Move the 'GenerateMipmapTarget' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(78,19): info CRR0048: Adjust the 'GenerateMipmapTarget' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(43,64): info CRR0042: The 'elementCount' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(75,19): info CRR0047: Move the 'ALGetSourcei' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(75,19): info CRR0048: Adjust the 'ALGetSourcei' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Utilities\CurrentPlatform.cs(53,37): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\RenderTarget2D.cs(39,16): info CRR0045: The 'selectedDepthFormat' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\ModelBoneCollection.cs(51,21): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\GameWindow.cs(51,9): info CRR0050: Use a string.Compare() call instead of the '!=' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\RenderTarget2D.cs(40,8): info CRR0045: The 'selectedMultiSampleCount' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(83,19): info CRR0047: Move the 'ALSourceState' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(83,19): info CRR0048: Adjust the 'ALSourceState' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenALSoundController.cs(62,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\LzxDecoder.cs(55,24): info CRR0046: Remove the 'position_base' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(55,21): info CRR0045: The 'hByteReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(55,21): info CRR0044: The 'hByteReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(90,19): info CRR0047: Move the 'BlitFramebufferFilter' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(90,19): info CRR0048: Adjust the 'BlitFramebufferFilter' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\LzxDecoder.cs(56,24): info CRR0046: Remove the 'extra_bits' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Game.cs(48,22): info CRR0046: Remove the '_initialized' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(91,19): info CRR0047: Move the 'ALListener3f' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(91,19): info CRR0048: Adjust the 'ALListener3f' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(56,21): info CRR0045: The 'hSByteReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(56,21): info CRR0044: The 'hSByteReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(95,19): info CRR0047: Move the 'ReadBufferMode' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(95,19): info CRR0048: Adjust the 'ReadBufferMode' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Input\MouseCursor.SDL.cs(45,57): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(57,21): info CRR0045: The 'hDateTimeReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(57,21): info CRR0044: The 'hDateTimeReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(96,19): info CRR0047: Move the 'ALSource3f' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(96,19): info CRR0048: Adjust the 'ALSource3f' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\WaveBank.cs(57,9): info CRR0026: The 'Flag_EntryNames' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenALSoundController.cs(69,46): info CRR0046: Remove the '_instance' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(58,21): info CRR0045: The 'hDecimalReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(58,21): info CRR0044: The 'hDecimalReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(100,19): info CRR0047: Move the 'DrawBufferMode' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(100,19): info CRR0048: Adjust the 'DrawBufferMode' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\SoundBank.cs(53,21): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\TitleContainer.cs(63,46): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(102,19): info CRR0047: Move the 'ALDistanceModel' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(102,19): info CRR0048: Adjust the 'ALDistanceModel' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenALSoundController.cs(70,41): info CRR0046: Remove the '_efx' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(59,21): info CRR0045: The 'hBoundingSphereReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(59,21): info CRR0044: The 'hBoundingSphereReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(59,21): info CRR0045: The 'unknown' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(59,21): info CRR0044: The 'unknown' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(105,19): info CRR0047: Move the 'FramebufferErrorCode' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(105,19): info CRR0048: Adjust the 'FramebufferErrorCode' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\FileHelpers.cs(50,31): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(60,21): info CRR0045: The 'hBoundingFrustumReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(60,21): info CRR0044: The 'hBoundingFrustumReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\WaveBank.cs(59,9): info CRR0026: The 'Flag_SyncDisabled' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(108,19): info CRR0047: Move the 'AlcError' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(108,19): info CRR0048: Adjust the 'AlcError' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Input\MouseCursor.SDL.cs(49,57): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\Microphone.OpenAL.cs(71,21): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(61,21): info CRR0045: The 'hRayReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(61,21): info CRR0044: The 'hRayReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\TitleContainer.cs(68,31): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(113,19): info CRR0047: Move the 'AlcGetString' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(113,19): info CRR0048: Adjust the 'AlcGetString' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\WaveBank.cs(60,9): info CRR0026: The 'Flag_SeekTables' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\AudioLoader.cs(55,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(62,21): info CRR0045: The 'hCharListReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(62,21): info CRR0044: The 'hCharListReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(63,21): info CRR0045: The 'hRectangleListReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(63,21): info CRR0044: The 'hRectangleListReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\WaveBank.cs(61,9): info CRR0026: The 'Flag_Mask' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OALSoundBuffer.cs(70,32): info CRR0020: The expression contains a divide-by-integral operation that may produce unexpected results (casting from int type to double type)
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OALSoundBuffer.cs(70,49): info CRR0020: The expression contains a divide-by-integral operation that may produce unexpected results (casting from int type to double type)
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(64,21): info CRR0045: The 'hRectangleArrayReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(64,21): info CRR0044: The 'hRectangleArrayReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(120,19): info CRR0047: Move the 'AlcGetInteger' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(120,19): info CRR0048: Adjust the 'AlcGetInteger' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(64,41): info CRR0042: The 'level' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(64,52): info CRR0042: The 'left' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(64,62): info CRR0042: The 'top' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(64,71): info CRR0042: The 'right' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(65,21): info CRR0045: The 'hVector3ListReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(65,21): info CRR0044: The 'hVector3ListReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(64,82): info CRR0042: The 'bottom' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(64,94): info CRR0042: The 'front' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(125,19): info CRR0047: Move the 'EfxFilteri' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(125,19): info CRR0048: Adjust the 'EfxFilteri' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(64,105): info CRR0042: The 'back' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(64,115): info CRR0042: The 'data' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(64,125): info CRR0042: The 'startIndex' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\JoystickCapabilities.cs(58,16): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(73,25): info CRR0045: The 'playRelease' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(73,25): info CRR0044: The 'playRelease' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture3D.OpenGL.cs(64,141): info CRR0042: The 'elementCount' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(66,21): info CRR0045: The 'hStringListReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(66,21): info CRR0044: The 'hStringListReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(130,19): info CRR0047: Move the 'EfxFilterf' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(130,19): info CRR0048: Adjust the 'EfxFilterf' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(74,25): info CRR0045: The 'panEnabled' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(74,25): info CRR0044: The 'panEnabled' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(67,9): info CRR0045: The 'hIntListReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(67,9): info CRR0044: The 'hIntListReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(75,25): info CRR0045: The 'useCenterSpeaker' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(75,25): info CRR0044: The 'useCenterSpeaker' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(68,21): info CRR0045: The 'hSpriteFontReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(68,21): info CRR0044: The 'hSpriteFontReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(69,21): info CRR0045: The 'hTexture2DReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(69,21): info CRR0044: The 'hTexture2DReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngWriter.cs(81,40): info CRR0042: The 'texture2D' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(70,21): info CRR0045: The 'hCharReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(70,21): info CRR0044: The 'hCharReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(71,21): info CRR0045: The 'hRectangleReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(71,21): info CRR0044: The 'hRectangleReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(141,19): info CRR0047: Move the 'EfxFilterType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(141,19): info CRR0048: Adjust the 'EfxFilterType' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(72,21): info CRR0045: The 'hStringReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(72,21): info CRR0044: The 'hStringReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(80,25): info CRR0045: The 'panAngle' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(80,25): info CRR0044: The 'panAngle' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\EffectMaterialReader.cs(74,23): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(73,21): info CRR0045: The 'hVector2Reader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(73,21): info CRR0044: The 'hVector2Reader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Media\Song.cs(119,38): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Inflate.cs(68,18): info CRR0047: Move the 'InflateBlocks' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Inflate.cs(68,18): info CRR0048: Adjust the 'InflateBlocks' type name in accordance with the 'Inflate' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(81,25): info CRR0045: The 'panArc' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(81,25): info CRR0044: The 'panArc' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(149,19): info CRR0047: Move the 'EfxEffecti' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(149,19): info CRR0048: Adjust the 'EfxEffecti' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(74,21): info CRR0045: The 'hVector3Reader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(74,21): info CRR0044: The 'hVector3Reader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\InfTree.cs(74,17): info CRR0026: The 'Z_STREAM_END' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(127,19): info CRR0047: Move the 'BufferTarget' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(127,19): info CRR0048: Adjust the 'BufferTarget' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(75,21): info CRR0045: The 'hVector4Reader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(75,21): info CRR0044: The 'hVector4Reader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\InfTree.cs(75,17): info CRR0026: The 'Z_NEED_DICT' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(155,19): info CRR0047: Move the 'EfxEffectSlotf' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(155,19): info CRR0048: Adjust the 'EfxEffectSlotf' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(76,21): info CRR0045: The 'hCurveReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(76,21): info CRR0044: The 'hCurveReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\InfTree.cs(76,17): info CRR0026: The 'Z_ERRNO' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(133,19): info CRR0047: Move the 'RenderbufferTarget' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(133,19): info CRR0048: Adjust the 'RenderbufferTarget' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Deflate.cs(75,19): info CRR0047: Move the 'BlockState' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Deflate.cs(75,19): info CRR0048: Adjust the 'BlockState' type name in accordance with the 'Deflate' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(77,21): info CRR0045: The 'hIndexBufferReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(77,21): info CRR0044: The 'hIndexBufferReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(160,19): info CRR0047: Move the 'EfxEffectf' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(160,19): info CRR0048: Adjust the 'EfxEffectf' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\InfTree.cs(77,17): info CRR0026: The 'Z_STREAM_ERROR' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Media\MediaPlayer.Default.cs(137,26): info CRR0045: The 'song' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Media\MediaPlayer.Default.cs(137,26): info CRR0044: The 'song' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\Huffman.cs(91,11): info CRR0047: Move the 'HuffmanListNode' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(78,21): info CRR0045: The 'hBoundingBoxReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(78,21): info CRR0044: The 'hBoundingBoxReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(139,19): info CRR0047: Move the 'FramebufferTarget' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(139,19): info CRR0048: Adjust the 'FramebufferTarget' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Microphone.cs(109,41): info CRR0046: Remove the '_allMicrophones' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\StbImageWriteSharp\src\StbImageWriteSharp\ImageWriter.cs(152,17): info CRR0045: The 'b' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\StbImageWriteSharp\src\StbImageWriteSharp\ImageWriter.cs(152,17): info CRR0044: The 'b' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(79,21): info CRR0045: The 'hMatrixReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(79,21): info CRR0044: The 'hMatrixReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDLGameWindow.cs(113,79): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(80,21): info CRR0045: The 'hBasicEffectReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(80,21): info CRR0044: The 'hBasicEffectReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\InfTree.cs(81,17): info CRR0026: The 'Z_VERSION_ERROR' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\DisplayMode.cs(121,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(81,21): info CRR0045: The 'hVertexBufferReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(81,21): info CRR0044: The 'hVertexBufferReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(146,19): info CRR0047: Move the 'RenderbufferStorage' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(146,19): info CRR0048: Adjust the 'RenderbufferStorage' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(82,21): info CRR0045: The 'hAlphaTestEffectReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(82,21): info CRR0044: The 'hAlphaTestEffectReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Deflate.cs(83,19): info CRR0047: Move the 'DeflateFlavor' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Deflate.cs(83,19): info CRR0048: Adjust the 'DeflateFlavor' type name in accordance with the 'Deflate' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(83,21): info CRR0045: The 'hEnumSpriteEffectsReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(83,21): info CRR0044: The 'hEnumSpriteEffectsReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsDevice.OpenGL.cs(114,31): info CRR0046: Remove the '_shaderProgram' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Deflate.cs(90,27): info CRR0047: Move the 'DeflateManager' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Deflate.cs(90,27): info CRR0048: Adjust the 'DeflateManager' type name in accordance with the 'Deflate' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(84,21): info CRR0045: The 'hArrayFloatReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(84,21): info CRR0044: The 'hArrayFloatReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(85,21): info CRR0045: The 'hArrayVector2Reader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(85,21): info CRR0044: The 'hArrayVector2Reader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(158,19): info CRR0047: Move the 'EnableCap' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(158,19): info CRR0048: Adjust the 'EnableCap' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(86,21): info CRR0045: The 'hListVector2Reader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(86,21): info CRR0044: The 'hListVector2Reader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Microphone.cs(125,35): info CRR0046: Remove the '_default' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(87,21): info CRR0045: The 'hArrayMatrixReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(87,21): info CRR0044: The 'hArrayMatrixReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\AudioEngine.cs(102,37): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(109,25): info CRR0045: The 'playRelease' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(109,25): info CRR0044: The 'playRelease' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(88,21): info CRR0045: The 'hEnumBlendReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(88,21): info CRR0044: The 'hEnumBlendReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\DxtUtil.cs(75,89): info CRR0042: The 'blockCountX' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\RenderTargetCube.cs(83,16): info CRR0045: The 'selectedDepthFormat' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(110,25): info CRR0045: The 'panEnabled' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(110,25): info CRR0044: The 'panEnabled' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\GamePadTriggers.cs(86,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\StbImageWriteSharp\src\StbImageWriteSharp\StbImageWrite.cs(173,14): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(89,21): info CRR0045: The 'hNullableRectReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(89,21): info CRR0044: The 'hNullableRectReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsDevice.OpenGL.cs(125,22): info CRR0046: Remove the 'glMajorVersion' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\RenderTargetCube.cs(84,8): info CRR0045: The 'selectedMultiSampleCount' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(111,25): info CRR0045: The 'useCenterSpeaker' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(111,25): info CRR0044: The 'useCenterSpeaker' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsDevice.OpenGL.cs(126,22): info CRR0046: Remove the 'glMinorVersion' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(90,9): info CRR0045: The 'hEffectMaterialReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(90,9): info CRR0044: The 'hEffectMaterialReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(187,19): info CRR0047: Move the 'EfxEffectType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(187,19): info CRR0048: Adjust the 'EfxEffectType' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsDevice.OpenGL.cs(127,22): info CRR0046: Remove the 'glFramebuffer' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngReader.cs(137,21): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(91,9): info CRR0045: The 'hExternalReferenceReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(91,9): info CRR0044: The 'hExternalReferenceReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(192,20): info CRR0047: Move the 'AL' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(192,20): info CRR0048: Adjust the 'AL' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\GraphicsCapabilities.cs(109,9): info CRR0026: The 'MultiSampleCountLimit' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsDevice.OpenGL.cs(129,22): info CRR0046: Remove the '_maxTextureSize' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\GraphicsDevice.cs(110,9): info CRR0026: The 'VertexShaderDirty' property is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(114,25): info CRR0045: The 'panAngle' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(114,25): info CRR0044: The 'panAngle' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(92,21): info CRR0045: The 'hSoundEffectReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(92,21): info CRR0044: The 'hSoundEffectReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(115,25): info CRR0045: The 'panArc' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(115,25): info CRR0044: The 'panArc' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(93,21): info CRR0045: The 'hSongReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(93,21): info CRR0044: The 'hSongReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsDevice.OpenGL.cs(132,23): info CRR0046: Remove the '_lastBlendEnable' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(94,21): info CRR0045: The 'hModelReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(94,21): info CRR0044: The 'hModelReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\VorbisCodebook.cs(131,44): info CRR0042: The 'sortedEntries' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(103,17): info CRR0047: Move the 'FlushType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(103,17): info CRR0048: Adjust the 'FlushType' type name in accordance with the 'Zlib' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(95,21): info CRR0045: The 'hInt32Reader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(95,21): info CRR0044: The 'hInt32Reader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(181,20): info CRR0047: Move the 'HeaderChunk' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(181,20): info CRR0048: Adjust the 'HeaderChunk' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(96,21): info CRR0045: The 'hEffectReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(96,21): info CRR0044: The 'hEffectReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\GraphicsDevice.cs(120,9): info CRR0026: The 'PixelShaderDirty' property is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\VorbisFloor.cs(113,53): info CRR0020: The expression contains a divide-by-integral operation that may produce unexpected results (casting from int type to double type)
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(97,21): info CRR0045: The 'hSingleReader' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(97,21): info CRR0044: The 'hSingleReader' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(189,19): info CRR0047: Move the 'VertexPointerType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(189,19): info CRR0048: Adjust the 'VertexPointerType' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsDevice.OpenGL.cs(138,21): info CRR0046: Remove the '_lastClearStencil' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\GraphicsResource.cs(96,17): info CRR0009: Subsequent if-statements have identical conditions
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Vertices\VertexElement.cs(116,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(195,19): info CRR0047: Move the 'VertexAttribPointerType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(195,19): info CRR0048: Adjust the 'VertexAttribPointerType' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\TextureCube.OpenGL.cs(98,119): info CRR0042: The 'elementCount' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(203,19): info CRR0047: Move the 'CullFaceMode' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(203,19): info CRR0048: Adjust the 'CullFaceMode' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(209,19): info CRR0047: Move the 'FrontFaceDirection' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(209,19): info CRR0048: Adjust the 'FrontFaceDirection' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\AudioLoader.cs(108,17): info CRR0050: Use a string.Compare() call instead of the '!=' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\JoystickHat.cs(101,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(215,19): info CRR0047: Move the 'MaterialFace' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(215,19): info CRR0048: Adjust the 'MaterialFace' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\JoystickState.cs(111,24): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\JoystickCapabilities.cs(104,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(220,19): info CRR0047: Move the 'PolygonMode' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(220,19): info CRR0048: Adjust the 'PolygonMode' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\AudioLoader.cs(113,17): info CRR0050: Use a string.Compare() call instead of the '!=' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(226,19): info CRR0047: Move the 'ColorPointerType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(226,19): info CRR0048: Adjust the 'ColorPointerType' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\JoystickState.cs(117,32): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibBaseStream.cs(156,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(235,19): info CRR0047: Move the 'NormalPointerType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(235,19): info CRR0048: Adjust the 'NormalPointerType' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReaders\ReflectiveReader.cs(152,52): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\GamePadDPad.cs(117,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\Cue.cs(183,21): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Game.cs(161,27): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Effect\EffectParameter.cs(152,38): info CRR0045: The 'e' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Effect\EffectParameter.cs(152,38): info CRR0044: The 'e' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\JoystickState.cs(126,32): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(245,19): info CRR0047: Move the 'TexCoordPointerType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(245,19): info CRR0048: Adjust the 'TexCoordPointerType' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture2D.OpenGL.cs(140,52): info CRR0042: The 'arraySlice' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Game.cs(173,29): info CRR0046: Remove the '_instance' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(255,19): info CRR0047: Move the 'BlendEquationMode' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(255,19): info CRR0048: Adjust the 'BlendEquationMode' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(252,37): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\TextureCube.cs(134,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\TextureCube.cs(134,59): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\SoundEffectInstance.OpenAL.cs(168,35): info CRR0042: The 'immediate' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(264,19): info CRR0047: Move the 'BlendingFactorSrc' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(264,19): info CRR0048: Adjust the 'BlendingFactorSrc' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(143,17): info CRR0047: Move the 'CompressionLevel' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(143,17): info CRR0048: Adjust the 'CompressionLevel' type name in accordance with the 'Zlib' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\AudioLoader.cs(137,33): info CRR0045: The 'byteRate' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\AudioLoader.cs(137,33): info CRR0044: The 'byteRate' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(172,25): info CRR0045: The 'playRelease' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(172,25): info CRR0044: The 'playRelease' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(173,25): info CRR0045: The 'panEnabled' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(173,25): info CRR0044: The 'panEnabled' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(174,25): info CRR0045: The 'useCenterSpeaker' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(174,25): info CRR0044: The 'useCenterSpeaker' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibBaseStream.cs(191,39): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(283,19): info CRR0047: Move the 'BlendingFactorDest' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(283,19): info CRR0048: Adjust the 'BlendingFactorDest' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibBaseStream.cs(193,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(274,20): info CRR0047: Move the 'PaletteChunk' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(274,20): info CRR0048: Adjust the 'PaletteChunk' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(179,25): info CRR0045: The 'panAngle' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(179,25): info CRR0044: The 'panAngle' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibBaseStream.cs(195,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(180,25): info CRR0045: The 'panArc' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(180,25): info CRR0044: The 'panArc' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Deflate.cs(180,37): info CRR0046: Remove the 'STORED_BLOCK' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Deflate.cs(185,37): info CRR0046: Remove the 'Z_BINARY' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(302,19): info CRR0047: Move the 'DepthFunction' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(302,19): info CRR0048: Adjust the 'DepthFunction' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Point.cs(208,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\DxtUtil.cs(189,89): info CRR0042: The 'blockCountX' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Texture3D.cs(159,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Texture3D.cs(159,59): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentManager.cs(211,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(314,19): info CRR0047: Move the 'GetPName' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(314,19): info CRR0048: Adjust the 'GetPName' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Texture2D.cs(191,23): info CRR0045: The 'checkedRect' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(156,41): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(326,19): info CRR0047: Move the 'StringName' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(326,19): info CRR0048: Adjust the 'StringName' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentReader.cs(252,60): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(309,20): info CRR0047: Move the 'TransparencyChunk' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(309,20): info CRR0048: Adjust the 'TransparencyChunk' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\AudioEngine.cs(187,77): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(332,19): info CRR0047: Move the 'FramebufferAttachment' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(332,19): info CRR0048: Adjust the 'FramebufferAttachment' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\AudioEngine.cs(192,74): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDLGameWindow.cs(242,17): info CRR0045: The 'ignore' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Texture2D.cs(203,23): info CRR0045: The 'checkedRect' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\GamePadButtons.cs(205,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(343,19): info CRR0047: Move the 'GLPrimitiveType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(343,19): info CRR0048: Adjust the 'GLPrimitiveType' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\GamePadThumbSticks.cs(189,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(352,19): info CRR0047: Move the 'ClearBufferMask' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(352,19): info CRR0048: Adjust the 'ClearBufferMask' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture2D.OpenGL.cs(195,52): info CRR0042: The 'arraySlice' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(169,37): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture2D.OpenGL.cs(195,110): info CRR0042: The 'elementCount' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(342,20): info CRR0047: Move the 'DataChunk' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(342,20): info CRR0048: Adjust the 'DataChunk' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(359,19): info CRR0047: Move the 'ErrorCode' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(359,19): info CRR0048: Adjust the 'ErrorCode' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(222,17): info CRR0047: Move the 'CompressionStrategy' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(222,17): info CRR0048: Adjust the 'CompressionStrategy' type name in accordance with the 'Zlib' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Ray.cs(267,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(364,19): info CRR0047: Move the 'TextureUnit' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(364,19): info CRR0048: Adjust the 'TextureUnit' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(350,20): info CRR0047: Move the 'EndChunk' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(350,20): info CRR0048: Adjust the 'EndChunk' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(369,19): info CRR0047: Move the 'TextureTarget' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(369,19): info CRR0048: Adjust the 'TextureTarget' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Viewport.cs(265,17): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\GraphicsDevice.cs(234,61): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(362,19): info CRR0047: Move the 'ColorType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(362,19): info CRR0048: Adjust the 'ColorType' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\GraphicsDeviceManager.cs(253,60): info CRR0042: The 'presentationParameters' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(371,19): info CRR0047: Move the 'FilterType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(371,19): info CRR0048: Adjust the 'FilterType' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(382,19): info CRR0047: Move the 'PixelInternalFormat' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(382,19): info CRR0048: Adjust the 'PixelInternalFormat' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OggStream.cs(278,25): info CRR0045: The 'salvaged' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentManager.cs(265,33): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(384,27): info CRR0047: Move the 'NoneFilter' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(384,27): info CRR0048: Adjust the 'NoneFilter' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\GamePadCapabilities.cs(195,20): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(242,25): info CRR0045: The 'playRelease' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(242,25): info CRR0044: The 'playRelease' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\GamePadCapabilities.cs(196,20): info CRR0050: Use a string.Compare() call instead of the '==' operator
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(243,25): info CRR0045: The 'panEnabled' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(243,25): info CRR0044: The 'panEnabled' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\WaveBank.cs(234,29): info CRR0045: The 'flagsAndDuration' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\WaveBank.cs(234,29): info CRR0044: The 'flagsAndDuration' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(244,25): info CRR0045: The 'useCenterSpeaker' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(244,25): info CRR0044: The 'useCenterSpeaker' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(249,17): info CRR0047: Move the 'CompressionMode' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(249,17): info CRR0048: Adjust the 'CompressionMode' type name in accordance with the 'Zlib' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(402,27): info CRR0047: Move the 'SubFilter' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(402,27): info CRR0048: Adjust the 'SubFilter' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibBaseStream.cs(256,57): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(247,25): info CRR0045: The 'panAngle' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(247,25): info CRR0044: The 'panAngle' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(248,25): info CRR0045: The 'panArc' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(248,25): info CRR0044: The 'panArc' local variable is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibBaseStream.cs(257,71): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\AudioLoader.cs(218,56): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Plane.cs(294,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\Touch\TouchLocation.cs(278,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(266,18): info CRR0047: Move the 'ZlibException' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(266,18): info CRR0048: Adjust the 'ZlibException' type name in accordance with the 'Zlib' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(421,19): info CRR0047: Move the 'PixelFormat' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(421,19): info CRR0048: Adjust the 'PixelFormat' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OggStream.cs(320,20): info CRR0047: Move the 'OggStreamer' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(431,19): info CRR0047: Move the 'PixelType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(431,19): info CRR0048: Adjust the 'PixelType' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\GraphicsDevice.cs(262,61): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibBaseStream.cs(271,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(224,78): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\VorbisStreamDecoder.cs(341,23): info CRR0046: Remove the '_clipped' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(225,84): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(435,27): info CRR0047: Move the 'UpFilter' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(435,27): info CRR0048: Adjust the 'UpFilter' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\States\SamplerState.OpenGL.cs(196,37): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibBaseStream.cs(274,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(288,20): info CRR0047: Move the 'SharedUtils' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(288,20): info CRR0048: Adjust the 'SharedUtils' type name in accordance with the 'Zlib' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentTypeReaderManager.cs(226,78): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(445,19): info CRR0047: Move the 'PixelStoreParameter' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(445,19): info CRR0048: Adjust the 'PixelStoreParameter' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(451,19): info CRR0047: Move the 'GLStencilFunction' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(451,19): info CRR0048: Adjust the 'GLStencilFunction' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\Ogg\OggContainerReader.cs(322,29): info CRR0001: Binary operation contains identical sub-expressions
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\GamePadState.cs(218,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(463,19): info CRR0047: Move the 'StencilOp' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(463,19): info CRR0048: Adjust the 'StencilOp' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\SoundBank.cs(228,41): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(475,19): info CRR0047: Move the 'TextureParameterName' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(475,19): info CRR0048: Adjust the 'TextureParameterName' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\DataPacket.cs(363,17): info CRR0045: The 'temp' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\DxtUtil.cs(337,89): info CRR0042: The 'blockCountX' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(468,27): info CRR0047: Move the 'AverageFilter' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(468,27): info CRR0048: Adjust the 'AverageFilter' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDL2.cs(338,13): info CRR0026: The 'padding1' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDL2.cs(339,13): info CRR0026: The 'padding2' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\SoundEffect.OpenAL.cs(227,38): info CRR0042: The 'disposing' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDL2.cs(340,13): info CRR0026: The 'padding3' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\InfTree.cs(110,32): info CRR0046: Remove the 'hn' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\InfTree.cs(111,32): info CRR0046: Remove the 'v' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\ContentManager.cs(339,36): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\ThirdParty\NVorbis\NVorbis\DataPacket.cs(377,17): info CRR0045: The 'temp' local variable is never used and can be replaced with a discard
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\InfTree.cs(112,32): info CRR0046: Remove the 'c' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(491,19): info CRR0047: Move the 'Bool' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(491,19): info CRR0048: Adjust the 'Bool' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\InfTree.cs(113,32): info CRR0046: Remove the 'r' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(497,19): info CRR0047: Move the 'TextureMinFilter' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(497,19): info CRR0048: Adjust the 'TextureMinFilter' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\InfTree.cs(114,32): info CRR0046: Remove the 'u' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Vertices\VertexBuffer.cs(212,55): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\InfTree.cs(115,32): info CRR0046: Remove the 'x' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(507,19): info CRR0047: Move the 'TextureMagFilter' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(507,19): info CRR0048: Adjust the 'TextureMagFilter' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(513,19): info CRR0047: Move the 'TextureCompareMode' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(513,19): info CRR0048: Adjust the 'TextureCompareMode' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\SoundEffectInstance.OpenAL.cs(356,38): info CRR0042: The 'disposing' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(519,19): info CRR0047: Move the 'TextureWrapMode' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(519,19): info CRR0048: Adjust the 'TextureWrapMode' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibBaseStream.cs(347,22): info CRR0046: Remove the 'nomoreinput' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(528,28): info CRR0047: Move the 'ColorFormat' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(528,28): info CRR0048: Adjust the 'ColorFormat' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(508,27): info CRR0047: Move the 'PaethFilter' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(508,27): info CRR0048: Adjust the 'PaethFilter' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(544,28): info CRR0047: Move the 'GL' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\OpenGL.cs(544,28): info CRR0048: Adjust the 'GL' type name in accordance with the 'OpenGL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\SpriteFont.cs(386,24): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Game.cs(416,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(359,27): info CRR0047: Move the 'InternalConstants' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(359,27): info CRR0048: Adjust the 'InternalConstants' type name in accordance with the 'Zlib' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Input\GamePadCapabilities.cs(266,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(382,27): info CRR0047: Move the 'StaticTree' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(382,27): info CRR0048: Adjust the 'StaticTree' type name in accordance with the 'Zlib' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Audio\Xact\XactClip.cs(369,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(571,27): info CRR0047: Move the 'PngCrc' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(571,27): info CRR0048: Adjust the 'PngCrc' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(574,31): info CRR0046: Remove the 'crcTable' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\Texture2D.OpenGL.cs(360,44): info CRR0042: The 'stream' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Texture2D.cs(350,9): info CRR0026: The 'ConvertToABGR' method is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\DeflateStream.cs(359,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibStream.cs(368,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(630,27): info CRR0047: Move the 'Extensions' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Png\PngCommon.cs(630,27): info CRR0048: Adjust the 'Extensions' type name in accordance with the 'PngCommon' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\CRC32.cs(493,18): info CRR0047: Move the 'CrcCalculatorStream' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibBaseStream.cs(487,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(430,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(468,25): info CRR0047: Move the 'Adler' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Zlib.cs(468,25): info CRR0048: Adjust the 'Adler' type name in accordance with the 'Zlib' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibBaseStream.cs(516,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Texture2D.cs(422,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\Texture2D.cs(422,59): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\BoundingBox.cs(569,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(552,28): info CRR0047: Move the 'Alc' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(552,28): info CRR0048: Adjust the 'Alc' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Rectangle.cs(490,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\BoundingFrustum.cs(487,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\BoundingSphere.cs(570,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\LzxDecoder.cs(749,9): info CRR0047: Move the 'LzxConstants' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Content\LzxDecoder.cs(777,8): info CRR0047: Move the 'UnsupportedWindowSizeRange' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\GZipStream.cs(585,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDL2.cs(660,13): info CRR0026: The '_padding1' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDL2.cs(661,13): info CRR0026: The '_padding2' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDL2.cs(662,13): info CRR0026: The '_padding3' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(667,20): info CRR0047: Move the 'XRamExtension' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(667,20): info CRR0048: Adjust the 'XRamExtension' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\GraphicsExtensions.cs(727,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\ZlibCodec.cs(668,41): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(731,20): info CRR0047: Move the 'EffectsExtension' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(731,20): info CRR0048: Adjust the 'EffectsExtension' type name in accordance with the 'OpenAL' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Inflate.cs(738,27): info CRR0047: Move the 'InternalInflateConstants' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Inflate.cs(738,27): info CRR0048: Adjust the 'InternalInflateConstants' type name in accordance with the 'Inflate' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDL2.cs(764,13): info CRR0026: The 'padding2' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\SDL\SDL2.cs(765,13): info CRR0026: The 'padding3' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Inflate.cs(749,18): info CRR0047: Move the 'InflateCodes' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Inflate.cs(749,18): info CRR0048: Adjust the 'InflateCodes' type name in accordance with the 'Inflate' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Inflate.cs(771,22): info CRR0046: Remove the 'tree_index' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(789,27): info CRR0047: Move the 'ZlibConstants' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\GraphicsExtensions.cs(915,47): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\GraphicsExtensions.cs(933,33): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\GraphicsExtensions.cs(940,20): info CRR0047: Move the 'MonoGameGLException' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(856,27): info CRR0047: Move the 'ZlibCodec' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(856,33): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(867,33): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Audio\OpenAL.cs(873,33): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Quaternion.cs(1004,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Vector2.cs(978,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsDevice.OpenGL.cs(1112,122): info CRR0042: The 'numVertices' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsDevice.OpenGL.cs(1145,122): info CRR0042: The 'numVertices' parameter is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsDevice.OpenGL.cs(1265,9): info CRR0026: The 'GetModeSwitchedSize' method is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Platform\Graphics\GraphicsDevice.OpenGL.cs(1281,9): info CRR0026: The 'GetDisplayResolution' method is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Inflate.cs(1405,27): info CRR0047: Move the 'InflateManager' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Inflate.cs(1405,27): info CRR0048: Adjust the 'InflateManager' type name in accordance with the 'Inflate' file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Vector4.cs(1246,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1442,41): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\GraphicsDevice.cs(1404,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Graphics\GraphicsDevice.cs(1404,59): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Deflate.cs(1481,24): info CRR0001: Binary operation contains identical sub-expressions
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1487,19): info CRR0047: Move the 'ZlibStreamFlavor' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1489,20): info CRR0047: Move the 'ZlibBaseStream' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1491,38): info CRR0046: Remove the '_z' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Deflate.cs(1511,22): info CRR0046: Remove the 'Rfc1950BytesEmitted' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Inflate.cs(1540,46): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Deflate.cs(1545,41): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Inflate.cs(1547,46): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Inflate.cs(1547,89): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1608,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1625,9): info CRR0026: The 'finish' method is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1643,39): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1645,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1647,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Deflate.cs(1716,41): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1708,57): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\Deflate\Inflate.cs(1690,49): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1709,71): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1723,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1726,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1738,9): info CRR0026: The 'end' method is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1781,22): info CRR0046: Remove the 'nomoreinput' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1921,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(1950,53): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2068,17): info CRR0047: Move the 'FlushType' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2108,17): info CRR0047: Move the 'CompressionLevel' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2187,19): info CRR0047: Move the 'CompressionStrategy' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2214,17): info CRR0047: Move the 'CompressionMode' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2230,20): info CRR0047: Move the 'ZlibException' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2252,20): info CRR0047: Move the 'SharedUtils' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2323,27): info CRR0047: Move the 'InternalConstants' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2346,27): info CRR0047: Move the 'StaticTree' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2432,27): info CRR0047: Move the 'Adler' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2510,18): info CRR0047: Move the 'Tree' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Matrix.cs(2383,20): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Matrix.cs(2440,9): info CRR0026: The 'FindDeterminants' method is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2867,18): info CRR0047: Move the 'InfTree' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2873,9): info CRR0026: The 'Z_STREAM_END' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2874,9): info CRR0026: The 'Z_NEED_DICT' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2875,9): info CRR0026: The 'Z_ERRNO' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2876,9): info CRR0026: The 'Z_STREAM_ERROR' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2880,9): info CRR0026: The 'Z_VERSION_ERROR' field is never used and can be deleted
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2909,24): info CRR0046: Remove the 'hn' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2910,24): info CRR0046: Remove the 'v' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2911,24): info CRR0046: Remove the 'c' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2912,24): info CRR0046: Remove the 'r' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2913,24): info CRR0046: Remove the 'u' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(2914,24): info CRR0046: Remove the 'x' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(3236,18): info CRR0047: Move the 'InflateBlocks' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(3905,27): info CRR0047: Move the 'InternalInflateConstants' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(3916,18): info CRR0047: Move the 'InflateCodes' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(3938,22): info CRR0046: Remove the 'tree_index' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(4572,27): info CRR0047: Move the 'InflateManager' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(4707,46): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(4714,46): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(4714,89): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(4857,49): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(5005,20): info CRR0047: Move the 'GZipStream' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(5507,45): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(5951,19): info CRR0047: Move the 'BlockState' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(5959,19): info CRR0047: Move the 'DeflateFlavor' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(5966,27): info CRR0047: Move the 'DeflateManager' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(6056,37): info CRR0046: Remove the 'STORED_BLOCK' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(6061,37): info CRR0046: Remove the 'Z_BINARY' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(7357,24): info CRR0001: Binary operation contains identical sub-expressions
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(7387,22): info CRR0046: Remove the 'Rfc1950BytesEmitted' field redundant initialization to improve code readability
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(7421,41): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(7592,41): info CRR0052: Convert an expression into string interpolation
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(7767,20): info CRR0047: Move the 'CRC32' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(8218,20): info CRR0047: Move the 'CrcCalculatorStream' type to a separate file
+C:\Users\slaterweinstock\Documents\CS581_MonoGame_Addons\MonoGame.Framework\Utilities\ZLibStream\ZlibStream.cs(8528,20): info CRR0047: Move the 'Iso88591Encoding' type to a separate file
