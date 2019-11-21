@@ -8,9 +8,7 @@ namespace Microsoft.Xna.Framework.Content
 {
     internal class DateTimeReader : ContentTypeReader<DateTime>
     {
-        public DateTimeReader()
-        {
-        }
+        public DateTimeReader() { }
 
         protected internal override DateTime Read(ContentReader input, DateTime existingInstance)
         {

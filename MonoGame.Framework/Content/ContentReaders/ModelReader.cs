@@ -15,31 +15,27 @@ namespace Microsoft.Xna.Framework.Content
         //      List<Effect> effects = new List<Effect>();
         //      List<GraphicsResource> sharedResources = new List<GraphicsResource>();
 
-        public ModelReader()
-        {
-        }
+        public ModelReader() { }
 
         static int ReadBoneReference(ContentReader reader, uint boneCount)
         {
             uint boneId;
 
             // Read the bone ID, which may be encoded as either an 8 or 32 bit value.
-            if (boneCount < 255)
+            if(boneCount < 255)
             {
                 boneId = reader.ReadByte();
-            }
-            else
+            } else
             {
                 boneId = reader.ReadUInt32();
             }
 
             // Print out the bone ID.
-            if (boneId != 0)
+            if(boneId != 0)
             {
                 //Debug.WriteLine("bone #{0}", boneId - 1);
                 return (int)(boneId - 1);
-            }
-            else
+            } else
             {
                 //Debug.WriteLine("null");
             }
@@ -55,7 +51,7 @@ namespace Microsoft.Xna.Framework.Content
 
             List<ModelBone> bones = new List<ModelBone>((int)boneCount);
 
-            for (uint i = 0; i < boneCount; i++)
+            for(uint i = 0; i < boneCount; i++)
             {
                 string name = reader.ReadObject<string>();
                 var matrix = reader.ReadMatrix();
@@ -64,7 +60,7 @@ namespace Microsoft.Xna.Framework.Content
             }
 
             // Read the bone hierarchy.
-            for (int i = 0; i < boneCount; i++)
+            for(int i = 0; i < boneCount; i++)
             {
                 var bone = bones[i];
 
@@ -74,7 +70,7 @@ namespace Microsoft.Xna.Framework.Content
                 //Debug.WriteLine("Parent: ");
                 var parentIndex = ReadBoneReference(reader, boneCount);
 
-                if (parentIndex != -1)
+                if(parentIndex != -1)
                 {
                     bone.Parent = bones[parentIndex];
                 }
@@ -82,14 +78,14 @@ namespace Microsoft.Xna.Framework.Content
                 // Read the child bone references.
                 uint childCount = reader.ReadUInt32();
 
-                if (childCount != 0)
+                if(childCount != 0)
                 {
                     //Debug.WriteLine("Children:");
 
-                    for (uint j = 0; j < childCount; j++)
+                    for(uint j = 0; j < childCount; j++)
                     {
                         var childIndex = ReadBoneReference(reader, boneCount);
-                        if (childIndex != -1)
+                        if(childIndex != -1)
                         {
                             bone.AddChild(bones[childIndex]);
                         }
@@ -103,9 +99,8 @@ namespace Microsoft.Xna.Framework.Content
             int meshCount = reader.ReadInt32();
             //Debug.WriteLine("Mesh count: {0}", meshCount);
 
-            for (int i = 0; i < meshCount; i++)
+            for(int i = 0; i < meshCount; i++)
             {
-
                 //Debug.WriteLine("Mesh {0}", i);
                 string name = reader.ReadObject<string>();
                 var parentBoneIndex = ReadBoneReference(reader, boneCount);
@@ -120,10 +115,10 @@ namespace Microsoft.Xna.Framework.Content
 
                 List<ModelMeshPart> parts = new List<ModelMeshPart>(partCount);
 
-                for (uint j = 0; j < partCount; j++)
+                for(uint j = 0; j < partCount; j++)
                 {
                     ModelMeshPart part;
-                    if (existingInstance != null)
+                    if(existingInstance != null)
                         part = existingInstance.Meshes[i].MeshParts[(int)j];
                     else
                         part = new ModelMeshPart();
@@ -139,23 +134,21 @@ namespace Microsoft.Xna.Framework.Content
                     parts.Add(part);
 
                     int jj = (int)j;
-                    reader.ReadSharedResource<VertexBuffer>(delegate (VertexBuffer v)
+                    reader.ReadSharedResource<VertexBuffer>(delegate(VertexBuffer v)
                     {
                         parts[jj].VertexBuffer = v;
                     });
-                    reader.ReadSharedResource<IndexBuffer>(delegate (IndexBuffer v)
+                    reader.ReadSharedResource<IndexBuffer>(delegate(IndexBuffer v)
                     {
                         parts[jj].IndexBuffer = v;
                     });
-                    reader.ReadSharedResource<Effect>(delegate (Effect v)
+                    reader.ReadSharedResource<Effect>(delegate(Effect v)
                     {
                         parts[jj].Effect = v;
                     });
-
-
                 }
 
-                if (existingInstance != null)
+                if(existingInstance != null)
                     continue;
 
                 ModelMesh mesh = new ModelMesh(reader.GraphicsDevice, parts);
@@ -170,7 +163,7 @@ namespace Microsoft.Xna.Framework.Content
                 meshes.Add(mesh);
             }
 
-            if (existingInstance != null)
+            if(existingInstance != null)
             {
                 // Read past remaining data and return existing instance
                 ReadBoneReference(reader, boneCount);

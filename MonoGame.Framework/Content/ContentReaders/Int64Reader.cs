@@ -8,13 +8,8 @@ namespace Microsoft.Xna.Framework.Content
 {
     internal class Int64Reader : ContentTypeReader<long>
     {
-        public Int64Reader()
-        {
-        }
+        public Int64Reader() { }
 
-        protected internal override long Read(ContentReader input, long existingInstance)
-        {
-            return input.ReadInt64();
-        }
+        protected internal override long Read(ContentReader input, long existingInstance) { return input.ReadInt64(); }
     }
 }

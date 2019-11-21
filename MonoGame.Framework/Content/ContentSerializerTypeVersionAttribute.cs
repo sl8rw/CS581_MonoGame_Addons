@@ -16,10 +16,7 @@ namespace Microsoft.Xna.Framework.Content
         /// Creates an instance of the attribute.
         /// </summary>
         /// <param name="typeVersion">The version passed to the type at runtime.</param>
-        public ContentSerializerTypeVersionAttribute(int typeVersion)
-        {
-            TypeVersion = typeVersion;
-        }
+        public ContentSerializerTypeVersionAttribute(int typeVersion) { TypeVersion = typeVersion; }
 
         /// <summary>
         /// The version passed to the type at runtime.

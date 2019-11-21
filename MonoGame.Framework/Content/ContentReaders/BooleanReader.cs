@@ -8,13 +8,9 @@ namespace Microsoft.Xna.Framework.Content
 {
     internal class BooleanReader : ContentTypeReader<bool>
     {
-        public BooleanReader()
-        {
-        }
+        public BooleanReader() { }
 
         protected internal override bool Read(ContentReader input, bool existingInstance)
-        {
-            return input.ReadBoolean();
-        }
+        { return input.ReadBoolean(); }
     }
 }

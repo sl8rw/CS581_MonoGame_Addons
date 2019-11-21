@@ -8,13 +8,9 @@ namespace Microsoft.Xna.Framework.Content
 {
     internal class BoundingFrustumReader : ContentTypeReader<BoundingFrustum>
     {
-        public BoundingFrustumReader()
-        {
-        }
+        public BoundingFrustumReader() { }
 
         protected internal override BoundingFrustum Read(ContentReader input, BoundingFrustum existingInstance)
-        {
-            return new BoundingFrustum(input.ReadMatrix());
-        }
+        { return new BoundingFrustum(input.ReadMatrix()); }
     }
 }

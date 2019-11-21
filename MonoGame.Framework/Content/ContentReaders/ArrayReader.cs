@@ -11,9 +11,7 @@ namespace Microsoft.Xna.Framework.Content
     {
         ContentTypeReader elementReader;
 
-        public ArrayReader()
-        {
-        }
+        public ArrayReader() { }
 
         protected internal override void Initialize(ContentTypeReaderManager manager)
         {
@@ -25,19 +23,18 @@ namespace Microsoft.Xna.Framework.Content
         {
             uint count = input.ReadUInt32();
             T[] array = existingInstance;
-            if (array == null)
+            if(array == null)
                 array = new T[count];
 
-            if (ReflectionHelpers.IsValueType(typeof(T)))
+            if(ReflectionHelpers.IsValueType(typeof(T)))
             {
-                for (uint i = 0; i < count; i++)
+                for(uint i = 0; i < count; i++)
                 {
                     array[i] = input.ReadObject<T>(elementReader);
                 }
-            }
-            else
+            } else
             {
-                for (uint i = 0; i < count; i++)
+                for(uint i = 0; i < count; i++)
                 {
                     var readerType = input.Read7BitEncodedInt();
                     array[i] = readerType > 0 ? input.ReadObject<T>(input.TypeReaders[readerType - 1]) : default(T);

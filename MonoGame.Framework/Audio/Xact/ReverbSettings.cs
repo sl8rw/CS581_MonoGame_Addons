@@ -37,33 +37,53 @@ namespace Microsoft.Xna.Framework.Audio
             _parameters[21] = new DspParameter(reader); // WetDryMixPct
         }
 
-        public float this[int index]
-        {
-            get { return _parameters[index].Value; }
-            set { _parameters[index].SetValue(value); }
-        }
+        public float this[int index] { get { return _parameters[index].Value; } set
+                                                                                {
+                                                                                    _parameters[index].SetValue(value);
+                                                                                } }
 
         public float ReflectionsDelayMs { get { return _parameters[0].Value; } }
+
         public float ReverbDelayMs { get { return _parameters[1].Value; } }
+
         public float PositionLeft { get { return _parameters[2].Value; } }
+
         public float PositionRight { get { return _parameters[3].Value; } }
+
         public float PositionLeftMatrix { get { return _parameters[4].Value; } }
+
         public float PositionRightMatrix { get { return _parameters[5].Value; } }
+
         public float EarlyDiffusion { get { return _parameters[6].Value; } }
+
         public float LateDiffusion { get { return _parameters[7].Value; } }
+
         public float LowEqGain { get { return _parameters[8].Value; } }
+
         public float LowEqCutoff { get { return _parameters[9].Value; } }
+
         public float HighEqGain { get { return _parameters[10].Value; } }
+
         public float HighEqCutoff { get { return _parameters[11].Value; } }
+
         public float RearDelayMs { get { return _parameters[12].Value; } }
+
         public float RoomFilterFrequencyHz { get { return _parameters[13].Value; } }
+
         public float RoomFilterMainDb { get { return _parameters[14].Value; } }
+
         public float RoomFilterHighFrequencyDb { get { return _parameters[15].Value; } }
+
         public float ReflectionsGainDb { get { return _parameters[16].Value; } }
+
         public float ReverbGainDb { get { return _parameters[17].Value; } }
+
         public float DecayTimeSec { get { return _parameters[18].Value; } }
+
         public float DensityPct { get { return _parameters[19].Value; } }
+
         public float RoomSizeFeet { get { return _parameters[20].Value; } }
+
         public float WetDryMixPct { get { return _parameters[21].Value; } }
     }
 }

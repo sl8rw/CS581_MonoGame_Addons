@@ -6,12 +6,9 @@ using System;
 
 namespace Microsoft.Xna.Framework.Content
 {
-
     internal class RectangleReader : ContentTypeReader<Rectangle>
     {
-        public RectangleReader()
-        {
-        }
+        public RectangleReader() { }
 
         protected internal override Rectangle Read(ContentReader input, Rectangle existingInstance)
         {

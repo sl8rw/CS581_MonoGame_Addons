@@ -8,13 +8,8 @@ namespace Microsoft.Xna.Framework.Content
 {
     internal class CharReader : ContentTypeReader<char>
     {
-        public CharReader()
-        {
-        }
+        public CharReader() { }
 
-        protected internal override char Read(ContentReader input, char existingInstance)
-        {
-            return input.ReadChar();
-        }
+        protected internal override char Read(ContentReader input, char existingInstance) { return input.ReadChar(); }
     }
 }

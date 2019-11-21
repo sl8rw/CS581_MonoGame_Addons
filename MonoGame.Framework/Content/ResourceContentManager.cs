@@ -8,12 +8,11 @@ namespace Microsoft.Xna.Framework.Content
     {
         private ResourceManager resource;
 
-        public ResourceContentManager(IServiceProvider servicesProvider, ResourceManager resource)
-            : base(servicesProvider)
+        public ResourceContentManager(IServiceProvider servicesProvider, ResourceManager resource) : base(servicesProvider)
         {
-            if (resource == null)
+            if(resource == null)
             {
-                throw new ArgumentNullException("resource");
+                throw new ArgumentNullException(nameof(resource));
             }
             this.resource = resource;
         }
@@ -21,11 +20,11 @@ namespace Microsoft.Xna.Framework.Content
         protected override System.IO.Stream OpenStream(string assetName)
         {
             object obj = this.resource.GetObject(assetName);
-            if (obj == null)
+            if(obj == null)
             {
                 throw new ContentLoadException("Resource not found");
             }
-            if (!(obj is byte[]))
+            if(!(obj is byte[]))
             {
                 throw new ContentLoadException("Resource is not in binary format");
             }

@@ -15,7 +15,7 @@ namespace Microsoft.Xna.Framework.Content
         {
             var path = input.ReadString();
 
-            if (!String.IsNullOrEmpty(path))
+            if(!String.IsNullOrEmpty(path))
             {
                 // Add the ContentManager's RootDirectory
                 var dirPath = Path.Combine(input.ContentManager.RootDirectoryFullPath, input.AssetName);

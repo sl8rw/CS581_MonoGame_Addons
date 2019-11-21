@@ -14,10 +14,7 @@ namespace Microsoft.Xna.Framework.Audio
     {
         private static readonly List<WeakReference> _playingInstances;
 
-        static DynamicSoundEffectInstanceManager()
-        {
-            _playingInstances = new List<WeakReference>();
-        }
+        static DynamicSoundEffectInstanceManager() { _playingInstances = new List<WeakReference>(); }
 
         public static void AddInstance(DynamicSoundEffectInstance instance)
         {
@@ -27,9 +24,9 @@ namespace Microsoft.Xna.Framework.Audio
 
         public static void RemoveInstance(DynamicSoundEffectInstance instance)
         {
-            for (int i = _playingInstances.Count - 1; i >= 0; i--)
+            for(int i = _playingInstances.Count - 1; i >= 0; i--)
             {
-                if (_playingInstances[i].Target == instance)
+                if(_playingInstances[i].Target == instance)
                 {
                     _playingInstances.RemoveAt(i);
                     return;
@@ -45,15 +42,14 @@ namespace Microsoft.Xna.Framework.Audio
         /// </remarks>
         public static void UpdatePlayingInstances()
         {
-            for (int i = _playingInstances.Count - 1; i >= 0; i--)
+            for(int i = _playingInstances.Count - 1; i >= 0; i--)
             {
                 var target = _playingInstances[i].Target as DynamicSoundEffectInstance;
-                if (target != null)
+                if(target != null)
                 {
-                    if (!target.IsDisposed)
+                    if(!target.IsDisposed)
                         target.UpdateQueue();
-                }
-                else
+                } else
                 {
                     // The instance has been disposed.
                     _playingInstances.RemoveAt(i);

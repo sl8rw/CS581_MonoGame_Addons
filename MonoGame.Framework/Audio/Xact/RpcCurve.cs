@@ -17,30 +17,30 @@ namespace Microsoft.Xna.Framework.Audio
             // TODO: We need to implement the different RpcPointTypes.
 
             var first = Points[0];
-            if (position <= first.Position)
+            if(position <= first.Position)
                 return first.Value;
 
             var second = Points[Points.Length - 1];
-            if (position >= second.Position)
+            if(position >= second.Position)
                 return second.Value;
 
-            for (var i = 1; i < Points.Length; ++i)
+            for(var i = 1; i < Points.Length; ++i)
             {
                 second = Points[i];
-                if (second.Position >= position)
+                if(second.Position >= position)
                     break;
 
                 first = second;
             }
 
-            switch (first.Type)
+            switch(first.Type)
             {
                 default:
                 case RpcPointType.Linear:
-                    {
-                        var t = (position - first.Position) / (second.Position - first.Position);
-                        return first.Value + ((second.Value - first.Value) * t);
-                    }
+                {
+                    var t = (position - first.Position) / (second.Position - first.Position);
+                    return first.Value + ((second.Value - first.Value) * t);
+                }
             }
         }
     }

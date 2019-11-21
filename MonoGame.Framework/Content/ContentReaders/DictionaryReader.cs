@@ -8,7 +8,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.Xna.Framework.Content
 {
-
     internal class DictionaryReader<TKey, TValue> : ContentTypeReader<Dictionary<TKey, TValue>>
     {
         ContentTypeReader keyReader;
@@ -17,9 +16,7 @@ namespace Microsoft.Xna.Framework.Content
         Type keyType;
         Type valueType;
 
-        public DictionaryReader()
-        {
-        }
+        public DictionaryReader() { }
 
         protected internal override void Initialize(ContentTypeReaderManager manager)
         {
@@ -30,43 +27,41 @@ namespace Microsoft.Xna.Framework.Content
             valueReader = manager.GetTypeReader(valueType);
         }
 
-        public override bool CanDeserializeIntoExistingObject
-        {
-            get { return true; }
-        }
+        public override bool CanDeserializeIntoExistingObject { get { return true; } }
 
-        protected internal override Dictionary<TKey, TValue> Read(ContentReader input, Dictionary<TKey, TValue> existingInstance)
+        protected internal override Dictionary<TKey, TValue> Read(ContentReader input,
+                                                                  Dictionary<TKey, TValue> existingInstance)
         {
             int count = input.ReadInt32();
             Dictionary<TKey, TValue> dictionary = existingInstance;
-            if (dictionary == null)
+            if(dictionary == null)
                 dictionary = new Dictionary<TKey, TValue>(count);
             else
                 dictionary.Clear();
 
-            for (int i = 0; i < count; i++)
+            for(int i = 0; i < count; i++)
             {
                 TKey key;
                 TValue value;
 
-                if (ReflectionHelpers.IsValueType(keyType))
+                if(ReflectionHelpers.IsValueType(keyType))
                 {
                     key = input.ReadObject<TKey>(keyReader);
-                }
-                else
+                } else
                 {
                     var readerType = input.Read7BitEncodedInt();
                     key = readerType > 0 ? input.ReadObject<TKey>(input.TypeReaders[readerType - 1]) : default(TKey);
                 }
 
-                if (ReflectionHelpers.IsValueType(valueType))
+                if(ReflectionHelpers.IsValueType(valueType))
                 {
                     value = input.ReadObject<TValue>(valueReader);
-                }
-                else
+                } else
                 {
                     var readerType = input.Read7BitEncodedInt();
-                    value = readerType > 0 ? input.ReadObject<TValue>(input.TypeReaders[readerType - 1]) : default(TValue);
+                    value = readerType > 0
+                        ? input.ReadObject<TValue>(input.TypeReaders[readerType - 1])
+                        : default(TValue);
                 }
 
                 dictionary.Add(key, value);

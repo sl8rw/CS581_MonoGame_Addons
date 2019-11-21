@@ -10,9 +10,7 @@ namespace Microsoft.Xna.Framework.Content
     {
         ContentTypeReader elementReader;
 
-        public EnumReader()
-        {
-        }
+        public EnumReader() { }
 
         protected internal override void Initialize(ContentTypeReaderManager manager)
         {
@@ -21,9 +19,7 @@ namespace Microsoft.Xna.Framework.Content
         }
 
         protected internal override T Read(ContentReader input, T existingInstance)
-        {
-            return input.ReadRawObject<T>(elementReader);
-        }
+        { return input.ReadRawObject<T>(elementReader); }
     }
 }
 

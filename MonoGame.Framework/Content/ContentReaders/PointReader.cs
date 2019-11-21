@@ -8,9 +8,7 @@ namespace Microsoft.Xna.Framework.Content
 {
     internal class PointReader : ContentTypeReader<Point>
     {
-        public PointReader()
-        {
-        }
+        public PointReader() { }
 
         protected internal override Point Read(ContentReader input, Point existingInstance)
         {

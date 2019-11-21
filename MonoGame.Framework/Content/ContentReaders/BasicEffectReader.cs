@@ -12,7 +12,7 @@ namespace Microsoft.Xna.Framework.Content
         {
             var effect = new BasicEffect(input.GraphicsDevice);
             var texture = input.ReadExternalReference<Texture>() as Texture2D;
-            if (texture != null)
+            if(texture != null)
             {
                 effect.Texture = texture;
                 effect.TextureEnabled = true;

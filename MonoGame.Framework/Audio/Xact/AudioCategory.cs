@@ -66,17 +66,14 @@ namespace Microsoft.Xna.Framework.Audio
             isPublic = (visibilityFlags & 0x2) != 0;
         }
 
-        internal void AddSound(XactSound sound)
-        {
-            _sounds.Add(sound);
-        }
+        internal void AddSound(XactSound sound) { _sounds.Add(sound); }
 
         internal int GetPlayingInstanceCount()
         {
             var sum = 0;
-            for (var i = 0; i < _sounds.Count; i++)
+            for(var i = 0; i < _sounds.Count; i++)
             {
-                if (_sounds[i].Playing)
+                if(_sounds[i].Playing)
                     sum++;
             }
             return sum;
@@ -84,9 +81,9 @@ namespace Microsoft.Xna.Framework.Audio
 
         internal XactSound GetOldestInstance()
         {
-            for (var i = 0; i < _sounds.Count; i++)
+            for(var i = 0; i < _sounds.Count; i++)
             {
-                if (_sounds[i].Playing)
+                if(_sounds[i].Playing)
                     return _sounds[i];
             }
             return null;
@@ -102,7 +99,7 @@ namespace Microsoft.Xna.Framework.Audio
         /// </summary>
         public void Pause()
         {
-            foreach (var sound in _sounds)
+            foreach(var sound in _sounds)
                 sound.Pause();
         }
 
@@ -111,7 +108,7 @@ namespace Microsoft.Xna.Framework.Audio
         /// </summary>
         public void Resume()
         {
-            foreach (var sound in _sounds)
+            foreach(var sound in _sounds)
                 sound.Resume();
         }
 
@@ -120,23 +117,23 @@ namespace Microsoft.Xna.Framework.Audio
         /// </summary>
         public void Stop(AudioStopOptions options)
         {
-            foreach (var sound in _sounds)
+            foreach(var sound in _sounds)
                 sound.Stop(options);
         }
 
         public void SetVolume(float volume)
         {
-            if (volume < 0)
+            if(volume < 0)
                 throw new ArgumentException("The volume must be positive.");
 
             // Updating all the sounds in a category can be
             // very expensive... so avoid it if we can.
-            if (_volume[0] == volume)
+            if(_volume[0] == volume)
                 return;
 
             _volume[0] = volume;
 
-            foreach (var sound in _sounds)
+            foreach(var sound in _sounds)
                 sound.UpdateCategoryVolume(volume);
         }
 
@@ -168,9 +165,7 @@ namespace Microsoft.Xna.Framework.Audio
         /// <param name="other">AudioCategory to compare with this instance.</param>
         /// <returns>true if the objects are equal or false if they aren't</returns>
         public bool Equals(AudioCategory other)
-        {
-            return _engine == other._engine && _name.Equals(other._name, StringComparison.Ordinal);
-        }
+        { return _engine == other._engine && _name.Equals(other._name, StringComparison.Ordinal); }
 
         /// <summary>
         /// Determines whether two AudioCategory instances are equal.
@@ -179,7 +174,7 @@ namespace Microsoft.Xna.Framework.Audio
         /// <returns>true if the objects are equal or false if they aren't.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is AudioCategory)
+            if(obj is AudioCategory)
             {
                 var other = (AudioCategory)obj;
                 return _engine == other._engine && _name.Equals(other._name, StringComparison.Ordinal);
@@ -192,19 +187,13 @@ namespace Microsoft.Xna.Framework.Audio
         /// Gets the hash code for this instance.
         /// </summary>
         /// <returns>Hash code for this object.</returns>
-        public override int GetHashCode()
-        {
-            return _name.GetHashCode() ^ _engine.GetHashCode();
-        }
+        public override int GetHashCode() { return _name.GetHashCode() ^ _engine.GetHashCode(); }
 
         /// <summary>
         /// Returns the name of this AudioCategory
         /// </summary>
         /// <returns>Friendly name of the AudioCategory</returns>
-        public override string ToString()
-        {
-            return _name;
-        }
+        public override string ToString() { return _name; }
     }
 }
 

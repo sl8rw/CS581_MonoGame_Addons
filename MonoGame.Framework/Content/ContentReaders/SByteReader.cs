@@ -8,13 +8,9 @@ namespace Microsoft.Xna.Framework.Content
 {
     internal class SByteReader : ContentTypeReader<sbyte>
     {
-        public SByteReader()
-        {
-        }
+        public SByteReader() { }
 
         protected internal override sbyte Read(ContentReader input, sbyte existingInstance)
-        {
-            return input.ReadSByte();
-        }
+        { return input.ReadSByte(); }
     }
 }

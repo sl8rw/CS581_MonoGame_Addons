@@ -31,11 +31,11 @@ namespace Microsoft.Xna.Framework.Content
 
         public ContentTypeReader GetTypeReader(Type targetType)
         {
-            if (targetType.IsArray && targetType.GetArrayRank() > 1)
+            if(targetType.IsArray && targetType.GetArrayRank() > 1)
                 targetType = typeof(Array);
 
             ContentTypeReader reader;
-            if (_contentReaders.TryGetValue(targetType, out reader))
+            if(_contentReaders.TryGetValue(targetType, out reader))
                 return reader;
 
             return null;
@@ -48,7 +48,7 @@ namespace Microsoft.Xna.Framework.Content
         {
 #pragma warning disable 0219, 0649
             // Trick to prevent the linker removing the code, but not actually execute the code
-            if (falseflag)
+            if(falseflag)
             {
                 // Dummy variables required for it to work on iDevices ** DO NOT DELETE ** 
                 // This forces the classes not to be optimized out when deploying to iDevices
@@ -113,23 +113,22 @@ namespace Microsoft.Xna.Framework.Content
             // Lock until we're done allocating and initializing any new
             // content type readers...  this ensures we can load content
             // from multiple threads and still cache the readers.
-            lock (_locker)
+            lock(_locker)
             {
                 // For each reader in the file, we read out the length of the string which contains the type of the reader,
                 // then we read out the string. Finally we instantiate an instance of that reader using reflection
-                for (var i = 0; i < numberOfReaders; i++)
+                for(var i = 0; i < numberOfReaders; i++)
                 {
                     // This string tells us what reader we need to decode the following data
                     // string readerTypeString = reader.ReadString();
                     string originalReaderTypeString = reader.ReadString();
 
                     Func<ContentTypeReader> readerFunc;
-                    if (typeCreators.TryGetValue(originalReaderTypeString, out readerFunc))
+                    if(typeCreators.TryGetValue(originalReaderTypeString, out readerFunc))
                     {
                         contentReaders[i] = readerFunc();
                         needsInitialize[i] = true;
-                    }
-                    else
+                    } else
                     {
                         //System.Diagnostics.Debug.WriteLine(originalReaderTypeString);
 
@@ -139,22 +138,20 @@ namespace Microsoft.Xna.Framework.Content
                         readerTypeString = PrepareType(readerTypeString);
 
                         var l_readerType = Type.GetType(readerTypeString);
-                        if (l_readerType != null)
+                        if(l_readerType != null)
                         {
                             ContentTypeReader typeReader;
-                            if (!_contentReadersCache.TryGetValue(l_readerType, out typeReader))
+                            if(!_contentReadersCache.TryGetValue(l_readerType, out typeReader))
                             {
                                 try
                                 {
                                     typeReader = l_readerType.GetDefaultConstructor().Invoke(null) as ContentTypeReader;
-                                }
-                                catch (TargetInvocationException ex)
+                                } catch(TargetInvocationException ex)
                                 {
                                     // If you are getting here, the Mono runtime is most likely not able to JIT the type.
                                     // In particular, MonoTouch needs help instantiating types that are only defined in strings in Xnb files. 
-                                    throw new InvalidOperationException(
-                                        "Failed to get default constructor for ContentTypeReader. To work around, add a creation function to ContentTypeReaderManager.AddTypeCreator() " +
-                                        "with the following failed type string: " + originalReaderTypeString, ex);
+                                    throw new InvalidOperationException($"Failed to get default constructor for ContentTypeReader. To work around, add a creation function to ContentTypeReaderManager.AddTypeCreator() with the following failed type string: {originalReaderTypeString}",
+                                                                        ex);
                                 }
 
                                 needsInitialize[i] = true;
@@ -163,16 +160,13 @@ namespace Microsoft.Xna.Framework.Content
                             }
 
                             contentReaders[i] = typeReader;
-                        }
-                        else
-                            throw new ContentLoadException(
-                                    "Could not find ContentTypeReader Type. Please ensure the name of the Assembly that contains the Type matches the assembly in the full type name: " +
-                                    originalReaderTypeString + " (" + readerTypeString + ")");
+                        } else
+                            throw new ContentLoadException($"Could not find ContentTypeReader Type. Please ensure the name of the Assembly that contains the Type matches the assembly in the full type name: {originalReaderTypeString} ({readerTypeString})");
                     }
 
                     var targetType = contentReaders[i].TargetType;
-                    if (targetType != null)
-                        if (!_contentReaders.ContainsKey(targetType))
+                    if(targetType != null)
+                        if(!_contentReaders.ContainsKey(targetType))
                             _contentReaders.Add(targetType, contentReaders[i]);
 
                     // I think the next 4 bytes refer to the "Version" of the type reader,
@@ -181,12 +175,11 @@ namespace Microsoft.Xna.Framework.Content
                 }
 
                 // Initialize any new readers.
-                for (var i = 0; i < contentReaders.Length; i++)
+                for(var i = 0; i < contentReaders.Length; i++)
                 {
-                    if (needsInitialize.Get(i))
+                    if(needsInitialize.Get(i))
                         contentReaders[i].Initialize(this);
                 }
-
             } // lock (_locker)
 
             return contentReaders;
@@ -196,7 +189,8 @@ namespace Microsoft.Xna.Framework.Content
         /// Removes Version, Culture and PublicKeyToken from a type string.
         /// </summary>
         /// <remarks>
-        /// Supports multiple generic types (e.g. Dictionary&lt;TKey,TValue&gt;) and nested generic types (e.g. List&lt;List&lt;int&gt;&gt;).
+        /// Supports multiple generic types (e.g. Dictionary&lt;TKey,TValue&gt;) and nested generic types (e.g.
+        /// List&lt;List&lt;int&gt;&gt;).
         /// </remarks> 
         /// <param name="type">
         /// A <see cref="System.String"/>
@@ -211,19 +205,19 @@ namespace Microsoft.Xna.Framework.Content
 
             string preparedType = type;
 
-            for (int i = 0; i < count; i++)
+            for(int i = 0; i < count; i++)
             {
                 preparedType = Regex.Replace(preparedType, @"\[(.+?), Version=.+?\]", "[$1]");
             }
 
             //Handle non generic types
-            if (preparedType.Contains("PublicKeyToken"))
+            if(preparedType.Contains("PublicKeyToken"))
                 preparedType = Regex.Replace(preparedType, @"(.+?), Version=.+?$", "$1");
 
             // TODO: For WinRT this is most likely broken!
-            preparedType = preparedType.Replace(", Microsoft.Xna.Framework.Graphics", string.Format(", {0}", _assemblyName));
-            preparedType = preparedType.Replace(", Microsoft.Xna.Framework.Video", string.Format(", {0}", _assemblyName));
-            preparedType = preparedType.Replace(", Microsoft.Xna.Framework", string.Format(", {0}", _assemblyName));
+            preparedType = preparedType.Replace(", Microsoft.Xna.Framework.Graphics", $", {_assemblyName}");
+            preparedType = preparedType.Replace(", Microsoft.Xna.Framework.Video", $", {_assemblyName}");
+            preparedType = preparedType.Replace(", Microsoft.Xna.Framework", $", {_assemblyName}");
 
             return preparedType;
         }
@@ -242,14 +236,10 @@ namespace Microsoft.Xna.Framework.Content
         /// </param>
         public static void AddTypeCreator(string typeString, Func<ContentTypeReader> createFunction)
         {
-            if (!typeCreators.ContainsKey(typeString))
+            if(!typeCreators.ContainsKey(typeString))
                 typeCreators.Add(typeString, createFunction);
         }
 
-        public static void ClearTypeCreators()
-        {
-            typeCreators.Clear();
-        }
-
+        public static void ClearTypeCreators() { typeCreators.Clear(); }
     }
 }

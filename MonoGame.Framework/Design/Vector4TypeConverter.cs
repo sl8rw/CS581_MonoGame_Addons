@@ -11,20 +11,21 @@ namespace Microsoft.Xna.Framework.Design
     public class Vector4TypeConverter : TypeConverter
     {
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
-        {
-            return (VectorConversion.CanConvertTo(context, destinationType) || destinationType == typeof(string));
-        }
+        { return (VectorConversion.CanConvertTo(context, destinationType) || destinationType == typeof(string)); }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(ITypeDescriptorContext context,
+                                         CultureInfo culture,
+                                         object value,
+                                         Type destinationType)
         {
             var vec = (Vector4)value;
 
-            if (VectorConversion.CanConvertTo(context, destinationType))
+            if(VectorConversion.CanConvertTo(context, destinationType))
             {
                 return VectorConversion.ConvertToFromVector4(context, culture, vec, destinationType);
             }
 
-            if (destinationType == typeof(string))
+            if(destinationType == typeof(string))
             {
                 var terms = new string[4];
                 terms[0] = vec.X.ToString("R", culture);
@@ -32,7 +33,7 @@ namespace Microsoft.Xna.Framework.Design
                 terms[2] = vec.Z.ToString("R", culture);
                 terms[3] = vec.W.ToString("R", culture);
 
-                return string.Join(culture.TextInfo.ListSeparator + " ", terms);
+                return string.Join($"{culture.TextInfo.ListSeparator} ", terms);
             }
 
             return base.ConvertTo(context, culture, value, destinationType);
@@ -40,7 +41,7 @@ namespace Microsoft.Xna.Framework.Design
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            if (sourceType == typeof(string))
+            if(sourceType == typeof(string))
                 return true;
 
             return base.CanConvertFrom(context, sourceType);
@@ -51,7 +52,7 @@ namespace Microsoft.Xna.Framework.Design
             var sourceType = value.GetType();
             var vec = Vector4.Zero;
 
-            if (sourceType == typeof(string))
+            if(sourceType == typeof(string))
             {
                 var str = (string)value;
                 var words = str.Split(culture.TextInfo.ListSeparator.ToCharArray());

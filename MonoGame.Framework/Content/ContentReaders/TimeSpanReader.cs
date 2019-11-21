@@ -8,9 +8,7 @@ namespace Microsoft.Xna.Framework.Content
 {
     internal class TimeSpanReader : ContentTypeReader<TimeSpan>
     {
-        public TimeSpanReader()
-        {
-        }
+        public TimeSpanReader() { }
 
         protected internal override TimeSpan Read(ContentReader input, TimeSpan existingInstance)
         {

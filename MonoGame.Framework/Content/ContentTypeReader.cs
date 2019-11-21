@@ -10,25 +10,19 @@ namespace Microsoft.Xna.Framework.Content
     {
         private Type _targetType;
 
-        public virtual bool CanDeserializeIntoExistingObject
-        {
-            get { return false; }
-        }
+        public virtual bool CanDeserializeIntoExistingObject { get { return false; } }
 
-        public Type TargetType
-        {
-            get { return _targetType; }
-        }
+        public Type TargetType { get { return _targetType; } }
 
         public virtual int TypeVersion
         {
-            get { return 0; }   // The default version (unless overridden) is zero
+            get
+            {
+                return 0;
+            }   // The default version (unless overridden) is zero
         }
 
-        protected ContentTypeReader(Type targetType)
-        {
-            _targetType = targetType;
-        }
+        protected ContentTypeReader(Type targetType) { _targetType = targetType; }
 
         protected internal virtual void Initialize(ContentTypeReaderManager manager)
         {
@@ -40,8 +34,7 @@ namespace Microsoft.Xna.Framework.Content
 
     public abstract class ContentTypeReader<T> : ContentTypeReader
     {
-        protected ContentTypeReader()
-            : base(typeof(T))
+        protected ContentTypeReader() : base(typeof(T))
         {
             // Nothing
         }
@@ -51,7 +44,7 @@ namespace Microsoft.Xna.Framework.Content
             // as per the documentation http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.content.contenttypereader.read.aspx
             // existingInstance
             // The object receiving the data, or null if a new instance of the object should be created.
-            if (existingInstance == null)
+            if(existingInstance == null)
             {
                 return Read(input, default(T));
             }

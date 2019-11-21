@@ -9,14 +9,19 @@ namespace Microsoft.Xna.Framework.Design
     {
         public static bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            return (destinationType == typeof(float) || destinationType == typeof(Vector2) ||
-                    destinationType == typeof(Vector3) || destinationType == typeof(Vector4) ||
-                    destinationType.GetInterface("IPackedVector") != null);
+            return (destinationType == typeof(float) ||
+                destinationType == typeof(Vector2) ||
+                destinationType == typeof(Vector3) ||
+                destinationType == typeof(Vector4) ||
+                destinationType.GetInterface("IPackedVector") != null);
         }
 
-        public static object ConvertToFromVector4(ITypeDescriptorContext context, CultureInfo culture, Vector4 value, Type destinationType)
+        public static object ConvertToFromVector4(ITypeDescriptorContext context,
+                                                  CultureInfo culture,
+                                                  Vector4 value,
+                                                  Type destinationType)
         {
-            switch (destinationType.Name)
+            switch(destinationType.Name)
             {
                 case "float":
                     return value.X;
@@ -27,7 +32,7 @@ namespace Microsoft.Xna.Framework.Design
                 case "Vector4":
                     return new Vector4(value.X, value.Y, value.Z, value.W);
                 default:
-                    if (destinationType.GetInterface("IPackedVector") != null)
+                    if(destinationType.GetInterface("IPackedVector") != null)
                     {
                         var packedVec = (IPackedVector)Activator.CreateInstance(destinationType);
                         packedVec.PackFromVector4(value);
@@ -35,7 +40,6 @@ namespace Microsoft.Xna.Framework.Design
                     }
                     return null;
             }
-        }         
-
+        }
     }
 }

@@ -16,10 +16,7 @@ namespace Microsoft.Xna.Framework.Content
         /// Creates an instance of the attribute.
         /// </summary>
         /// <param name="runtimeType">The name of the type to use at runtime.</param>
-        public ContentSerializerRuntimeTypeAttribute(string runtimeType)
-        {
-            RuntimeType = runtimeType;
-        }
+        public ContentSerializerRuntimeTypeAttribute(string runtimeType) { RuntimeType = runtimeType; }
 
         /// <summary>
         /// The name of the type to use at runtime.

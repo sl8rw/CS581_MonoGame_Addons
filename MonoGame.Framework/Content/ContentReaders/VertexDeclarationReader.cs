@@ -3,6 +3,7 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using Microsoft.Xna.Framework.Graphics;
+
 namespace Microsoft.Xna.Framework.Content
 {
     internal class VertexDeclarationReader : ContentTypeReader<VertexDeclaration>
@@ -12,7 +13,7 @@ namespace Microsoft.Xna.Framework.Content
             var vertexStride = reader.ReadInt32();
             var elementCount = reader.ReadInt32();
             VertexElement[] elements = new VertexElement[elementCount];
-            for (int i = 0; i < elementCount; ++i)
+            for(int i = 0; i < elementCount; ++i)
             {
                 var offset = reader.ReadInt32();
                 var elementFormat = (VertexElementFormat)reader.ReadInt32();

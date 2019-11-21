@@ -22,32 +22,32 @@ namespace Microsoft.Xna.Framework.Content
         protected internal override Array Read(ContentReader input, Array existingInstance)
         {
             var rank = input.ReadInt32();
-            if (rank < 1)
+            if(rank < 1)
                 throw new RankException();
 
             var dimensions = new int[rank];
             var count = 1;
-            for (int d = 0; d < dimensions.Length; d++)
+            for(int d = 0; d < dimensions.Length; d++)
                 count *= dimensions[d] = input.ReadInt32();
 
 
             var array = existingInstance;
-            if (array == null)
+            if(array == null)
                 array = Array.CreateInstance(typeof(T), dimensions);//new T[count];
-            else if (dimensions.Length != array.Rank)
-                throw new RankException("existingInstance");
+            else if(dimensions.Length != array.Rank)
+                throw new RankException(nameof(existingInstance));
 
             var indices = new int[rank];
 
-            for (int i = 0; i < count; i++)
+            for(int i = 0; i < count; i++)
             {
                 T value;
-                if (ReflectionHelpers.IsValueType(typeof(T)))
+                if(ReflectionHelpers.IsValueType(typeof(T)))
                     value = input.ReadObject<T>(elementReader);
                 else
                 {
                     var readerType = input.Read7BitEncodedInt();
-                    if (readerType > 0)
+                    if(readerType > 0)
                         value = input.ReadObject<T>(input.TypeReaders[readerType - 1]);
                     else
                         value = default(T);
@@ -62,12 +62,12 @@ namespace Microsoft.Xna.Framework.Content
 
         static void CalcIndices(Array array, int index, int[] indices)
         {
-            if (array.Rank != indices.Length)
-                throw new Exception("indices");
+            if(array.Rank != indices.Length)
+                throw new Exception(nameof(indices));
 
-            for (int d = 0; d < indices.Length; d++)
+            for(int d = 0; d < indices.Length; d++)
             {
-                if (index == 0)
+                if(index == 0)
                     indices[d] = 0;
                 else
                 {
@@ -76,8 +76,8 @@ namespace Microsoft.Xna.Framework.Content
                 }
             }
 
-            if (index != 0)
-                throw new ArgumentOutOfRangeException("index");
+            if(index != 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
         }
     }
 }

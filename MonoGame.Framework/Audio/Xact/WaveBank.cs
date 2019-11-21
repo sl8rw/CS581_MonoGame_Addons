@@ -7,7 +7,9 @@ using System.IO;
 
 namespace Microsoft.Xna.Framework.Audio
 {
-    /// <summary>Represents a collection of wave files.</summary>
+    /// <summary>
+    /// Represents a collection of wave files.
+    /// </summary>
     public partial class WaveBank : IDisposable
     {
         private readonly SoundEffect[] _sounds;
@@ -61,35 +63,39 @@ namespace Microsoft.Xna.Framework.Audio
         private const int Flag_Mask = 0x000F0000;
 
         /// <summary>
+        ///
         /// </summary>
         public bool IsInUse { get; private set; }
 
         /// <summary>
+        ///
         /// </summary>
         public bool IsPrepared { get; private set; }
 
         /// <param name="audioEngine">Instance of the AudioEngine to associate this wave bank with.</param>
         /// <param name="nonStreamingWaveBankFilename">Path to the .xwb file to load.</param>
         /// <remarks>This constructor immediately loads all wave data into memory at once.</remarks>
-        public WaveBank(AudioEngine audioEngine, string nonStreamingWaveBankFilename)
-            : this(audioEngine, nonStreamingWaveBankFilename, false, 0, 0)
-        {
-        }
+        public WaveBank(AudioEngine audioEngine, string nonStreamingWaveBankFilename) : this(audioEngine,
+                                                                                             nonStreamingWaveBankFilename,
+                                                                                             false,
+                                                                                             0,
+                                                                                             0)
+        { }
 
         private WaveBank(AudioEngine audioEngine, string waveBankFilename, bool streaming, int offset, int packetsize)
         {
-            if (audioEngine == null)
-                throw new ArgumentNullException("audioEngine");
-            if (string.IsNullOrEmpty(waveBankFilename))
+            if(audioEngine == null)
+                throw new ArgumentNullException(nameof(audioEngine));
+            if(string.IsNullOrEmpty(waveBankFilename))
                 throw new ArgumentNullException("nonStreamingWaveBankFilename");
 
             // Is this a streaming wavebank?
-            if (streaming)
+            if(streaming)
             {
-                if (offset != 0)
-                    throw new ArgumentException("We only support a zero offset in streaming banks.", "offset");
-                if (packetsize < 2)
-                    throw new ArgumentException("The packet size must be greater than 2.", "packetsize");
+                if(offset != 0)
+                    throw new ArgumentException("We only support a zero offset in streaming banks.", nameof(offset));
+                if(packetsize < 2)
+                    throw new ArgumentException("The packet size must be greater than 2.", nameof(packetsize));
 
                 _streaming = true;
                 _offset = offset;
@@ -120,12 +126,14 @@ namespace Microsoft.Xna.Framework.Audio
 
             int last_segment = 4;
             //if (wavebankheader.Version == 1) goto WAVEBANKDATA;
-            if (wavebankheader.Version <= 3) last_segment = 3;
-            if (wavebankheader.Version >= 42) reader.ReadInt32();    // skip HeaderVersion
+            if(wavebankheader.Version <= 3)
+                last_segment = 3;
+            if(wavebankheader.Version >= 42)
+                reader.ReadInt32();    // skip HeaderVersion
 
             wavebankheader.Segments = new Segment[5];
 
-            for (int i = 0; i <= last_segment; i++)
+            for(int i = 0; i <= last_segment; i++)
             {
                 wavebankheader.Segments[i].Offset = reader.ReadInt32();
                 wavebankheader.Segments[i].Length = reader.ReadInt32();
@@ -138,23 +146,25 @@ namespace Microsoft.Xna.Framework.Audio
             wavebankdata.Flags = reader.ReadInt32();
             wavebankdata.EntryCount = reader.ReadInt32();
 
-            if ((wavebankheader.Version == 2) || (wavebankheader.Version == 3))
+            if((wavebankheader.Version == 2) || (wavebankheader.Version == 3))
             {
-                wavebankdata.BankName = System.Text.Encoding.UTF8.GetString(reader.ReadBytes(16), 0, 16).Replace("\0", string.Empty);
-            }
-            else
+                wavebankdata.BankName = System.Text.Encoding.UTF8
+                    .GetString(reader.ReadBytes(16), 0, 16)
+                    .Replace("\0", string.Empty);
+            } else
             {
-                wavebankdata.BankName = System.Text.Encoding.UTF8.GetString(reader.ReadBytes(64), 0, 64).Replace("\0", string.Empty);
+                wavebankdata.BankName = System.Text.Encoding.UTF8
+                    .GetString(reader.ReadBytes(64), 0, 64)
+                    .Replace("\0", string.Empty);
             }
 
             _bankName = wavebankdata.BankName;
 
-            if (wavebankheader.Version == 1)
+            if(wavebankheader.Version == 1)
             {
                 //wavebank_offset = (int)ftell(fd) - file_offset;
                 wavebankdata.EntryMetaDataElementSize = 20;
-            }
-            else
+            } else
             {
                 wavebankdata.EntryMetaDataElementSize = reader.ReadInt32();
                 wavebankdata.EntryNameElementSize = reader.ReadInt32();
@@ -162,26 +172,27 @@ namespace Microsoft.Xna.Framework.Audio
                 wavebank_offset = wavebankheader.Segments[1].Offset; //METADATASEGMENT
             }
 
-            if ((wavebankdata.Flags & Flag_Compact) != 0)
+            if((wavebankdata.Flags & Flag_Compact) != 0)
             {
                 reader.ReadInt32(); // compact_format
             }
 
             _playRegionOffset = wavebankheader.Segments[last_segment].Offset;
-            if (_playRegionOffset == 0)
+            if(_playRegionOffset == 0)
             {
                 _playRegionOffset =
-                    wavebank_offset +
-                    (wavebankdata.EntryCount * wavebankdata.EntryMetaDataElementSize);
+                    wavebank_offset + (wavebankdata.EntryCount * wavebankdata.EntryMetaDataElementSize);
             }
 
             int segidx_entry_name = 2;
-            if (wavebankheader.Version >= 42) segidx_entry_name = 3;
+            if(wavebankheader.Version >= 42)
+                segidx_entry_name = 3;
 
-            if ((wavebankheader.Segments[segidx_entry_name].Offset != 0) &&
+            if((wavebankheader.Segments[segidx_entry_name].Offset != 0) &&
                 (wavebankheader.Segments[segidx_entry_name].Length != 0))
             {
-                if (wavebankdata.EntryNameElementSize == -1) wavebankdata.EntryNameElementSize = 0;
+                if(wavebankdata.EntryNameElementSize == -1)
+                    wavebankdata.EntryNameElementSize = 0;
                 byte[] entry_name = new byte[wavebankdata.EntryNameElementSize + 1];
                 entry_name[wavebankdata.EntryNameElementSize] = 0;
             }
@@ -193,10 +204,10 @@ namespace Microsoft.Xna.Framework.Audio
 
             // The compact format requires us to load stuff differently.
             var isCompactFormat = (wavebankdata.Flags & Flag_Compact) != 0;
-            if (isCompactFormat)
+            if(isCompactFormat)
             {
                 // Load the sound data offset table from disk.
-                for (var i = 0; i < wavebankdata.EntryCount; i++)
+                for(var i = 0; i < wavebankdata.EntryCount; i++)
                 {
                     var len = reader.ReadInt32();
                     _streams[i].Format = wavebankdata.CompactFormat;
@@ -204,10 +215,10 @@ namespace Microsoft.Xna.Framework.Audio
                 }
 
                 // Now figure out the sound data lengths.
-                for (var i = 0; i < wavebankdata.EntryCount; i++)
+                for(var i = 0; i < wavebankdata.EntryCount; i++)
                 {
                     int nextOffset;
-                    if (i == (wavebankdata.EntryCount - 1))
+                    if(i == (wavebankdata.EntryCount - 1))
                         nextOffset = wavebankheader.Segments[last_segment].Length;
                     else
                         nextOffset = _streams[i + 1].FileOffset;
@@ -215,40 +226,38 @@ namespace Microsoft.Xna.Framework.Audio
                     // The next and current offsets used to calculate the length.
                     _streams[i].FileLength = nextOffset - _streams[i].FileOffset;
                 }
-            }
-            else
+            } else
             {
-                for (var i = 0; i < wavebankdata.EntryCount; i++)
+                for(var i = 0; i < wavebankdata.EntryCount; i++)
                 {
                     var info = new StreamInfo();
-                    if (wavebankheader.Version == 1)
+                    if(wavebankheader.Version == 1)
                     {
                         info.Format = reader.ReadInt32();
                         info.FileOffset = reader.ReadInt32();
                         info.FileLength = reader.ReadInt32();
                         info.LoopStart = reader.ReadInt32();
                         info.LoopLength = reader.ReadInt32();
-                    }
-                    else
+                    } else
                     {
                         var flagsAndDuration = reader.ReadInt32(); // Unused
 
-                        if (wavebankdata.EntryMetaDataElementSize >= 8)
+                        if(wavebankdata.EntryMetaDataElementSize >= 8)
                             info.Format = reader.ReadInt32();
-                        if (wavebankdata.EntryMetaDataElementSize >= 12)
+                        if(wavebankdata.EntryMetaDataElementSize >= 12)
                             info.FileOffset = reader.ReadInt32();
-                        if (wavebankdata.EntryMetaDataElementSize >= 16)
+                        if(wavebankdata.EntryMetaDataElementSize >= 16)
                             info.FileLength = reader.ReadInt32();
-                        if (wavebankdata.EntryMetaDataElementSize >= 20)
+                        if(wavebankdata.EntryMetaDataElementSize >= 20)
                             info.LoopStart = reader.ReadInt32();
-                        if (wavebankdata.EntryMetaDataElementSize >= 24)
+                        if(wavebankdata.EntryMetaDataElementSize >= 24)
                             info.LoopLength = reader.ReadInt32();
                     }
 
                     // TODO: What is this doing?
-                    if (wavebankdata.EntryMetaDataElementSize < 24)
+                    if(wavebankdata.EntryMetaDataElementSize < 24)
                     {
-                        if (info.FileLength != 0)
+                        if(info.FileLength != 0)
                             info.FileLength = wavebankheader.Segments[last_segment].Length;
                     }
 
@@ -257,9 +266,9 @@ namespace Microsoft.Xna.Framework.Audio
             }
 
             // If this isn't a streaming wavebank then load all the sounds now.
-            if (!_streaming)
+            if(!_streaming)
             {
-                for (var i = 0; i < _streams.Length; i++)
+                for(var i = 0; i < _streams.Length; i++)
                 {
                     var info = _streams[i];
 
@@ -273,7 +282,13 @@ namespace Microsoft.Xna.Framework.Audio
                     DecodeFormat(info.Format, out codec, out channels, out rate, out alignment);
 
                     // Call the special constuctor on SoundEffect to sort it out.
-                    _sounds[i] = new SoundEffect(codec, audiodata, channels, rate, alignment, info.LoopStart, info.LoopLength);
+                    _sounds[i] = new SoundEffect(codec,
+                                                 audiodata,
+                                                 channels,
+                                                 rate,
+                                                 alignment,
+                                                 info.LoopStart,
+                                                 info.LoopLength);
                 }
 
                 _streams = null;
@@ -284,9 +299,13 @@ namespace Microsoft.Xna.Framework.Audio
             IsPrepared = true;
         }
 
-        private void DecodeFormat(int format, out MiniFormatTag codec, out int channels, out int rate, out int alignment)
+        private void DecodeFormat(int format,
+                                  out MiniFormatTag codec,
+                                  out int channels,
+                                  out int rate,
+                                  out int alignment)
         {
-            if (_version == 1)
+            if(_version == 1)
             {
                 // I'm not 100% sure if the following is correct
                 // version 1:
@@ -323,10 +342,7 @@ namespace Microsoft.Xna.Framework.Audio
                     chans = (wavebankentry.Format >> (1)             ) & ((1 <<  3) - 1);
                     rate  = (wavebankentry.Format >> (1 + 3)         ) & ((1 << 18) - 1);
                     align = (wavebankentry.Format >> (1 + 3 + 18)    ) & ((1 <<  9) - 1);
-                    bits  = (wavebankentry.Format >> (1 + 3 + 18 + 9)) & ((1 <<  1) - 1); */
-
-            }
-            else
+                    bits  = (wavebankentry.Format >> (1 + 3 + 18 + 9)) & ((1 <<  1) - 1); */            } else
             {
                 // 0 00000000 000111110100000000 010 01
                 // | |        |                  |   |
@@ -349,24 +365,25 @@ namespace Microsoft.Xna.Framework.Audio
         /// <param name="offset">DVD sector-aligned offset within the wave bank data file.</param>
         /// <param name="packetsize">Stream packet size, in sectors, to use for each stream. The minimum value is 2.</param>
         /// <remarks>
-        /// <para>This constructor streams wave data as needed.</para>
-        /// <para>Note that packetsize is in sectors, which is 2048 bytes.</para>
-        /// <para>AudioEngine.Update() must be called at least once before using data from a streaming wave bank.</para>
+        /// <para>This constructor streams wave data as needed.</para> <para>Note that packetsize is in sectors, which
+        /// is 2048 bytes.</para> <para>AudioEngine.Update() must be called at least once before using data from a
+        /// streaming wave bank.</para>
         /// </remarks>
-        public WaveBank(AudioEngine audioEngine, string streamingWaveBankFilename, int offset, short packetsize)
-            : this(audioEngine, streamingWaveBankFilename, true, offset, packetsize)
-        {
-        }
+        public WaveBank(AudioEngine audioEngine, string streamingWaveBankFilename, int offset, short packetsize) : this(audioEngine,
+                                                                                                                        streamingWaveBankFilename,
+                                                                                                                        true,
+                                                                                                                        offset,
+                                                                                                                        packetsize)
+        { }
 
         internal SoundEffectInstance GetSoundEffectInstance(int trackIndex, out bool streaming)
         {
-            if (_streaming)
+            if(_streaming)
             {
                 streaming = true;
                 var stream = _streams[trackIndex];
                 return PlatformCreateStream(stream);
-            }
-            else
+            } else
             {
                 streaming = false;
                 var sound = _sounds[trackIndex];
@@ -393,21 +410,18 @@ namespace Microsoft.Xna.Framework.Audio
             GC.SuppressFinalize(this);
         }
 
-        ~WaveBank()
-        {
-            Dispose(false);
-        }
+        ~WaveBank() { Dispose(false); }
 
         private void Dispose(bool disposing)
         {
-            if (IsDisposed)
+            if(IsDisposed)
                 return;
 
             IsDisposed = true;
 
-            if (disposing)
+            if(disposing)
             {
-                foreach (var s in _sounds)
+                foreach(var s in _sounds)
                     s.Dispose();
 
                 IsPrepared = false;

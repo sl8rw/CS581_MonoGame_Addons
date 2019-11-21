@@ -11,7 +11,7 @@ namespace Microsoft.Xna.Framework.Content
         protected internal override Curve Read(ContentReader input, Curve existingInstance)
         {
             Curve curve = existingInstance;
-            if (curve == null)
+            if(curve == null)
             {
                 curve = new Curve();
             }
@@ -20,7 +20,7 @@ namespace Microsoft.Xna.Framework.Content
             curve.PostLoop = (CurveLoopType)input.ReadInt32();
             int num6 = input.ReadInt32();
 
-            for (int i = 0; i < num6; i++)
+            for(int i = 0; i < num6; i++)
             {
                 float position = input.ReadSingle();
                 float num4 = input.ReadSingle();

@@ -8,13 +8,8 @@ namespace Microsoft.Xna.Framework.Content
 {
     internal class UInt32Reader : ContentTypeReader<uint>
     {
-        public UInt32Reader()
-        {
-        }
+        public UInt32Reader() { }
 
-        protected internal override uint Read(ContentReader input, uint existingInstance)
-        {
-            return input.ReadUInt32();
-        }
+        protected internal override uint Read(ContentReader input, uint existingInstance) { return input.ReadUInt32(); }
     }
 }

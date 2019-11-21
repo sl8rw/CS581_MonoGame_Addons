@@ -11,9 +11,13 @@ namespace Microsoft.Xna.Framework.Audio
     /// </summary>
     public enum AudioChannels
     {
-        /// <summary>Single channel.</summary> 
+        /// <summary>
+        /// Single channel.
+        /// </summary> 
         Mono = 1,
-        /// <summary>Two channels.</summary> 
+        /// <summary>
+        /// Two channels.
+        /// </summary> 
         Stereo = 2
     }
 }

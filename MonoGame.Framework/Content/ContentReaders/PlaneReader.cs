@@ -8,9 +8,7 @@ namespace Microsoft.Xna.Framework.Content
 {
     internal class PlaneReader : ContentTypeReader<Plane>
     {
-        public PlaneReader()
-        {
-        }
+        public PlaneReader() { }
 
         protected internal override Plane Read(ContentReader input, Plane existingInstance)
         {

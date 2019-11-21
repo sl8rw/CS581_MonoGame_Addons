@@ -17,11 +17,14 @@ namespace Microsoft.Xna.Framework.Content
             byte[] data = input.ContentManager.GetScratchBuffer(dataSize);
             input.Read(data, 0, dataSize);
 
-            if (indexBuffer == null)
+            if(indexBuffer == null)
             {
                 indexBuffer = new IndexBuffer(input.GraphicsDevice,
-                    sixteenBits ? IndexElementSize.SixteenBits : IndexElementSize.ThirtyTwoBits,
-                    dataSize / (sixteenBits ? 2 : 4), BufferUsage.None);
+                                              sixteenBits
+                    ? IndexElementSize.SixteenBits
+                    : IndexElementSize.ThirtyTwoBits,
+                                              dataSize / (sixteenBits ? 2 : 4),
+                                              BufferUsage.None);
             }
 
             indexBuffer.SetData(data, 0, dataSize);

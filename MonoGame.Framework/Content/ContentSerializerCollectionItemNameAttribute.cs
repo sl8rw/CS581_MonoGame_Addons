@@ -17,9 +17,7 @@ namespace Microsoft.Xna.Framework.Content
         /// </summary>
         /// <param name="collectionItemName">The XML element name to use for each item in the collection.</param>
         public ContentSerializerCollectionItemNameAttribute(string collectionItemName)
-        {
-            CollectionItemName = collectionItemName;
-        }
+        { CollectionItemName = collectionItemName; }
 
         /// <summary>
         /// The XML element name to use for each item in the collection.

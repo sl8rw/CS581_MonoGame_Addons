@@ -31,17 +31,14 @@ namespace Microsoft.Xna.Framework.Audio
 
         public void SetValue(float value)
         {
-            if (value < MinValue)
+            if(value < MinValue)
                 Value = MinValue;
-            else if (value > MaxValue)
+            else if(value > MaxValue)
                 Value = MaxValue;
             else
                 Value = value;
         }
 
-        public override string ToString()
-        {
-            return "Value:" + Value + " MinValue:" + MinValue + " MaxValue:" + MaxValue;
-        }
+        public override string ToString() { return $"Value:{Value} MinValue:{MinValue} MaxValue:{MaxValue}"; }
     }
 }

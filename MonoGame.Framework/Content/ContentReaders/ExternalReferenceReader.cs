@@ -9,15 +9,9 @@ namespace Microsoft.Xna.Framework.Content
     /// </summary>
     internal class ExternalReferenceReader : ContentTypeReader
     {
-        public ExternalReferenceReader()
-            : base(null)
-        {
-
-        }
+        public ExternalReferenceReader() : base(null) { }
 
         protected internal override object Read(ContentReader input, object existingInstance)
-        {
-            return input.ReadExternalReference<object>();
-        }
+        { return input.ReadExternalReference<object>(); }
     }
 }

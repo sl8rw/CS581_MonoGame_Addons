@@ -6,13 +6,12 @@ using System;
 
 namespace Microsoft.Xna.Framework.Content
 {
-    internal class NullableReader<T> : ContentTypeReader<T?> where T : struct
+    internal class NullableReader<T> : ContentTypeReader<T?>
+        where T : struct
     {
         ContentTypeReader elementReader;
 
-        public NullableReader()
-        {
-        }
+        public NullableReader() { }
 
         protected internal override void Initialize(ContentTypeReaderManager manager)
         {
@@ -22,7 +21,7 @@ namespace Microsoft.Xna.Framework.Content
 
         protected internal override T? Read(ContentReader input, T? existingInstance)
         {
-            if (input.ReadBoolean())
+            if(input.ReadBoolean())
                 return input.ReadObject<T>(elementReader);
 
             return null;

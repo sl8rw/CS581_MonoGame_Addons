@@ -56,7 +56,7 @@ namespace Microsoft.Xna.Framework.Audio
             soundReader.ReadUInt16(); // filter stuff?
 
             var numClips = 0;
-            if (_complexSound)
+            if(_complexSound)
                 numClips = soundReader.ReadByte();
             else
             {
@@ -64,7 +64,7 @@ namespace Microsoft.Xna.Framework.Audio
                 _waveBankIndex = soundReader.ReadByte();
             }
 
-            if (!hasRPCs)
+            if(!hasRPCs)
                 RpcCurves = new int[0];
             else
             {
@@ -76,14 +76,14 @@ namespace Microsoft.Xna.Framework.Audio
 
                 var numPresets = soundReader.ReadByte();
                 RpcCurves = new int[numPresets];
-                for (var i = 0; i < numPresets; i++)
+                for(var i = 0; i < numPresets; i++)
                     RpcCurves[i] = engine.GetRpcIndex(soundReader.ReadUInt32());
 
                 // Just in case seek to the right spot.
                 soundReader.BaseStream.Seek(current + dataLength, SeekOrigin.Begin);
             }
 
-            if (!hasDSPs)
+            if(!hasDSPs)
                 _useReverb = false;
             else
             {
@@ -94,10 +94,10 @@ namespace Microsoft.Xna.Framework.Audio
                 soundReader.BaseStream.Seek(7, SeekOrigin.Current);
             }
 
-            if (_complexSound)
+            if(_complexSound)
             {
                 _soundClips = new XactClip[numClips];
-                for (int i = 0; i < numClips; i++)
+                for(int i = 0; i < numClips; i++)
                     _soundClips[i] = new XactClip(soundBank, soundReader, _useReverb);
             }
 
@@ -107,16 +107,14 @@ namespace Microsoft.Xna.Framework.Audio
 
         internal void SetFade(float fadeInTime, float fadeOutTime)
         {
-            if (fadeInTime == 0.0f &&
-                fadeOutTime == 0.0f)
+            if(fadeInTime == 0.0f && fadeOutTime == 0.0f)
                 return;
 
-            if (_complexSound)
+            if(_complexSound)
             {
-                foreach (var sound in _soundClips)
+                foreach(var sound in _soundClips)
                     sound.SetFade(fadeInTime, fadeOutTime);
-            }
-            else
+            } else
             {
                 // TODO:
             }
@@ -128,11 +126,11 @@ namespace Microsoft.Xna.Framework.Audio
             var category = engine.Categories[_categoryID];
 
             var curInstances = category.GetPlayingInstanceCount();
-            if (curInstances >= category.maxInstances)
+            if(curInstances >= category.maxInstances)
             {
                 var prevSound = category.GetOldestInstance();
 
-                if (prevSound != null)
+                if(prevSound != null)
                 {
                     prevSound.SetFade(0.0f, category.fadeOut);
                     prevSound.Stop(AudioStopOptions.Immediate);
@@ -144,19 +142,18 @@ namespace Microsoft.Xna.Framework.Audio
             float finalPitch = _pitch + _cuePitch;
             float finalMix = _useReverb ? _cueReverbMix : 0.0f;
 
-            if (_complexSound)
+            if(_complexSound)
             {
-                foreach (XactClip clip in _soundClips)
+                foreach(XactClip clip in _soundClips)
                 {
                     clip.UpdateState(finalVolume, finalPitch, finalMix, _cueFilterFrequency, _cueFilterQFactor);
                     clip.Play();
                 }
-            }
-            else
+            } else
             {
-                if (_wave != null)
+                if(_wave != null)
                 {
-                    if (_streaming)
+                    if(_streaming)
                         _wave.Dispose();
                     else
                         _wave._isXAct = false;
@@ -165,7 +162,7 @@ namespace Microsoft.Xna.Framework.Audio
 
                 _wave = _soundBank.GetSoundEffectInstance(_waveBankIndex, _trackIndex, out _streaming);
 
-                if (_wave == null)
+                if(_wave == null)
                 {
                     // We couldn't create a sound effect instance, most likely
                     // because we've reached the sound pool limits.
@@ -181,16 +178,15 @@ namespace Microsoft.Xna.Framework.Audio
 
         internal void Update(float dt)
         {
-            if (_complexSound)
+            if(_complexSound)
             {
-                foreach (var sound in _soundClips)
+                foreach(var sound in _soundClips)
                     sound.Update(dt);
-            }
-            else
+            } else
             {
-                if (_wave != null && _wave.State == SoundState.Stopped)
+                if(_wave != null && _wave.State == SoundState.Stopped)
                 {
-                    if (_streaming)
+                    if(_streaming)
                         _wave.Dispose();
                     else
                         _wave._isXAct = false;
@@ -201,17 +197,16 @@ namespace Microsoft.Xna.Framework.Audio
 
         internal void StopAll(AudioStopOptions options)
         {
-            if (_complexSound)
+            if(_complexSound)
             {
-                foreach (XactClip clip in _soundClips)
+                foreach(XactClip clip in _soundClips)
                     clip.Stop();
-            }
-            else
+            } else
             {
-                if (_wave != null)
+                if(_wave != null)
                 {
                     _wave.Stop();
-                    if (_streaming)
+                    if(_streaming)
                         _wave.Dispose();
                     else
                         _wave._isXAct = false;
@@ -222,17 +217,16 @@ namespace Microsoft.Xna.Framework.Audio
 
         public void Stop(AudioStopOptions options)
         {
-            if (_complexSound)
+            if(_complexSound)
             {
-                foreach (var sound in _soundClips)
+                foreach(var sound in _soundClips)
                     sound.Stop();
-            }
-            else
+            } else
             {
-                if (_wave != null)
+                if(_wave != null)
                 {
                     _wave.Stop();
-                    if (_streaming)
+                    if(_streaming)
                         _wave.Dispose();
                     else
                         _wave._isXAct = false;
@@ -243,34 +237,32 @@ namespace Microsoft.Xna.Framework.Audio
 
         public void Pause()
         {
-            if (_complexSound)
+            if(_complexSound)
             {
-                foreach (var sound in _soundClips)
+                foreach(var sound in _soundClips)
                 {
-                    if (sound.State == SoundState.Playing)
+                    if(sound.State == SoundState.Playing)
                         sound.Pause();
                 }
-            }
-            else
+            } else
             {
-                if (_wave != null && _wave.State == SoundState.Playing)
+                if(_wave != null && _wave.State == SoundState.Playing)
                     _wave.Pause();
             }
         }
 
         public void Resume()
         {
-            if (_complexSound)
+            if(_complexSound)
             {
-                foreach (var sound in _soundClips)
+                foreach(var sound in _soundClips)
                 {
-                    if (sound.State == SoundState.Paused)
+                    if(sound.State == SoundState.Paused)
                         sound.Resume();
                 }
-            }
-            else
+            } else
             {
-                if (_wave != null && _wave.State == SoundState.Paused)
+                if(_wave != null && _wave.State == SoundState.Paused)
                     _wave.Resume();
             }
         }
@@ -280,19 +272,23 @@ namespace Microsoft.Xna.Framework.Audio
             // The different volumes modulate each other.
             var volume = _volume * _cueVolume * categoryVolume;
 
-            if (_complexSound)
+            if(_complexSound)
             {
-                foreach (var clip in _soundClips)
+                foreach(var clip in _soundClips)
                     clip.SetVolumeScale(volume);
-            }
-            else
+            } else
             {
-                if (_wave != null)
+                if(_wave != null)
                     _wave.Volume = volume;
             }
         }
 
-        internal void UpdateState(AudioEngine engine, float volume, float pitch, float reverbMix, float? filterFrequency, float? filterQFactor)
+        internal void UpdateState(AudioEngine engine,
+                                  float volume,
+                                  float pitch,
+                                  float reverbMix,
+                                  float? filterFrequency,
+                                  float? filterQFactor)
         {
             _cueVolume = volume;
             var finalVolume = _volume * _cueVolume * engine.Categories[_categoryID]._volume[0];
@@ -304,12 +300,15 @@ namespace Microsoft.Xna.Framework.Audio
             _cuePitch = pitch;
             var finalPitch = _pitch + _cuePitch;
 
-            if (_complexSound)
+            if(_complexSound)
             {
-                foreach (var clip in _soundClips)
-                    clip.UpdateState(finalVolume, finalPitch, _useReverb ? _cueReverbMix : 0.0f, _cueFilterFrequency, _cueFilterQFactor);
-            }
-            else if (_wave != null)
+                foreach(var clip in _soundClips)
+                    clip.UpdateState(finalVolume,
+                                     finalPitch,
+                                     _useReverb ? _cueReverbMix : 0.0f,
+                                     _cueFilterFrequency,
+                                     _cueFilterQFactor);
+            } else if(_wave != null)
             {
                 _wave.PlatformSetReverbMix(_useReverb ? _cueReverbMix : 0.0f);
                 _wave.Pitch = finalPitch;
@@ -319,14 +318,13 @@ namespace Microsoft.Xna.Framework.Audio
 
         internal void SetCuePan(float pan)
         {
-            if (_complexSound)
+            if(_complexSound)
             {
-                foreach (var clip in _soundClips)
+                foreach(var clip in _soundClips)
                     clip.SetPan(pan);
-            }
-            else
+            } else
             {
-                if (_wave != null)
+                if(_wave != null)
                     _wave.Pan = pan;
             }
         }
@@ -335,10 +333,10 @@ namespace Microsoft.Xna.Framework.Audio
         {
             get
             {
-                if (_complexSound)
+                if(_complexSound)
                 {
-                    foreach (var clip in _soundClips)
-                        if (clip.State == SoundState.Playing)
+                    foreach(var clip in _soundClips)
+                        if(clip.State == SoundState.Playing)
                             return true;
 
                     return false;
@@ -352,14 +350,14 @@ namespace Microsoft.Xna.Framework.Audio
         {
             get
             {
-                if (_complexSound)
+                if(_complexSound)
                 {
                     var notStopped = false;
 
                     // All clips must be stopped for the sound to be stopped.
-                    foreach (var clip in _soundClips)
+                    foreach(var clip in _soundClips)
                     {
-                        if (clip.State != SoundState.Stopped)
+                        if(clip.State != SoundState.Stopped)
                             notStopped = true;
                     }
 
@@ -375,10 +373,10 @@ namespace Microsoft.Xna.Framework.Audio
         {
             get
             {
-                if (_complexSound)
+                if(_complexSound)
                 {
-                    foreach (var clip in _soundClips)
-                        if (clip.State == SoundState.Paused)
+                    foreach(var clip in _soundClips)
+                        if(clip.State == SoundState.Paused)
                             return true;
 
                     return false;

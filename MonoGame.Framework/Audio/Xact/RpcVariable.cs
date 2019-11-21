@@ -13,31 +13,19 @@ namespace Microsoft.Xna.Framework.Audio
         public float MaxValue;
         public float MinValue;
 
-        public bool IsPublic
-        {
-            get { return (Flags & 0x1) != 0; }
-        }
+        public bool IsPublic { get { return (Flags & 0x1) != 0; } }
 
-        public bool IsReadOnly
-        {
-            get { return (Flags & 0x2) != 0; }
-        }
+        public bool IsReadOnly { get { return (Flags & 0x2) != 0; } }
 
-        public bool IsGlobal
-        {
-            get { return (Flags & 0x4) == 0; }
-        }
+        public bool IsGlobal { get { return (Flags & 0x4) == 0; } }
 
-        public bool IsReserved
-        {
-            get { return (Flags & 0x8) != 0; }
-        }
+        public bool IsReserved { get { return (Flags & 0x8) != 0; } }
 
         public void SetValue(float value)
         {
-            if (value < MinValue)
+            if(value < MinValue)
                 Value = MinValue;
-            else if (value > MaxValue)
+            else if(value > MaxValue)
                 Value = MaxValue;
             else
                 Value = value;

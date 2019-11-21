@@ -8,9 +8,7 @@ namespace Microsoft.Xna.Framework.Content
 {
     internal class ColorReader : ContentTypeReader<Color>
     {
-        public ColorReader()
-        {
-        }
+        public ColorReader() { }
 
         protected internal override Color Read(ContentReader input, Color existingInstance)
         {
