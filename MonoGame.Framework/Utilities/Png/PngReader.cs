@@ -34,14 +34,14 @@ namespace MonoGame.Utilities.Png
 
         public Texture2D Read(Stream inputStream, GraphicsDevice graphicsDevice)
         {
-            if (IsPngImage(inputStream) == false)
+            if(IsPngImage(inputStream) == false)
             {
                 throw new Exception("File does not have PNG signature.");
             }
 
             inputStream.Position = 8;
 
-            while (inputStream.Position != inputStream.Length)
+            while(inputStream.Position != inputStream.Length)
             {
                 byte[] chunkDataLengthBytes = new byte[4];
                 inputStream.Read(chunkDataLengthBytes, 0, 4);
@@ -81,7 +81,7 @@ namespace MonoGame.Utilities.Png
         {
             string chunkType = PngChunk.GetChunkTypeString(chunkBytes.Skip(4).Take(4).ToArray());
 
-            switch (chunkType)
+            switch(chunkType)
             {
                 case "IHDR":
 
@@ -128,9 +128,9 @@ namespace MonoGame.Utilities.Png
         {
             var dataByteList = new List<byte>();
 
-            foreach (var dataChunk in dataChunks)
+            foreach(var dataChunk in dataChunks)
             {
-                if (dataChunk.Type == "IDAT")
+                if(dataChunk.Type == "IDAT")
                 {
                     dataByteList.AddRange(dataChunk.Data);
                 }
@@ -141,12 +141,11 @@ namespace MonoGame.Utilities.Png
 
             try
             {
-                using (var deflateStream = new ZlibStream(compressedStream, CompressionMode.Decompress))
+                using(var deflateStream = new ZlibStream(compressedStream, CompressionMode.Decompress))
                 {
                     deflateStream.CopyTo(decompressedStream);
                 }
-            }
-            catch (Exception exception)
+            } catch(Exception exception)
             {
                 throw new Exception("An error occurred during DEFLATE decompression.", exception);
             }
@@ -164,18 +163,18 @@ namespace MonoGame.Utilities.Png
             bytesPerScanline = (bytesPerPixel * width) + 1;
             int scanlineCount = pixelData.Length / bytesPerScanline;
 
-            if (pixelData.Length % bytesPerScanline != 0)
+            if(pixelData.Length % bytesPerScanline != 0)
             {
                 throw new Exception("Malformed pixel data - total length of pixel data not multiple of ((bytesPerPixel * width) + 1)");
             }
 
             var result = new byte[scanlineCount][];
 
-            for (int y = 0; y < scanlineCount; y++)
+            for(int y = 0; y < scanlineCount; y++)
             {
                 result[y] = new byte[bytesPerScanline];
 
-                for (int x = 0; x < bytesPerScanline; x++)
+                for(int x = 0; x < bytesPerScanline; x++)
                 {
                     result[y][x] = pixelData[y * bytesPerScanline + x];
                 }
@@ -190,14 +189,14 @@ namespace MonoGame.Utilities.Png
 
             byte[] previousScanline = new byte[bytesPerScanline];
 
-            for (int y = 0; y < height; y++)
+            for(int y = 0; y < height; y++)
             {
                 var scanline = pixelData[y];
 
                 FilterType filterType = (FilterType)scanline[0];
                 byte[] defilteredScanline;
 
-                switch (filterType)
+                switch(filterType)
                 {
                     case FilterType.None:
 
@@ -240,11 +239,11 @@ namespace MonoGame.Utilities.Png
 
         private void ProcessDefilteredScanline(byte[] defilteredScanline, int y)
         {
-            switch (colorType)
+            switch(colorType)
             {
                 case ColorType.Grayscale:
 
-                    for (int x = 0; x < width; x++)
+                    for(int x = 0; x < width; x++)
                     {
                         int offset = 1 + (x * bytesPerPixel);
 
@@ -257,7 +256,7 @@ namespace MonoGame.Utilities.Png
 
                 case ColorType.GrayscaleWithAlpha:
 
-                    for (int x = 0; x < width; x++)
+                    for(int x = 0; x < width; x++)
                     {
                         int offset = 1 + (x * bytesPerPixel);
 
@@ -271,7 +270,7 @@ namespace MonoGame.Utilities.Png
 
                 case ColorType.Palette:
 
-                    for (int x = 0; x < width; x++)
+                    for(int x = 0; x < width; x++)
                     {
                         var pixelColor = palette[defilteredScanline[x + 1]];
 
@@ -282,7 +281,7 @@ namespace MonoGame.Utilities.Png
 
                 case ColorType.Rgb:
 
-                    for (int x = 0; x < width; x++)
+                    for(int x = 0; x < width; x++)
                     {
                         int offset = 1 + (x * bytesPerPixel);
 
@@ -297,7 +296,7 @@ namespace MonoGame.Utilities.Png
 
                 case ColorType.RgbWithAlpha:
 
-                    for (int x = 0; x < width; x++)
+                    for(int x = 0; x < width; x++)
                     {
                         int offset = 1 + (x * bytesPerPixel);
 
@@ -318,7 +317,7 @@ namespace MonoGame.Utilities.Png
 
         private int CalculateBytesPerPixel()
         {
-            switch (colorType)
+            switch(colorType)
             {
                 case ColorType.Grayscale:
                     return bitsPerSample / 8;

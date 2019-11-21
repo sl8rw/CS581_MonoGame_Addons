@@ -15,23 +15,11 @@ namespace MonoGame.Utilities.Png
     {
         private IList<Color> colors;
 
-        internal Palette()
-        {
-            colors = new List<Color>();
-        }
+        internal Palette() { colors = new List<Color>(); }
 
-        internal Color this[int index]
-        {
-            get
-            {
-                return colors[index];
-            }
-        }
+        internal Color this[int index] { get { return colors[index]; } }
 
-        internal void AddColor(Color color)
-        {
-            colors.Add(color);
-        }
+        internal void AddColor(Color color) { colors.Add(color); }
 
         internal void AddAlphaToColorAtIndex(int colorIndex, byte alpha)
         {
@@ -42,7 +30,7 @@ namespace MonoGame.Utilities.Png
 
         internal void AddAlphaToColors(IList<byte> alphas)
         {
-            for (int i = 0; i < alphas.Count; i++)
+            for(int i = 0; i < alphas.Count; i++)
             {
                 AddAlphaToColorAtIndex(i, alphas[i]);
             }
@@ -53,64 +41,29 @@ namespace MonoGame.Utilities.Png
 
     internal class PngChunk
     {
-        internal PngChunk()
-        {
-            this.Data = new byte[0];
-        }
+        internal PngChunk() { this.Data = new byte[0]; }
 
         /// <summary>
         /// Length of Data field
         /// </summary>
-        internal uint Length
-        {
-            get;
-            set;
-        }
+        internal uint Length { get; set; }
 
-        internal string Type
-        {
-            get;
-            set;
-        }
+        internal string Type { get; set; }
 
-        private bool Ancillary
-        {
-            get;
-            set;
-        }
+        private bool Ancillary { get; set; }
 
-        private bool Private
-        {
-            get;
-            set;
-        }
+        private bool Private { get; set; }
 
-        private bool Reserved
-        {
-            get;
-            set;
-        }
+        private bool Reserved { get; set; }
 
-        private bool SafeToCopy
-        {
-            get;
-            set;
-        }
+        private bool SafeToCopy { get; set; }
 
-        internal byte[] Data
-        {
-            get;
-            set;
-        }
+        internal byte[] Data { get; set; }
 
         /// <summary>
         /// CRC of both Type and Data fields, but not Length field
         /// </summary>
-        internal uint Crc
-        {
-            get;
-            set;
-        }
+        internal uint Crc { get; set; }
 
         internal virtual void Decode(byte[] chunkBytes)
         {
@@ -121,7 +74,7 @@ namespace MonoGame.Utilities.Png
             this.Data = chunkBytesList.GetRange(8, (int)this.Length).ToArray();
             this.Crc = chunkBytesList.GetRange((int)(8 + this.Length), 4).ToArray().ToUInt();
 
-            if (CrcCheck() == false)
+            if(CrcCheck() == false)
             {
                 throw new Exception("CRC check failed.");
             }
@@ -168,71 +121,33 @@ namespace MonoGame.Utilities.Png
         }
 
         internal static string GetChunkTypeString(byte[] chunkTypeBytes)
-        {
-            return Encoding.UTF8.GetString(chunkTypeBytes, 0, chunkTypeBytes.Length);
-        }
+        { return Encoding.UTF8.GetString(chunkTypeBytes, 0, chunkTypeBytes.Length); }
 
         private static byte[] GetChunkTypeBytes(string chunkTypeString)
-        {
-            return Encoding.UTF8.GetBytes(chunkTypeString);
-        }
+        { return Encoding.UTF8.GetBytes(chunkTypeString); }
     }
 
     internal class HeaderChunk : PngChunk
     {
         private static byte[] pngSignature = new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 };
 
-        internal HeaderChunk()
-        {
-            base.Type = "IHDR";
-        }
+        internal HeaderChunk() { base.Type = "IHDR"; }
 
-        internal uint Width
-        {
-            get;
-            set;
-        }
+        internal uint Width { get; set; }
 
-        internal uint Height
-        {
-            get;
-            set;
-        }
+        internal uint Height { get; set; }
 
-        internal byte BitDepth
-        {
-            get;
-            set;
-        }
+        internal byte BitDepth { get; set; }
 
-        internal ColorType ColorType
-        {
-            get;
-            set;
-        }
+        internal ColorType ColorType { get; set; }
 
-        internal byte CompressionMethod
-        {
-            get;
-            set;
-        }
+        internal byte CompressionMethod { get; set; }
 
-        internal byte FilterMethod
-        {
-            get;
-            set;
-        }
+        internal byte FilterMethod { get; set; }
 
-        internal byte InterlaceMethod
-        {
-            get;
-            set;
-        }
+        internal byte InterlaceMethod { get; set; }
 
-        internal static byte[] PngSignature
-        {
-            get { return pngSignature; }
-        }
+        internal static byte[] PngSignature { get { return pngSignature; } }
 
         internal override void Decode(byte[] chunkBytes)
         {
@@ -247,9 +162,9 @@ namespace MonoGame.Utilities.Png
             this.FilterMethod = chunkData.Skip(11).First();
             this.InterlaceMethod = chunkData.Skip(12).First();
 
-            if (this.BitDepth < 8)
+            if(this.BitDepth < 8)
             {
-                throw new Exception(String.Format("Bit depth less than 8 bits per sample is unsupported.  Image bit depth is {0} bits per sample.", this.BitDepth));
+                throw new Exception($"Bit depth less than 8 bits per sample is unsupported.  Image bit depth is {BitDepth} bits per sample.");
             }
         }
 
@@ -279,23 +194,19 @@ namespace MonoGame.Utilities.Png
             this.Palette = new Palette();
         }
 
-        internal Palette Palette
-        {
-            get;
-            set;
-        }
+        internal Palette Palette { get; set; }
 
         internal override void Decode(byte[] chunkBytes)
         {
             base.Decode(chunkBytes);
             var chunkData = base.Data;
 
-            if (chunkData.Length % 3 != 0)
+            if(chunkData.Length % 3 != 0)
             {
                 throw new Exception("Malformed palette chunk - length not multiple of 3.");
             }
 
-            for (int i = 0; i < chunkData.Length / 3; i++)
+            for(int i = 0; i < chunkData.Length / 3; i++)
             {
                 byte red = chunkData.Skip(3 * i).Take(1).First();
                 byte green = chunkData.Skip((3 * i) + 1).Take(1).First();
@@ -314,11 +225,7 @@ namespace MonoGame.Utilities.Png
             this.PaletteTransparencies = new List<byte>();
         }
 
-        internal IList<byte> PaletteTransparencies
-        {
-            get;
-            set;
-        }
+        internal IList<byte> PaletteTransparencies { get; set; }
 
         internal override void Decode(byte[] chunkBytes)
         {
@@ -341,18 +248,12 @@ namespace MonoGame.Utilities.Png
 
     internal class DataChunk : PngChunk
     {
-        internal DataChunk()
-        {
-            base.Type = "IDAT";
-        }
+        internal DataChunk() { base.Type = "IDAT"; }
     }
 
     internal class EndChunk : PngChunk
     {
-        internal EndChunk()
-        {
-            base.Type = "IEND";
-        }
+        internal EndChunk() { base.Type = "IEND"; }
     }
 
     #endregion
@@ -383,10 +284,7 @@ namespace MonoGame.Utilities.Png
 
     internal static class NoneFilter
     {
-        internal static byte[] Decode(byte[] scanline)
-        {
-            return scanline;
-        }
+        internal static byte[] Decode(byte[] scanline) { return scanline; }
 
         internal static byte[] Encode(byte[] scanline)
         {
@@ -405,7 +303,7 @@ namespace MonoGame.Utilities.Png
         {
             byte[] result = new byte[scanline.Length];
 
-            for (int x = 1; x < scanline.Length; x++)
+            for(int x = 1; x < scanline.Length; x++)
             {
                 byte priorRawByte = (x - bytesPerPixel < 1) ? (byte)0 : result[x - bytesPerPixel];
 
@@ -421,7 +319,7 @@ namespace MonoGame.Utilities.Png
 
             encodedScanline[0] = (byte)FilterType.Sub;
 
-            for (int x = 0; x < scanline.Length; x++)
+            for(int x = 0; x < scanline.Length; x++)
             {
                 byte priorRawByte = (x - bytesPerPixel < 0) ? (byte)0 : scanline[x - bytesPerPixel];
 
@@ -438,7 +336,7 @@ namespace MonoGame.Utilities.Png
         {
             byte[] result = new byte[scanline.Length];
 
-            for (int x = 1; x < scanline.Length; x++)
+            for(int x = 1; x < scanline.Length; x++)
             {
                 byte above = previousScanline[x];
 
@@ -454,7 +352,7 @@ namespace MonoGame.Utilities.Png
 
             encodedScanline[0] = (byte)FilterType.Up;
 
-            for (int x = 0; x < scanline.Length; x++)
+            for(int x = 0; x < scanline.Length; x++)
             {
                 byte above = previousScanline[x];
 
@@ -471,7 +369,7 @@ namespace MonoGame.Utilities.Png
         {
             byte[] result = new byte[scanline.Length];
 
-            for (int x = 1; x < scanline.Length; x++)
+            for(int x = 1; x < scanline.Length; x++)
             {
                 byte left = (x - bytesPerPixel < 1) ? (byte)0 : result[x - bytesPerPixel];
                 byte above = previousScanline[x];
@@ -488,7 +386,7 @@ namespace MonoGame.Utilities.Png
 
             encodedScanline[0] = (byte)FilterType.Average;
 
-            for (int x = 0; x < scanline.Length; x++)
+            for(int x = 0; x < scanline.Length; x++)
             {
                 byte left = (x - bytesPerPixel < 0) ? (byte)0 : scanline[x - bytesPerPixel];
                 byte above = previousScanline[x];
@@ -499,10 +397,7 @@ namespace MonoGame.Utilities.Png
             return encodedScanline;
         }
 
-        private static int Average(byte left, byte above)
-        {
-            return Convert.ToInt32(Math.Floor((left + above) / 2.0));
-        }
+        private static int Average(byte left, byte above) { return Convert.ToInt32(Math.Floor((left + above) / 2.0)); }
     }
 
     internal static class PaethFilter
@@ -511,7 +406,7 @@ namespace MonoGame.Utilities.Png
         {
             byte[] result = new byte[scanline.Length];
 
-            for (int x = 1; x < scanline.Length; x++)
+            for(int x = 1; x < scanline.Length; x++)
             {
                 byte left = (x - bytesPerPixel < 1) ? (byte)0 : result[x - bytesPerPixel];
                 byte above = previousScanline[x];
@@ -529,7 +424,7 @@ namespace MonoGame.Utilities.Png
 
             encodedScanline[0] = (byte)FilterType.Paeth;
 
-            for (int x = 0; x < scanline.Length; x++)
+            for(int x = 0; x < scanline.Length; x++)
             {
                 byte left = (x - bytesPerPixel < 0) ? (byte)0 : scanline[x - bytesPerPixel];
                 byte above = previousScanline[x];
@@ -548,17 +443,15 @@ namespace MonoGame.Utilities.Png
             int pb = Math.Abs(p - b);
             int pc = Math.Abs(p - c);
 
-            if ((pa <= pb) && (pa <= pc))
+            if((pa <= pb) && (pa <= pc))
             {
                 return a;
-            }
-            else
+            } else
             {
-                if (pb <= pc)
+                if(pb <= pc)
                 {
                     return b;
-                }
-                else
+                } else
                 {
                     return c;
                 }
@@ -573,10 +466,7 @@ namespace MonoGame.Utilities.Png
         // table of CRCs of all 8-bit messages
         private static uint[] crcTable = null;
 
-        static PngCrc()
-        {
-            BuildCrcTable();
-        }
+        static PngCrc() { BuildCrcTable(); }
 
         /// <summary>
         /// Build CRC lookup table for performance (once-off)
@@ -587,17 +477,16 @@ namespace MonoGame.Utilities.Png
 
             uint c, n, k;
 
-            for (n = 0; n < 256; n++)
+            for(n = 0; n < 256; n++)
             {
                 c = n;
 
-                for (k = 0; k < 8; k++)
+                for(k = 0; k < 8; k++)
                 {
-                    if ((c & 1) > 0)
+                    if((c & 1) > 0)
                     {
                         c = 0xedb88320 ^ (c >> 1);
-                    }
-                    else
+                    } else
                     {
                         c = c >> 1;
                     }
@@ -613,12 +502,12 @@ namespace MonoGame.Utilities.Png
 
             int n;
 
-            if (crcTable == null)
+            if(crcTable == null)
             {
                 BuildCrcTable();
             }
 
-            for (n = 0; n < bytes.Length; n++)
+            for(n = 0; n < bytes.Length; n++)
             {
                 c = crcTable[(c ^ bytes[n]) & 0xff] ^ (c >> 8);
             }
@@ -633,11 +522,10 @@ namespace MonoGame.Utilities.Png
         {
             byte[] input;
 
-            if (BitConverter.IsLittleEndian)
+            if(BitConverter.IsLittleEndian)
             {
                 input = ReverseByteArray(bytes);
-            }
-            else
+            } else
             {
                 input = bytes;
             }
@@ -649,19 +537,15 @@ namespace MonoGame.Utilities.Png
         {
             byte[] output = BitConverter.GetBytes(integer);
 
-            if (BitConverter.IsLittleEndian)
+            if(BitConverter.IsLittleEndian)
             {
                 return ReverseByteArray(output);
-            }
-            else
+            } else
             {
                 return output;
             }
         }
 
-        private static byte[] ReverseByteArray(byte[] byteArray)
-        {
-            return (byte[])byteArray.Reverse().ToArray();
-        }
+        private static byte[] ReverseByteArray(byte[] byteArray) { return (byte[])byteArray.Reverse().ToArray(); }
     }
 }

@@ -30,7 +30,7 @@ namespace MonoGame.Utilities
             long startPos = stream.Position;
             long pos = startPos;
 
-            while (pos - startPos < compressedSize)
+            while(pos - startPos < compressedSize)
             {
                 // the compressed stream is seperated into blocks that will decompress
                 // into 32Kb or some other size if specified.
@@ -44,8 +44,8 @@ namespace MonoGame.Utilities
                 int lo = stream.ReadByte();
                 int block_size = (hi << 8) | lo;
                 int frame_size = 0x8000; // frame size is 32Kb by default
-                                         // does this block define a frame size?
-                if (hi == 0xFF)
+                // does this block define a frame size?
+                if(hi == 0xFF)
                 {
                     hi = lo;
                     lo = (byte)stream.ReadByte();
@@ -54,12 +54,11 @@ namespace MonoGame.Utilities
                     lo = (byte)stream.ReadByte();
                     block_size = (hi << 8) | lo;
                     pos += 5;
-                }
-                else
+                } else
                     pos += 2;
 
                 // either says there is nothing to decode
-                if (block_size == 0 || frame_size == 0)
+                if(block_size == 0 || frame_size == 0)
                     break;
 
                 dec.Decompress(stream, block_size, decompressedStream, frame_size);
@@ -70,7 +69,7 @@ namespace MonoGame.Utilities
                 stream.Seek(pos, SeekOrigin.Begin);
             }
 
-            if (decompressedStream.Position != decompressedSize)
+            if(decompressedStream.Position != decompressedSize)
             {
                 throw new ContentLoadException("Decompression failed.");
             }
@@ -81,7 +80,7 @@ namespace MonoGame.Utilities
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-            if (disposing)
+            if(disposing)
             {
                 decompressedStream.Dispose();
             }
@@ -92,34 +91,18 @@ namespace MonoGame.Utilities
         #region Stream internals
 
         public override int Read(byte[] buffer, int offset, int count)
-        {
-            return decompressedStream.Read(buffer, offset, count);
-        }
+        { return decompressedStream.Read(buffer, offset, count); }
 
-        public override bool CanRead
-        {
-            get { return true; }
-        }
+        public override bool CanRead { get { return true; } }
 
 
-        public override bool CanSeek
-        {
-            get { return false; }
-        }
+        public override bool CanSeek { get { return false; } }
 
-        public override bool CanWrite
-        {
-            get { return false; }
-        }
+        public override bool CanWrite { get { return false; } }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
-        public override long Length
-        {
-            get { throw new NotSupportedException(); }
-        }
+        public override long Length { get { throw new NotSupportedException(); } }
 
         public override long Position
         {
@@ -128,21 +111,11 @@ namespace MonoGame.Utilities
         }
 
 
-        public override long Seek(long offset, SeekOrigin origin)
-        {
-            throw new NotImplementedException();
-        }
+        public override long Seek(long offset, SeekOrigin origin) { throw new NotImplementedException(); }
 
-        public override void SetLength(long value)
-        {
-            throw new NotImplementedException();
-        }
+        public override void SetLength(long value) { throw new NotImplementedException(); }
 
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-            throw new NotImplementedException();
-        }
-
+        public override void Write(byte[] buffer, int offset, int count) { throw new NotImplementedException(); }
         #endregion
     }
 }

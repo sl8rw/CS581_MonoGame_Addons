@@ -12,8 +12,7 @@ namespace MonoGame.Utilities
         /// Compute a hash from a byte array.
         /// </summary>
         /// <remarks>
-        /// Modified FNV Hash in C#
-        /// http://stackoverflow.com/a/468084
+        /// Modified FNV Hash in C# http://stackoverflow.com/a/468084
         /// </remarks>
         internal static int ComputeHash(params byte[] data)
         {
@@ -22,7 +21,7 @@ namespace MonoGame.Utilities
                 const int p = 16777619;
                 var hash = (int)2166136261;
 
-                for (var i = 0; i < data.Length; i++)
+                for(var i = 0; i < data.Length; i++)
                     hash = (hash ^ data[i]) * p;
 
                 hash += hash << 13;
@@ -38,8 +37,7 @@ namespace MonoGame.Utilities
         /// Compute a hash from the content of a stream and restore the position.
         /// </summary>
         /// <remarks>
-        /// Modified FNV Hash in C#
-        /// http://stackoverflow.com/a/468084
+        /// Modified FNV Hash in C# http://stackoverflow.com/a/468084
         /// </remarks>
         internal static int ComputeHash(Stream stream)
         {
@@ -55,9 +53,9 @@ namespace MonoGame.Utilities
 
                 var data = new byte[1024];
                 int length;
-                while ((length = stream.Read(data, 0, data.Length)) != 0)
+                while((length = stream.Read(data, 0, data.Length)) != 0)
                 {
-                    for (var i = 0; i < length; i++)
+                    for(var i = 0; i < length; i++)
                         hash = (hash ^ data[i]) * p;
                 }
 

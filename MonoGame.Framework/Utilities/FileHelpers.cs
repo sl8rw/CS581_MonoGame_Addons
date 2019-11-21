@@ -20,14 +20,13 @@ namespace MonoGame.Utilities
         public static readonly char NotSeparator = ForwardSlash;
         public static readonly char Separator = BackwardSlash;
 #else
-        public static readonly char NotSeparator = Path.DirectorySeparatorChar == BackwardSlash ? ForwardSlash : BackwardSlash;
+        public static readonly char NotSeparator = Path.DirectorySeparatorChar == BackwardSlash
+            ? ForwardSlash
+            : BackwardSlash;
         public static readonly char Separator = Path.DirectorySeparatorChar;
 #endif
 
-        public static string NormalizeFilePathSeparators(string name)
-        {
-            return name.Replace(NotSeparator, Separator);
-        }
+        public static string NormalizeFilePathSeparators(string name) { return name.Replace(NotSeparator, Separator); }
 
         /// <summary>
         /// Combines the filePath and relativeFile based on relativeFile being a file in the same location as filePath.
@@ -43,11 +42,11 @@ namespace MonoGame.Utilities
             filePath = filePath.Replace(BackwardSlash, ForwardSlash);
 
             bool hasForwardSlash = filePath.StartsWith(ForwardSlashString);
-            if (!hasForwardSlash)
+            if(!hasForwardSlash)
                 filePath = ForwardSlashString + filePath;
 
             // Get a uri for filePath using the file:// schema and no host.
-            var src = new Uri("file://" + UrlEncode(filePath));
+            var src = new Uri($"file://{UrlEncode(filePath)}");
 
             var dst = new Uri(src, UrlEncode(relativeFile));
 
@@ -55,7 +54,7 @@ namespace MonoGame.Utilities
             // relative addresses resolved... get the local path.
             var localPath = dst.LocalPath;
 
-            if (!hasForwardSlash && localPath.StartsWith("/"))
+            if(!hasForwardSlash && localPath.StartsWith("/"))
                 localPath = localPath.Substring(1);
 
             // Convert the directory separator characters to the 
@@ -68,15 +67,18 @@ namespace MonoGame.Utilities
             var encoder = new UTF8Encoding();
             var safeline = new StringBuilder(encoder.GetByteCount(url) * 3);
 
-            foreach (var c in url)
+            foreach(var c in url)
             {
-                if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122) || Array.IndexOf(UrlSafeChars, c) != -1)
+                if((c >= 48 && c <= 57) ||
+                    (c >= 65 && c <= 90) ||
+                    (c >= 97 && c <= 122) ||
+                    Array.IndexOf(UrlSafeChars, c) != -1)
                     safeline.Append(c);
                 else
                 {
                     var bytes = encoder.GetBytes(c.ToString());
 
-                    foreach (var num in bytes)
+                    foreach(var num in bytes)
                     {
                         safeline.Append("%");
                         safeline.Append(num.ToString("X"));

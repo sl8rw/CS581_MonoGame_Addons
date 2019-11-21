@@ -13,14 +13,9 @@ namespace MonoGame.Utilities
 {
     internal class Lz4DecoderStream : Stream
     {
-        public Lz4DecoderStream()
-        {
-        }
+        public Lz4DecoderStream() { }
 
-        public Lz4DecoderStream(Stream input, long inputLength = long.MaxValue)
-        {
-            Reset(input, inputLength);
-        }
+        public Lz4DecoderStream(Stream input, long inputLength = long.MaxValue) { Reset(input, inputLength); }
 
         public void Reset(Stream input, long inputLength = long.MaxValue)
         {
@@ -84,12 +79,12 @@ namespace MonoGame.Utilities
         public override int Read(byte[] buffer, int offset, int count)
         {
 #if CHECK_ARGS
-            if (buffer == null)
-                throw new ArgumentNullException("buffer");
-            if (offset < 0 || count < 0 || buffer.Length - count < offset)
+            if(buffer == null)
+                throw new ArgumentNullException(nameof(buffer));
+            if(offset < 0 || count < 0 || buffer.Length - count < offset)
                 throw new ArgumentOutOfRangeException();
 
-            if (input == null)
+            if(input == null)
                 throw new InvalidOperationException();
 #endif
             int nRead, nToRead = count;
@@ -107,7 +102,7 @@ namespace MonoGame.Utilities
 			var inBufPos = this.inBufPos;
 			var inBufEnd = this.inBufEnd;
 #endif
-            switch (phase)
+            switch(phase)
             {
                 case DecodePhase.ReadToken:
                     goto readToken;
@@ -128,13 +123,12 @@ namespace MonoGame.Utilities
                     goto copyMatch;
             }
 
-        readToken:
-            int tok;
-            if (inBufPos < inBufEnd)
+            readToken:
+int tok;
+            if(inBufPos < inBufEnd)
             {
                 tok = decBuf[inBufPos++];
-            }
-            else
+            } else
             {
 #if LOCAL_SHADOW
 				this.inBufPos = inBufPos;
@@ -146,7 +140,7 @@ namespace MonoGame.Utilities
 				inBufEnd = this.inBufEnd;
 #endif
 #if CHECK_EOF
-                if (tok == -1)
+                if(tok == -1)
                     goto finish;
 #endif
             }
@@ -154,7 +148,7 @@ namespace MonoGame.Utilities
             litLen = tok >> 4;
             matLen = (tok & 0xF) + 4;
 
-            switch (litLen)
+            switch(litLen)
             {
                 case 0:
                     phase = DecodePhase.ReadOffset;
@@ -169,13 +163,12 @@ namespace MonoGame.Utilities
                     goto copyLiteral;
             }
 
-        readExLiteralLength:
-            int exLitLen;
-            if (inBufPos < inBufEnd)
+            readExLiteralLength:
+int exLitLen;
+            if(inBufPos < inBufEnd)
             {
                 exLitLen = decBuf[inBufPos++];
-            }
-            else
+            } else
             {
 #if LOCAL_SHADOW
 				this.inBufPos = inBufPos;
@@ -187,32 +180,31 @@ namespace MonoGame.Utilities
 #endif
 
 #if CHECK_EOF
-                if (exLitLen == -1)
+                if(exLitLen == -1)
                     goto finish;
 #endif
             }
 
             litLen += exLitLen;
-            if (exLitLen == 255)
+            if(exLitLen == 255)
                 goto readExLiteralLength;
 
             phase = DecodePhase.CopyLiteral;
             goto copyLiteral;
 
-        copyLiteral:
-            int nReadLit = litLen < nToRead ? litLen : nToRead;
-            if (nReadLit != 0)
+            copyLiteral:
+int nReadLit = litLen < nToRead ? litLen : nToRead;
+            if(nReadLit != 0)
             {
-                if (inBufPos + nReadLit <= inBufEnd)
+                if(inBufPos + nReadLit <= inBufEnd)
                 {
                     int ofs = offset;
 
-                    for (int c = nReadLit; c-- != 0;)
+                    for(int c = nReadLit; c-- != 0; )
                         buffer[ofs++] = decBuf[inBufPos++];
 
                     nRead = nReadLit;
-                }
-                else
+                } else
                 {
 #if LOCAL_SHADOW
 					this.inBufPos = inBufPos;
@@ -223,7 +215,7 @@ namespace MonoGame.Utilities
 					inBufEnd = this.inBufEnd;
 #endif
 #if CHECK_EOF
-                    if (nRead == 0)
+                    if(nRead == 0)
                         goto finish;
 #endif
                 }
@@ -233,56 +225,53 @@ namespace MonoGame.Utilities
 
                 litLen -= nRead;
 
-                if (litLen != 0)
+                if(litLen != 0)
                     goto copyLiteral;
             }
 
-            if (nToRead == 0)
+            if(nToRead == 0)
                 goto finish;
 
             phase = DecodePhase.ReadOffset;
             goto readOffset;
 
-        readOffset:
-            if (inBufPos + 1 < inBufEnd)
-            {
-                matDst = (decBuf[inBufPos + 1] << 8) | decBuf[inBufPos];
-                inBufPos += 2;
-            }
-            else
-            {
+            readOffset:
+if(inBufPos + 1 < inBufEnd)
+{
+    matDst = (decBuf[inBufPos + 1] << 8) | decBuf[inBufPos];
+    inBufPos += 2;
+} else
+{
 #if LOCAL_SHADOW
 				this.inBufPos = inBufPos;
 #endif
-                matDst = ReadOffsetCore();
+    matDst = ReadOffsetCore();
 #if LOCAL_SHADOW
 				inBufPos = this.inBufPos;
 				inBufEnd = this.inBufEnd;
 #endif
 #if CHECK_EOF
-                if (matDst == -1)
-                    goto finish;
+    if(matDst == -1)
+        goto finish;
 #endif
-            }
+}
 
-            if (matLen == 15 + 4)
+            if(matLen == 15 + 4)
             {
                 phase = DecodePhase.ReadExMatchLength;
                 goto readExMatchLength;
-            }
-            else
+            } else
             {
                 phase = DecodePhase.CopyMatch;
                 goto copyMatch;
             }
 
-        readExMatchLength:
-            int exMatLen;
-            if (inBufPos < inBufEnd)
+            readExMatchLength:
+int exMatLen;
+            if(inBufPos < inBufEnd)
             {
                 exMatLen = decBuf[inBufPos++];
-            }
-            else
+            } else
             {
 #if LOCAL_SHADOW
 				this.inBufPos = inBufPos;
@@ -293,72 +282,70 @@ namespace MonoGame.Utilities
 				inBufEnd = this.inBufEnd;
 #endif
 #if CHECK_EOF
-                if (exMatLen == -1)
+                if(exMatLen == -1)
                     goto finish;
 #endif
             }
 
             matLen += exMatLen;
-            if (exMatLen == 255)
+            if(exMatLen == 255)
                 goto readExMatchLength;
 
             phase = DecodePhase.CopyMatch;
             goto copyMatch;
 
-        copyMatch:
-            int nCpyMat = matLen < nToRead ? matLen : nToRead;
-            if (nCpyMat != 0)
+            copyMatch:
+int nCpyMat = matLen < nToRead ? matLen : nToRead;
+            if(nCpyMat != 0)
             {
                 nRead = count - nToRead;
 
                 int bufDst = matDst - nRead;
-                if (bufDst > 0)
+                if(bufDst > 0)
                 {
                     //offset is fairly far back, we need to pull from the buffer
 
                     int bufSrc = decodeBufferPos - bufDst;
-                    if (bufSrc < 0)
+                    if(bufSrc < 0)
                         bufSrc += DecBufLen;
                     int bufCnt = bufDst < nCpyMat ? bufDst : nCpyMat;
 
-                    for (int c = bufCnt; c-- != 0;)
+                    for(int c = bufCnt; c-- != 0; )
                         buffer[offset++] = decBuf[bufSrc++ & DecBufMask];
-                }
-                else
+                } else
                 {
                     bufDst = 0;
                 }
 
                 int sOfs = offset - matDst;
-                for (int i = bufDst; i < nCpyMat; i++)
+                for(int i = bufDst; i < nCpyMat; i++)
                     buffer[offset++] = buffer[sOfs++];
 
                 nToRead -= nCpyMat;
                 matLen -= nCpyMat;
             }
 
-            if (nToRead == 0)
+            if(nToRead == 0)
                 goto finish;
 
             phase = DecodePhase.ReadToken;
             goto readToken;
 
-        finish:
-            nRead = count - nToRead;
+            finish:
+nRead = count - nToRead;
 
             int nToBuf = nRead < DecBufLen ? nRead : DecBufLen;
             int repPos = offset - nToBuf;
 
-            if (nToBuf == DecBufLen)
+            if(nToBuf == DecBufLen)
             {
                 Buffer.BlockCopy(buffer, repPos, decBuf, 0, DecBufLen);
                 decodeBufferPos = 0;
-            }
-            else
+            } else
             {
                 int decPos = decodeBufferPos;
 
-                while (nToBuf-- != 0)
+                while(nToBuf-- != 0)
                     decBuf[decPos++ & DecBufMask] = buffer[repPos++];
 
                 decodeBufferPos = decPos & DecBufMask;
@@ -375,13 +362,12 @@ namespace MonoGame.Utilities
         {
             var buf = decodeBuffer;
 
-            if (inBufPos == inBufEnd)
+            if(inBufPos == inBufEnd)
             {
-                int nRead = input.Read(buf, DecBufLen,
-                    InBufLen < inputLength ? InBufLen : (int)inputLength);
+                int nRead = input.Read(buf, DecBufLen, InBufLen < inputLength ? InBufLen : (int)inputLength);
 
 #if CHECK_EOF
-                if (nRead == 0)
+                if(nRead == 0)
                     return -1;
 #endif
 
@@ -398,13 +384,12 @@ namespace MonoGame.Utilities
         {
             var buf = decodeBuffer;
 
-            if (inBufPos == inBufEnd)
+            if(inBufPos == inBufEnd)
             {
-                int nRead = input.Read(buf, DecBufLen,
-                    InBufLen < inputLength ? InBufLen : (int)inputLength);
+                int nRead = input.Read(buf, DecBufLen, InBufLen < inputLength ? InBufLen : (int)inputLength);
 
 #if CHECK_EOF
-                if (nRead == 0)
+                if(nRead == 0)
                     return -1;
 #endif
 
@@ -414,15 +399,14 @@ namespace MonoGame.Utilities
                 inBufEnd = DecBufLen + nRead;
             }
 
-            if (inBufEnd - inBufPos == 1)
+            if(inBufEnd - inBufPos == 1)
             {
                 buf[DecBufLen] = buf[inBufPos];
 
-                int nRead = input.Read(buf, DecBufLen + 1,
-                    InBufLen - 1 < inputLength ? InBufLen - 1 : (int)inputLength);
+                int nRead = input.Read(buf, DecBufLen + 1, InBufLen - 1 < inputLength ? InBufLen - 1 : (int)inputLength);
 
 #if CHECK_EOF
-                if (nRead == 0)
+                if(nRead == 0)
                 {
                     inBufPos = DecBufLen;
                     inBufEnd = DecBufLen + 1;
@@ -451,31 +435,28 @@ namespace MonoGame.Utilities
             int inBufLen = inBufEnd - inBufPos;
 
             int fromBuf = nToRead < inBufLen ? nToRead : inBufLen;
-            if (fromBuf != 0)
+            if(fromBuf != 0)
             {
                 var bufPos = inBufPos;
 
-                for (int c = fromBuf; c-- != 0;)
+                for(int c = fromBuf; c-- != 0; )
                     buffer[offset++] = buf[bufPos++];
 
                 inBufPos = bufPos;
                 nToRead -= fromBuf;
             }
 
-            if (nToRead != 0)
+            if(nToRead != 0)
             {
                 int nRead;
 
-                if (nToRead >= InBufLen)
+                if(nToRead >= InBufLen)
                 {
-                    nRead = input.Read(buffer, offset,
-                        nToRead < inputLength ? nToRead : (int)inputLength);
+                    nRead = input.Read(buffer, offset, nToRead < inputLength ? nToRead : (int)inputLength);
                     nToRead -= nRead;
-                }
-                else
+                } else
                 {
-                    nRead = input.Read(buf, DecBufLen,
-                        InBufLen < inputLength ? InBufLen : (int)inputLength);
+                    nRead = input.Read(buf, DecBufLen, InBufLen < inputLength ? InBufLen : (int)inputLength);
 
                     inBufPos = DecBufLen;
                     inBufEnd = DecBufLen + nRead;
@@ -484,7 +465,7 @@ namespace MonoGame.Utilities
 
                     var bufPos = inBufPos;
 
-                    for (int c = fromBuf; c-- != 0;)
+                    for(int c = fromBuf; c-- != 0; )
                         buffer[offset++] = buf[bufPos++];
 
                     inBufPos = bufPos;
@@ -499,29 +480,15 @@ namespace MonoGame.Utilities
 
         #region Stream internals
 
-        public override bool CanRead
-        {
-            get { return true; }
-        }
+        public override bool CanRead { get { return true; } }
 
-        public override bool CanSeek
-        {
-            get { return false; }
-        }
+        public override bool CanSeek { get { return false; } }
 
-        public override bool CanWrite
-        {
-            get { return false; }
-        }
+        public override bool CanWrite { get { return false; } }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
-        public override long Length
-        {
-            get { throw new NotSupportedException(); }
-        }
+        public override long Length { get { throw new NotSupportedException(); } }
 
         public override long Position
         {
@@ -529,21 +496,11 @@ namespace MonoGame.Utilities
             set { throw new NotSupportedException(); }
         }
 
-        public override long Seek(long offset, SeekOrigin origin)
-        {
-            throw new NotSupportedException();
-        }
+        public override long Seek(long offset, SeekOrigin origin) { throw new NotSupportedException(); }
 
-        public override void SetLength(long value)
-        {
-            throw new NotSupportedException();
-        }
+        public override void SetLength(long value) { throw new NotSupportedException(); }
 
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-            throw new NotSupportedException();
-        }
-
+        public override void Write(byte[] buffer, int offset, int count) { throw new NotSupportedException(); }
         #endregion
     }
 }

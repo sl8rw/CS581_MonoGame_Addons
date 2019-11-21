@@ -71,22 +71,18 @@ namespace MonoGame.Utilities.Deflate
 
         // extra bits for each length code
         internal static readonly int[] ExtraLengthBits = new int[]
-        {
-            0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2,
-            3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0
-        };
+        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0 };
 
         // extra bits for each distance code
         internal static readonly int[] ExtraDistanceBits = new int[]
-        {
-            0, 0, 0, 0, 1, 1,  2,  2,  3,  3,  4,  4,  5,  5,  6,  6,
-            7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13
-        };
+        { 0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13 };
 
         // extra bits for each bit length code
-        internal static readonly int[] extra_blbits = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 7 };
+        internal static readonly int[] extra_blbits = new int[]
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 7 };
 
-        internal static readonly sbyte[] bl_order = new sbyte[] { 16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15 };
+        internal static readonly sbyte[] bl_order = new sbyte[]
+        { 16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15 };
 
 
         // The lengths of the bit length codes are sent in order of decreasing
@@ -100,87 +96,858 @@ namespace MonoGame.Utilities.Deflate
 
         private static readonly sbyte[] _dist_code = new sbyte[]
         {
-            0,  1,  2,  3,  4,  4,  5,  5,  6,  6,  6,  6,  7,  7,  7,  7,
-            8,  8,  8,  8,  8,  8,  8,  8,  9,  9,  9,  9,  9,  9,  9,  9,
-            10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
-            11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
-            12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
-            12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
-            13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-            13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-            14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
-            14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
-            14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
-            14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
-            15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
-            15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
-            15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
-            15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
-            0,   0, 16, 17, 18, 18, 19, 19, 20, 20, 20, 20, 21, 21, 21, 21,
-            22, 22, 22, 22, 22, 22, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23,
-            24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24,
-            25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,
-            26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26,
-            26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26,
-            27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27,
-            27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27,
-            28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28,
-            28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28,
-            28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28,
-            28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28,
-            29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29,
-            29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29,
-            29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29,
-            29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29
+            0,
+            1,
+            2,
+            3,
+            4,
+            4,
+            5,
+            5,
+            6,
+            6,
+            6,
+            6,
+            7,
+            7,
+            7,
+            7,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            9,
+            9,
+            9,
+            9,
+            9,
+            9,
+            9,
+            9,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            14,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            0,
+            0,
+            16,
+            17,
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            20,
+            20,
+            21,
+            21,
+            21,
+            21,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29,
+            29
         };
 
         internal static readonly sbyte[] LengthCode = new sbyte[]
         {
-            0,   1,  2,  3,  4,  5,  6,  7,  8,  8,  9,  9, 10, 10, 11, 11,
-            12, 12, 12, 12, 13, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15,
-            16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 17, 17,
-            18, 18, 18, 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 19,
-            20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-            21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
-            22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22,
-            23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23,
-            24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24,
-            24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24,
-            25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,
-            25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,
-            26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26,
-            26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26,
-            27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27,
-            27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 28
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            8,
+            9,
+            9,
+            10,
+            10,
+            11,
+            11,
+            12,
+            12,
+            12,
+            12,
+            13,
+            13,
+            13,
+            13,
+            14,
+            14,
+            14,
+            14,
+            15,
+            15,
+            15,
+            15,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            17,
+            17,
+            17,
+            17,
+            17,
+            17,
+            17,
+            17,
+            18,
+            18,
+            18,
+            18,
+            18,
+            18,
+            18,
+            18,
+            19,
+            19,
+            19,
+            19,
+            19,
+            19,
+            19,
+            19,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            27,
+            28
         };
 
 
         internal static readonly int[] LengthBase = new int[]
         {
-            0,   1,  2,  3,  4,  5,  6,   7,   8,  10,  12,  14, 16, 20, 24, 28,
-            32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 0
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            10,
+            12,
+            14,
+            16,
+            20,
+            24,
+            28,
+            32,
+            40,
+            48,
+            56,
+            64,
+            80,
+            96,
+            112,
+            128,
+            160,
+            192,
+            224,
+            0
         };
 
 
         internal static readonly int[] DistanceBase = new int[]
         {
-            0, 1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192,
-            256, 384, 512, 768, 1024, 1536, 2048, 3072, 4096, 6144, 8192, 12288, 16384, 24576
+            0,
+            1,
+            2,
+            3,
+            4,
+            6,
+            8,
+            12,
+            16,
+            24,
+            32,
+            48,
+            64,
+            96,
+            128,
+            192,
+            256,
+            384,
+            512,
+            768,
+            1024,
+            1536,
+            2048,
+            3072,
+            4096,
+            6144,
+            8192,
+            12288,
+            16384,
+            24576
         };
 
 
         /// <summary>
         /// Map from a distance to a distance code.
         /// </summary>
-        /// <remarks> 
+        /// <remarks>
         /// No side effects. _dist_code[256] and _dist_code[257] are never used.
         /// </remarks>
         internal static int DistanceCode(int dist)
-        {
-            return (dist < 256)
-                ? _dist_code[dist]
-                : _dist_code[256 + SharedUtils.URShift(dist, 7)];
-        }
+        { return (dist < 256) ? _dist_code[dist] : _dist_code[256 + SharedUtils.URShift(dist, 7)]; }
 
         internal short[] dyn_tree; // the dynamic tree
         internal int max_code; // largest code with non zero frequency
@@ -208,37 +975,38 @@ namespace MonoGame.Utilities.Deflate
             short f; // frequency
             int overflow = 0; // number of elements with bit length too large
 
-            for (bits = 0; bits <= InternalConstants.MAX_BITS; bits++)
+            for(bits = 0; bits <= InternalConstants.MAX_BITS; bits++)
                 s.bl_count[bits] = 0;
 
             // In a first pass, compute the optimal bit lengths (which may
             // overflow in the case of the bit length tree).
             tree[s.heap[s.heap_max] * 2 + 1] = 0; // root of the heap
 
-            for (h = s.heap_max + 1; h < HEAP_SIZE; h++)
+            for(h = s.heap_max + 1; h < HEAP_SIZE; h++)
             {
                 n = s.heap[h];
                 bits = tree[tree[n * 2 + 1] * 2 + 1] + 1;
-                if (bits > max_length)
+                if(bits > max_length)
                 {
-                    bits = max_length; overflow++;
+                    bits = max_length;
+                    overflow++;
                 }
                 tree[n * 2 + 1] = (short)bits;
                 // We overwrite tree[n*2+1] which is no longer needed
 
-                if (n > max_code)
+                if(n > max_code)
                     continue; // not a leaf node
 
                 s.bl_count[bits]++;
                 xbits = 0;
-                if (n >= base_Renamed)
+                if(n >= base_Renamed)
                     xbits = extra[n - base_Renamed];
                 f = tree[n * 2];
                 s.opt_len += f * (bits + xbits);
-                if (stree != null)
+                if(stree != null)
                     s.static_len += f * (stree[n * 2 + 1] + xbits);
             }
-            if (overflow == 0)
+            if(overflow == 0)
                 return;
 
             // This happens for example on obj2 and pic of the Calgary corpus
@@ -246,7 +1014,7 @@ namespace MonoGame.Utilities.Deflate
             do
             {
                 bits = max_length - 1;
-                while (s.bl_count[bits] == 0)
+                while(s.bl_count[bits] == 0)
                     bits--;
                 s.bl_count[bits]--; // move one leaf down the tree
                 s.bl_count[bits + 1] = (short)(s.bl_count[bits + 1] + 2); // move one overflow item as its brother
@@ -254,18 +1022,17 @@ namespace MonoGame.Utilities.Deflate
                 // The brother of the overflow item also moves one step up,
                 // but this does not affect bl_count[max_length]
                 overflow -= 2;
-            }
-            while (overflow > 0);
+            } while (overflow > 0);
 
-            for (bits = max_length; bits != 0; bits--)
+            for(bits = max_length; bits != 0; bits--)
             {
                 n = s.bl_count[bits];
-                while (n != 0)
+                while(n != 0)
                 {
                     m = s.heap[--h];
-                    if (m > max_code)
+                    if(m > max_code)
                         continue;
-                    if (tree[m * 2 + 1] != bits)
+                    if(tree[m * 2 + 1] != bits)
                     {
                         s.opt_len = (int)(s.opt_len + ((long)bits - (long)tree[m * 2 + 1]) * (long)tree[m * 2]);
                         tree[m * 2 + 1] = (short)bits;
@@ -296,14 +1063,13 @@ namespace MonoGame.Utilities.Deflate
             s.heap_len = 0;
             s.heap_max = HEAP_SIZE;
 
-            for (n = 0; n < elems; n++)
+            for(n = 0; n < elems; n++)
             {
-                if (tree[n * 2] != 0)
+                if(tree[n * 2] != 0)
                 {
                     s.heap[++s.heap_len] = max_code = n;
                     s.depth[n] = 0;
-                }
-                else
+                } else
                 {
                     tree[n * 2 + 1] = 0;
                 }
@@ -313,13 +1079,13 @@ namespace MonoGame.Utilities.Deflate
             // and that at least one bit should be sent even if there is only one
             // possible code. So to avoid special checks later on we force at least
             // two codes of non zero frequency.
-            while (s.heap_len < 2)
+            while(s.heap_len < 2)
             {
                 node = s.heap[++s.heap_len] = (max_code < 2 ? ++max_code : 0);
                 tree[node * 2] = 1;
                 s.depth[node] = 0;
                 s.opt_len--;
-                if (stree != null)
+                if(stree != null)
                     s.static_len -= stree[node * 2 + 1];
                 // node is 0 or 1 so it does not have extra bits
             }
@@ -328,7 +1094,7 @@ namespace MonoGame.Utilities.Deflate
             // The elements heap[heap_len/2+1 .. heap_len] are leaves of the tree,
             // establish sub-heaps of increasing lengths:
 
-            for (n = s.heap_len / 2; n >= 1; n--)
+            for(n = s.heap_len / 2; n >= 1; n--)
                 s.pqdownheap(tree, n);
 
             // Construct the Huffman tree by repeatedly combining the least two
@@ -354,8 +1120,7 @@ namespace MonoGame.Utilities.Deflate
                 // and insert the new node in the heap
                 s.heap[1] = node++;
                 s.pqdownheap(tree, 1);
-            }
-            while (s.heap_len >= 2);
+            } while (s.heap_len >= 2);
 
             s.heap[--s.heap_max] = s.heap[1];
 
@@ -383,7 +1148,7 @@ namespace MonoGame.Utilities.Deflate
 
             // The distribution counts are first used to generate the code values
             // without bit reversal.
-            for (bits = 1; bits <= InternalConstants.MAX_BITS; bits++)
+            for(bits = 1; bits <= InternalConstants.MAX_BITS; bits++)
                 unchecked
                 {
                     next_code[bits] = code = (short)((code + bl_count[bits - 1]) << 1);
@@ -395,10 +1160,10 @@ namespace MonoGame.Utilities.Deflate
             //        "inconsistent bit counts");
             //Tracev((stderr,"\ngen_codes: max_code %d ", max_code));
 
-            for (n = 0; n <= max_code; n++)
+            for(n = 0; n <= max_code; n++)
             {
                 int len = tree[n * 2 + 1];
-                if (len == 0)
+                if(len == 0)
                     continue;
                 // Now reverse the bits
                 tree[n * 2] = unchecked((short)(bi_reverse(next_code[len]++, len)));
@@ -416,8 +1181,7 @@ namespace MonoGame.Utilities.Deflate
                 res |= code & 1;
                 code >>= 1; //SharedUtils.URShift(code, 1);
                 res <<= 1;
-            }
-            while (--len > 0);
+            } while (--len > 0);
             return res >> 1;
         }
     }

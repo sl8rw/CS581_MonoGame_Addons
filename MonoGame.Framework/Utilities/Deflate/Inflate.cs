@@ -63,6 +63,7 @@
 
 
 using System;
+
 namespace MonoGame.Utilities.Deflate
 {
     sealed class InflateBlocks
@@ -135,7 +136,7 @@ namespace MonoGame.Utilities.Deflate
             bitb = 0;
             readAt = writeAt = 0;
 
-            if (checkfn != null)
+            if(checkfn != null)
                 _codec._Adler32 = check = Adler.Adler32(0, null, 0, 0);
             return oldCheck;
         }
@@ -163,21 +164,21 @@ namespace MonoGame.Utilities.Deflate
 
 
             // process input based on current state
-            while (true)
+            while(true)
             {
-                switch (mode)
+                switch(mode)
                 {
                     case InflateBlockMode.TYPE:
 
-                        while (k < (3))
+                        while(k < (3))
                         {
-                            if (n != 0)
+                            if(n != 0)
                             {
                                 r = ZlibConstants.Z_OK;
-                            }
-                            else
+                            } else
                             {
-                                bitb = b; bitk = k;
+                                bitb = b;
+                                bitk = k;
                                 _codec.AvailableBytesIn = n;
                                 _codec.TotalBytesIn += p - _codec.NextIn;
                                 _codec.NextIn = p;
@@ -192,12 +193,14 @@ namespace MonoGame.Utilities.Deflate
                         t = (b & 7);
                         last = t & 1;
 
-                        switch ((uint)t >> 1)
+                        switch((uint)t >> 1)
                         {
                             case 0:  // stored
-                                b >>= 3; k -= (3);
+                                b >>= 3;
+                                k -= (3);
                                 t = k & 7; // go to byte boundary
-                                b >>= t; k -= t;
+                                b >>= t;
+                                k -= t;
                                 mode = InflateBlockMode.LENS; // get length of stored block
                                 break;
 
@@ -208,21 +211,25 @@ namespace MonoGame.Utilities.Deflate
                                 int[][] td = new int[1][];
                                 InfTree.inflate_trees_fixed(bl, bd, tl, td, _codec);
                                 codes.Init(bl[0], bd[0], tl[0], 0, td[0], 0);
-                                b >>= 3; k -= 3;
+                                b >>= 3;
+                                k -= 3;
                                 mode = InflateBlockMode.CODES;
                                 break;
 
                             case 2:  // dynamic
-                                b >>= 3; k -= 3;
+                                b >>= 3;
+                                k -= 3;
                                 mode = InflateBlockMode.TABLE;
                                 break;
 
                             case 3:  // illegal
-                                b >>= 3; k -= 3;
+                                b >>= 3;
+                                k -= 3;
                                 mode = InflateBlockMode.BAD;
                                 _codec.Message = "invalid block type";
                                 r = ZlibConstants.Z_DATA_ERROR;
-                                bitb = b; bitk = k;
+                                bitb = b;
+                                bitk = k;
                                 _codec.AvailableBytesIn = n;
                                 _codec.TotalBytesIn += p - _codec.NextIn;
                                 _codec.NextIn = p;
@@ -233,15 +240,15 @@ namespace MonoGame.Utilities.Deflate
 
                     case InflateBlockMode.LENS:
 
-                        while (k < (32))
+                        while(k < (32))
                         {
-                            if (n != 0)
+                            if(n != 0)
                             {
                                 r = ZlibConstants.Z_OK;
-                            }
-                            else
+                            } else
                             {
-                                bitb = b; bitk = k;
+                                bitb = b;
+                                bitk = k;
                                 _codec.AvailableBytesIn = n;
                                 _codec.TotalBytesIn += p - _codec.NextIn;
                                 _codec.NextIn = p;
@@ -254,13 +261,14 @@ namespace MonoGame.Utilities.Deflate
                             k += 8;
                         }
 
-                        if ((((~b) >> 16) & 0xffff) != (b & 0xffff))
+                        if((((~b) >> 16) & 0xffff) != (b & 0xffff))
                         {
                             mode = InflateBlockMode.BAD;
                             _codec.Message = "invalid stored block lengths";
                             r = ZlibConstants.Z_DATA_ERROR;
 
-                            bitb = b; bitk = k;
+                            bitb = b;
+                            bitk = k;
                             _codec.AvailableBytesIn = n;
                             _codec.TotalBytesIn += p - _codec.NextIn;
                             _codec.NextIn = p;
@@ -269,13 +277,16 @@ namespace MonoGame.Utilities.Deflate
                         }
                         left = (b & 0xffff);
                         b = k = 0; // dump bits
-                        mode = left != 0 ? InflateBlockMode.STORED : (last != 0 ? InflateBlockMode.DRY : InflateBlockMode.TYPE);
+                        mode = left != 0
+                            ? InflateBlockMode.STORED
+                            : (last != 0 ? InflateBlockMode.DRY : InflateBlockMode.TYPE);
                         break;
 
                     case InflateBlockMode.STORED:
-                        if (n == 0)
+                        if(n == 0)
                         {
-                            bitb = b; bitk = k;
+                            bitb = b;
+                            bitk = k;
                             _codec.AvailableBytesIn = n;
                             _codec.TotalBytesIn += p - _codec.NextIn;
                             _codec.NextIn = p;
@@ -283,24 +294,28 @@ namespace MonoGame.Utilities.Deflate
                             return Flush(r);
                         }
 
-                        if (m == 0)
+                        if(m == 0)
                         {
-                            if (q == end && readAt != 0)
+                            if(q == end && readAt != 0)
                             {
-                                q = 0; m = (q < readAt ? readAt - q - 1 : end - q);
+                                q = 0;
+                                m = (q < readAt ? readAt - q - 1 : end - q);
                             }
-                            if (m == 0)
+                            if(m == 0)
                             {
                                 writeAt = q;
                                 r = Flush(r);
-                                q = writeAt; m = (q < readAt ? readAt - q - 1 : end - q);
-                                if (q == end && readAt != 0)
+                                q = writeAt;
+                                m = (q < readAt ? readAt - q - 1 : end - q);
+                                if(q == end && readAt != 0)
                                 {
-                                    q = 0; m = (q < readAt ? readAt - q - 1 : end - q);
+                                    q = 0;
+                                    m = (q < readAt ? readAt - q - 1 : end - q);
                                 }
-                                if (m == 0)
+                                if(m == 0)
                                 {
-                                    bitb = b; bitk = k;
+                                    bitb = b;
+                                    bitk = k;
                                     _codec.AvailableBytesIn = n;
                                     _codec.TotalBytesIn += p - _codec.NextIn;
                                     _codec.NextIn = p;
@@ -312,29 +327,31 @@ namespace MonoGame.Utilities.Deflate
                         r = ZlibConstants.Z_OK;
 
                         t = left;
-                        if (t > n)
+                        if(t > n)
                             t = n;
-                        if (t > m)
+                        if(t > m)
                             t = m;
                         Array.Copy(_codec.InputBuffer, p, window, q, t);
-                        p += t; n -= t;
-                        q += t; m -= t;
-                        if ((left -= t) != 0)
+                        p += t;
+                        n -= t;
+                        q += t;
+                        m -= t;
+                        if((left -= t) != 0)
                             break;
                         mode = last != 0 ? InflateBlockMode.DRY : InflateBlockMode.TYPE;
                         break;
 
                     case InflateBlockMode.TABLE:
 
-                        while (k < (14))
+                        while(k < (14))
                         {
-                            if (n != 0)
+                            if(n != 0)
                             {
                                 r = ZlibConstants.Z_OK;
-                            }
-                            else
+                            } else
                             {
-                                bitb = b; bitk = k;
+                                bitb = b;
+                                bitk = k;
                                 _codec.AvailableBytesIn = n;
                                 _codec.TotalBytesIn += p - _codec.NextIn;
                                 _codec.NextIn = p;
@@ -348,13 +365,14 @@ namespace MonoGame.Utilities.Deflate
                         }
 
                         table = t = (b & 0x3fff);
-                        if ((t & 0x1f) > 29 || ((t >> 5) & 0x1f) > 29)
+                        if((t & 0x1f) > 29 || ((t >> 5) & 0x1f) > 29)
                         {
                             mode = InflateBlockMode.BAD;
                             _codec.Message = "too many length or distance symbols";
                             r = ZlibConstants.Z_DATA_ERROR;
 
-                            bitb = b; bitk = k;
+                            bitb = b;
+                            bitk = k;
                             _codec.AvailableBytesIn = n;
                             _codec.TotalBytesIn += p - _codec.NextIn;
                             _codec.NextIn = p;
@@ -362,11 +380,10 @@ namespace MonoGame.Utilities.Deflate
                             return Flush(r);
                         }
                         t = 258 + (t & 0x1f) + ((t >> 5) & 0x1f);
-                        if (blens == null || blens.Length < t)
+                        if(blens == null || blens.Length < t)
                         {
                             blens = new int[t];
-                        }
-                        else
+                        } else
                         {
                             Array.Clear(blens, 0, t);
                             // for (int i = 0; i < t; i++)
@@ -384,17 +401,17 @@ namespace MonoGame.Utilities.Deflate
                         goto case InflateBlockMode.BTREE;
 
                     case InflateBlockMode.BTREE:
-                        while (index < 4 + (table >> 10))
+                        while(index < 4 + (table >> 10))
                         {
-                            while (k < (3))
+                            while(k < (3))
                             {
-                                if (n != 0)
+                                if(n != 0)
                                 {
                                     r = ZlibConstants.Z_OK;
-                                }
-                                else
+                                } else
                                 {
-                                    bitb = b; bitk = k;
+                                    bitb = b;
+                                    bitk = k;
                                     _codec.AvailableBytesIn = n;
                                     _codec.TotalBytesIn += p - _codec.NextIn;
                                     _codec.NextIn = p;
@@ -409,26 +426,28 @@ namespace MonoGame.Utilities.Deflate
 
                             blens[border[index++]] = b & 7;
 
-                            b >>= 3; k -= 3;
+                            b >>= 3;
+                            k -= 3;
                         }
 
-                        while (index < 19)
+                        while(index < 19)
                         {
                             blens[border[index++]] = 0;
                         }
 
                         bb[0] = 7;
                         t = inftree.inflate_trees_bits(blens, bb, tb, hufts, _codec);
-                        if (t != ZlibConstants.Z_OK)
+                        if(t != ZlibConstants.Z_OK)
                         {
                             r = t;
-                            if (r == ZlibConstants.Z_DATA_ERROR)
+                            if(r == ZlibConstants.Z_DATA_ERROR)
                             {
                                 blens = null;
                                 mode = InflateBlockMode.BAD;
                             }
 
-                            bitb = b; bitk = k;
+                            bitb = b;
+                            bitk = k;
                             _codec.AvailableBytesIn = n;
                             _codec.TotalBytesIn += p - _codec.NextIn;
                             _codec.NextIn = p;
@@ -441,10 +460,10 @@ namespace MonoGame.Utilities.Deflate
                         goto case InflateBlockMode.DTREE;
 
                     case InflateBlockMode.DTREE:
-                        while (true)
+                        while(true)
                         {
                             t = table;
-                            if (!(index < 258 + (t & 0x1f) + ((t >> 5) & 0x1f)))
+                            if(!(index < 258 + (t & 0x1f) + ((t >> 5) & 0x1f)))
                             {
                                 break;
                             }
@@ -453,15 +472,15 @@ namespace MonoGame.Utilities.Deflate
 
                             t = bb[0];
 
-                            while (k < t)
+                            while(k < t)
                             {
-                                if (n != 0)
+                                if(n != 0)
                                 {
                                     r = ZlibConstants.Z_OK;
-                                }
-                                else
+                                } else
                                 {
-                                    bitb = b; bitk = k;
+                                    bitb = b;
+                                    bitk = k;
                                     _codec.AvailableBytesIn = n;
                                     _codec.TotalBytesIn += p - _codec.NextIn;
                                     _codec.NextIn = p;
@@ -477,26 +496,26 @@ namespace MonoGame.Utilities.Deflate
                             t = hufts[(tb[0] + (b & InternalInflateConstants.InflateMask[t])) * 3 + 1];
                             c = hufts[(tb[0] + (b & InternalInflateConstants.InflateMask[t])) * 3 + 2];
 
-                            if (c < 16)
+                            if(c < 16)
                             {
-                                b >>= t; k -= t;
+                                b >>= t;
+                                k -= t;
                                 blens[index++] = c;
-                            }
-                            else
+                            } else
                             {
                                 // c == 16..18
                                 i = c == 18 ? 7 : c - 14;
                                 j = c == 18 ? 11 : 3;
 
-                                while (k < (t + i))
+                                while(k < (t + i))
                                 {
-                                    if (n != 0)
+                                    if(n != 0)
                                     {
                                         r = ZlibConstants.Z_OK;
-                                    }
-                                    else
+                                    } else
                                     {
-                                        bitb = b; bitk = k;
+                                        bitb = b;
+                                        bitk = k;
                                         _codec.AvailableBytesIn = n;
                                         _codec.TotalBytesIn += p - _codec.NextIn;
                                         _codec.NextIn = p;
@@ -509,22 +528,25 @@ namespace MonoGame.Utilities.Deflate
                                     k += 8;
                                 }
 
-                                b >>= t; k -= t;
+                                b >>= t;
+                                k -= t;
 
                                 j += (b & InternalInflateConstants.InflateMask[i]);
 
-                                b >>= i; k -= i;
+                                b >>= i;
+                                k -= i;
 
                                 i = index;
                                 t = table;
-                                if (i + j > 258 + (t & 0x1f) + ((t >> 5) & 0x1f) || (c == 16 && i < 1))
+                                if(i + j > 258 + (t & 0x1f) + ((t >> 5) & 0x1f) || (c == 16 && i < 1))
                                 {
                                     blens = null;
                                     mode = InflateBlockMode.BAD;
                                     _codec.Message = "invalid bit length repeat";
                                     r = ZlibConstants.Z_DATA_ERROR;
 
-                                    bitb = b; bitk = k;
+                                    bitb = b;
+                                    bitk = k;
                                     _codec.AvailableBytesIn = n;
                                     _codec.TotalBytesIn += p - _codec.NextIn;
                                     _codec.NextIn = p;
@@ -536,52 +558,61 @@ namespace MonoGame.Utilities.Deflate
                                 do
                                 {
                                     blens[i++] = c;
-                                }
-                                while (--j != 0);
+                                } while (--j != 0);
                                 index = i;
                             }
                         }
 
                         tb[0] = -1;
+                    {
+                        int[] bl = new int[] { 9 };  // must be <= 9 for lookahead assumptions
+                        int[] bd = new int[] { 6 }; // must be <= 9 for lookahead assumptions
+                        int[] tl = new int[1];
+                        int[] td = new int[1];
+
+                        t = table;
+                        t = inftree.inflate_trees_dynamic(257 + (t & 0x1f),
+                                                          1 + ((t >> 5) & 0x1f),
+                                                          blens,
+                                                          bl,
+                                                          bd,
+                                                          tl,
+                                                          td,
+                                                          hufts,
+                                                          _codec);
+
+                        if(t != ZlibConstants.Z_OK)
                         {
-                            int[] bl = new int[] { 9 };  // must be <= 9 for lookahead assumptions
-                            int[] bd = new int[] { 6 }; // must be <= 9 for lookahead assumptions
-                            int[] tl = new int[1];
-                            int[] td = new int[1];
-
-                            t = table;
-                            t = inftree.inflate_trees_dynamic(257 + (t & 0x1f), 1 + ((t >> 5) & 0x1f), blens, bl, bd, tl, td, hufts, _codec);
-
-                            if (t != ZlibConstants.Z_OK)
+                            if(t == ZlibConstants.Z_DATA_ERROR)
                             {
-                                if (t == ZlibConstants.Z_DATA_ERROR)
-                                {
-                                    blens = null;
-                                    mode = InflateBlockMode.BAD;
-                                }
-                                r = t;
-
-                                bitb = b; bitk = k;
-                                _codec.AvailableBytesIn = n;
-                                _codec.TotalBytesIn += p - _codec.NextIn;
-                                _codec.NextIn = p;
-                                writeAt = q;
-                                return Flush(r);
+                                blens = null;
+                                mode = InflateBlockMode.BAD;
                             }
-                            codes.Init(bl[0], bd[0], hufts, tl[0], hufts, td[0]);
+                            r = t;
+
+                            bitb = b;
+                            bitk = k;
+                            _codec.AvailableBytesIn = n;
+                            _codec.TotalBytesIn += p - _codec.NextIn;
+                            _codec.NextIn = p;
+                            writeAt = q;
+                            return Flush(r);
                         }
+                        codes.Init(bl[0], bd[0], hufts, tl[0], hufts, td[0]);
+                    }
                         mode = InflateBlockMode.CODES;
                         goto case InflateBlockMode.CODES;
 
                     case InflateBlockMode.CODES:
-                        bitb = b; bitk = k;
+                        bitb = b;
+                        bitk = k;
                         _codec.AvailableBytesIn = n;
                         _codec.TotalBytesIn += p - _codec.NextIn;
                         _codec.NextIn = p;
                         writeAt = q;
 
                         r = codes.Process(this, r);
-                        if (r != ZlibConstants.Z_STREAM_END)
+                        if(r != ZlibConstants.Z_STREAM_END)
                         {
                             return Flush(r);
                         }
@@ -594,7 +625,7 @@ namespace MonoGame.Utilities.Deflate
                         q = writeAt;
                         m = (q < readAt ? readAt - q - 1 : end - q);
 
-                        if (last == 0)
+                        if(last == 0)
                         {
                             mode = InflateBlockMode.TYPE;
                             break;
@@ -605,10 +636,12 @@ namespace MonoGame.Utilities.Deflate
                     case InflateBlockMode.DRY:
                         writeAt = q;
                         r = Flush(r);
-                        q = writeAt; m = (q < readAt ? readAt - q - 1 : end - q);
-                        if (readAt != writeAt)
+                        q = writeAt;
+                        m = (q < readAt ? readAt - q - 1 : end - q);
+                        if(readAt != writeAt)
                         {
-                            bitb = b; bitk = k;
+                            bitb = b;
+                            bitk = k;
                             _codec.AvailableBytesIn = n;
                             _codec.TotalBytesIn += p - _codec.NextIn;
                             _codec.NextIn = p;
@@ -631,7 +664,8 @@ namespace MonoGame.Utilities.Deflate
                     case InflateBlockMode.BAD:
                         r = ZlibConstants.Z_DATA_ERROR;
 
-                        bitb = b; bitk = k;
+                        bitb = b;
+                        bitk = k;
                         _codec.AvailableBytesIn = n;
                         _codec.TotalBytesIn += p - _codec.NextIn;
                         _codec.NextIn = p;
@@ -642,7 +676,8 @@ namespace MonoGame.Utilities.Deflate
                     default:
                         r = ZlibConstants.Z_STREAM_ERROR;
 
-                        bitb = b; bitk = k;
+                        bitb = b;
+                        bitk = k;
                         _codec.AvailableBytesIn = n;
                         _codec.TotalBytesIn += p - _codec.NextIn;
                         _codec.NextIn = p;
@@ -668,41 +703,37 @@ namespace MonoGame.Utilities.Deflate
 
         // Returns true if inflate is currently at the end of a block generated
         // by Z_SYNC_FLUSH or Z_FULL_FLUSH.
-        internal int SyncPoint()
-        {
-            return mode == InflateBlockMode.LENS ? 1 : 0;
-        }
+        internal int SyncPoint() { return mode == InflateBlockMode.LENS ? 1 : 0; }
 
         // copy as much as possible from the sliding window to the output area
         internal int Flush(int r)
         {
             int nBytes;
 
-            for (int pass = 0; pass < 2; pass++)
+            for(int pass = 0; pass < 2; pass++)
             {
-                if (pass == 0)
+                if(pass == 0)
                 {
                     // compute number of bytes to copy as far as end of window
                     nBytes = ((readAt <= writeAt ? writeAt : end) - readAt);
-                }
-                else
+                } else
                 {
                     // compute bytes to copy
                     nBytes = writeAt - readAt;
                 }
 
                 // workitem 8870
-                if (nBytes == 0)
+                if(nBytes == 0)
                 {
-                    if (r == ZlibConstants.Z_BUF_ERROR)
+                    if(r == ZlibConstants.Z_BUF_ERROR)
                         r = ZlibConstants.Z_OK;
                     return r;
                 }
 
-                if (nBytes > _codec.AvailableBytesOut)
+                if(nBytes > _codec.AvailableBytesOut)
                     nBytes = _codec.AvailableBytesOut;
 
-                if (nBytes != 0 && r == ZlibConstants.Z_BUF_ERROR)
+                if(nBytes != 0 && r == ZlibConstants.Z_BUF_ERROR)
                     r = ZlibConstants.Z_OK;
 
                 // update counters
@@ -710,7 +741,7 @@ namespace MonoGame.Utilities.Deflate
                 _codec.TotalBytesOut += nBytes;
 
                 // update check information
-                if (checkfn != null)
+                if(checkfn != null)
                     _codec._Adler32 = check = Adler.Adler32(check, window, readAt, nBytes);
 
                 // copy as far as end of window
@@ -719,14 +750,13 @@ namespace MonoGame.Utilities.Deflate
                 readAt += nBytes;
 
                 // see if more to copy at beginning of window
-                if (readAt == end && pass == 0)
+                if(readAt == end && pass == 0)
                 {
                     // wrap pointers
                     readAt = 0;
-                    if (writeAt == end)
+                    if(writeAt == end)
                         writeAt = 0;
-                }
-                else pass++;
+                } else pass++;
             }
 
             // done
@@ -738,11 +768,26 @@ namespace MonoGame.Utilities.Deflate
     internal static class InternalInflateConstants
     {
         // And'ing with mask[n] masks the lower n bits
-        internal static readonly int[] InflateMask = new int[] {
-            0x00000000, 0x00000001, 0x00000003, 0x00000007,
-            0x0000000f, 0x0000001f, 0x0000003f, 0x0000007f,
-            0x000000ff, 0x000001ff, 0x000003ff, 0x000007ff,
-            0x00000fff, 0x00001fff, 0x00003fff, 0x00007fff, 0x0000ffff };
+        internal static readonly int[] InflateMask = new int[]
+        {
+            0x00000000,
+            0x00000001,
+            0x00000003,
+            0x00000007,
+            0x0000000f,
+            0x0000001f,
+            0x0000003f,
+            0x0000007f,
+            0x000000ff,
+            0x000001ff,
+            0x000003ff,
+            0x000007ff,
+            0x00000fff,
+            0x00001fff,
+            0x00003fff,
+            0x00007fff,
+            0x0000ffff
+        };
     }
 
 
@@ -784,9 +829,7 @@ namespace MonoGame.Utilities.Deflate
         internal int[] dtree;     // distance tree
         internal int dtree_index; // distance tree
 
-        internal InflateCodes()
-        {
-        }
+        internal InflateCodes() { }
 
         internal void Init(int bl, int bd, int[] tl, int tl_index, int[] td, int td_index)
         {
@@ -820,18 +863,20 @@ namespace MonoGame.Utilities.Deflate
             n = z.AvailableBytesIn;
             b = blocks.bitb;
             k = blocks.bitk;
-            q = blocks.writeAt; m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
+            q = blocks.writeAt;
+            m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
 
             // process input and output based on current state
-            while (true)
+            while(true)
             {
-                switch (mode)
+                switch(mode)
                 {
                     // waiting for "i:"=input, "o:"=output, "x:"=nothing
                     case START:  // x: set up for LEN
-                        if (m >= 258 && n >= 10)
+                        if(m >= 258 && n >= 10)
                         {
-                            blocks.bitb = b; blocks.bitk = k;
+                            blocks.bitb = b;
+                            blocks.bitk = k;
                             z.AvailableBytesIn = n;
                             z.TotalBytesIn += p - z.NextIn;
                             z.NextIn = p;
@@ -842,9 +887,10 @@ namespace MonoGame.Utilities.Deflate
                             n = z.AvailableBytesIn;
                             b = blocks.bitb;
                             k = blocks.bitk;
-                            q = blocks.writeAt; m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
+                            q = blocks.writeAt;
+                            m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
 
-                            if (r != ZlibConstants.Z_OK)
+                            if(r != ZlibConstants.Z_OK)
                             {
                                 mode = (r == ZlibConstants.Z_STREAM_END) ? WASH : BADCODE;
                                 break;
@@ -860,13 +906,14 @@ namespace MonoGame.Utilities.Deflate
                     case LEN:  // i: get length/literal/eob next
                         j = need;
 
-                        while (k < j)
+                        while(k < j)
                         {
-                            if (n != 0)
+                            if(n != 0)
                                 r = ZlibConstants.Z_OK;
                             else
                             {
-                                blocks.bitb = b; blocks.bitk = k;
+                                blocks.bitb = b;
+                                blocks.bitk = k;
                                 z.AvailableBytesIn = n;
                                 z.TotalBytesIn += p - z.NextIn;
                                 z.NextIn = p;
@@ -885,14 +932,14 @@ namespace MonoGame.Utilities.Deflate
 
                         e = tree[tindex];
 
-                        if (e == 0)
+                        if(e == 0)
                         {
                             // literal
                             lit = tree[tindex + 2];
                             mode = LIT;
                             break;
                         }
-                        if ((e & 16) != 0)
+                        if((e & 16) != 0)
                         {
                             // length
                             bitsToGet = e & 15;
@@ -900,14 +947,14 @@ namespace MonoGame.Utilities.Deflate
                             mode = LENEXT;
                             break;
                         }
-                        if ((e & 64) == 0)
+                        if((e & 64) == 0)
                         {
                             // next table
                             need = e;
                             tree_index = tindex / 3 + tree[tindex + 2];
                             break;
                         }
-                        if ((e & 32) != 0)
+                        if((e & 32) != 0)
                         {
                             // end of block
                             mode = WASH;
@@ -917,7 +964,8 @@ namespace MonoGame.Utilities.Deflate
                         z.Message = "invalid literal/length code";
                         r = ZlibConstants.Z_DATA_ERROR;
 
-                        blocks.bitb = b; blocks.bitk = k;
+                        blocks.bitb = b;
+                        blocks.bitk = k;
                         z.AvailableBytesIn = n;
                         z.TotalBytesIn += p - z.NextIn;
                         z.NextIn = p;
@@ -928,18 +976,22 @@ namespace MonoGame.Utilities.Deflate
                     case LENEXT:  // i: getting length extra (have base)
                         j = bitsToGet;
 
-                        while (k < j)
+                        while(k < j)
                         {
-                            if (n != 0)
+                            if(n != 0)
                                 r = ZlibConstants.Z_OK;
                             else
                             {
-                                blocks.bitb = b; blocks.bitk = k;
-                                z.AvailableBytesIn = n; z.TotalBytesIn += p - z.NextIn; z.NextIn = p;
+                                blocks.bitb = b;
+                                blocks.bitk = k;
+                                z.AvailableBytesIn = n;
+                                z.TotalBytesIn += p - z.NextIn;
+                                z.NextIn = p;
                                 blocks.writeAt = q;
                                 return blocks.Flush(r);
                             }
-                            n--; b |= (z.InputBuffer[p++] & 0xff) << k;
+                            n--;
+                            b |= (z.InputBuffer[p++] & 0xff) << k;
                             k += 8;
                         }
 
@@ -957,18 +1009,22 @@ namespace MonoGame.Utilities.Deflate
                     case DIST:  // i: get distance next
                         j = need;
 
-                        while (k < j)
+                        while(k < j)
                         {
-                            if (n != 0)
+                            if(n != 0)
                                 r = ZlibConstants.Z_OK;
                             else
                             {
-                                blocks.bitb = b; blocks.bitk = k;
-                                z.AvailableBytesIn = n; z.TotalBytesIn += p - z.NextIn; z.NextIn = p;
+                                blocks.bitb = b;
+                                blocks.bitk = k;
+                                z.AvailableBytesIn = n;
+                                z.TotalBytesIn += p - z.NextIn;
+                                z.NextIn = p;
                                 blocks.writeAt = q;
                                 return blocks.Flush(r);
                             }
-                            n--; b |= (z.InputBuffer[p++] & 0xff) << k;
+                            n--;
+                            b |= (z.InputBuffer[p++] & 0xff) << k;
                             k += 8;
                         }
 
@@ -978,7 +1034,7 @@ namespace MonoGame.Utilities.Deflate
                         k -= tree[tindex + 1];
 
                         e = (tree[tindex]);
-                        if ((e & 0x10) != 0)
+                        if((e & 0x10) != 0)
                         {
                             // distance
                             bitsToGet = e & 15;
@@ -986,7 +1042,7 @@ namespace MonoGame.Utilities.Deflate
                             mode = DISTEXT;
                             break;
                         }
-                        if ((e & 64) == 0)
+                        if((e & 64) == 0)
                         {
                             // next table
                             need = e;
@@ -997,8 +1053,11 @@ namespace MonoGame.Utilities.Deflate
                         z.Message = "invalid distance code";
                         r = ZlibConstants.Z_DATA_ERROR;
 
-                        blocks.bitb = b; blocks.bitk = k;
-                        z.AvailableBytesIn = n; z.TotalBytesIn += p - z.NextIn; z.NextIn = p;
+                        blocks.bitb = b;
+                        blocks.bitk = k;
+                        z.AvailableBytesIn = n;
+                        z.TotalBytesIn += p - z.NextIn;
+                        z.NextIn = p;
                         blocks.writeAt = q;
                         return blocks.Flush(r);
 
@@ -1006,18 +1065,22 @@ namespace MonoGame.Utilities.Deflate
                     case DISTEXT:  // i: getting distance extra
                         j = bitsToGet;
 
-                        while (k < j)
+                        while(k < j)
                         {
-                            if (n != 0)
+                            if(n != 0)
                                 r = ZlibConstants.Z_OK;
                             else
                             {
-                                blocks.bitb = b; blocks.bitk = k;
-                                z.AvailableBytesIn = n; z.TotalBytesIn += p - z.NextIn; z.NextIn = p;
+                                blocks.bitb = b;
+                                blocks.bitk = k;
+                                z.AvailableBytesIn = n;
+                                z.TotalBytesIn += p - z.NextIn;
+                                z.NextIn = p;
                                 blocks.writeAt = q;
                                 return blocks.Flush(r);
                             }
-                            n--; b |= (z.InputBuffer[p++] & 0xff) << k;
+                            n--;
+                            b |= (z.InputBuffer[p++] & 0xff) << k;
                             k += 8;
                         }
 
@@ -1031,32 +1094,37 @@ namespace MonoGame.Utilities.Deflate
 
                     case COPY:  // o: copying bytes in window, waiting for space
                         f = q - dist;
-                        while (f < 0)
+                        while(f < 0)
                         {
                             // modulo window size-"while" instead
                             f += blocks.end; // of "if" handles invalid distances
                         }
-                        while (len != 0)
+                        while(len != 0)
                         {
-                            if (m == 0)
+                            if(m == 0)
                             {
-                                if (q == blocks.end && blocks.readAt != 0)
+                                if(q == blocks.end && blocks.readAt != 0)
                                 {
-                                    q = 0; m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
+                                    q = 0;
+                                    m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
                                 }
-                                if (m == 0)
+                                if(m == 0)
                                 {
-                                    blocks.writeAt = q; r = blocks.Flush(r);
-                                    q = blocks.writeAt; m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
+                                    blocks.writeAt = q;
+                                    r = blocks.Flush(r);
+                                    q = blocks.writeAt;
+                                    m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
 
-                                    if (q == blocks.end && blocks.readAt != 0)
+                                    if(q == blocks.end && blocks.readAt != 0)
                                     {
-                                        q = 0; m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
+                                        q = 0;
+                                        m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
                                     }
 
-                                    if (m == 0)
+                                    if(m == 0)
                                     {
-                                        blocks.bitb = b; blocks.bitk = k;
+                                        blocks.bitb = b;
+                                        blocks.bitk = k;
                                         z.AvailableBytesIn = n;
                                         z.TotalBytesIn += p - z.NextIn;
                                         z.NextIn = p;
@@ -1066,9 +1134,10 @@ namespace MonoGame.Utilities.Deflate
                                 }
                             }
 
-                            blocks.window[q++] = blocks.window[f++]; m--;
+                            blocks.window[q++] = blocks.window[f++];
+                            m--;
 
-                            if (f == blocks.end)
+                            if(f == blocks.end)
                                 f = 0;
                             len--;
                         }
@@ -1076,25 +1145,32 @@ namespace MonoGame.Utilities.Deflate
                         break;
 
                     case LIT:  // o: got literal, waiting for output space
-                        if (m == 0)
+                        if(m == 0)
                         {
-                            if (q == blocks.end && blocks.readAt != 0)
+                            if(q == blocks.end && blocks.readAt != 0)
                             {
-                                q = 0; m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
+                                q = 0;
+                                m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
                             }
-                            if (m == 0)
+                            if(m == 0)
                             {
-                                blocks.writeAt = q; r = blocks.Flush(r);
-                                q = blocks.writeAt; m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
+                                blocks.writeAt = q;
+                                r = blocks.Flush(r);
+                                q = blocks.writeAt;
+                                m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
 
-                                if (q == blocks.end && blocks.readAt != 0)
+                                if(q == blocks.end && blocks.readAt != 0)
                                 {
-                                    q = 0; m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
+                                    q = 0;
+                                    m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
                                 }
-                                if (m == 0)
+                                if(m == 0)
                                 {
-                                    blocks.bitb = b; blocks.bitk = k;
-                                    z.AvailableBytesIn = n; z.TotalBytesIn += p - z.NextIn; z.NextIn = p;
+                                    blocks.bitb = b;
+                                    blocks.bitk = k;
+                                    z.AvailableBytesIn = n;
+                                    z.TotalBytesIn += p - z.NextIn;
+                                    z.NextIn = p;
                                     blocks.writeAt = q;
                                     return blocks.Flush(r);
                                 }
@@ -1102,13 +1178,14 @@ namespace MonoGame.Utilities.Deflate
                         }
                         r = ZlibConstants.Z_OK;
 
-                        blocks.window[q++] = (byte)lit; m--;
+                        blocks.window[q++] = (byte)lit;
+                        m--;
 
                         mode = START;
                         break;
 
                     case WASH:  // o: got eob, possibly more output
-                        if (k > 7)
+                        if(k > 7)
                         {
                             // return unused byte, if any
                             k -= 8;
@@ -1116,13 +1193,18 @@ namespace MonoGame.Utilities.Deflate
                             p--; // can always return one
                         }
 
-                        blocks.writeAt = q; r = blocks.Flush(r);
-                        q = blocks.writeAt; m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
+                        blocks.writeAt = q;
+                        r = blocks.Flush(r);
+                        q = blocks.writeAt;
+                        m = q < blocks.readAt ? blocks.readAt - q - 1 : blocks.end - q;
 
-                        if (blocks.readAt != blocks.writeAt)
+                        if(blocks.readAt != blocks.writeAt)
                         {
-                            blocks.bitb = b; blocks.bitk = k;
-                            z.AvailableBytesIn = n; z.TotalBytesIn += p - z.NextIn; z.NextIn = p;
+                            blocks.bitb = b;
+                            blocks.bitk = k;
+                            z.AvailableBytesIn = n;
+                            z.TotalBytesIn += p - z.NextIn;
+                            z.NextIn = p;
                             blocks.writeAt = q;
                             return blocks.Flush(r);
                         }
@@ -1131,8 +1213,11 @@ namespace MonoGame.Utilities.Deflate
 
                     case END:
                         r = ZlibConstants.Z_STREAM_END;
-                        blocks.bitb = b; blocks.bitk = k;
-                        z.AvailableBytesIn = n; z.TotalBytesIn += p - z.NextIn; z.NextIn = p;
+                        blocks.bitb = b;
+                        blocks.bitk = k;
+                        z.AvailableBytesIn = n;
+                        z.TotalBytesIn += p - z.NextIn;
+                        z.NextIn = p;
                         blocks.writeAt = q;
                         return blocks.Flush(r);
 
@@ -1140,16 +1225,22 @@ namespace MonoGame.Utilities.Deflate
 
                         r = ZlibConstants.Z_DATA_ERROR;
 
-                        blocks.bitb = b; blocks.bitk = k;
-                        z.AvailableBytesIn = n; z.TotalBytesIn += p - z.NextIn; z.NextIn = p;
+                        blocks.bitb = b;
+                        blocks.bitk = k;
+                        z.AvailableBytesIn = n;
+                        z.TotalBytesIn += p - z.NextIn;
+                        z.NextIn = p;
                         blocks.writeAt = q;
                         return blocks.Flush(r);
 
                     default:
                         r = ZlibConstants.Z_STREAM_ERROR;
 
-                        blocks.bitb = b; blocks.bitk = k;
-                        z.AvailableBytesIn = n; z.TotalBytesIn += p - z.NextIn; z.NextIn = p;
+                        blocks.bitb = b;
+                        blocks.bitk = k;
+                        z.AvailableBytesIn = n;
+                        z.TotalBytesIn += p - z.NextIn;
+                        z.NextIn = p;
                         blocks.writeAt = q;
                         return blocks.Flush(r);
                 }
@@ -1162,7 +1253,14 @@ namespace MonoGame.Utilities.Deflate
         // at least ten.  The ten bytes are six bytes for the longest length/
         // distance pair plus four bytes for overloading the bit buffer.
 
-        internal int InflateFast(int bl, int bd, int[] tl, int tl_index, int[] td, int td_index, InflateBlocks s, ZlibCodec z)
+        internal int InflateFast(int bl,
+                                 int bd,
+                                 int[] tl,
+                                 int tl_index,
+                                 int[] td,
+                                 int td_index,
+                                 InflateBlocks s,
+                                 ZlibCodec z)
         {
             int t;        // temporary pointer
             int[] tp;     // temporary pointer
@@ -1183,8 +1281,12 @@ namespace MonoGame.Utilities.Deflate
             int tp_index_t_3; // (tp_index+t)*3
 
             // load input, output, bit values
-            p = z.NextIn; n = z.AvailableBytesIn; b = s.bitb; k = s.bitk;
-            q = s.writeAt; m = q < s.readAt ? s.readAt - q - 1 : s.end - q;
+            p = z.NextIn;
+            n = z.AvailableBytesIn;
+            b = s.bitb;
+            k = s.bitk;
+            q = s.writeAt;
+            m = q < s.readAt ? s.readAt - q - 1 : s.end - q;
 
             // initialize masks
             ml = InternalInflateConstants.InflateMask[bl];
@@ -1195,20 +1297,22 @@ namespace MonoGame.Utilities.Deflate
             {
                 // assume called with m >= 258 && n >= 10
                 // get literal/length code
-                while (k < (20))
+                while(k < (20))
                 {
                     // max bits for literal/length code
                     n--;
-                    b |= (z.InputBuffer[p++] & 0xff) << k; k += 8;
+                    b |= (z.InputBuffer[p++] & 0xff) << k;
+                    k += 8;
                 }
 
                 t = b & ml;
                 tp = tl;
                 tp_index = tl_index;
                 tp_index_t_3 = (tp_index + t) * 3;
-                if ((e = tp[tp_index_t_3]) == 0)
+                if((e = tp[tp_index_t_3]) == 0)
                 {
-                    b >>= (tp[tp_index_t_3 + 1]); k -= (tp[tp_index_t_3 + 1]);
+                    b >>= (tp[tp_index_t_3 + 1]);
+                    k -= (tp[tp_index_t_3 + 1]);
 
                     s.window[q++] = (byte)tp[tp_index_t_3 + 2];
                     m--;
@@ -1216,22 +1320,24 @@ namespace MonoGame.Utilities.Deflate
                 }
                 do
                 {
+                    b >>= (tp[tp_index_t_3 + 1]);
+                    k -= (tp[tp_index_t_3 + 1]);
 
-                    b >>= (tp[tp_index_t_3 + 1]); k -= (tp[tp_index_t_3 + 1]);
-
-                    if ((e & 16) != 0)
+                    if((e & 16) != 0)
                     {
                         e &= 15;
                         c = tp[tp_index_t_3 + 2] + (b & InternalInflateConstants.InflateMask[e]);
 
-                        b >>= e; k -= e;
+                        b >>= e;
+                        k -= e;
 
                         // decode distance base of block to copy
-                        while (k < 15)
+                        while(k < 15)
                         {
                             // max bits for distance code
                             n--;
-                            b |= (z.InputBuffer[p++] & 0xff) << k; k += 8;
+                            b |= (z.InputBuffer[p++] & 0xff) << k;
+                            k += 8;
                         }
 
                         t = b & md;
@@ -1242,159 +1348,182 @@ namespace MonoGame.Utilities.Deflate
 
                         do
                         {
+                            b >>= (tp[tp_index_t_3 + 1]);
+                            k -= (tp[tp_index_t_3 + 1]);
 
-                            b >>= (tp[tp_index_t_3 + 1]); k -= (tp[tp_index_t_3 + 1]);
-
-                            if ((e & 16) != 0)
+                            if((e & 16) != 0)
                             {
                                 // get extra bits to add to distance base
                                 e &= 15;
-                                while (k < e)
+                                while(k < e)
                                 {
                                     // get extra bits (up to 13)
                                     n--;
-                                    b |= (z.InputBuffer[p++] & 0xff) << k; k += 8;
+                                    b |= (z.InputBuffer[p++] & 0xff) << k;
+                                    k += 8;
                                 }
 
                                 d = tp[tp_index_t_3 + 2] + (b & InternalInflateConstants.InflateMask[e]);
 
-                                b >>= e; k -= e;
+                                b >>= e;
+                                k -= e;
 
                                 // do the copy
                                 m -= c;
-                                if (q >= d)
+                                if(q >= d)
                                 {
                                     // offset before dest
                                     //  just copy
                                     r = q - d;
-                                    if (q - r > 0 && 2 > (q - r))
+                                    if(q - r > 0 && 2 > (q - r))
                                     {
                                         s.window[q++] = s.window[r++]; // minimum count is three,
                                         s.window[q++] = s.window[r++]; // so unroll loop a little
                                         c -= 2;
-                                    }
-                                    else
+                                    } else
                                     {
                                         Array.Copy(s.window, r, s.window, q, 2);
-                                        q += 2; r += 2; c -= 2;
+                                        q += 2;
+                                        r += 2;
+                                        c -= 2;
                                     }
-                                }
-                                else
+                                } else
                                 {
                                     // else offset after destination
                                     r = q - d;
                                     do
                                     {
                                         r += s.end; // force pointer in window
-                                    }
-                                    while (r < 0); // covers invalid distances
+                                    } while (r < 0); // covers invalid distances
                                     e = s.end - r;
-                                    if (c > e)
+                                    if(c > e)
                                     {
                                         // if source crosses,
                                         c -= e; // wrapped copy
-                                        if (q - r > 0 && e > (q - r))
+                                        if(q - r > 0 && e > (q - r))
                                         {
                                             do
                                             {
                                                 s.window[q++] = s.window[r++];
-                                            }
-                                            while (--e != 0);
-                                        }
-                                        else
+                                            } while (--e != 0);
+                                        } else
                                         {
                                             Array.Copy(s.window, r, s.window, q, e);
-                                            q += e; r += e; e = 0;
+                                            q += e;
+                                            r += e;
+                                            e = 0;
                                         }
                                         r = 0; // copy rest from start of window
                                     }
                                 }
 
                                 // copy all or what's left
-                                if (q - r > 0 && c > (q - r))
+                                if(q - r > 0 && c > (q - r))
                                 {
                                     do
                                     {
                                         s.window[q++] = s.window[r++];
-                                    }
-                                    while (--c != 0);
-                                }
-                                else
+                                    } while (--c != 0);
+                                } else
                                 {
                                     Array.Copy(s.window, r, s.window, q, c);
-                                    q += c; r += c; c = 0;
+                                    q += c;
+                                    r += c;
+                                    c = 0;
                                 }
                                 break;
-                            }
-                            else if ((e & 64) == 0)
+                            } else if((e & 64) == 0)
                             {
                                 t += tp[tp_index_t_3 + 2];
                                 t += (b & InternalInflateConstants.InflateMask[e]);
                                 tp_index_t_3 = (tp_index + t) * 3;
                                 e = tp[tp_index_t_3];
-                            }
-                            else
+                            } else
                             {
                                 z.Message = "invalid distance code";
 
-                                c = z.AvailableBytesIn - n; c = (k >> 3) < c ? k >> 3 : c; n += c; p -= c; k -= (c << 3);
+                                c = z.AvailableBytesIn - n;
+                                c = (k >> 3) < c ? k >> 3 : c;
+                                n += c;
+                                p -= c;
+                                k -= (c << 3);
 
-                                s.bitb = b; s.bitk = k;
-                                z.AvailableBytesIn = n; z.TotalBytesIn += p - z.NextIn; z.NextIn = p;
+                                s.bitb = b;
+                                s.bitk = k;
+                                z.AvailableBytesIn = n;
+                                z.TotalBytesIn += p - z.NextIn;
+                                z.NextIn = p;
                                 s.writeAt = q;
 
                                 return ZlibConstants.Z_DATA_ERROR;
                             }
-                        }
-                        while (true);
+                        } while (true);
                         break;
                     }
 
-                    if ((e & 64) == 0)
+                    if((e & 64) == 0)
                     {
                         t += tp[tp_index_t_3 + 2];
                         t += (b & InternalInflateConstants.InflateMask[e]);
                         tp_index_t_3 = (tp_index + t) * 3;
-                        if ((e = tp[tp_index_t_3]) == 0)
+                        if((e = tp[tp_index_t_3]) == 0)
                         {
-                            b >>= (tp[tp_index_t_3 + 1]); k -= (tp[tp_index_t_3 + 1]);
+                            b >>= (tp[tp_index_t_3 + 1]);
+                            k -= (tp[tp_index_t_3 + 1]);
                             s.window[q++] = (byte)tp[tp_index_t_3 + 2];
                             m--;
                             break;
                         }
-                    }
-                    else if ((e & 32) != 0)
+                    } else if((e & 32) != 0)
                     {
-                        c = z.AvailableBytesIn - n; c = (k >> 3) < c ? k >> 3 : c; n += c; p -= c; k -= (c << 3);
+                        c = z.AvailableBytesIn - n;
+                        c = (k >> 3) < c ? k >> 3 : c;
+                        n += c;
+                        p -= c;
+                        k -= (c << 3);
 
-                        s.bitb = b; s.bitk = k;
-                        z.AvailableBytesIn = n; z.TotalBytesIn += p - z.NextIn; z.NextIn = p;
+                        s.bitb = b;
+                        s.bitk = k;
+                        z.AvailableBytesIn = n;
+                        z.TotalBytesIn += p - z.NextIn;
+                        z.NextIn = p;
                         s.writeAt = q;
 
                         return ZlibConstants.Z_STREAM_END;
-                    }
-                    else
+                    } else
                     {
                         z.Message = "invalid literal/length code";
 
-                        c = z.AvailableBytesIn - n; c = (k >> 3) < c ? k >> 3 : c; n += c; p -= c; k -= (c << 3);
+                        c = z.AvailableBytesIn - n;
+                        c = (k >> 3) < c ? k >> 3 : c;
+                        n += c;
+                        p -= c;
+                        k -= (c << 3);
 
-                        s.bitb = b; s.bitk = k;
-                        z.AvailableBytesIn = n; z.TotalBytesIn += p - z.NextIn; z.NextIn = p;
+                        s.bitb = b;
+                        s.bitk = k;
+                        z.AvailableBytesIn = n;
+                        z.TotalBytesIn += p - z.NextIn;
+                        z.NextIn = p;
                         s.writeAt = q;
 
                         return ZlibConstants.Z_DATA_ERROR;
                     }
-                }
-                while (true);
-            }
-            while (m >= 258 && n >= 10);
+                } while (true);
+            } while (m >= 258 && n >= 10);
 
             // not enough input or output--restore pointers and return
-            c = z.AvailableBytesIn - n; c = (k >> 3) < c ? k >> 3 : c; n += c; p -= c; k -= (c << 3);
+            c = z.AvailableBytesIn - n;
+            c = (k >> 3) < c ? k >> 3 : c;
+            n += c;
+            p -= c;
+            k -= (c << 3);
 
-            s.bitb = b; s.bitk = k;
-            z.AvailableBytesIn = n; z.TotalBytesIn += p - z.NextIn; z.NextIn = p;
+            s.bitb = b;
+            s.bitk = k;
+            z.AvailableBytesIn = n;
+            z.TotalBytesIn += p - z.NextIn;
+            z.NextIn = p;
             s.writeAt = q;
 
             return ZlibConstants.Z_OK;
@@ -1443,21 +1572,20 @@ namespace MonoGame.Utilities.Deflate
         // mode independent information
         //internal int nowrap; // flag for no wrapper
         private bool _handleRfc1950HeaderBytes = true;
+
         internal bool HandleRfc1950HeaderBytes
         {
             get { return _handleRfc1950HeaderBytes; }
             set { _handleRfc1950HeaderBytes = value; }
         }
+
         internal int wbits; // log2(window size)  (8..15, defaults to 15)
 
         internal InflateBlocks blocks; // current inflate_blocks state
 
         public InflateManager() { }
 
-        public InflateManager(bool expectRfc1950HeaderBytes)
-        {
-            _handleRfc1950HeaderBytes = expectRfc1950HeaderBytes;
-        }
+        public InflateManager(bool expectRfc1950HeaderBytes) { _handleRfc1950HeaderBytes = expectRfc1950HeaderBytes; }
 
         internal int Reset()
         {
@@ -1470,7 +1598,7 @@ namespace MonoGame.Utilities.Deflate
 
         internal int End()
         {
-            if (blocks != null)
+            if(blocks != null)
                 blocks.Free();
             blocks = null;
             return ZlibConstants.Z_OK;
@@ -1491,7 +1619,7 @@ namespace MonoGame.Utilities.Deflate
             //}
 
             // set window size
-            if (w < 8 || w > 15)
+            if(w < 8 || w > 15)
             {
                 End();
                 throw new ZlibException("Bad window size.");
@@ -1500,9 +1628,7 @@ namespace MonoGame.Utilities.Deflate
             }
             wbits = w;
 
-            blocks = new InflateBlocks(codec,
-                HandleRfc1950HeaderBytes ? this : null,
-                1 << w);
+            blocks = new InflateBlocks(codec, HandleRfc1950HeaderBytes ? this : null, 1 << w);
 
             // reset state
             Reset();
@@ -1514,7 +1640,7 @@ namespace MonoGame.Utilities.Deflate
         {
             int b;
 
-            if (_codec.InputBuffer == null)
+            if(_codec.InputBuffer == null)
                 throw new ZlibException("InputBuffer is null. ");
 
             //             int f = (flush == FlushType.Finish)
@@ -1525,26 +1651,27 @@ namespace MonoGame.Utilities.Deflate
             int f = ZlibConstants.Z_OK;
             int r = ZlibConstants.Z_BUF_ERROR;
 
-            while (true)
+            while(true)
             {
-                switch (mode)
+                switch(mode)
                 {
                     case InflateManagerMode.METHOD:
-                        if (_codec.AvailableBytesIn == 0) return r;
+                        if(_codec.AvailableBytesIn == 0)
+                            return r;
                         r = f;
                         _codec.AvailableBytesIn--;
                         _codec.TotalBytesIn++;
-                        if (((method = _codec.InputBuffer[_codec.NextIn++]) & 0xf) != Z_DEFLATED)
+                        if(((method = _codec.InputBuffer[_codec.NextIn++]) & 0xf) != Z_DEFLATED)
                         {
                             mode = InflateManagerMode.BAD;
-                            _codec.Message = String.Format("unknown compression method (0x{0:X2})", method);
+                            _codec.Message = $"unknown compression method (0x{method:X2})";
                             marker = 5; // can't try inflateSync
                             break;
                         }
-                        if ((method >> 4) + 8 > wbits)
+                        if((method >> 4) + 8 > wbits)
                         {
                             mode = InflateManagerMode.BAD;
-                            _codec.Message = String.Format("invalid window size ({0})", (method >> 4) + 8);
+                            _codec.Message = $"invalid window size ({(method >> 4) + 8})";
                             marker = 5; // can't try inflateSync
                             break;
                         }
@@ -1553,13 +1680,14 @@ namespace MonoGame.Utilities.Deflate
 
 
                     case InflateManagerMode.FLAG:
-                        if (_codec.AvailableBytesIn == 0) return r;
+                        if(_codec.AvailableBytesIn == 0)
+                            return r;
                         r = f;
                         _codec.AvailableBytesIn--;
                         _codec.TotalBytesIn++;
                         b = (_codec.InputBuffer[_codec.NextIn++]) & 0xff;
 
-                        if ((((method << 8) + b) % 31) != 0)
+                        if((((method << 8) + b) % 31) != 0)
                         {
                             mode = InflateManagerMode.BAD;
                             _codec.Message = "incorrect header check";
@@ -1567,13 +1695,12 @@ namespace MonoGame.Utilities.Deflate
                             break;
                         }
 
-                        mode = ((b & PRESET_DICT) == 0)
-                            ? InflateManagerMode.BLOCKS
-                            : InflateManagerMode.DICT4;
+                        mode = ((b & PRESET_DICT) == 0) ? InflateManagerMode.BLOCKS : InflateManagerMode.DICT4;
                         break;
 
                     case InflateManagerMode.DICT4:
-                        if (_codec.AvailableBytesIn == 0) return r;
+                        if(_codec.AvailableBytesIn == 0)
+                            return r;
                         r = f;
                         _codec.AvailableBytesIn--;
                         _codec.TotalBytesIn++;
@@ -1582,7 +1709,8 @@ namespace MonoGame.Utilities.Deflate
                         break;
 
                     case InflateManagerMode.DICT3:
-                        if (_codec.AvailableBytesIn == 0) return r;
+                        if(_codec.AvailableBytesIn == 0)
+                            return r;
                         r = f;
                         _codec.AvailableBytesIn--;
                         _codec.TotalBytesIn++;
@@ -1592,7 +1720,8 @@ namespace MonoGame.Utilities.Deflate
 
                     case InflateManagerMode.DICT2:
 
-                        if (_codec.AvailableBytesIn == 0) return r;
+                        if(_codec.AvailableBytesIn == 0)
+                            return r;
                         r = f;
                         _codec.AvailableBytesIn--;
                         _codec.TotalBytesIn++;
@@ -1602,9 +1731,11 @@ namespace MonoGame.Utilities.Deflate
 
 
                     case InflateManagerMode.DICT1:
-                        if (_codec.AvailableBytesIn == 0) return r;
+                        if(_codec.AvailableBytesIn == 0)
+                            return r;
                         r = f;
-                        _codec.AvailableBytesIn--; _codec.TotalBytesIn++;
+                        _codec.AvailableBytesIn--;
+                        _codec.TotalBytesIn++;
                         expectedCheck += (uint)(_codec.InputBuffer[_codec.NextIn++] & 0x000000ff);
                         _codec._Adler32 = expectedCheck;
                         mode = InflateManagerMode.DICT0;
@@ -1620,21 +1751,22 @@ namespace MonoGame.Utilities.Deflate
 
                     case InflateManagerMode.BLOCKS:
                         r = blocks.Process(r);
-                        if (r == ZlibConstants.Z_DATA_ERROR)
+                        if(r == ZlibConstants.Z_DATA_ERROR)
                         {
                             mode = InflateManagerMode.BAD;
                             marker = 0; // can try inflateSync
                             break;
                         }
 
-                        if (r == ZlibConstants.Z_OK) r = f;
+                        if(r == ZlibConstants.Z_OK)
+                            r = f;
 
-                        if (r != ZlibConstants.Z_STREAM_END)
+                        if(r != ZlibConstants.Z_STREAM_END)
                             return r;
 
                         r = f;
                         computedCheck = blocks.Reset();
-                        if (!HandleRfc1950HeaderBytes)
+                        if(!HandleRfc1950HeaderBytes)
                         {
                             mode = InflateManagerMode.DONE;
                             return ZlibConstants.Z_STREAM_END;
@@ -1643,7 +1775,8 @@ namespace MonoGame.Utilities.Deflate
                         break;
 
                     case InflateManagerMode.CHECK4:
-                        if (_codec.AvailableBytesIn == 0) return r;
+                        if(_codec.AvailableBytesIn == 0)
+                            return r;
                         r = f;
                         _codec.AvailableBytesIn--;
                         _codec.TotalBytesIn++;
@@ -1652,15 +1785,18 @@ namespace MonoGame.Utilities.Deflate
                         break;
 
                     case InflateManagerMode.CHECK3:
-                        if (_codec.AvailableBytesIn == 0) return r;
+                        if(_codec.AvailableBytesIn == 0)
+                            return r;
                         r = f;
-                        _codec.AvailableBytesIn--; _codec.TotalBytesIn++;
+                        _codec.AvailableBytesIn--;
+                        _codec.TotalBytesIn++;
                         expectedCheck += (uint)((_codec.InputBuffer[_codec.NextIn++] << 16) & 0x00ff0000);
                         mode = InflateManagerMode.CHECK2;
                         break;
 
                     case InflateManagerMode.CHECK2:
-                        if (_codec.AvailableBytesIn == 0) return r;
+                        if(_codec.AvailableBytesIn == 0)
+                            return r;
                         r = f;
                         _codec.AvailableBytesIn--;
                         _codec.TotalBytesIn++;
@@ -1669,11 +1805,13 @@ namespace MonoGame.Utilities.Deflate
                         break;
 
                     case InflateManagerMode.CHECK1:
-                        if (_codec.AvailableBytesIn == 0) return r;
+                        if(_codec.AvailableBytesIn == 0)
+                            return r;
                         r = f;
-                        _codec.AvailableBytesIn--; _codec.TotalBytesIn++;
+                        _codec.AvailableBytesIn--;
+                        _codec.TotalBytesIn++;
                         expectedCheck += (uint)(_codec.InputBuffer[_codec.NextIn++] & 0x000000ff);
-                        if (computedCheck != expectedCheck)
+                        if(computedCheck != expectedCheck)
                         {
                             mode = InflateManagerMode.BAD;
                             _codec.Message = "incorrect data check";
@@ -1687,32 +1825,30 @@ namespace MonoGame.Utilities.Deflate
                         return ZlibConstants.Z_STREAM_END;
 
                     case InflateManagerMode.BAD:
-                        throw new ZlibException(String.Format("Bad state ({0})", _codec.Message));
+                        throw new ZlibException($"Bad state ({_codec.Message})");
 
                     default:
                         throw new ZlibException("Stream error.");
-
                 }
             }
         }
-
 
 
         internal int SetDictionary(byte[] dictionary)
         {
             int index = 0;
             int length = dictionary.Length;
-            if (mode != InflateManagerMode.DICT0)
+            if(mode != InflateManagerMode.DICT0)
                 throw new ZlibException("Stream error.");
 
-            if (Adler.Adler32(1, dictionary, 0, dictionary.Length) != _codec._Adler32)
+            if(Adler.Adler32(1, dictionary, 0, dictionary.Length) != _codec._Adler32)
             {
                 return ZlibConstants.Z_DATA_ERROR;
             }
 
             _codec._Adler32 = Adler.Adler32(0, null, 0, 0);
 
-            if (length >= (1 << wbits))
+            if(length >= (1 << wbits))
             {
                 length = (1 << wbits) - 1;
                 index = dictionary.Length - length;
@@ -1733,32 +1869,31 @@ namespace MonoGame.Utilities.Deflate
             long r, w; // temporaries to save total_in and total_out
 
             // set up
-            if (mode != InflateManagerMode.BAD)
+            if(mode != InflateManagerMode.BAD)
             {
                 mode = InflateManagerMode.BAD;
                 marker = 0;
             }
-            if ((n = _codec.AvailableBytesIn) == 0)
+            if((n = _codec.AvailableBytesIn) == 0)
                 return ZlibConstants.Z_BUF_ERROR;
             p = _codec.NextIn;
             m = marker;
 
             // search
-            while (n != 0 && m < 4)
+            while(n != 0 && m < 4)
             {
-                if (_codec.InputBuffer[p] == mark[m])
+                if(_codec.InputBuffer[p] == mark[m])
                 {
                     m++;
-                }
-                else if (_codec.InputBuffer[p] != 0)
+                } else if(_codec.InputBuffer[p] != 0)
                 {
                     m = 0;
-                }
-                else
+                } else
                 {
                     m = 4 - m;
                 }
-                p++; n--;
+                p++;
+                n--;
             }
 
             // restore
@@ -1768,7 +1903,7 @@ namespace MonoGame.Utilities.Deflate
             marker = m;
 
             // return no joy or set up to restart on a new block
-            if (m != 4)
+            if(m != 4)
             {
                 return ZlibConstants.Z_DATA_ERROR;
             }
@@ -1788,9 +1923,6 @@ namespace MonoGame.Utilities.Deflate
         // but removes the length bytes of the resulting empty stored block. When
         // decompressing, PPP checks that at the end of input packet, inflate is
         // waiting for these length bytes.
-        internal int SyncPoint(ZlibCodec z)
-        {
-            return blocks.SyncPoint();
-        }
+        internal int SyncPoint(ZlibCodec z) { return blocks.SyncPoint(); }
     }
 }

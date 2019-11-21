@@ -11,26 +11,28 @@ namespace MonoGame.Utilities
     {
         public static bool IsValueType(Type targetType)
         {
-            if (targetType == null)
+            if(targetType == null)
             {
                 throw new NullReferenceException("Must supply the targetType parameter");
             }
 #if NET45            
             return targetType.GetTypeInfo().IsValueType;
 #else
+
             return targetType.IsValueType;
 #endif
         }
 
         public static Type GetBaseType(Type targetType)
         {
-            if (targetType == null)
+            if(targetType == null)
             {
                 throw new NullReferenceException("Must supply the targetType parameter");
             }
 #if NET45            
             return targetType.GetTypeInfo().BaseType;
 #else
+
             return targetType.BaseType;
 #endif
         }
@@ -40,13 +42,14 @@ namespace MonoGame.Utilities
         /// </summary>
         public static Assembly GetAssembly(Type targetType)
         {
-            if (targetType == null)
+            if(targetType == null)
             {
                 throw new NullReferenceException("Must supply the targetType parameter");
             }
 #if NET45            
             return targetType.GetTypeInfo().Assembly;
 #else
+
             return targetType.Assembly;
 #endif
         }
@@ -56,19 +59,20 @@ namespace MonoGame.Utilities
         /// </summary>
         public static bool IsConcreteClass(Type t)
         {
-            if (t == null)
+            if(t == null)
             {
                 throw new NullReferenceException("Must supply the t (type) parameter");
             }
 
-            if (t == typeof(object))
+            if(t == typeof(object))
                 return false;
 #if NET45            
             var ti = t.GetTypeInfo();
             if (ti.IsClass && !ti.IsAbstract)
                 return true;
 #else            
-            if (t.IsClass && !t.IsAbstract)
+
+            if(t.IsClass && !t.IsAbstract)
                 return true;
 #endif
             return false;
@@ -85,7 +89,7 @@ namespace MonoGame.Utilities
 
         public static MethodInfo GetPropertyGetMethod(PropertyInfo property)
         {
-            if (property == null)
+            if(property == null)
             {
                 throw new NullReferenceException("Must supply the property parameter");
             }
@@ -99,7 +103,7 @@ namespace MonoGame.Utilities
 
         public static MethodInfo GetPropertySetMethod(PropertyInfo property)
         {
-            if (property == null)
+            if(property == null)
             {
                 throw new NullReferenceException("Must supply the property parameter");
             }
@@ -111,9 +115,10 @@ namespace MonoGame.Utilities
 #endif
         }
 
-        public static T GetCustomAttribute<T>(MemberInfo member) where T : Attribute
+        public static T GetCustomAttribute<T>(MemberInfo member)
+            where T : Attribute
         {
-            if (member == null)
+            if(member == null)
                 throw new NullReferenceException("Must supply the member parameter");
 
 #if NET45            
@@ -124,20 +129,20 @@ namespace MonoGame.Utilities
         }
 
         /// <summary>
-        /// Returns true if the get method of the given property exist and are public.
-        /// Note that we allow a getter-only property to be serialized (and deserialized),
-        /// *if* CanDeserializeIntoExistingObject is true for the property type.
+        /// Returns true if the get method of the given property exist and are public. Note that we allow a getter-only
+        /// property to be serialized (and deserialized), *if* CanDeserializeIntoExistingObject is true for the property
+        /// type.
         /// </summary>
         public static bool PropertyIsPublic(PropertyInfo property)
         {
-            if (property == null)
+            if(property == null)
             {
                 throw new NullReferenceException("Must supply the property parameter");
             }
 
             var getMethod = GetPropertyGetMethod(property);
 
-            if (getMethod == null || !getMethod.IsPublic)
+            if(getMethod == null || !getMethod.IsPublic)
                 return false;
 
             return true;
@@ -148,10 +153,10 @@ namespace MonoGame.Utilities
         /// </summary>
         public static bool IsAssignableFrom(Type type, object value)
         {
-            if (type == null)
-                throw new ArgumentNullException("type");
-            if (value == null)
-                throw new ArgumentNullException("value");
+            if(type == null)
+                throw new ArgumentNullException(nameof(type));
+            if(value == null)
+                throw new ArgumentNullException(nameof(value));
 
             return IsAssignableFromType(type, value.GetType());
         }
@@ -161,15 +166,16 @@ namespace MonoGame.Utilities
         /// </summary>
         public static bool IsAssignableFromType(Type type, Type objectType)
         {
-            if (type == null)
-                throw new ArgumentNullException("type");
-            if (objectType == null)
-                throw new ArgumentNullException("objectType");
+            if(type == null)
+                throw new ArgumentNullException(nameof(type));
+            if(objectType == null)
+                throw new ArgumentNullException(nameof(objectType));
 #if NET45
             if (type.GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo()))
                 return true;
 #else
-            if (type.IsAssignableFrom(objectType))
+
+            if(type.IsAssignableFrom(objectType))
                 return true;
 #endif
             return false;

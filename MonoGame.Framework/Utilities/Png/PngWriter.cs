@@ -19,10 +19,7 @@ namespace MonoGame.Utilities.Png
         private int width;
         private int height;
 
-        public PngWriter()
-        {
-            colorType = ColorType.RgbWithAlpha;
-        }
+        public PngWriter() { colorType = ColorType.RgbWithAlpha; }
 
         public void Write(Texture2D texture2D, Stream outputStream)
         {
@@ -53,12 +50,11 @@ namespace MonoGame.Utilities.Png
 
             try
             {
-                using (var deflateStream = new ZlibStream(new MemoryStream(encodedPixelData), CompressionMode.Compress))
+                using(var deflateStream = new ZlibStream(new MemoryStream(encodedPixelData), CompressionMode.Compress))
                 {
                     deflateStream.CopyTo(compressedPixelData);
                 }
-            }
-            catch (Exception exception)
+            } catch(Exception exception)
             {
                 throw new Exception("An error occurred during DEFLATE compression.", exception);
             }
@@ -81,7 +77,7 @@ namespace MonoGame.Utilities.Png
             int bytesPerPixel = CalculateBytesPerPixel();
             byte[] previousScanline = new byte[width * bytesPerPixel];
 
-            for (int y = 0; y < height; y++)
+            for(int y = 0; y < height; y++)
             {
                 var rawScanline = GetRawScanline(y);
 
@@ -94,7 +90,7 @@ namespace MonoGame.Utilities.Png
 
             List<byte> result = new List<byte>();
 
-            foreach (var encodedScanline in filteredScanlines)
+            foreach(var encodedScanline in filteredScanlines)
             {
                 result.AddRange(encodedScanline);
             }
@@ -103,8 +99,8 @@ namespace MonoGame.Utilities.Png
         }
 
         /// <summary>
-        /// Applies all PNG filters to the given scanline and returns the filtered scanline that is deemed
-        /// to be most compressible, using lowest total variation as proxy for compressibility.
+        /// Applies all PNG filters to the given scanline and returns the filtered scanline that is deemed to be most
+        /// compressible, using lowest total variation as proxy for compressibility.
         /// </summary>
         /// <param name="rawScanline"></param>
         /// <param name="previousScanline"></param>
@@ -129,9 +125,9 @@ namespace MonoGame.Utilities.Png
             int lowestTotalVariation = Int32.MaxValue;
             int lowestTotalVariationIndex = 0;
 
-            for (int i = 0; i < candidates.Count; i++)
+            for(int i = 0; i < candidates.Count; i++)
             {
-                if (candidates[i].Item2 < lowestTotalVariation)
+                if(candidates[i].Item2 < lowestTotalVariation)
                 {
                     lowestTotalVariationIndex = i;
                     lowestTotalVariation = candidates[i].Item2;
@@ -151,7 +147,7 @@ namespace MonoGame.Utilities.Png
         {
             int totalVariation = 0;
 
-            for (int i = 1; i < input.Length; i++)
+            for(int i = 1; i < input.Length; i++)
             {
                 totalVariation += Math.Abs(input[i] - input[i - 1]);
             }
@@ -163,7 +159,7 @@ namespace MonoGame.Utilities.Png
         {
             var rawScanline = new byte[4 * width];
 
-            for (int x = 0; x < width; x++)
+            for(int x = 0; x < width; x++)
             {
                 var color = colorData[(y * width) + x];
 
@@ -178,7 +174,7 @@ namespace MonoGame.Utilities.Png
 
         private int CalculateBytesPerPixel()
         {
-            switch (colorType)
+            switch(colorType)
             {
                 case ColorType.Grayscale:
                     return bitsPerSample / 8;

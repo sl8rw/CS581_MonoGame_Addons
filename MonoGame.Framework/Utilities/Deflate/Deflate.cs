@@ -71,7 +71,6 @@ using System;
 
 namespace MonoGame.Utilities.Deflate
 {
-
     internal enum BlockState
     {
         NeedMore = 0,       // block not completed, need more input or more output
@@ -124,15 +123,13 @@ namespace MonoGame.Utilities.Deflate
                 this.Flavor = flavor;
             }
 
-            public static Config Lookup(CompressionLevel level)
-            {
-                return Table[(int)level];
-            }
+            public static Config Lookup(CompressionLevel level) { return Table[(int)level]; }
 
 
             static Config()
             {
-                Table = new Config[] {
+                Table = new Config[]
+                {
                     new Config(0, 0, 0, 0, DeflateFlavor.Store),
                     new Config(4, 4, 8, 4, DeflateFlavor.Fast),
                     new Config(4, 5, 16, 8, DeflateFlavor.Fast),
@@ -386,11 +383,11 @@ namespace MonoGame.Utilities.Deflate
         internal void _InitializeBlocks()
         {
             // Initialize the trees.
-            for (int i = 0; i < InternalConstants.L_CODES; i++)
+            for(int i = 0; i < InternalConstants.L_CODES; i++)
                 dyn_ltree[i * 2] = 0;
-            for (int i = 0; i < InternalConstants.D_CODES; i++)
+            for(int i = 0; i < InternalConstants.D_CODES; i++)
                 dyn_dtree[i * 2] = 0;
-            for (int i = 0; i < InternalConstants.BL_CODES; i++)
+            for(int i = 0; i < InternalConstants.BL_CODES; i++)
                 bl_tree[i * 2] = 0;
 
             dyn_ltree[END_BLOCK * 2] = 1;
@@ -406,19 +403,20 @@ namespace MonoGame.Utilities.Deflate
         {
             int v = heap[k];
             int j = k << 1; // left son of k
-            while (j <= heap_len)
+            while(j <= heap_len)
             {
                 // Set j to the smallest of the two sons:
-                if (j < heap_len && _IsSmaller(tree, heap[j + 1], heap[j], depth))
+                if(j < heap_len && _IsSmaller(tree, heap[j + 1], heap[j], depth))
                 {
                     j++;
                 }
                 // Exit if v is smaller than both sons
-                if (_IsSmaller(tree, v, heap[j], depth))
+                if(_IsSmaller(tree, v, heap[j], depth))
                     break;
 
                 // Exchange v with the smallest son
-                heap[k] = heap[j]; k = j;
+                heap[k] = heap[j];
+                k = j;
                 // And continue down the tree, setting j to the left son of k
                 j <<= 1;
             }
@@ -445,49 +443,49 @@ namespace MonoGame.Utilities.Deflate
             int max_count = 7; // max repeat count
             int min_count = 4; // min repeat count
 
-            if (nextlen == 0)
+            if(nextlen == 0)
             {
-                max_count = 138; min_count = 3;
+                max_count = 138;
+                min_count = 3;
             }
             tree[(max_code + 1) * 2 + 1] = (short)0x7fff; // guard //??
 
-            for (n = 0; n <= max_code; n++)
+            for(n = 0; n <= max_code; n++)
             {
-                curlen = nextlen; nextlen = (int)tree[(n + 1) * 2 + 1];
-                if (++count < max_count && curlen == nextlen)
+                curlen = nextlen;
+                nextlen = (int)tree[(n + 1) * 2 + 1];
+                if(++count < max_count && curlen == nextlen)
                 {
                     continue;
-                }
-                else if (count < min_count)
+                } else if(count < min_count)
                 {
                     bl_tree[curlen * 2] = (short)(bl_tree[curlen * 2] + count);
-                }
-                else if (curlen != 0)
+                } else if(curlen != 0)
                 {
-                    if (curlen != prevlen)
+                    if(curlen != prevlen)
                         bl_tree[curlen * 2]++;
                     bl_tree[InternalConstants.REP_3_6 * 2]++;
-                }
-                else if (count <= 10)
+                } else if(count <= 10)
                 {
                     bl_tree[InternalConstants.REPZ_3_10 * 2]++;
-                }
-                else
+                } else
                 {
                     bl_tree[InternalConstants.REPZ_11_138 * 2]++;
                 }
-                count = 0; prevlen = curlen;
-                if (nextlen == 0)
+                count = 0;
+                prevlen = curlen;
+                if(nextlen == 0)
                 {
-                    max_count = 138; min_count = 3;
-                }
-                else if (curlen == nextlen)
+                    max_count = 138;
+                    min_count = 3;
+                } else if(curlen == nextlen)
                 {
-                    max_count = 6; min_count = 3;
-                }
-                else
+                    max_count = 6;
+                    min_count = 3;
+                } else
                 {
-                    max_count = 7; min_count = 4;
+                    max_count = 7;
+                    min_count = 4;
                 }
             }
         }
@@ -510,9 +508,9 @@ namespace MonoGame.Utilities.Deflate
             // Determine the number of bit length codes to send. The pkzip format
             // requires that at least 4 bit length codes be sent. (appnote.txt says
             // 3 but the actual value used is 4.)
-            for (max_blindex = InternalConstants.BL_CODES - 1; max_blindex >= 3; max_blindex--)
+            for(max_blindex = InternalConstants.BL_CODES - 1; max_blindex >= 3; max_blindex--)
             {
-                if (bl_tree[Tree.bl_order[max_blindex] * 2 + 1] != 0)
+                if(bl_tree[Tree.bl_order[max_blindex] * 2 + 1] != 0)
                     break;
             }
             // Update opt_len to include the bit length tree and counts
@@ -532,7 +530,7 @@ namespace MonoGame.Utilities.Deflate
             send_bits(lcodes - 257, 5); // not +255 as stated in appnote.txt
             send_bits(dcodes - 1, 5);
             send_bits(blcodes - 4, 4); // not -3 as stated in appnote.txt
-            for (rank = 0; rank < blcodes; rank++)
+            for(rank = 0; rank < blcodes; rank++)
             {
                 send_bits(bl_tree[Tree.bl_order[rank] * 2 + 1], 3);
             }
@@ -552,57 +550,57 @@ namespace MonoGame.Utilities.Deflate
             int max_count = 7;               // max repeat count
             int min_count = 4;               // min repeat count
 
-            if (nextlen == 0)
+            if(nextlen == 0)
             {
-                max_count = 138; min_count = 3;
+                max_count = 138;
+                min_count = 3;
             }
 
-            for (n = 0; n <= max_code; n++)
+            for(n = 0; n <= max_code; n++)
             {
-                curlen = nextlen; nextlen = tree[(n + 1) * 2 + 1];
-                if (++count < max_count && curlen == nextlen)
+                curlen = nextlen;
+                nextlen = tree[(n + 1) * 2 + 1];
+                if(++count < max_count && curlen == nextlen)
                 {
                     continue;
-                }
-                else if (count < min_count)
+                } else if(count < min_count)
                 {
                     do
                     {
                         send_code(curlen, bl_tree);
-                    }
-                    while (--count != 0);
-                }
-                else if (curlen != 0)
+                    } while (--count != 0);
+                } else if(curlen != 0)
                 {
-                    if (curlen != prevlen)
+                    if(curlen != prevlen)
                     {
-                        send_code(curlen, bl_tree); count--;
+                        send_code(curlen, bl_tree);
+                        count--;
                     }
                     send_code(InternalConstants.REP_3_6, bl_tree);
                     send_bits(count - 3, 2);
-                }
-                else if (count <= 10)
+                } else if(count <= 10)
                 {
                     send_code(InternalConstants.REPZ_3_10, bl_tree);
                     send_bits(count - 3, 3);
-                }
-                else
+                } else
                 {
                     send_code(InternalConstants.REPZ_11_138, bl_tree);
                     send_bits(count - 11, 7);
                 }
-                count = 0; prevlen = curlen;
-                if (nextlen == 0)
+                count = 0;
+                prevlen = curlen;
+                if(nextlen == 0)
                 {
-                    max_count = 138; min_count = 3;
-                }
-                else if (curlen == nextlen)
+                    max_count = 138;
+                    min_count = 3;
+                } else if(curlen == nextlen)
                 {
-                    max_count = 6; min_count = 3;
-                }
-                else
+                    max_count = 6;
+                    min_count = 3;
+                } else
                 {
-                    max_count = 7; min_count = 4;
+                    max_count = 7;
+                    min_count = 4;
                 }
             }
         }
@@ -649,7 +647,7 @@ namespace MonoGame.Utilities.Deflate
             int len = length;
             unchecked
             {
-                if (bi_valid > Buf_size - len)
+                if(bi_valid > Buf_size - len)
                 {
                     //int val = value;
                     //      bi_buf |= (val << bi_valid);
@@ -662,8 +660,7 @@ namespace MonoGame.Utilities.Deflate
 
                     bi_buf = (short)((uint)value >> (Buf_size - bi_valid));
                     bi_valid += len - Buf_size;
-                }
-                else
+                } else
                 {
                     //      bi_buf |= (value) << bi_valid;
                     bi_buf |= (short)((value << bi_valid) & 0xffff);
@@ -692,7 +689,7 @@ namespace MonoGame.Utilities.Deflate
             // (10 - bi_valid) bits. The lookahead for the last real code (before
             // the EOB of the previous block) was thus at least one plus the length
             // of the EOB plus what we have just sent of the empty static block.
-            if (1 + last_eob_len + 10 - bi_valid < 9)
+            if(1 + last_eob_len + 10 - bi_valid < 9)
             {
                 send_bits(STATIC_TREES << 1, 3);
                 send_code(END_BLOCK, StaticTree.lengthAndLiteralsTreeCodes);
@@ -711,12 +708,11 @@ namespace MonoGame.Utilities.Deflate
             pending[_lengthOffset + last_lit] = unchecked((byte)lc);
             last_lit++;
 
-            if (dist == 0)
+            if(dist == 0)
             {
                 // lc is the unmatched char
                 dyn_ltree[lc * 2]++;
-            }
-            else
+            } else
             {
                 matches++;
                 // Here, lc is the match length - MIN_MATCH
@@ -725,18 +721,18 @@ namespace MonoGame.Utilities.Deflate
                 dyn_dtree[Tree.DistanceCode(dist) * 2]++;
             }
 
-            if ((last_lit & 0x1fff) == 0 && (int)compressionLevel > 2)
+            if((last_lit & 0x1fff) == 0 && (int)compressionLevel > 2)
             {
                 // Compute an upper bound for the compressed length
                 int out_length = last_lit << 3;
                 int in_length = strstart - block_start;
                 int dcode;
-                for (dcode = 0; dcode < InternalConstants.D_CODES; dcode++)
+                for(dcode = 0; dcode < InternalConstants.D_CODES; dcode++)
                 {
                     out_length = (int)(out_length + (int)dyn_dtree[dcode * 2] * (5L + Tree.ExtraDistanceBits[dcode]));
                 }
                 out_length >>= 3;
-                if ((matches < (last_lit / 2)) && out_length < in_length / 2)
+                if((matches < (last_lit / 2)) && out_length < in_length / 2)
                     return true;
             }
 
@@ -748,7 +744,6 @@ namespace MonoGame.Utilities.Deflate
         }
 
 
-
         // Send the block data compressed using the given Huffman trees
         internal void send_compressed_block(short[] ltree, short[] dtree)
         {
@@ -758,21 +753,19 @@ namespace MonoGame.Utilities.Deflate
             int code;     // the code to send
             int extra;    // number of extra bits to send
 
-            if (last_lit != 0)
+            if(last_lit != 0)
             {
                 do
                 {
                     int ix = _distanceOffset + lx * 2;
-                    distance = ((pending[ix] << 8) & 0xff00) |
-                        (pending[ix + 1] & 0xff);
+                    distance = ((pending[ix] << 8) & 0xff00) | (pending[ix + 1] & 0xff);
                     lc = (pending[_lengthOffset + lx]) & 0xff;
                     lx++;
 
-                    if (distance == 0)
+                    if(distance == 0)
                     {
                         send_code(lc, ltree); // send a literal byte
-                    }
-                    else
+                    } else
                     {
                         // literal or match pair
                         // Here, lc is the match length - MIN_MATCH
@@ -781,7 +774,7 @@ namespace MonoGame.Utilities.Deflate
                         // send the length code
                         send_code(code + InternalConstants.LITERALS + 1, ltree);
                         extra = Tree.ExtraLengthBits[code];
-                        if (extra != 0)
+                        if(extra != 0)
                         {
                             // send the extra length bits
                             lc -= Tree.LengthBase[code];
@@ -794,7 +787,7 @@ namespace MonoGame.Utilities.Deflate
                         send_code(code, dtree);
 
                         extra = Tree.ExtraDistanceBits[code];
-                        if (extra != 0)
+                        if(extra != 0)
                         {
                             // send the extra distance bits
                             distance -= Tree.DistanceBase[code];
@@ -803,14 +796,12 @@ namespace MonoGame.Utilities.Deflate
                     }
 
                     // Check that the overlay between pending and d_buf+l_buf is ok:
-                }
-                while (lx < last_lit);
+                } while (lx < last_lit);
             }
 
             send_code(END_BLOCK, ltree);
             last_eob_len = ltree[END_BLOCK * 2 + 1];
         }
-
 
 
         // Set the data type to ASCII or BINARY, using a crude approximation:
@@ -822,34 +813,35 @@ namespace MonoGame.Utilities.Deflate
             int n = 0;
             int ascii_freq = 0;
             int bin_freq = 0;
-            while (n < 7)
+            while(n < 7)
             {
-                bin_freq += dyn_ltree[n * 2]; n++;
+                bin_freq += dyn_ltree[n * 2];
+                n++;
             }
-            while (n < 128)
+            while(n < 128)
             {
-                ascii_freq += dyn_ltree[n * 2]; n++;
+                ascii_freq += dyn_ltree[n * 2];
+                n++;
             }
-            while (n < InternalConstants.LITERALS)
+            while(n < InternalConstants.LITERALS)
             {
-                bin_freq += dyn_ltree[n * 2]; n++;
+                bin_freq += dyn_ltree[n * 2];
+                n++;
             }
             data_type = (sbyte)(bin_freq > (ascii_freq >> 2) ? Z_BINARY : Z_ASCII);
         }
 
 
-
         // Flush the bit buffer, keeping at most 7 bits in it.
         internal void bi_flush()
         {
-            if (bi_valid == 16)
+            if(bi_valid == 16)
             {
                 pending[pendingCount++] = (byte)bi_buf;
                 pending[pendingCount++] = (byte)(bi_buf >> 8);
                 bi_buf = 0;
                 bi_valid = 0;
-            }
-            else if (bi_valid >= 8)
+            } else if(bi_valid >= 8)
             {
                 //put_byte((byte)bi_buf);
                 pending[pendingCount++] = (byte)bi_buf;
@@ -861,12 +853,11 @@ namespace MonoGame.Utilities.Deflate
         // Flush the bit buffer and align the output on a byte boundary
         internal void bi_windup()
         {
-            if (bi_valid > 8)
+            if(bi_valid > 8)
             {
                 pending[pendingCount++] = (byte)bi_buf;
                 pending[pendingCount++] = (byte)(bi_buf >> 8);
-            }
-            else if (bi_valid > 0)
+            } else if(bi_valid > 0)
             {
                 //put_byte((byte)bi_buf);
                 pending[pendingCount++] = (byte)bi_buf;
@@ -882,7 +873,7 @@ namespace MonoGame.Utilities.Deflate
             bi_windup(); // align on byte boundary
             last_eob_len = 8; // enough lookahead for inflate
 
-            if (header)
+            if(header)
                 unchecked
                 {
                     //put_short((short)len);
@@ -918,21 +909,21 @@ namespace MonoGame.Utilities.Deflate
             int max_block_size = 0xffff;
             int max_start;
 
-            if (max_block_size > pending.Length - 5)
+            if(max_block_size > pending.Length - 5)
             {
                 max_block_size = pending.Length - 5;
             }
 
             // Copy as much as possible from input to output:
-            while (true)
+            while(true)
             {
                 // Fill the window as much as possible:
-                if (lookahead <= 1)
+                if(lookahead <= 1)
                 {
                     _fillWindow();
-                    if (lookahead == 0 && flush == FlushType.None)
+                    if(lookahead == 0 && flush == FlushType.None)
                         return BlockState.NeedMore;
-                    if (lookahead == 0)
+                    if(lookahead == 0)
                         break; // flush the current block
                 }
 
@@ -941,29 +932,29 @@ namespace MonoGame.Utilities.Deflate
 
                 // Emit a stored block if pending will be full:
                 max_start = block_start + max_block_size;
-                if (strstart == 0 || strstart >= max_start)
+                if(strstart == 0 || strstart >= max_start)
                 {
                     // strstart == 0 is possible when wraparound on 16-bit machine
                     lookahead = (strstart - max_start);
                     strstart = max_start;
 
                     flush_block_only(false);
-                    if (_codec.AvailableBytesOut == 0)
+                    if(_codec.AvailableBytesOut == 0)
                         return BlockState.NeedMore;
                 }
 
                 // Flush if we may have to slide, otherwise block_start may become
                 // negative and the data will be gone:
-                if (strstart - block_start >= w_size - MIN_LOOKAHEAD)
+                if(strstart - block_start >= w_size - MIN_LOOKAHEAD)
                 {
                     flush_block_only(false);
-                    if (_codec.AvailableBytesOut == 0)
+                    if(_codec.AvailableBytesOut == 0)
                         return BlockState.NeedMore;
                 }
             }
 
             flush_block_only(flush == FlushType.Finish);
-            if (_codec.AvailableBytesOut == 0)
+            if(_codec.AvailableBytesOut == 0)
                 return (flush == FlushType.Finish) ? BlockState.FinishStarted : BlockState.NeedMore;
 
             return flush == FlushType.Finish ? BlockState.FinishDone : BlockState.BlockDone;
@@ -985,10 +976,10 @@ namespace MonoGame.Utilities.Deflate
             int max_blindex = 0; // index of last bit length code of non zero freq
 
             // Build the Huffman trees unless a stored block is forced
-            if (compressionLevel > 0)
+            if(compressionLevel > 0)
             {
                 // Check if the file is ascii or binary
-                if (data_type == Z_UNKNOWN)
+                if(data_type == Z_UNKNOWN)
                     set_data_type();
 
                 // Construct the literal and distance trees
@@ -1007,15 +998,14 @@ namespace MonoGame.Utilities.Deflate
                 opt_lenb = (opt_len + 3 + 7) >> 3;
                 static_lenb = (static_len + 3 + 7) >> 3;
 
-                if (static_lenb <= opt_lenb)
+                if(static_lenb <= opt_lenb)
                     opt_lenb = static_lenb;
-            }
-            else
+            } else
             {
                 opt_lenb = static_lenb = stored_len + 5; // force a stored block
             }
 
-            if (stored_len + 4 <= opt_lenb && buf != -1)
+            if(stored_len + 4 <= opt_lenb && buf != -1)
             {
                 // 4: two words for the lengths
                 // The test buf != NULL is only necessary if LIT_BUFSIZE > WSIZE.
@@ -1024,13 +1014,11 @@ namespace MonoGame.Utilities.Deflate
                 // successful. If LIT_BUFSIZE <= WSIZE, it is never too late to
                 // transform a block into a stored block.
                 _tr_stored_block(buf, stored_len, eof);
-            }
-            else if (static_lenb == opt_lenb)
+            } else if(static_lenb == opt_lenb)
             {
                 send_bits((STATIC_TREES << 1) + (eof ? 1 : 0), 3);
                 send_compressed_block(StaticTree.lengthAndLiteralsTreeCodes, StaticTree.distTreeCodes);
-            }
-            else
+            } else
             {
                 send_bits((DYN_TREES << 1) + (eof ? 1 : 0), 3);
                 send_all_trees(treeLiterals.max_code + 1, treeDistances.max_code + 1, max_blindex + 1);
@@ -1042,7 +1030,7 @@ namespace MonoGame.Utilities.Deflate
 
             _InitializeBlocks();
 
-            if (eof)
+            if(eof)
             {
                 bi_windup();
             }
@@ -1067,11 +1055,10 @@ namespace MonoGame.Utilities.Deflate
                 more = (window_size - lookahead - strstart);
 
                 // Deal with !@#$% 64K limit:
-                if (more == 0 && strstart == 0 && lookahead == 0)
+                if(more == 0 && strstart == 0 && lookahead == 0)
                 {
                     more = w_size;
-                }
-                else if (more == -1)
+                } else if(more == -1)
                 {
                     // Very unlikely, but possible on 16 bit machine if strstart == 0
                     // and lookahead == 1 (input done one byte at time)
@@ -1079,8 +1066,7 @@ namespace MonoGame.Utilities.Deflate
 
                     // If the window is almost full and there is insufficient lookahead,
                     // move the upper half to the lower one to make room in the upper half.
-                }
-                else if (strstart >= w_size + w_size - MIN_LOOKAHEAD)
+                } else if(strstart >= w_size + w_size - MIN_LOOKAHEAD)
                 {
                     Array.Copy(window, w_size, window, 0, w_size);
                     match_start -= w_size;
@@ -1099,8 +1085,7 @@ namespace MonoGame.Utilities.Deflate
                     {
                         m = (head[--p] & 0xffff);
                         head[p] = (short)((m >= w_size) ? (m - w_size) : 0);
-                    }
-                    while (--n != 0);
+                    } while (--n != 0);
 
                     n = w_size;
                     p = n;
@@ -1110,12 +1095,11 @@ namespace MonoGame.Utilities.Deflate
                         prev[p] = (short)((m >= w_size) ? (m - w_size) : 0);
                         // If n is not on any hash chain, prev[n] is garbage but
                         // its value will never be used.
-                    }
-                    while (--n != 0);
+                    } while (--n != 0);
                     more += w_size;
                 }
 
-                if (_codec.AvailableBytesIn == 0)
+                if(_codec.AvailableBytesIn == 0)
                     return;
 
                 // If there was no sliding:
@@ -1133,15 +1117,14 @@ namespace MonoGame.Utilities.Deflate
                 lookahead += n;
 
                 // Initialize the hash value now that we have some input:
-                if (lookahead >= MIN_MATCH)
+                if(lookahead >= MIN_MATCH)
                 {
                     ins_h = window[strstart] & 0xff;
                     ins_h = (((ins_h) << hash_shift) ^ (window[strstart + 1] & 0xff)) & hash_mask;
                 }
                 // If the whole input has less than MIN_MATCH bytes, ins_h is garbage,
                 // but this is not important since only literal bytes will be emitted.
-            }
-            while (lookahead < MIN_LOOKAHEAD && _codec.AvailableBytesIn != 0);
+            } while (lookahead < MIN_LOOKAHEAD && _codec.AvailableBytesIn != 0);
         }
 
         // Compress as much as possible from the input stream, return the current
@@ -1155,26 +1138,26 @@ namespace MonoGame.Utilities.Deflate
             int hash_head = 0; // head of the hash chain
             bool bflush; // set if current block must be flushed
 
-            while (true)
+            while(true)
             {
                 // Make sure that we always have enough lookahead, except
                 // at the end of the input file. We need MAX_MATCH bytes
                 // for the next match, plus MIN_MATCH bytes to insert the
                 // string following the next match.
-                if (lookahead < MIN_LOOKAHEAD)
+                if(lookahead < MIN_LOOKAHEAD)
                 {
                     _fillWindow();
-                    if (lookahead < MIN_LOOKAHEAD && flush == FlushType.None)
+                    if(lookahead < MIN_LOOKAHEAD && flush == FlushType.None)
                     {
                         return BlockState.NeedMore;
                     }
-                    if (lookahead == 0)
+                    if(lookahead == 0)
                         break; // flush the current block
                 }
 
                 // Insert the string window[strstart .. strstart+2] in the
                 // dictionary, and set hash_head to the head of the hash chain:
-                if (lookahead >= MIN_MATCH)
+                if(lookahead >= MIN_MATCH)
                 {
                     ins_h = (((ins_h) << hash_shift) ^ (window[(strstart) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
 
@@ -1187,18 +1170,18 @@ namespace MonoGame.Utilities.Deflate
                 // Find the longest match, discarding those <= prev_length.
                 // At this point we have always match_length < MIN_MATCH
 
-                if (hash_head != 0L && ((strstart - hash_head) & 0xffff) <= w_size - MIN_LOOKAHEAD)
+                if(hash_head != 0L && ((strstart - hash_head) & 0xffff) <= w_size - MIN_LOOKAHEAD)
                 {
                     // To simplify the code, we prevent matches with the string
                     // of window index 0 (in particular we have to avoid a match
                     // of the string with itself at the start of the input file).
-                    if (compressionStrategy != CompressionStrategy.HuffmanOnly)
+                    if(compressionStrategy != CompressionStrategy.HuffmanOnly)
                     {
                         match_length = longest_match(hash_head);
                     }
                     // longest_match() sets match_start
                 }
-                if (match_length >= MIN_MATCH)
+                if(match_length >= MIN_MATCH)
                 {
                     //        check_match(strstart, match_start, match_length);
 
@@ -1208,7 +1191,7 @@ namespace MonoGame.Utilities.Deflate
 
                     // Insert new strings in the hash table only if the match length
                     // is not too large. This saves time but degrades compression.
-                    if (match_length <= config.MaxLazy && lookahead >= MIN_MATCH)
+                    if(match_length <= config.MaxLazy && lookahead >= MIN_MATCH)
                     {
                         match_length--; // string at strstart already in hash table
                         do
@@ -1223,11 +1206,9 @@ namespace MonoGame.Utilities.Deflate
 
                             // strstart never exceeds WSIZE-MAX_MATCH, so there are
                             // always MIN_MATCH bytes ahead.
-                        }
-                        while (--match_length != 0);
+                        } while (--match_length != 0);
                         strstart++;
-                    }
-                    else
+                    } else
                     {
                         strstart += match_length;
                         match_length = 0;
@@ -1237,8 +1218,7 @@ namespace MonoGame.Utilities.Deflate
                         // If lookahead < MIN_MATCH, ins_h is garbage, but it does not
                         // matter since it will be recomputed at next deflate call.
                     }
-                }
-                else
+                } else
                 {
                     // No match, output a literal byte
 
@@ -1246,18 +1226,18 @@ namespace MonoGame.Utilities.Deflate
                     lookahead--;
                     strstart++;
                 }
-                if (bflush)
+                if(bflush)
                 {
                     flush_block_only(false);
-                    if (_codec.AvailableBytesOut == 0)
+                    if(_codec.AvailableBytesOut == 0)
                         return BlockState.NeedMore;
                 }
             }
 
             flush_block_only(flush == FlushType.Finish);
-            if (_codec.AvailableBytesOut == 0)
+            if(_codec.AvailableBytesOut == 0)
             {
-                if (flush == FlushType.Finish)
+                if(flush == FlushType.Finish)
                     return BlockState.FinishStarted;
                 else
                     return BlockState.NeedMore;
@@ -1275,27 +1255,27 @@ namespace MonoGame.Utilities.Deflate
             bool bflush; // set if current block must be flushed
 
             // Process the input block.
-            while (true)
+            while(true)
             {
                 // Make sure that we always have enough lookahead, except
                 // at the end of the input file. We need MAX_MATCH bytes
                 // for the next match, plus MIN_MATCH bytes to insert the
                 // string following the next match.
 
-                if (lookahead < MIN_LOOKAHEAD)
+                if(lookahead < MIN_LOOKAHEAD)
                 {
                     _fillWindow();
-                    if (lookahead < MIN_LOOKAHEAD && flush == FlushType.None)
+                    if(lookahead < MIN_LOOKAHEAD && flush == FlushType.None)
                         return BlockState.NeedMore;
 
-                    if (lookahead == 0)
+                    if(lookahead == 0)
                         break; // flush the current block
                 }
 
                 // Insert the string window[strstart .. strstart+2] in the
                 // dictionary, and set hash_head to the head of the hash chain:
 
-                if (lookahead >= MIN_MATCH)
+                if(lookahead >= MIN_MATCH)
                 {
                     ins_h = (((ins_h) << hash_shift) ^ (window[(strstart) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
                     //  prev[strstart&w_mask]=hash_head=head[ins_h];
@@ -1309,23 +1289,24 @@ namespace MonoGame.Utilities.Deflate
                 prev_match = match_start;
                 match_length = MIN_MATCH - 1;
 
-                if (hash_head != 0 && prev_length < config.MaxLazy &&
+                if(hash_head != 0 &&
+                    prev_length < config.MaxLazy &&
                     ((strstart - hash_head) & 0xffff) <= w_size - MIN_LOOKAHEAD)
                 {
                     // To simplify the code, we prevent matches with the string
                     // of window index 0 (in particular we have to avoid a match
                     // of the string with itself at the start of the input file).
 
-                    if (compressionStrategy != CompressionStrategy.HuffmanOnly)
+                    if(compressionStrategy != CompressionStrategy.HuffmanOnly)
                     {
                         match_length = longest_match(hash_head);
                     }
                     // longest_match() sets match_start
 
-                    if (match_length <= 5 && (compressionStrategy == CompressionStrategy.Filtered ||
-                                              (match_length == MIN_MATCH && strstart - match_start > 4096)))
+                    if(match_length <= 5 &&
+                        (compressionStrategy == CompressionStrategy.Filtered ||
+                            (match_length == MIN_MATCH && strstart - match_start > 4096)))
                     {
-
                         // If prev_match is also MIN_MATCH, match_start is garbage
                         // but we will ignore the current match anyway.
                         match_length = MIN_MATCH - 1;
@@ -1334,7 +1315,7 @@ namespace MonoGame.Utilities.Deflate
 
                 // If there was a match at the previous step and the current
                 // match is not better, output the previous match:
-                if (prev_length >= MIN_MATCH && match_length <= prev_length)
+                if(prev_length >= MIN_MATCH && match_length <= prev_length)
                 {
                     int max_insert = strstart + lookahead - MIN_MATCH;
                     // Do not insert strings in hash table beyond this.
@@ -1351,46 +1332,43 @@ namespace MonoGame.Utilities.Deflate
                     prev_length -= 2;
                     do
                     {
-                        if (++strstart <= max_insert)
+                        if(++strstart <= max_insert)
                         {
-                            ins_h = (((ins_h) << hash_shift) ^ (window[(strstart) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
+                            ins_h = (((ins_h) << hash_shift) ^ (window[(strstart) + (MIN_MATCH - 1)] & 0xff)) &
+                                hash_mask;
                             //prev[strstart&w_mask]=hash_head=head[ins_h];
                             hash_head = (head[ins_h] & 0xffff);
                             prev[strstart & w_mask] = head[ins_h];
                             head[ins_h] = unchecked((short)strstart);
                         }
-                    }
-                    while (--prev_length != 0);
+                    } while (--prev_length != 0);
                     match_available = 0;
                     match_length = MIN_MATCH - 1;
                     strstart++;
 
-                    if (bflush)
+                    if(bflush)
                     {
                         flush_block_only(false);
-                        if (_codec.AvailableBytesOut == 0)
+                        if(_codec.AvailableBytesOut == 0)
                             return BlockState.NeedMore;
                     }
-                }
-                else if (match_available != 0)
+                } else if(match_available != 0)
                 {
-
                     // If there was no match at the previous position, output a
                     // single literal. If there was a match but the current match
                     // is longer, truncate the previous match to a single literal.
 
                     bflush = _tr_tally(0, window[strstart - 1] & 0xff);
 
-                    if (bflush)
+                    if(bflush)
                     {
                         flush_block_only(false);
                     }
                     strstart++;
                     lookahead--;
-                    if (_codec.AvailableBytesOut == 0)
+                    if(_codec.AvailableBytesOut == 0)
                         return BlockState.NeedMore;
-                }
-                else
+                } else
                 {
                     // There is no previous match to compare with, wait for
                     // the next step to decide.
@@ -1401,16 +1379,16 @@ namespace MonoGame.Utilities.Deflate
                 }
             }
 
-            if (match_available != 0)
+            if(match_available != 0)
             {
                 bflush = _tr_tally(0, window[strstart - 1] & 0xff);
                 match_available = 0;
             }
             flush_block_only(flush == FlushType.Finish);
 
-            if (_codec.AvailableBytesOut == 0)
+            if(_codec.AvailableBytesOut == 0)
             {
-                if (flush == FlushType.Finish)
+                if(flush == FlushType.Finish)
                     return BlockState.FinishStarted;
                 else
                     return BlockState.NeedMore;
@@ -1444,14 +1422,14 @@ namespace MonoGame.Utilities.Deflate
             // It is easy to get rid of this optimization if necessary.
 
             // Do not waste too much time if we already have a good match:
-            if (prev_length >= config.GoodLength)
+            if(prev_length >= config.GoodLength)
             {
                 chain_length >>= 2;
             }
 
             // Do not look for matches beyond the end of the input. This is necessary
             // to make deflate deterministic.
-            if (niceLength > lookahead)
+            if(niceLength > lookahead)
                 niceLength = lookahead;
 
             do
@@ -1460,7 +1438,7 @@ namespace MonoGame.Utilities.Deflate
 
                 // Skip to next match if the match length cannot increase
                 // or if the match length is less than 2:
-                if (window[match + best_len] != scan_end ||
+                if(window[match + best_len] != scan_end ||
                     window[match + best_len - 1] != scan_end1 ||
                     window[match] != window[scan] ||
                     window[++match] != window[scan + 1])
@@ -1471,38 +1449,38 @@ namespace MonoGame.Utilities.Deflate
                 // It is not necessary to compare scan[2] and match[2] since they
                 // are always equal when the other bytes match, given that
                 // the hash keys are equal and that HASH_BITS >= 8.
-                scan += 2; match++;
+                scan += 2;
+                match++;
 
                 // We check for insufficient lookahead only every 8th comparison;
                 // the 256th check will be made at strstart+258.
                 do
                 {
-                }
-                while (window[++scan] == window[++match] &&
-                       window[++scan] == window[++match] &&
-                       window[++scan] == window[++match] &&
-                       window[++scan] == window[++match] &&
-                       window[++scan] == window[++match] &&
-                       window[++scan] == window[++match] &&
-                       window[++scan] == window[++match] &&
-                       window[++scan] == window[++match] && scan < strend);
+                } while (window[++scan] == window[++match] &&
+                    window[++scan] == window[++match] &&
+                    window[++scan] == window[++match] &&
+                    window[++scan] == window[++match] &&
+                    window[++scan] == window[++match] &&
+                    window[++scan] == window[++match] &&
+                    window[++scan] == window[++match] &&
+                    window[++scan] == window[++match] &&
+                    scan < strend);
 
                 len = MAX_MATCH - (strend - scan);
                 scan = strend - MAX_MATCH;
 
-                if (len > best_len)
+                if(len > best_len)
                 {
                     match_start = cur_match;
                     best_len = len;
-                    if (len >= niceLength)
+                    if(len >= niceLength)
                         break;
                     scan_end1 = window[scan + best_len - 1];
                     scan_end = window[scan + best_len];
                 }
-            }
-            while ((cur_match = (prev[cur_match & wmask] & 0xffff)) > limit && --chain_length != 0);
+            } while ((cur_match = (prev[cur_match & wmask] & 0xffff)) > limit && --chain_length != 0);
 
-            if (best_len <= lookahead)
+            if(best_len <= lookahead)
                 return best_len;
             return lookahead;
         }
@@ -1510,6 +1488,7 @@ namespace MonoGame.Utilities.Deflate
 
         private bool Rfc1950BytesEmitted = false;
         private bool _WantRfc1950HeaderBytes = true;
+
         internal bool WantRfc1950HeaderBytes
         {
             get { return _WantRfc1950HeaderBytes; }
@@ -1518,31 +1497,32 @@ namespace MonoGame.Utilities.Deflate
 
 
         internal int Initialize(ZlibCodec codec, CompressionLevel level)
-        {
-            return Initialize(codec, level, ZlibConstants.WindowBitsMax);
-        }
+        { return Initialize(codec, level, ZlibConstants.WindowBitsMax); }
 
         internal int Initialize(ZlibCodec codec, CompressionLevel level, int bits)
-        {
-            return Initialize(codec, level, bits, MEM_LEVEL_DEFAULT, CompressionStrategy.Default);
-        }
+        { return Initialize(codec, level, bits, MEM_LEVEL_DEFAULT, CompressionStrategy.Default); }
 
-        internal int Initialize(ZlibCodec codec, CompressionLevel level, int bits, CompressionStrategy compressionStrategy)
-        {
-            return Initialize(codec, level, bits, MEM_LEVEL_DEFAULT, compressionStrategy);
-        }
+        internal int Initialize(ZlibCodec codec,
+                                CompressionLevel level,
+                                int bits,
+                                CompressionStrategy compressionStrategy)
+        { return Initialize(codec, level, bits, MEM_LEVEL_DEFAULT, compressionStrategy); }
 
-        internal int Initialize(ZlibCodec codec, CompressionLevel level, int windowBits, int memLevel, CompressionStrategy strategy)
+        internal int Initialize(ZlibCodec codec,
+                                CompressionLevel level,
+                                int windowBits,
+                                int memLevel,
+                                CompressionStrategy strategy)
         {
             _codec = codec;
             _codec.Message = null;
 
             // validation
-            if (windowBits < 9 || windowBits > 15)
+            if(windowBits < 9 || windowBits > 15)
                 throw new ZlibException("windowBits must be in the range 9..15.");
 
-            if (memLevel < 1 || memLevel > MEM_LEVEL_MAX)
-                throw new ZlibException(String.Format("memLevel must be in the range 1.. {0}", MEM_LEVEL_MAX));
+            if(memLevel < 1 || memLevel > MEM_LEVEL_MAX)
+                throw new ZlibException($"memLevel must be in the range 1.. {MEM_LEVEL_MAX}");
 
             _codec.dstate = this;
 
@@ -1606,7 +1586,7 @@ namespace MonoGame.Utilities.Deflate
 
         internal int End()
         {
-            if (status != INIT_STATE && status != BUSY_STATE && status != FINISH_STATE)
+            if(status != INIT_STATE && status != BUSY_STATE && status != FINISH_STATE)
             {
                 return ZlibConstants.Z_STREAM_ERROR;
             }
@@ -1623,7 +1603,7 @@ namespace MonoGame.Utilities.Deflate
 
         private void SetDeflater()
         {
-            switch (config.Flavor)
+            switch(config.Flavor)
             {
                 case DeflateFlavor.Store:
                     DeflateFunction = DeflateNone;
@@ -1642,12 +1622,12 @@ namespace MonoGame.Utilities.Deflate
         {
             int result = ZlibConstants.Z_OK;
 
-            if (compressionLevel != level)
+            if(compressionLevel != level)
             {
                 Config newConfig = Config.Lookup(level);
 
                 // change in the deflate flavor (Fast vs slow vs none)?
-                if (newConfig.Flavor != config.Flavor && _codec.TotalBytesIn != 0)
+                if(newConfig.Flavor != config.Flavor && _codec.TotalBytesIn != 0)
                 {
                     // Flush the last buffer:
                     result = _codec.Deflate(FlushType.Partial);
@@ -1670,14 +1650,14 @@ namespace MonoGame.Utilities.Deflate
             int length = dictionary.Length;
             int index = 0;
 
-            if (dictionary == null || status != INIT_STATE)
+            if(dictionary == null || status != INIT_STATE)
                 throw new ZlibException("Stream error.");
 
             _codec._Adler32 = Adler.Adler32(_codec._Adler32, dictionary, 0, dictionary.Length);
 
-            if (length < MIN_MATCH)
+            if(length < MIN_MATCH)
                 return ZlibConstants.Z_OK;
-            if (length > w_size - MIN_LOOKAHEAD)
+            if(length > w_size - MIN_LOOKAHEAD)
             {
                 length = w_size - MIN_LOOKAHEAD;
                 index = dictionary.Length - length; // use the tail of the dictionary
@@ -1693,7 +1673,7 @@ namespace MonoGame.Utilities.Deflate
             ins_h = window[0] & 0xff;
             ins_h = (((ins_h) << hash_shift) ^ (window[1] & 0xff)) & hash_mask;
 
-            for (int n = 0; n <= length - MIN_MATCH; n++)
+            for(int n = 0; n <= length - MIN_MATCH; n++)
             {
                 ins_h = (((ins_h) << hash_shift) ^ (window[(n) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
                 prev[n & w_mask] = head[ins_h];
@@ -1703,19 +1683,18 @@ namespace MonoGame.Utilities.Deflate
         }
 
 
-
         internal int Deflate(FlushType flush)
         {
             int old_flush;
 
-            if (_codec.OutputBuffer == null ||
+            if(_codec.OutputBuffer == null ||
                 (_codec.InputBuffer == null && _codec.AvailableBytesIn != 0) ||
                 (status == FINISH_STATE && flush != FlushType.Finish))
             {
                 _codec.Message = _ErrorMessage[ZlibConstants.Z_NEED_DICT - (ZlibConstants.Z_STREAM_ERROR)];
-                throw new ZlibException(String.Format("Something is fishy. [{0}]", _codec.Message));
+                throw new ZlibException($"Something is fishy. [{_codec.Message}]");
             }
-            if (_codec.AvailableBytesOut == 0)
+            if(_codec.AvailableBytesOut == 0)
             {
                 _codec.Message = _ErrorMessage[ZlibConstants.Z_NEED_DICT - (ZlibConstants.Z_BUF_ERROR)];
                 throw new ZlibException("OutputBuffer is full (AvailableBytesOut == 0)");
@@ -1725,15 +1704,15 @@ namespace MonoGame.Utilities.Deflate
             last_flush = (int)flush;
 
             // Write the zlib (rfc1950) header bytes
-            if (status == INIT_STATE)
+            if(status == INIT_STATE)
             {
                 int header = (Z_DEFLATED + ((w_bits - 8) << 4)) << 8;
                 int level_flags = (((int)compressionLevel - 1) & 0xff) >> 1;
 
-                if (level_flags > 3)
+                if(level_flags > 3)
                     level_flags = 3;
                 header |= (level_flags << 6);
-                if (strstart != 0)
+                if(strstart != 0)
                     header |= PRESET_DICT;
                 header += 31 - (header % 31);
 
@@ -1745,7 +1724,7 @@ namespace MonoGame.Utilities.Deflate
                     pending[pendingCount++] = (byte)header;
                 }
                 // Save the adler32 of the preset dictionary:
-                if (strstart != 0)
+                if(strstart != 0)
                 {
                     pending[pendingCount++] = (byte)((_codec._Adler32 & 0xFF000000) >> 24);
                     pending[pendingCount++] = (byte)((_codec._Adler32 & 0x00FF0000) >> 16);
@@ -1756,10 +1735,10 @@ namespace MonoGame.Utilities.Deflate
             }
 
             // Flush as much pending output as possible
-            if (pendingCount != 0)
+            if(pendingCount != 0)
             {
                 _codec.flush_pending();
-                if (_codec.AvailableBytesOut == 0)
+                if(_codec.AvailableBytesOut == 0)
                 {
                     //System.out.println("  avail_out==0");
                     // Since avail_out is 0, deflate will be called again with
@@ -1774,10 +1753,7 @@ namespace MonoGame.Utilities.Deflate
                 // Make sure there is something to do and avoid duplicate consecutive
                 // flushes. For repeated and useless calls with Z_FINISH, we keep
                 // returning Z_STREAM_END instead of Z_BUFF_ERROR.
-            }
-            else if (_codec.AvailableBytesIn == 0 &&
-                     (int)flush <= old_flush &&
-                     flush != FlushType.Finish)
+            } else if(_codec.AvailableBytesIn == 0 && (int)flush <= old_flush && flush != FlushType.Finish)
             {
                 // workitem 8557
                 //
@@ -1793,24 +1769,24 @@ namespace MonoGame.Utilities.Deflate
             }
 
             // User must not provide more input after the first FINISH:
-            if (status == FINISH_STATE && _codec.AvailableBytesIn != 0)
+            if(status == FINISH_STATE && _codec.AvailableBytesIn != 0)
             {
                 _codec.Message = _ErrorMessage[ZlibConstants.Z_NEED_DICT - (ZlibConstants.Z_BUF_ERROR)];
                 throw new ZlibException("status == FINISH_STATE && _codec.AvailableBytesIn != 0");
             }
 
             // Start a new block or continue the current one.
-            if (_codec.AvailableBytesIn != 0 || lookahead != 0 || (flush != FlushType.None && status != FINISH_STATE))
+            if(_codec.AvailableBytesIn != 0 || lookahead != 0 || (flush != FlushType.None && status != FINISH_STATE))
             {
                 BlockState bstate = DeflateFunction(flush);
 
-                if (bstate == BlockState.FinishStarted || bstate == BlockState.FinishDone)
+                if(bstate == BlockState.FinishStarted || bstate == BlockState.FinishDone)
                 {
                     status = FINISH_STATE;
                 }
-                if (bstate == BlockState.NeedMore || bstate == BlockState.FinishStarted)
+                if(bstate == BlockState.NeedMore || bstate == BlockState.FinishStarted)
                 {
-                    if (_codec.AvailableBytesOut == 0)
+                    if(_codec.AvailableBytesOut == 0)
                     {
                         last_flush = -1; // avoid BUF_ERROR next call, see above
                     }
@@ -1823,27 +1799,26 @@ namespace MonoGame.Utilities.Deflate
                     // one empty block.
                 }
 
-                if (bstate == BlockState.BlockDone)
+                if(bstate == BlockState.BlockDone)
                 {
-                    if (flush == FlushType.Partial)
+                    if(flush == FlushType.Partial)
                     {
                         _tr_align();
-                    }
-                    else
+                    } else
                     {
                         // FlushType.Full or FlushType.Sync
                         _tr_stored_block(0, 0, false);
                         // For a full flush, this empty block will be recognized
                         // as a special marker by inflate_sync().
-                        if (flush == FlushType.Full)
+                        if(flush == FlushType.Full)
                         {
                             // clear hash (forget the history)
-                            for (int i = 0; i < hash_size; i++)
+                            for(int i = 0; i < hash_size; i++)
                                 head[i] = 0;
                         }
                     }
                     _codec.flush_pending();
-                    if (_codec.AvailableBytesOut == 0)
+                    if(_codec.AvailableBytesOut == 0)
                     {
                         last_flush = -1; // avoid BUF_ERROR at next call, see above
                         return ZlibConstants.Z_OK;
@@ -1851,10 +1826,10 @@ namespace MonoGame.Utilities.Deflate
                 }
             }
 
-            if (flush != FlushType.Finish)
+            if(flush != FlushType.Finish)
                 return ZlibConstants.Z_OK;
 
-            if (!WantRfc1950HeaderBytes || Rfc1950BytesEmitted)
+            if(!WantRfc1950HeaderBytes || Rfc1950BytesEmitted)
                 return ZlibConstants.Z_STREAM_END;
 
             // Write the zlib trailer (adler32)
@@ -1874,6 +1849,5 @@ namespace MonoGame.Utilities.Deflate
 
             return pendingCount != 0 ? ZlibConstants.Z_OK : ZlibConstants.Z_STREAM_END;
         }
-
     }
 }

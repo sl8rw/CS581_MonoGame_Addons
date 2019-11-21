@@ -91,7 +91,7 @@ namespace MonoGame.Utilities.Deflate
         public const int Z_STREAM_END = 1;
 
         /// <summary>
-        /// The operation ended in need of a dictionary. 
+        /// The operation ended in need of a dictionary.
         /// </summary>
         public const int Z_NEED_DICT = 2;
 
@@ -111,8 +111,8 @@ namespace MonoGame.Utilities.Deflate
         public const int Z_BUF_ERROR = -5;
 
         /// <summary>
-        /// The size of the working buffer used in the ZlibCodec class. Defaults to 8192 bytes.
-        /// </summary>
+/// The size of the working buffer used in the ZlibCodec class. Defaults to 8192 bytes.
+/// </summary>
 #if NETCF
         public const int WorkingBufferSizeDefault = 8192;
 #else
@@ -123,6 +123,5 @@ namespace MonoGame.Utilities.Deflate
         /// </summary>
         public const int WorkingBufferSizeMin = 1024;
     }
-
 }
 
