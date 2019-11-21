@@ -60,10 +60,10 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         public Vector4 ToVector4()
         {
             return new Vector4(
-                (float) (((packedValue >> 10) & 0x1F) / 31.0f),
-                (float) (((packedValue >> 5) & 0x1F) / 31.0f),
-                (float) (((packedValue >> 0) & 0x1F) / 31.0f),
-                (float) ((packedValue >> 15)& 0x01)
+(((packedValue >> 10) & 0x1F) / 31.0f),
+(((packedValue >> 5) & 0x1F) / 31.0f),
+(((packedValue >> 0) & 0x1F) / 31.0f),
+                (float)((packedValue >> 15) & 0x01)
             );
         }
 
@@ -83,7 +83,7 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// <returns>True if the object is equal to the packed vector.</returns>
         public override bool Equals(object obj)
         {
-            return (obj is Bgra5551) && Equals((Bgra5551) obj);
+            return (obj is Bgra5551) && Equals((Bgra5551)obj);
         }
 
         /// <summary>
@@ -126,11 +126,11 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 
         private static UInt16 Pack(float x, float y, float z, float w)
         {
-            return (UInt16) (
-                (((int) Math.Round(MathHelper.Clamp(x, 0, 1) * 31.0f) & 0x1F) << 10) |
-                (((int) Math.Round(MathHelper.Clamp(y, 0, 1) * 31.0f) & 0x1F) << 5) |
-                (((int) Math.Round(MathHelper.Clamp(z, 0, 1) * 31.0f) & 0x1F) << 0) |
-                ((((int) Math.Round(MathHelper.Clamp(w, 0, 1)) & 0x1) << 15))
+            return (UInt16)(
+                (((int)Math.Round(MathHelper.Clamp(x, 0, 1) * 31.0f) & 0x1F) << 10) |
+                (((int)Math.Round(MathHelper.Clamp(y, 0, 1) * 31.0f) & 0x1F) << 5) |
+                (((int)Math.Round(MathHelper.Clamp(z, 0, 1) * 31.0f) & 0x1F) << 0) |
+                ((((int)Math.Round(MathHelper.Clamp(w, 0, 1)) & 0x1) << 15))
             );
         }
     }

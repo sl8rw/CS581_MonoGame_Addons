@@ -6,14 +6,13 @@
 // It was released to the public domain by the author (Renaud Bedard).
 // No other license is intended or required.
 
+using MonoGame.OpenAL;
+using NVorbis;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Threading;
-using NVorbis;
-using MonoGame.OpenAL;
 
 namespace Microsoft.Xna.Framework.Audio
 {
@@ -439,7 +438,7 @@ namespace Microsoft.Xna.Framework.Audio
         {
             while (!cancelled)
             {
-                Thread.Sleep((int) (1000 / ((UpdateRate <= 0) ? 1 : UpdateRate)));
+                Thread.Sleep((int)(1000 / ((UpdateRate <= 0) ? 1 : UpdateRate)));
                 if (cancelled) break;
 
                 threadLocalStreams.Clear();

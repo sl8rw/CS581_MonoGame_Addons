@@ -5,7 +5,7 @@
 using System;
 
 namespace Microsoft.Xna.Framework.Content
-{	
+{
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public sealed class ContentSerializerAttribute : Attribute
     {
@@ -61,7 +61,7 @@ namespace Microsoft.Xna.Framework.Content
 
         public ContentSerializerAttribute Clone()
         {
-            var clone = new ContentSerializerAttribute ();
+            var clone = new ContentSerializerAttribute();
             clone.AllowNull = AllowNull;
             clone._collectionItemName = _collectionItemName;
             clone.ElementName = ElementName;
@@ -71,4 +71,4 @@ namespace Microsoft.Xna.Framework.Content
             return clone;
         }
     }
-} 
+}

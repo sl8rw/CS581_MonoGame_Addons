@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.Xna.Framework.Content
 {
-	internal class UInt64Reader : ContentTypeReader<ulong>
+    internal class UInt64Reader : ContentTypeReader<ulong>
     {
         public UInt64Reader()
         {

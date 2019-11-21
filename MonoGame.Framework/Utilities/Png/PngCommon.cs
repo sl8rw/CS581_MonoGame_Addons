@@ -2,12 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Collections;
-using System.Text;
 using Microsoft.Xna.Framework;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace MonoGame.Utilities.Png
 {
@@ -181,7 +181,7 @@ namespace MonoGame.Utilities.Png
     internal class HeaderChunk : PngChunk
     {
         private static byte[] pngSignature = new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 };
-        
+
         internal HeaderChunk()
         {
             base.Type = "IHDR";
@@ -356,7 +356,7 @@ namespace MonoGame.Utilities.Png
     }
 
     #endregion
-    
+
     #region Enumerations
 
     internal enum ColorType

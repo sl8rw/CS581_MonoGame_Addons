@@ -2,9 +2,6 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 #if WINDOWS_UAP
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
@@ -12,7 +9,14 @@ using Windows.ApplicationModel.Activation;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+#if WINDOWS_UAP
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Activation;
+#endif
 using Microsoft.Xna.Framework.Input.Touch;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 
 namespace Microsoft.Xna.Framework
@@ -29,7 +33,7 @@ namespace Microsoft.Xna.Framework
                 d => d.Visible,
                 (d, handler) => d.VisibleChanged += handler,
                 (d, handler) => d.VisibleChanged -= handler,
-                (d1 ,d2) => Comparer<int>.Default.Compare(d1.DrawOrder, d2.DrawOrder),
+                (d1, d2) => Comparer<int>.Default.Compare(d1.DrawOrder, d2.DrawOrder),
                 (d, handler) => d.DrawOrderChanged += handler,
                 (d, handler) => d.DrawOrderChanged -= handler);
 
@@ -56,7 +60,7 @@ namespace Microsoft.Xna.Framework
         private bool _shouldExit;
         private bool _suppressDraw;
 
-        partial void PlatformConstruct();       
+        partial void PlatformConstruct();
 
         public Game()
         {
@@ -85,11 +89,11 @@ namespace Microsoft.Xna.Framework
             Dispose(false);
         }
 
-		[System.Diagnostics.Conditional("DEBUG")]
-		internal void Log(string Message)
-		{
-			if (Platform != null) Platform.Log(Message);
-		}
+        [System.Diagnostics.Conditional("DEBUG")]
+        internal void Log(string Message)
+        {
+            if (Platform != null) Platform.Log(Message);
+        }
 
         #region IDisposable Implementation
 
@@ -237,9 +241,9 @@ namespace Microsoft.Xna.Framework
                 if (value <= TimeSpan.Zero)
                     throw new ArgumentOutOfRangeException(
                         "The time must be positive and non-zero.", default(Exception));
-                if(value>MaxElapsedTime) //clamps the targetElapsedTime by the MaxElapsedTime
+                if (value > MaxElapsedTime) //clamps the targetElapsedTime by the MaxElapsedTime
                     throw new ArgumentOutOfRangeException("The time cannot be greater than the MaxElapsedTime", default(Exception));
-                
+
                 if (value != _targetElapsedTime)
                 {
                     _targetElapsedTime = value;
@@ -254,7 +258,8 @@ namespace Microsoft.Xna.Framework
             set { _isFixedTimeStep = value; }
         }
 
-        public GameServiceContainer Services {
+        public GameServiceContainer Services
+        {
             get { return _services; }
         }
 
@@ -337,7 +342,7 @@ namespace Microsoft.Xna.Framework
         public void ResetElapsedTime()
         {
             Platform.ResetElapsedTime();
-            if (_gameTimer != null) 
+            if (_gameTimer != null)
             {
                 _gameTimer.Reset();
                 _gameTimer.Start();
@@ -351,7 +356,7 @@ namespace Microsoft.Xna.Framework
         {
             _suppressDraw = true;
         }
-        
+
         public void RunOneFrame()
         {
             if (Platform == null)
@@ -362,17 +367,17 @@ namespace Microsoft.Xna.Framework
 
             if (!_initialized)
             {
-                DoInitialize ();
+                DoInitialize();
                 _gameTimer = Stopwatch.StartNew();
                 _initialized = true;
             }
 
-            BeginRun();            
+            BeginRun();
 
             //Not quite right..
-            Tick ();
+            Tick();
 
-            EndRun ();
+            EndRun();
 
         }
 
@@ -391,8 +396,9 @@ namespace Microsoft.Xna.Framework
                 return;
             }
 
-            if (!_initialized) {
-                DoInitialize ();
+            if (!_initialized)
+            {
+                DoInitialize();
                 _initialized = true;
             }
 
@@ -400,21 +406,21 @@ namespace Microsoft.Xna.Framework
             _gameTimer = Stopwatch.StartNew();
             switch (runBehavior)
             {
-            case GameRunBehavior.Asynchronous:
-                Platform.AsyncRunLoopEnded += Platform_AsyncRunLoopEnded;
-                Platform.StartRunLoop();
-                break;
-            case GameRunBehavior.Synchronous:
-                // XNA runs one Update even before showing the window
-                DoUpdate(new GameTime());
+                case GameRunBehavior.Asynchronous:
+                    Platform.AsyncRunLoopEnded += Platform_AsyncRunLoopEnded;
+                    Platform.StartRunLoop();
+                    break;
+                case GameRunBehavior.Synchronous:
+                    // XNA runs one Update even before showing the window
+                    DoUpdate(new GameTime());
 
-                Platform.RunLoop();
-                EndRun();
-				DoExiting();
-                break;
-            default:
-                throw new ArgumentException(string.Format(
-                    "Handling for the run behavior {0} is not implemented.", runBehavior));
+                    Platform.RunLoop();
+                    EndRun();
+                    DoExiting();
+                    break;
+                default:
+                    throw new ArgumentException(string.Format(
+                        "Handling for the run behavior {0} is not implemented.", runBehavior));
             }
         }
 
@@ -429,10 +435,10 @@ namespace Microsoft.Xna.Framework
 
         public void Tick()
         {
-            // NOTE: This code is very sensitive and can break very badly
-            // with even what looks like a safe change.  Be sure to test 
-            // any change fully in both the fixed and variable timestep 
-            // modes across multiple devices and platforms.
+        // NOTE: This code is very sensitive and can break very badly
+        // with even what looks like a safe change.  Be sure to test 
+        // any change fully in both the fixed and variable timestep 
+        // modes across multiple devices and platforms.
 
         RetryTick:
 
@@ -470,6 +476,24 @@ namespace Microsoft.Xna.Framework
             if (_accumulatedElapsedTime > _maxElapsedTime)
                 _accumulatedElapsedTime = _maxElapsedTime;
 
+            DoTick();
+
+            // Draw unless the update suppressed it.
+            if (_suppressDraw)
+                _suppressDraw = false;
+            else
+            {
+                DoDraw(_gameTime);
+            }
+
+            if (_shouldExit)
+            {
+                Platform.Exit();
+                _shouldExit = false; //prevents perpetual exiting on platforms supporting resume.
+            }
+        }
+        private void DoTick()
+        {
             if (IsFixedTimeStep)
             {
                 _gameTime.ElapsedGameTime = TargetElapsedTime;
@@ -516,20 +540,6 @@ namespace Microsoft.Xna.Framework
                 _accumulatedElapsedTime = TimeSpan.Zero;
 
                 DoUpdate(_gameTime);
-            }
-
-            // Draw unless the update suppressed it.
-            if (_suppressDraw)
-                _suppressDraw = false;
-            else
-            {
-                DoDraw(_gameTime);
-            }
-
-            if (_shouldExit)
-            {
-                Platform.Exit();
-                _shouldExit = false; //prevents perpetual exiting on platforms supporting resume.
             }
         }
 
@@ -588,24 +598,24 @@ namespace Microsoft.Xna.Framework
         protected virtual void Update(GameTime gameTime)
         {
             _updateables.ForEachFilteredItem(UpdateAction, gameTime);
-		}
+        }
 
         protected virtual void OnExiting(object sender, EventArgs args)
         {
             EventHelpers.Raise(sender, Exiting, args);
         }
-		
-		protected virtual void OnActivated(object sender, EventArgs args)
-		{
-			AssertNotDisposed();
+
+        protected virtual void OnActivated(object sender, EventArgs args)
+        {
+            AssertNotDisposed();
             EventHelpers.Raise(sender, Activated, args);
-		}
-		
-		protected virtual void OnDeactivated(object sender, EventArgs args)
-		{
-			AssertNotDisposed();
+        }
+
+        protected virtual void OnDeactivated(object sender, EventArgs args)
+        {
+            AssertNotDisposed();
             EventHelpers.Raise(sender, Deactivated, args);
-		}
+        }
 
         #endregion Protected Methods
 
@@ -633,7 +643,7 @@ namespace Microsoft.Xna.Framework
             var platform = (GamePlatform)sender;
             platform.AsyncRunLoopEnded -= Platform_AsyncRunLoopEnded;
             EndRun();
-			DoExiting();
+            DoExiting();
         }
 
         #endregion Event Handlers
@@ -647,18 +657,18 @@ namespace Microsoft.Xna.Framework
 #if !(WINDOWS && DIRECTX)
         internal void applyChanges(GraphicsDeviceManager manager)
         {
-			Platform.BeginScreenDeviceChange(GraphicsDevice.PresentationParameters.IsFullScreen);
+            Platform.BeginScreenDeviceChange(GraphicsDevice.PresentationParameters.IsFullScreen);
 
             if (GraphicsDevice.PresentationParameters.IsFullScreen)
                 Platform.EnterFullScreen();
             else
                 Platform.ExitFullScreen();
             var viewport = new Viewport(0, 0,
-			                            GraphicsDevice.PresentationParameters.BackBufferWidth,
-			                            GraphicsDevice.PresentationParameters.BackBufferHeight);
+                                        GraphicsDevice.PresentationParameters.BackBufferWidth,
+                                        GraphicsDevice.PresentationParameters.BackBufferHeight);
 
             GraphicsDevice.Viewport = viewport;
-			Platform.EndScreenDeviceChange(string.Empty, viewport.Width, viewport.Height);
+            Platform.EndScreenDeviceChange(string.Empty, viewport.Width, viewport.Height);
         }
 #endif
 
@@ -668,7 +678,7 @@ namespace Microsoft.Xna.Framework
             if (Platform.BeforeUpdate(gameTime))
             {
                 FrameworkDispatcher.Update();
-				
+
                 Update(gameTime);
 
                 //The TouchPanel needs to know the time for when touches arrive
@@ -708,11 +718,11 @@ namespace Microsoft.Xna.Framework
             _components.ComponentRemoved += Components_ComponentRemoved;
         }
 
-		internal void DoExiting()
-		{
-			OnExiting(this, EventArgs.Empty);
-			UnloadContent();
-		}
+        internal void DoExiting()
+        {
+            OnExiting(this, EventArgs.Empty);
+            UnloadContent();
+        }
 
         #endregion Internal Methods
 
@@ -742,7 +752,7 @@ namespace Microsoft.Xna.Framework
         //       Components.ComponentAdded.
         private void InitializeExistingComponents()
         {
-            for(int i = 0; i < Components.Count; ++i)
+            for (int i = 0; i < Components.Count; ++i)
                 Components[i].Initialize();
         }
 

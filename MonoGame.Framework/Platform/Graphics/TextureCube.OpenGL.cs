@@ -2,24 +2,23 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using MonoGame.OpenGL;
+using MonoGame.Utilities;
 using System;
 using System.Runtime.InteropServices;
-using MonoGame.OpenGL;
 using GLPixelFormat = MonoGame.OpenGL.PixelFormat;
-using PixelFormat = MonoGame.OpenGL.PixelFormat;
-using MonoGame.Utilities;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
-	public partial class TextureCube
-	{
+    public partial class TextureCube
+    {
         private void PlatformConstruct(GraphicsDevice graphicsDevice, int size, bool mipMap, SurfaceFormat format, bool renderTarget)
         {
             this.glTarget = TextureTarget.TextureCubeMap;
 
             Threading.BlockOnUIThread(() =>
             {
-			    GL.GenTextures(1, out this.glTexture);
+                GL.GenTextures(1, out this.glTexture);
                 GraphicsExtensions.CheckGLError();
                 GL.BindTexture(TextureTarget.TextureCubeMap, this.glTexture);
                 GraphicsExtensions.CheckGLError();
@@ -43,7 +42,7 @@ namespace Microsoft.Xna.Framework.Graphics
                 {
                     var target = GetGLCubeFace((CubeMapFace)i);
 
-                    if (glFormat == (PixelFormat)GLPixelFormat.CompressedTextureFormats)
+                    if (glFormat == GLPixelFormat.CompressedTextureFormats)
                     {
                         var imageSize = 0;
                         switch (format)
@@ -86,7 +85,7 @@ namespace Microsoft.Xna.Framework.Graphics
 #if IOS || ANDROID
                     GL.GenerateMipmap(GenerateMipmapTarget.TextureCubeMap);
 #else
-                    GraphicsDevice.FramebufferHelper.Get().GenerateMipmap((int) glTarget);
+                    GraphicsDevice.FramebufferHelper.Get().GenerateMipmap((int)glTarget);
                     // This updates the mipmaps after a change in the base texture
                     GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.GenerateMipmap, (int)Bool.True);
 #endif
@@ -104,7 +103,7 @@ namespace Microsoft.Xna.Framework.Graphics
             var tSizeInByte = ReflectionHelpers.SizeOf<T>.Get();
             GL.BindTexture(TextureTarget.TextureCubeMap, this.glTexture);
 
-            if (glFormat == (PixelFormat) GLPixelFormat.CompressedTextureFormats)
+            if (glFormat == GLPixelFormat.CompressedTextureFormats)
             {
                 // Note: for compressed format Format.GetSize() returns the size of a 4x4 block
                 var pixelToT = Format.GetSize() / tSizeInByte;
@@ -161,10 +160,10 @@ namespace Microsoft.Xna.Framework.Graphics
                     GraphicsExtensions.CheckGLError();
 
                     var target = GetGLCubeFace(face);
-                    if (glFormat == (PixelFormat) GLPixelFormat.CompressedTextureFormats)
+                    if (glFormat == GLPixelFormat.CompressedTextureFormats)
                     {
                         GL.CompressedTexSubImage2D(target, level, rect.X, rect.Y, rect.Width, rect.Height,
-                            (PixelInternalFormat) glInternalFormat, elementCount * elementSizeInByte, dataPtr);
+glInternalFormat, elementCount * elementSizeInByte, dataPtr);
                         GraphicsExtensions.CheckGLError();
                     }
                     else
@@ -181,19 +180,19 @@ namespace Microsoft.Xna.Framework.Graphics
             });
         }
 
-		private TextureTarget GetGLCubeFace(CubeMapFace face)
+        private TextureTarget GetGLCubeFace(CubeMapFace face)
         {
-			switch (face)
+            switch (face)
             {
-			case CubeMapFace.PositiveX: return TextureTarget.TextureCubeMapPositiveX;
-			case CubeMapFace.NegativeX: return TextureTarget.TextureCubeMapNegativeX;
-			case CubeMapFace.PositiveY: return TextureTarget.TextureCubeMapPositiveY;
-			case CubeMapFace.NegativeY: return TextureTarget.TextureCubeMapNegativeY;
-			case CubeMapFace.PositiveZ: return TextureTarget.TextureCubeMapPositiveZ;
-			case CubeMapFace.NegativeZ: return TextureTarget.TextureCubeMapNegativeZ;
-			}
-			throw new ArgumentException();
-		}
-	}
+                case CubeMapFace.PositiveX: return TextureTarget.TextureCubeMapPositiveX;
+                case CubeMapFace.NegativeX: return TextureTarget.TextureCubeMapNegativeX;
+                case CubeMapFace.PositiveY: return TextureTarget.TextureCubeMapPositiveY;
+                case CubeMapFace.NegativeY: return TextureTarget.TextureCubeMapNegativeY;
+                case CubeMapFace.PositiveZ: return TextureTarget.TextureCubeMapPositiveZ;
+                case CubeMapFace.NegativeZ: return TextureTarget.TextureCubeMapNegativeZ;
+            }
+            throw new ArgumentException();
+        }
+    }
 }
 

@@ -170,7 +170,7 @@ namespace MonoGame.Utilities
                 return true;
 #else
             if (type.IsAssignableFrom(objectType))
-                return true;     
+                return true;
 #endif
             return false;
         }

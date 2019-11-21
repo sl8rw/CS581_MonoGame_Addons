@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.Xna.Framework.Content
 {
-	internal class Int32Reader : ContentTypeReader<int>
+    internal class Int32Reader : ContentTypeReader<int>
     {
         public Int32Reader()
         {

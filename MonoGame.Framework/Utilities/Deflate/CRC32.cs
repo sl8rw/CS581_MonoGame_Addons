@@ -272,7 +272,7 @@ namespace MonoGame.Utilities.Deflate
                         crc32Table[i] = dwCrc;
                     }
                     i++;
-                } while (i!=0);
+                } while (i != 0);
             }
 
 #if VERBOSE
@@ -296,10 +296,10 @@ namespace MonoGame.Utilities.Deflate
         private uint gf2_matrix_times(uint[] matrix, uint vec)
         {
             uint sum = 0;
-            int i=0;
+            int i = 0;
             while (vec != 0)
             {
-                if ((vec & 0x01)== 0x01)
+                if ((vec & 0x01) == 0x01)
                     sum ^= matrix[i];
                 vec >>= 1;
                 i++;
@@ -334,8 +334,8 @@ namespace MonoGame.Utilities.Deflate
             if (length == 0)
                 return;
 
-            uint crc1= ~_register;
-            uint crc2= (uint) crc;
+            uint crc1 = ~_register;
+            uint crc2 = (uint)crc;
 
             // put operator for one zero bit in odd
             odd[0] = this.dwPolynomial;  // the CRC-32 polynomial
@@ -352,15 +352,16 @@ namespace MonoGame.Utilities.Deflate
             // put operator for four zero bits in odd
             gf2_matrix_square(odd, even);
 
-            uint len2 = (uint) length;
+            uint len2 = (uint)length;
 
             // apply len2 zeros to crc1 (first square will put the operator for one
             // zero byte, eight zero bits, in even)
-            do {
+            do
+            {
                 // apply zeros operator for this bit of len2
                 gf2_matrix_square(even, odd);
 
-                if ((len2 & 1)== 1)
+                if ((len2 & 1) == 1)
                     crc1 = gf2_matrix_times(even, crc1);
                 len2 >>= 1;
 
@@ -369,7 +370,7 @@ namespace MonoGame.Utilities.Deflate
 
                 // another iteration of the loop with odd and even swapped
                 gf2_matrix_square(odd, even);
-                if ((len2 & 1)==1)
+                if ((len2 & 1) == 1)
                     crc1 = gf2_matrix_times(odd, crc1);
                 len2 >>= 1;
 
@@ -378,7 +379,7 @@ namespace MonoGame.Utilities.Deflate
 
             crc1 ^= crc2;
 
-            _register= ~crc1;
+            _register = ~crc1;
 
             //return (int) crc1;
             return;
@@ -410,7 +411,7 @@ namespace MonoGame.Utilities.Deflate
         ///   </para>
         /// </remarks>
         public CRC32(bool reverseBits) :
-            this( unchecked((int)0xEDB88320), reverseBits)
+            this(unchecked((int)0xEDB88320), reverseBits)
         {
         }
 
@@ -443,7 +444,7 @@ namespace MonoGame.Utilities.Deflate
         public CRC32(int polynomial, bool reverseBits)
         {
             this.reverseBits = reverseBits;
-            this.dwPolynomial = (uint) polynomial;
+            this.dwPolynomial = (uint)polynomial;
             this.GenerateLookupTable();
         }
 

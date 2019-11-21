@@ -131,6 +131,7 @@ This package provides you with MonoGame Framework that uses OpenGL for rendering
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
   </ItemGroup>

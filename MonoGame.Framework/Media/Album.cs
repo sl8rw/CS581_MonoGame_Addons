@@ -115,7 +115,7 @@ namespace Microsoft.Xna.Framework.Media
             }
         }
 
-       private Album(SongCollection songCollection, string name, Artist artist, Genre genre)
+        private Album(SongCollection songCollection, string name, Artist artist, Genre genre)
         {
             this.songCollection = songCollection;
             this.album = name;
@@ -152,7 +152,7 @@ namespace Microsoft.Xna.Framework.Media
                 this.thumbnail.Dispose();
 #endif
         }
-        
+
 #if IOS && !TVOS
         [CLSCompliant(false)]
         public UIImage GetAlbumArt(int width = 0, int height = 0)
@@ -221,7 +221,7 @@ namespace Microsoft.Xna.Framework.Media
         }
 #endif
 
-		/// <summary>
+        /// <summary>
         /// Returns a String representation of this Album.
         /// </summary>
         public override string ToString()

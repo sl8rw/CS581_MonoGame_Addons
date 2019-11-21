@@ -2,16 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using MonoGame.Utilities;
-using Microsoft.Xna.Framework.Graphics.PackedVector;
 
 namespace MonoGame.Utilities.Png
 {
@@ -66,7 +62,7 @@ namespace MonoGame.Utilities.Png
             {
                 throw new Exception("An error occurred during DEFLATE compression.", exception);
             }
-            
+
             var dataChunk = new DataChunk();
             dataChunk.Data = compressedPixelData.ToArray();
             var dataChunkBytes = dataChunk.Encode();
@@ -117,7 +113,7 @@ namespace MonoGame.Utilities.Png
         private byte[] GetOptimalFilteredScanline(byte[] rawScanline, byte[] previousScanline, int bytesPerPixel)
         {
             var candidates = new List<Tuple<byte[], int>>();
-            
+
             var sub = SubFilter.Encode(rawScanline, bytesPerPixel);
             candidates.Add(new Tuple<byte[], int>(sub, CalculateTotalVariation(sub)));
 
@@ -166,7 +162,7 @@ namespace MonoGame.Utilities.Png
         private byte[] GetRawScanline(int y)
         {
             var rawScanline = new byte[4 * width];
-            
+
             for (int x = 0; x < width; x++)
             {
                 var color = colorData[(y * width) + x];

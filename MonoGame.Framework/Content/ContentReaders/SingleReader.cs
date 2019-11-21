@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.Xna.Framework.Content
 {
-	internal class SingleReader : ContentTypeReader<float>
+    internal class SingleReader : ContentTypeReader<float>
     {
         public SingleReader()
         {

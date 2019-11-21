@@ -2,9 +2,9 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Microsoft.Xna.Framework.Content;
 using System;
 using System.IO;
-using Microsoft.Xna.Framework.Content;
 
 namespace MonoGame.Utilities
 {
@@ -29,7 +29,7 @@ namespace MonoGame.Utilities
             decompressedStream = new MemoryStream(decompressedSize);
             long startPos = stream.Position;
             long pos = startPos;
-            
+
             while (pos - startPos < compressedSize)
             {
                 // the compressed stream is seperated into blocks that will decompress
@@ -81,10 +81,10 @@ namespace MonoGame.Utilities
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-            if(disposing)
-            {                
+            if (disposing)
+            {
                 decompressedStream.Dispose();
-            }            
+            }
             dec = null;
             decompressedStream = null;
         }

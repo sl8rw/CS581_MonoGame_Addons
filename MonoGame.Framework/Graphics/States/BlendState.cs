@@ -6,17 +6,17 @@ using System;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
-	public partial class BlendState : GraphicsResource
-	{
+    public partial class BlendState : GraphicsResource
+    {
         private readonly TargetBlendState[] _targetBlendState;
 
         private readonly bool _defaultStateObject;
 
-	    private Color _blendFactor;
+        private Color _blendFactor;
 
-	    private int _multiSampleMask;
+        private int _multiSampleMask;
 
-	    private bool _independentBlendEnable;
+        private bool _independentBlendEnable;
 
         internal void BindToGraphicsDevice(GraphicsDevice device)
         {
@@ -45,17 +45,17 @@ namespace Microsoft.Xna.Framework.Graphics
             get { return _targetBlendState[index]; }
         }
 
-	    public BlendFunction AlphaBlendFunction
-	    {
-	        get { return _targetBlendState[0].AlphaBlendFunction; }
+        public BlendFunction AlphaBlendFunction
+        {
+            get { return _targetBlendState[0].AlphaBlendFunction; }
             set
             {
                 ThrowIfBound();
                 _targetBlendState[0].AlphaBlendFunction = value;
             }
-	    }
+        }
 
-		public Blend AlphaDestinationBlend
+        public Blend AlphaDestinationBlend
         {
             get { return _targetBlendState[0].AlphaDestinationBlend; }
             set
@@ -65,7 +65,7 @@ namespace Microsoft.Xna.Framework.Graphics
             }
         }
 
-		public Blend AlphaSourceBlend
+        public Blend AlphaSourceBlend
         {
             get { return _targetBlendState[0].AlphaSourceBlend; }
             set
@@ -75,7 +75,7 @@ namespace Microsoft.Xna.Framework.Graphics
             }
         }
 
-		public BlendFunction ColorBlendFunction
+        public BlendFunction ColorBlendFunction
         {
             get { return _targetBlendState[0].ColorBlendFunction; }
             set
@@ -85,7 +85,7 @@ namespace Microsoft.Xna.Framework.Graphics
             }
         }
 
-		public Blend ColorDestinationBlend
+        public Blend ColorDestinationBlend
         {
             get { return _targetBlendState[0].ColorDestinationBlend; }
             set
@@ -95,7 +95,7 @@ namespace Microsoft.Xna.Framework.Graphics
             }
         }
 
-		public Blend ColorSourceBlend
+        public Blend ColorSourceBlend
         {
             get { return _targetBlendState[0].ColorSourceBlend; }
             set
@@ -105,7 +105,7 @@ namespace Microsoft.Xna.Framework.Graphics
             }
         }
 
-		public ColorWriteChannels ColorWriteChannels
+        public ColorWriteChannels ColorWriteChannels
         {
             get { return _targetBlendState[0].ColorWriteChannels; }
             set
@@ -115,7 +115,7 @@ namespace Microsoft.Xna.Framework.Graphics
             }
         }
 
-		public ColorWriteChannels ColorWriteChannels1
+        public ColorWriteChannels ColorWriteChannels1
         {
             get { return _targetBlendState[1].ColorWriteChannels; }
             set
@@ -125,7 +125,7 @@ namespace Microsoft.Xna.Framework.Graphics
             }
         }
 
-		public ColorWriteChannels ColorWriteChannels2
+        public ColorWriteChannels ColorWriteChannels2
         {
             get { return _targetBlendState[2].ColorWriteChannels; }
             set
@@ -135,7 +135,7 @@ namespace Microsoft.Xna.Framework.Graphics
             }
         }
 
-		public ColorWriteChannels ColorWriteChannels3
+        public ColorWriteChannels ColorWriteChannels3
         {
             get { return _targetBlendState[3].ColorWriteChannels; }
             set
@@ -153,14 +153,14 @@ namespace Microsoft.Xna.Framework.Graphics
         /// is bound to a GraphicsDevice.
         /// </remarks>
 	    public Color BlendFactor
-	    {
-	        get { return _blendFactor; }
+        {
+            get { return _blendFactor; }
             set
             {
                 ThrowIfBound();
                 _blendFactor = value;
             }
-	    }
+        }
 
         public int MultiSampleMask
         {
@@ -199,7 +199,7 @@ namespace Microsoft.Xna.Framework.Graphics
             _targetBlendState[2] = new TargetBlendState(this);
             _targetBlendState[3] = new TargetBlendState(this);
 
-			_blendFactor = Color.White;
+            _blendFactor = Color.White;
             _multiSampleMask = Int32.MaxValue;
             _independentBlendEnable = false;
         }
@@ -236,12 +236,12 @@ namespace Microsoft.Xna.Framework.Graphics
             AlphaBlend = new BlendState("BlendState.AlphaBlend", Blend.One, Blend.InverseSourceAlpha);
             NonPremultiplied = new BlendState("BlendState.NonPremultiplied", Blend.SourceAlpha, Blend.InverseSourceAlpha);
             Opaque = new BlendState("BlendState.Opaque", Blend.One, Blend.Zero);
-		}
+        }
 
-	    internal BlendState Clone()
-	    {
-	        return new BlendState(this);
-	    }
+        internal BlendState Clone()
+        {
+            return new BlendState(this);
+        }
 
         partial void PlatformDispose();
 

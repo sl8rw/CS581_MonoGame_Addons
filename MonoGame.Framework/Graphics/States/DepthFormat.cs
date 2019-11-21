@@ -4,9 +4,9 @@
 
 namespace Microsoft.Xna.Framework.Graphics
 {
-	/// <summary>
-	/// Defines formats for depth-stencil buffer.
-	/// </summary>
+    /// <summary>
+    /// Defines formats for depth-stencil buffer.
+    /// </summary>
     public enum DepthFormat
     {
         /// <summary>
