@@ -51,25 +51,16 @@ namespace Microsoft.Xna.Framework.Graphics
         private readonly int _arraySlice;
         private DepthFormat _depthFormat;
 
-        public Texture RenderTarget
-        {
-            get { return _renderTarget; }
-        }
+        public Texture RenderTarget { get { return _renderTarget; } }
 
-        public int ArraySlice
-        {
-            get { return _arraySlice; }
-        }
+        public int ArraySlice { get { return _arraySlice; } }
 
-        internal DepthFormat DepthFormat
-        {
-            get { return _depthFormat; }
-        }
+        internal DepthFormat DepthFormat { get { return _depthFormat; } }
 
         public RenderTargetBinding(RenderTarget2D renderTarget)
         {
-            if (renderTarget == null)
-                throw new ArgumentNullException("renderTarget");
+            if(renderTarget == null)
+                throw new ArgumentNullException(nameof(renderTarget));
 
             _renderTarget = renderTarget;
             _arraySlice = (int)CubeMapFace.PositiveX;
@@ -78,10 +69,10 @@ namespace Microsoft.Xna.Framework.Graphics
 
         public RenderTargetBinding(RenderTargetCube renderTarget, CubeMapFace cubeMapFace)
         {
-            if (renderTarget == null)
-                throw new ArgumentNullException("renderTarget");
-            if (cubeMapFace < CubeMapFace.PositiveX || cubeMapFace > CubeMapFace.NegativeZ)
-                throw new ArgumentOutOfRangeException("cubeMapFace");
+            if(renderTarget == null)
+                throw new ArgumentNullException(nameof(renderTarget));
+            if(cubeMapFace < CubeMapFace.PositiveX || cubeMapFace > CubeMapFace.NegativeZ)
+                throw new ArgumentOutOfRangeException(nameof(cubeMapFace));
 
             _renderTarget = renderTarget;
             _arraySlice = (int)cubeMapFace;

@@ -5,7 +5,8 @@
 namespace Microsoft.Xna.Framework.Graphics
 {
     /// <summary>
-    /// A snapshot of rendering statistics from <see cref="GraphicsDevice.Metrics"/> to be used for runtime debugging and profiling.
+    /// A snapshot of rendering statistics from <see cref="GraphicsDevice.Metrics"/> to be used for runtime debugging
+    /// and profiling.
     /// </summary>
     public struct GraphicsMetrics
     {

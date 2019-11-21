@@ -13,31 +13,15 @@ namespace MonoGame.OpenGL
         private IntPtr _winHandle;
         private bool _disposed;
 
-        public int SwapInterval
-        {
-            get
-            {
-                return Sdl.GL.GetSwapInterval();
-            }
-            set
-            {
-                Sdl.GL.SetSwapInterval(value);
-            }
-        }
+        public int SwapInterval { get { return Sdl.GL.GetSwapInterval(); } set { Sdl.GL.SetSwapInterval(value); } }
 
-        public bool IsDisposed
-        {
-            get { return _disposed; }
-        }
+        public bool IsDisposed { get { return _disposed; } }
 
-        public bool IsCurrent
-        {
-            get { return true; }
-        }
+        public bool IsCurrent { get { return true; } }
 
         public GraphicsContext(IWindowInfo info)
         {
-            if (_disposed)
+            if(_disposed)
                 return;
 
             SetWindowHandle(info);
@@ -47,18 +31,16 @@ namespace MonoGame.OpenGL
             try
             {
                 OpenGL.GL.LoadEntryPoints();
-            }
-            catch (EntryPointNotFoundException)
+            } catch(EntryPointNotFoundException)
             {
-                throw new PlatformNotSupportedException(
-                    "MonoGame requires OpenGL 3.0 compatible drivers, or either ARB_framebuffer_object or EXT_framebuffer_object extensions. " +
+                throw new PlatformNotSupportedException("MonoGame requires OpenGL 3.0 compatible drivers, or either ARB_framebuffer_object or EXT_framebuffer_object extensions. " +
                     "Try updating your graphics drivers.");
             }
         }
 
         public void MakeCurrent(IWindowInfo info)
         {
-            if (_disposed)
+            if(_disposed)
                 return;
 
             SetWindowHandle(info);
@@ -67,7 +49,7 @@ namespace MonoGame.OpenGL
 
         public void SwapBuffers()
         {
-            if (_disposed)
+            if(_disposed)
                 return;
 
             Sdl.GL.SwapWindow(_winHandle);
@@ -75,7 +57,7 @@ namespace MonoGame.OpenGL
 
         public void Dispose()
         {
-            if (_disposed)
+            if(_disposed)
                 return;
 
             GraphicsDevice.DisposeContext(_context);
@@ -85,7 +67,7 @@ namespace MonoGame.OpenGL
 
         private void SetWindowHandle(IWindowInfo info)
         {
-            if (info == null)
+            if(info == null)
                 _winHandle = IntPtr.Zero;
             else
                 _winHandle = info.Handle;

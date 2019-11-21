@@ -16,17 +16,13 @@ namespace Microsoft.Xna.Framework.Input
         public bool IsConnected { get; internal set; }
 
         /// <summary>
-        /// Gets the gamepad display name.
-        /// 
-        /// This property is not available in XNA.
+        /// Gets the gamepad display name.  This property is not available in XNA.
         /// </summary>
         /// <value>String representing the display name of the gamepad.</value>
         public string DisplayName { get; internal set; }
 
         /// <summary>
-        /// Gets the unique identifier of the gamepad.
-        /// 
-        /// This property is not available in XNA.
+        /// Gets the unique identifier of the gamepad.  This property is not available in XNA.
         /// </summary>
         /// <value>String representing the unique identifier of the gamepad.</value>
         public string Identifier { get; internal set; }
@@ -237,61 +233,40 @@ namespace Microsoft.Xna.Framework.Input
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current <see cref="T:Microsoft.Xna.Framework.Input.GamePadCapabilities"/>.
+        /// Determines whether the specified <see cref="object"/> is equal to the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.GamePadCapabilities"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current <see cref="T:Microsoft.Xna.Framework.Input.GamePadCapabilities"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current
-        /// <see cref="T:Microsoft.Xna.Framework.Input.GamePadCapabilities"/>; otherwise, <c>false</c>.</returns>
+        /// <param name="obj">
+        /// The <see cref="object"/> to compare with the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.GamePadCapabilities"/>.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the specified <see cref="object"/> is equal to the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.GamePadCapabilities"/>; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj)
-        {
-            return (obj is GamePadCapabilities) && (this == (GamePadCapabilities)obj);
-        }
+        { return (obj is GamePadCapabilities) && (this == (GamePadCapabilities)obj); }
 
         /// <summary>
         /// Serves as a hash function for a <see cref="T:Microsoft.Xna.Framework.Input.GamePadCapabilities"/> object.
         /// </summary>
-        /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
-        /// hash table.</returns>
-        public override int GetHashCode()
-        {
-            return Identifier.GetHashCode();
-        }
+        /// <returns>
+        /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+        /// hash table.
+        /// </returns>
+        public override int GetHashCode() { return Identifier.GetHashCode(); }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Microsoft.Xna.Framework.Input.GamePadCapabilities"/>.
+        /// Returns a <see cref="T:System.String"/> that represents the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.GamePadCapabilities"/>.
         /// </summary>
-        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Microsoft.Xna.Framework.Input.GamePadCapabilities"/>.</returns>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.GamePadCapabilities"/>.
+        /// </returns>
         public override string ToString()
         {
-            return "[GamePadCapabilities: IsConnected=" + IsConnected +
-                ", DisplayName=" + DisplayName +
-                ", Identifier=" + Identifier +
-                ", HasAButton=" + HasAButton +
-                ", HasBackButton=" + HasBackButton +
-                ", HasBButton=" + HasBButton +
-                ", HasDPadDownButton=" + HasDPadDownButton +
-                ", HasDPadLeftButton=" + HasDPadLeftButton +
-                ", HasDPadRightButton=" + HasDPadRightButton +
-                ", HasDPadUpButton=" + HasDPadUpButton +
-                ", HasLeftShoulderButton=" + HasLeftShoulderButton +
-                ", HasLeftStickButton=" + HasLeftStickButton +
-                ", HasRightShoulderButton=" + HasRightShoulderButton +
-                ", HasRightStickButton=" + HasRightStickButton +
-                ", HasStartButton=" + HasStartButton +
-                ", HasXButton=" + HasXButton +
-                ", HasYButton=" + HasYButton +
-                ", HasBigButton=" + HasBigButton +
-                ", HasLeftXThumbStick=" + HasLeftXThumbStick +
-                ", HasLeftYThumbStick=" + HasLeftYThumbStick +
-                ", HasRightXThumbStick=" + HasRightXThumbStick +
-                ", HasRightYThumbStick=" + HasRightYThumbStick +
-                ", HasLeftTrigger=" + HasLeftTrigger +
-                ", HasRightTrigger=" + HasRightTrigger +
-                ", HasLeftVibrationMotor=" + HasLeftVibrationMotor +
-                ", HasRightVibrationMotor=" + HasRightVibrationMotor +
-                ", HasVoiceSupport=" + HasVoiceSupport +
-                ", GamePadType=" + GamePadType +
-                "]";
+            return $"[GamePadCapabilities: IsConnected={IsConnected}, DisplayName={DisplayName}, Identifier={Identifier}, HasAButton={HasAButton}, HasBackButton={HasBackButton}, HasBButton={HasBButton}, HasDPadDownButton={HasDPadDownButton}, HasDPadLeftButton={HasDPadLeftButton}, HasDPadRightButton={HasDPadRightButton}, HasDPadUpButton={HasDPadUpButton}, HasLeftShoulderButton={HasLeftShoulderButton}, HasLeftStickButton={HasLeftStickButton}, HasRightShoulderButton={HasRightShoulderButton}, HasRightStickButton={HasRightStickButton}, HasStartButton={HasStartButton}, HasXButton={HasXButton}, HasYButton={HasYButton}, HasBigButton={HasBigButton}, HasLeftXThumbStick={HasLeftXThumbStick}, HasLeftYThumbStick={HasLeftYThumbStick}, HasRightXThumbStick={HasRightXThumbStick}, HasRightYThumbStick={HasRightYThumbStick}, HasLeftTrigger={HasLeftTrigger}, HasRightTrigger={HasRightTrigger}, HasLeftVibrationMotor={HasLeftVibrationMotor}, HasRightVibrationMotor={HasRightVibrationMotor}, HasVoiceSupport={HasVoiceSupport}, GamePadType={GamePadType}]";
         }
     }
 }

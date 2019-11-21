@@ -54,10 +54,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         private WeakReference _selfReference;
 
-        internal GraphicsResource()
-        {
-
-        }
+        internal GraphicsResource() { }
 
         ~GraphicsResource()
         {
@@ -66,15 +63,11 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 
         /// <summary>
-        /// Called before the device is reset. Allows graphics resources to 
-        /// invalidate their state so they can be recreated after the device reset.
-        /// Warning: This may be called after a call to Dispose() up until
-        /// the resource is garbage collected.
+        /// Called before the device is reset. Allows graphics resources to  invalidate their state so they can be
+        /// recreated after the device reset. Warning: This may be called after a call to Dispose() up until the
+        /// resource is garbage collected.
         /// </summary>
-        internal protected virtual void GraphicsDeviceResetting()
-        {
-
-        }
+        internal protected virtual void GraphicsDeviceResetting() { }
 
         public void Dispose()
         {
@@ -91,9 +84,9 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <remarks>Native resources should always be released regardless of the value of the disposing parameter.</remarks>
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if(!disposed)
             {
-                if (disposing)
+                if(disposing)
                 {
                     // Release managed objects
                     // ...
@@ -103,11 +96,11 @@ namespace Microsoft.Xna.Framework.Graphics
                 // ...
 
                 // Do not trigger the event if called from the finalizer
-                if (disposing)
+                if(disposing)
                     EventHelpers.Raise(this, Disposing, EventArgs.Empty);
 
                 // Remove from the global list of graphics resources
-                if (graphicsDevice != null)
+                if(graphicsDevice != null)
                     graphicsDevice.RemoveResourceReference(_selfReference);
 
                 _selfReference = null;
@@ -120,21 +113,18 @@ namespace Microsoft.Xna.Framework.Graphics
 
         public GraphicsDevice GraphicsDevice
         {
-            get
-            {
-                return graphicsDevice;
-            }
+            get { return graphicsDevice; }
 
             internal set
             {
                 Debug.Assert(value != null);
 
-                if (graphicsDevice == value)
+                if(graphicsDevice == value)
                     return;
 
                 // VertexDeclaration objects can be bound to multiple GraphicsDevice objects
                 // during their lifetime. But only one GraphicsDevice should retain ownership.
-                if (graphicsDevice != null)
+                if(graphicsDevice != null)
                 {
                     graphicsDevice.RemoveResourceReference(_selfReference);
                     _selfReference = null;
@@ -147,22 +137,13 @@ namespace Microsoft.Xna.Framework.Graphics
             }
         }
 
-        public bool IsDisposed
-        {
-            get
-            {
-                return disposed;
-            }
-        }
+        public bool IsDisposed { get { return disposed; } }
 
         public string Name { get; set; }
 
         public Object Tag { get; set; }
 
-        public override string ToString()
-        {
-            return string.IsNullOrEmpty(Name) ? base.ToString() : Name;
-        }
+        public override string ToString() { return string.IsNullOrEmpty(Name) ? base.ToString() : Name; }
     }
 }
 

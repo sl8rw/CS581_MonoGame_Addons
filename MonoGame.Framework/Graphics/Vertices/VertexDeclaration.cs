@@ -12,11 +12,11 @@ namespace Microsoft.Xna.Framework.Graphics
     /// Defines per-vertex data of a vertex buffer.
     /// </summary>
     /// <remarks>
-    /// <see cref="VertexDeclaration"/> implements <see cref="IEquatable{T}"/> and can be used as
-    /// a key in a dictionary. Two vertex declarations are considered equal if the vertices are
-    /// structurally equivalent, i.e. the vertex elements and the vertex stride are identical. (The
-    /// properties <see cref="GraphicsResource.Name"/> and <see cref="GraphicsResource.Tag"/> are
-    /// ignored in <see cref="GetHashCode"/> and <see cref="Equals(VertexDeclaration)"/>!)
+    /// <see cref="VertexDeclaration"/> implements <see cref="IEquatable{T}"/> and can be used as a key in a dictionary.
+    /// Two vertex declarations are considered equal if the vertices are structurally equivalent, i.e. the vertex
+    /// elements and the vertex stride are identical. (The properties <see cref="GraphicsResource.Name"/> and <see
+    /// cref="GraphicsResource.Tag"/> are ignored in <see cref="GetHashCode"/> and <see
+    /// cref="Equals(VertexDeclaration)"/>!)
     /// </remarks>
     public partial class VertexDeclaration : GraphicsResource, IEquatable<VertexDeclaration>
     {
@@ -27,7 +27,6 @@ namespace Microsoft.Xna.Framework.Graphics
         // --> VertexDeclaration should be a lightweight immutable type. No base class, no IDisposable.
         //     (Use the internal type Data. Do not expose a constructor. Use a factory method to
         //     cache the vertex declarations.)
-
         #region ----- Data shared between structurally identical vertex declarations -----
 
         private sealed class Data : IEquatable<Data>
@@ -45,7 +44,7 @@ namespace Microsoft.Xna.Framework.Graphics
                 unchecked
                 {
                     _hashCode = elements[0].GetHashCode();
-                    for (int i = 1; i < elements.Length; i++)
+                    for(int i = 1; i < elements.Length; i++)
                         _hashCode = (_hashCode * 397) ^ elements[i].GetHashCode();
 
                     _hashCode = (_hashCode * 397) ^ elements.Length;
@@ -53,36 +52,30 @@ namespace Microsoft.Xna.Framework.Graphics
                 }
             }
 
-            public override bool Equals(object obj)
-            {
-                return Equals(obj as Data);
-            }
+            public override bool Equals(object obj) { return Equals(obj as Data); }
 
             public bool Equals(Data other)
             {
-                if (ReferenceEquals(null, other))
+                if(ReferenceEquals(null, other))
                     return false;
-                if (ReferenceEquals(this, other))
+                if(ReferenceEquals(this, other))
                     return true;
 
-                if (_hashCode != other._hashCode
-                    || VertexStride != other.VertexStride
-                    || Elements.Length != other.Elements.Length)
+                if(_hashCode != other._hashCode ||
+                    VertexStride != other.VertexStride ||
+                    Elements.Length != other.Elements.Length)
                 {
                     return false;
                 }
 
-                for (int i = 0; i < Elements.Length; i++)
-                    if (!Elements[i].Equals(other.Elements[i]))
+                for(int i = 0; i < Elements.Length; i++)
+                    if(!Elements[i].Equals(other.Elements[i]))
                         return false;
 
                 return true;
             }
 
-            public override int GetHashCode()
-            {
-                return _hashCode;
-            }
+            public override int GetHashCode() { return _hashCode; }
         }
         #endregion
 
@@ -91,18 +84,15 @@ namespace Microsoft.Xna.Framework.Graphics
 
         private static readonly Dictionary<Data, VertexDeclaration> _vertexDeclarationCache;
 
-        static VertexDeclaration()
-        {
-            _vertexDeclarationCache = new Dictionary<Data, VertexDeclaration>();
-        }
+        static VertexDeclaration() { _vertexDeclarationCache = new Dictionary<Data, VertexDeclaration>(); }
 
         internal static VertexDeclaration GetOrCreate(int vertexStride, VertexElement[] elements)
         {
-            lock (_vertexDeclarationCache)
+            lock(_vertexDeclarationCache)
             {
                 var data = new Data(vertexStride, elements);
                 VertexDeclaration vertexDeclaration;
-                if (!_vertexDeclarationCache.TryGetValue(data, out vertexDeclaration))
+                if(!_vertexDeclarationCache.TryGetValue(data, out vertexDeclaration))
                 {
                     // Data.Elements have already been set in the Data ctor. However, entries
                     // in the vertex declaration cache must be immutable. Therefore, we create a 
@@ -117,10 +107,7 @@ namespace Microsoft.Xna.Framework.Graphics
             }
         }
 
-        private VertexDeclaration(Data data)
-        {
-            _data = data;
-        }
+        private VertexDeclaration(Data data) { _data = data; }
         #endregion
 
 
@@ -130,10 +117,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// Gets the internal vertex elements array.
         /// </summary>
         /// <value>The internal vertex elements array.</value>
-        internal VertexElement[] InternalVertexElements
-        {
-            get { return _data.Elements; }
-        }
+        internal VertexElement[] InternalVertexElements { get { return _data.Elements; } }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VertexDeclaration"/> class.
@@ -142,10 +126,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <exception cref="ArgumentNullException">
         /// <paramref name="elements"/> is <see langword="null"/> or empty.
         /// </exception>
-        public VertexDeclaration(params VertexElement[] elements)
-            : this(GetVertexStride(elements), elements)
-        {
-        }
+        public VertexDeclaration(params VertexElement[] elements) : this(GetVertexStride(elements), elements) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VertexDeclaration"/> class.
@@ -157,19 +138,18 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </exception>
         public VertexDeclaration(int vertexStride, params VertexElement[] elements)
         {
-            if ((elements == null) || (elements.Length == 0))
-                throw new ArgumentNullException("elements", "Elements cannot be empty");
+            if((elements == null) || (elements.Length == 0))
+                throw new ArgumentNullException(nameof(elements), "Elements cannot be empty");
 
-            lock (_vertexDeclarationCache)
+            lock(_vertexDeclarationCache)
             {
                 var data = new Data(vertexStride, elements);
                 VertexDeclaration vertexDeclaration;
-                if (_vertexDeclarationCache.TryGetValue(data, out vertexDeclaration))
+                if(_vertexDeclarationCache.TryGetValue(data, out vertexDeclaration))
                 {
                     // Reuse existing data.
                     _data = vertexDeclaration._data;
-                }
-                else
+                } else
                 {
                     // Cache new vertex declaration.
                     data.Elements = (VertexElement[])elements.Clone();
@@ -182,10 +162,10 @@ namespace Microsoft.Xna.Framework.Graphics
         private static int GetVertexStride(VertexElement[] elements)
         {
             int max = 0;
-            for (var i = 0; i < elements.Length; i++)
+            for(var i = 0; i < elements.Length; i++)
             {
                 var start = elements[i].Offset + elements[i].VertexElementFormat.GetSize();
-                if (max < start)
+                if(max < start)
                     max = start;
             }
 
@@ -198,27 +178,26 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <param name="vertexType">A value type which implements the IVertexType interface.</param>
         /// <returns>The VertexDeclaration.</returns>
         /// <remarks>
-        /// Prefer to use VertexDeclarationCache when the declaration lookup
-        /// can be performed with a templated type.
+        /// Prefer to use VertexDeclarationCache when the declaration lookup can be performed with a templated type.
         /// </remarks>
-		internal static VertexDeclaration FromType(Type vertexType)
+        internal static VertexDeclaration FromType(Type vertexType)
         {
-            if (vertexType == null)
-                throw new ArgumentNullException("vertexType", "Cannot be null");
+            if(vertexType == null)
+                throw new ArgumentNullException(nameof(vertexType), "Cannot be null");
 
-            if (!ReflectionHelpers.IsValueType(vertexType))
+            if(!ReflectionHelpers.IsValueType(vertexType))
             {
-                throw new ArgumentException("Must be value type", "vertexType");
+                throw new ArgumentException("Must be value type", nameof(vertexType));
             }
 
             var type = Activator.CreateInstance(vertexType) as IVertexType;
-            if (type == null)
+            if(type == null)
             {
                 throw new ArgumentException("vertexData does not inherit IVertexType");
             }
 
             var vertexDeclaration = type.VertexDeclaration;
-            if (vertexDeclaration == null)
+            if(vertexDeclaration == null)
             {
                 throw new Exception("VertexDeclaration cannot be null");
             }
@@ -230,68 +209,50 @@ namespace Microsoft.Xna.Framework.Graphics
         /// Gets a copy of the vertex elements.
         /// </summary>
         /// <returns>A copy of the vertex elements.</returns>
-        public VertexElement[] GetVertexElements()
-        {
-            return (VertexElement[])_data.Elements.Clone();
-        }
+        public VertexElement[] GetVertexElements() { return (VertexElement[])_data.Elements.Clone(); }
 
         /// <summary>
         /// Gets the size of a vertex (including padding) in bytes.
         /// </summary>
         /// <value>The size of a vertex (including padding) in bytes.</value>
-        public int VertexStride
-        {
-            get { return _data.VertexStride; }
-        }
+        public int VertexStride { get { return _data.VertexStride; } }
 
         /// <summary>
         /// Determines whether the specified <see cref="object"/> is equal to this instance.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns>
-        /// <see langword="true"/> if the specified <see cref="object"/> is equal to this instance;
-        /// otherwise, <see langword="false"/>.
+        /// <see langword="true"/> if the specified <see cref="object"/> is equal to this instance; otherwise, <see
+        /// langword="false"/>.
         /// </returns>
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as VertexDeclaration);
-        }
+        public override bool Equals(object obj) { return Equals(obj as VertexDeclaration); }
 
         /// <summary>
-        /// Determines whether the specified <see cref="VertexDeclaration"/> is equal to this
-        /// instance.
+        /// Determines whether the specified <see cref="VertexDeclaration"/> is equal to this instance.
         /// </summary>
         /// <param name="other">The object to compare with the current object.</param>
         /// <returns>
-        /// <see langword="true"/> if the specified <see cref="VertexDeclaration"/> is equal to this
-        /// instance; otherwise, <see langword="false"/>.
+        /// <see langword="true"/> if the specified <see cref="VertexDeclaration"/> is equal to this instance;
+        /// otherwise, <see langword="false"/>.
         /// </returns>
-        public bool Equals(VertexDeclaration other)
-        {
-            return other != null && ReferenceEquals(_data, other._data);
-        }
+        public bool Equals(VertexDeclaration other) { return other != null && ReferenceEquals(_data, other._data); }
 
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data
-        /// structures like a hash table.
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public override int GetHashCode()
-        {
-            return _data.GetHashCode();
-        }
+        public override int GetHashCode() { return _data.GetHashCode(); }
 
         /// <summary>
-        /// Compares two <see cref="VertexElement"/> instances to determine whether they are the
-        /// same.
+        /// Compares two <see cref="VertexElement"/> instances to determine whether they are the same.
         /// </summary>
         /// <param name="left">The first instance.</param>
         /// <param name="right">The second instance.</param>
         /// <returns>
-        /// <see langword="true"/> if the <paramref name="left"/> and <paramref name="right"/> are
-        /// the same; otherwise, <see langword="false"/>.
+        /// <see langword="true"/> if the <paramref name="left"/> and <paramref name="right"/> are the same; otherwise,
+        /// <see langword="false"/>.
         /// </returns>
         public static bool operator ==(VertexDeclaration left, VertexDeclaration right)
         {
@@ -299,14 +260,13 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 
         /// <summary>
-        /// Compares two <see cref="VertexElement"/> instances to determine whether they are
-        /// different.
+        /// Compares two <see cref="VertexElement"/> instances to determine whether they are different.
         /// </summary>
         /// <param name="left">The first instance.</param>
         /// <param name="right">The second instance.</param>
         /// <returns>
-        /// <see langword="true"/> if the <paramref name="left"/> and <paramref name="right"/> are
-        /// the different; otherwise, <see langword="false"/>.
+        /// <see langword="true"/> if the <paramref name="left"/> and <paramref name="right"/> are the different;
+        /// otherwise, <see langword="false"/>.
         /// </returns>
         public static bool operator !=(VertexDeclaration left, VertexDeclaration right)
         {

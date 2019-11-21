@@ -9,25 +9,37 @@ namespace Microsoft.Xna.Framework.Input
         /// <summary>
         /// Gets a value indicating wethever down is pressed on the directional pad.
         /// </summary>
-        /// <value><see cref="ButtonState.Pressed"/> if the down button is pressed; otherwise, <see cref="ButtonState.Released"/>.</value>
+        /// <value>
+        /// <see cref="ButtonState.Pressed"/> if the down button is pressed; otherwise, <see
+        /// cref="ButtonState.Released"/>.
+        /// </value>
         public ButtonState Down { get; private set; }
 
         /// <summary>
         /// Gets a value indicating wethever left is pressed on the directional pad.
         /// </summary>
-        /// <value><see cref="ButtonState.Pressed"/> if the left button is pressed; otherwise, <see cref="ButtonState.Released"/>.</value>
+        /// <value>
+        /// <see cref="ButtonState.Pressed"/> if the left button is pressed; otherwise, <see
+        /// cref="ButtonState.Released"/>.
+        /// </value>
         public ButtonState Left { get; private set; }
 
         /// <summary>
         /// Gets a value indicating wethever right is pressed on the directional pad.
         /// </summary>
-        /// <value><see cref="ButtonState.Pressed"/> if the right button is pressed; otherwise, <see cref="ButtonState.Released"/>.</value>
+        /// <value>
+        /// <see cref="ButtonState.Pressed"/> if the right button is pressed; otherwise, <see
+        /// cref="ButtonState.Released"/>.
+        /// </value>
         public ButtonState Right { get; private set; }
 
         /// <summary>
         /// Gets a value indicating wethever up is pressed on the directional pad.
         /// </summary>
-        /// <value><see cref="ButtonState.Pressed"/> if the up button is pressed; otherwise, <see cref="ButtonState.Released"/>.</value>
+        /// <value>
+        /// <see cref="ButtonState.Pressed"/> if the up button is pressed; otherwise, <see
+        /// cref="ButtonState.Released"/>.
+        /// </value>
         public ButtonState Up { get; private set; }
 
         /// <summary>
@@ -47,16 +59,13 @@ namespace Microsoft.Xna.Framework.Input
 
         internal GamePadDPad(Buttons[] buttons) : this()
         {
-            foreach (var button in buttons)
+            foreach(var button in buttons)
             {
                 ConvertButtonToDirection(button);
             }
         }
 
-        internal GamePadDPad(Buttons button) : this()
-        {
-            ConvertButtonToDirection(button);
-        }
+        internal GamePadDPad(Buttons button) : this() { ConvertButtonToDirection(button); }
 
         /// <summary>
         /// Determines whether two specified instances of <see cref="GamePadDPad"/> are equal.
@@ -66,10 +75,10 @@ namespace Microsoft.Xna.Framework.Input
         /// <returns>true if <paramref name="left"/> and <paramref name="right"/> are equal; otherwise, false.</returns>
         public static bool operator ==(GamePadDPad left, GamePadDPad right)
         {
-            return (left.Down == right.Down)
-                && (left.Left == right.Left)
-                && (left.Right == right.Right)
-                && (left.Up == right.Up);
+            return (left.Down == right.Down) &&
+                (left.Left == right.Left) &&
+                (left.Right == right.Right) &&
+                (left.Up == right.Up);
         }
 
         /// <summary>
@@ -87,17 +96,19 @@ namespace Microsoft.Xna.Framework.Input
         /// Returns a value indicating whether this instance is equal to a specified object.
         /// </summary>
         /// <param name="obj">An object to compare to this instance.</param>
-        /// <returns>true if <paramref name="obj"/> is a <see cref="GamePadDPad"/> and has the same value as this instance; otherwise, false.</returns>
-        public override bool Equals(object obj)
-        {
-            return (obj is GamePadDPad) && (this == (GamePadDPad)obj);
-        }
+        /// <returns>
+        /// true if <paramref name="obj"/> is a <see cref="GamePadDPad"/> and has the same value as this instance;
+        /// otherwise, false.
+        /// </returns>
+        public override bool Equals(object obj) { return (obj is GamePadDPad) && (this == (GamePadDPad)obj); }
 
         /// <summary>
         /// Serves as a hash function for a <see cref="T:Microsoft.Xna.Framework.Input.GamePadDPad"/> object.
         /// </summary>
-        /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
-        /// hash table.</returns>
+        /// <returns>
+        /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+        /// hash table.
+        /// </returns>
         public override int GetHashCode()
         {
             return
@@ -108,24 +119,25 @@ namespace Microsoft.Xna.Framework.Input
         }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Microsoft.Xna.Framework.Input.GamePadDPad"/>
-        /// in a format of 0000 where each number represents a boolean value of each respecting object property: Left, Up, Right, Down.
+        /// Returns a <see cref="T:System.String"/> that represents the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.GamePadDPad"/> in a format of 0000 where each number represents a
+        /// boolean value of each respecting object property: Left, Up, Right, Down.
         /// </summary>
-        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Microsoft.Xna.Framework.Input.GamePadDPad"/>.</returns>
-        public override string ToString()
-        {
-            return string.Empty + (int)Left + (int)Up + (int)Right + (int)Down;
-        }
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.GamePadDPad"/>.
+        /// </returns>
+        public override string ToString() { return string.Empty + (int)Left + (int)Up + (int)Right + (int)Down; }
 
         private void ConvertButtonToDirection(Buttons button)
         {
-            if ((button & Buttons.DPadDown) == Buttons.DPadDown)
+            if((button & Buttons.DPadDown) == Buttons.DPadDown)
                 Down = ButtonState.Pressed;
-            if ((button & Buttons.DPadLeft) == Buttons.DPadLeft)
+            if((button & Buttons.DPadLeft) == Buttons.DPadLeft)
                 Left = ButtonState.Pressed;
-            if ((button & Buttons.DPadRight) == Buttons.DPadRight)
+            if((button & Buttons.DPadRight) == Buttons.DPadRight)
                 Right = ButtonState.Pressed;
-            if ((button & Buttons.DPadUp) == Buttons.DPadUp)
+            if((button & Buttons.DPadUp) == Buttons.DPadUp)
                 Up = ButtonState.Pressed;
         }
     }

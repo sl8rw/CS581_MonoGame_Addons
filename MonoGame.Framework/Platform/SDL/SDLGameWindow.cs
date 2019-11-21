@@ -17,7 +17,7 @@ namespace Microsoft.Xna.Framework
             get { return !IsBorderless && _resizable; }
             set
             {
-                if (Sdl.Patch > 4)
+                if(Sdl.Patch > 4)
                     Sdl.Window.SetResizable(_handle, value);
                 else
                     throw new Exception("SDL 2.0.4 does not support changing resizable parameter of the window after it's already been created, please use a newer version of it.");
@@ -42,7 +42,7 @@ namespace Microsoft.Xna.Framework
             {
                 int x = 0, y = 0;
 
-                if (!IsFullScreen)
+                if(!IsFullScreen)
                     Sdl.Window.GetPosition(Handle, out x, out y);
 
                 return new Point(x, y);
@@ -54,20 +54,11 @@ namespace Microsoft.Xna.Framework
             }
         }
 
-        public override DisplayOrientation CurrentOrientation
-        {
-            get { return DisplayOrientation.Default; }
-        }
+        public override DisplayOrientation CurrentOrientation { get { return DisplayOrientation.Default; } }
 
-        public override IntPtr Handle
-        {
-            get { return _handle; }
-        }
+        public override IntPtr Handle { get { return _handle; } }
 
-        public override string ScreenDeviceName
-        {
-            get { return _screenDeviceName; }
-        }
+        public override string ScreenDeviceName { get { return _screenDeviceName; } }
 
         public override bool IsBorderless
         {
@@ -105,30 +96,35 @@ namespace Microsoft.Xna.Framework
             Sdl.SetHint("SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS", "1");
 
             // when running NUnit tests entry assembly can be null
-            if (Assembly.GetEntryAssembly() != null)
+            if(Assembly.GetEntryAssembly() != null)
             {
-                using (
-                    var stream =
-                        Assembly.GetEntryAssembly().GetManifestResourceStream(Assembly.GetEntryAssembly().EntryPoint.DeclaringType.Namespace + ".Icon.bmp") ??
-                        Assembly.GetEntryAssembly().GetManifestResourceStream("Icon.bmp") ??
-                        Assembly.GetExecutingAssembly().GetManifestResourceStream("MonoGame.bmp"))
+                using(var stream =
+                        Assembly.GetEntryAssembly()
+                        .GetManifestResourceStream($"{Assembly.GetEntryAssembly().EntryPoint.DeclaringType.Namespace}.Icon.bmp") ??
+                    Assembly.GetEntryAssembly().GetManifestResourceStream("Icon.bmp") ??
+                    Assembly.GetExecutingAssembly().GetManifestResourceStream("MonoGame.bmp"))
                 {
-                    if (stream != null)
-                        using (var br = new BinaryReader(stream))
+                    if(stream != null)
+                        using(var br = new BinaryReader(stream))
                         {
                             try
                             {
                                 var src = Sdl.RwFromMem(br.ReadBytes((int)stream.Length), (int)stream.Length);
                                 _icon = Sdl.LoadBMP_RW(src, 1);
+                            } catch
+                            {
                             }
-                            catch { }
                         }
                 }
             }
 
-            _handle = Sdl.Window.Create(string.Empty, 0, 0,
-                GraphicsDeviceManager.DefaultBackBufferWidth, GraphicsDeviceManager.DefaultBackBufferHeight,
-                Sdl.Window.State.Hidden);
+            _handle = Sdl.Window
+                .Create(string.Empty,
+                        0,
+                        0,
+                        GraphicsDeviceManager.DefaultBackBufferWidth,
+                        GraphicsDeviceManager.DefaultBackBufferHeight,
+                        Sdl.Window.State.Hidden);
         }
 
         internal void CreateWindow()
@@ -139,25 +135,24 @@ namespace Microsoft.Xna.Framework
                 Sdl.Window.State.InputFocus |
                 Sdl.Window.State.MouseFocus;
 
-            if (_handle != IntPtr.Zero)
+            if(_handle != IntPtr.Zero)
                 Sdl.Window.Destroy(_handle);
 
             var winx = Sdl.Window.PosCentered;
             var winy = Sdl.Window.PosCentered;
 
             // if we are on Linux, start on the current screen
-            if (CurrentPlatform.OS == OS.Linux)
+            if(CurrentPlatform.OS == OS.Linux)
             {
                 winx |= GetMouseDisplay();
                 winy |= GetMouseDisplay();
             }
 
-            _handle = Sdl.Window.Create(AssemblyHelper.GetDefaultWindowTitle(),
-                winx, winy, _width, _height, initflags);
+            _handle = Sdl.Window.Create(AssemblyHelper.GetDefaultWindowTitle(), winx, winy, _width, _height, initflags);
 
             Id = Sdl.Window.GetWindowId(_handle);
 
-            if (_icon != IntPtr.Zero)
+            if(_icon != IntPtr.Zero)
                 Sdl.Window.SetIcon(_handle, _icon);
 
             Sdl.Window.SetBordered(_handle, _borderless ? 0 : 1);
@@ -166,10 +161,7 @@ namespace Microsoft.Xna.Framework
             SetCursorVisible(_mouseVisible);
         }
 
-        ~SdlGameWindow()
-        {
-            Dispose(false);
-        }
+        ~SdlGameWindow() { Dispose(false); }
 
         private static int GetMouseDisplay()
         {
@@ -179,12 +171,11 @@ namespace Microsoft.Xna.Framework
             Sdl.Mouse.GetGlobalState(out x, out y);
 
             var displayCount = Sdl.Display.GetNumVideoDisplays();
-            for (var i = 0; i < displayCount; i++)
+            for(var i = 0; i < displayCount; i++)
             {
                 Sdl.Display.GetBounds(i, out rect);
 
-                if (x >= rect.X && x < rect.X + rect.Width &&
-                    y >= rect.Y && y < rect.Y + rect.Height)
+                if(x >= rect.X && x < rect.X + rect.Width && y >= rect.Y && y < rect.Y + rect.Height)
                 {
                     return i;
                 }
@@ -199,10 +190,7 @@ namespace Microsoft.Xna.Framework
             Sdl.Mouse.ShowCursor(visible ? 1 : 0);
         }
 
-        public override void BeginScreenDeviceChange(bool willBeFullScreen)
-        {
-            _willBeFullScreen = willBeFullScreen;
-        }
+        public override void BeginScreenDeviceChange(bool willBeFullScreen) { _willBeFullScreen = willBeFullScreen; }
 
         public override void EndScreenDeviceChange(string screenDeviceName, int clientWidth, int clientHeight)
         {
@@ -214,25 +202,26 @@ namespace Microsoft.Xna.Framework
             Sdl.Rectangle displayRect;
             Sdl.Display.GetBounds(displayIndex, out displayRect);
 
-            if (_willBeFullScreen != IsFullScreen || _hardwareSwitch != _game.graphicsDeviceManager.HardwareModeSwitch)
+            if(_willBeFullScreen != IsFullScreen || _hardwareSwitch != _game.graphicsDeviceManager.HardwareModeSwitch)
             {
-                var fullscreenFlag = _game.graphicsDeviceManager.HardwareModeSwitch ? Sdl.Window.State.Fullscreen : Sdl.Window.State.FullscreenDesktop;
+                var fullscreenFlag = _game.graphicsDeviceManager.HardwareModeSwitch
+                    ? Sdl.Window.State.Fullscreen
+                    : Sdl.Window.State.FullscreenDesktop;
                 Sdl.Window.SetFullscreen(Handle, (_willBeFullScreen) ? fullscreenFlag : 0);
                 _hardwareSwitch = _game.graphicsDeviceManager.HardwareModeSwitch;
             }
             // If going to exclusive full-screen mode, force the window to minimize on focus loss (Windows only)
-            if (CurrentPlatform.OS == OS.Windows)
+            if(CurrentPlatform.OS == OS.Windows)
             {
                 Sdl.SetHint("SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS", _willBeFullScreen && _hardwareSwitch ? "1" : "0");
             }
 
-            if (!_willBeFullScreen || _game.graphicsDeviceManager.HardwareModeSwitch)
+            if(!_willBeFullScreen || _game.graphicsDeviceManager.HardwareModeSwitch)
             {
                 Sdl.Window.SetSize(Handle, clientWidth, clientHeight);
                 _width = clientWidth;
                 _height = clientHeight;
-            }
-            else
+            } else
             {
                 _width = displayRect.Width;
                 _height = displayRect.Height;
@@ -244,7 +233,7 @@ namespace Microsoft.Xna.Framework
             var centerX = Math.Max(prevBounds.X + ((prevBounds.Width - clientWidth) / 2), minx);
             var centerY = Math.Max(prevBounds.Y + ((prevBounds.Height - clientHeight) / 2), miny);
 
-            if (IsFullScreen && !_willBeFullScreen)
+            if(IsFullScreen && !_willBeFullScreen)
             {
                 // We need to get the display information again in case
                 // the resolution of it was changed.
@@ -260,10 +249,10 @@ namespace Microsoft.Xna.Framework
             // after the window gets resized, window position information
             // becomes wrong (for me it always returned 10 8). Solution is
             // to not try and set the window position because it will be wrong.
-            if ((Sdl.Patch > 4 || !AllowUserResizing) && !_wasMoved)
+            if((Sdl.Patch > 4 || !AllowUserResizing) && !_wasMoved)
                 Sdl.Window.SetPosition(Handle, centerX, centerY);
 
-            if (IsFullScreen != _willBeFullScreen)
+            if(IsFullScreen != _willBeFullScreen)
                 OnClientSizeChanged();
 
             IsFullScreen = _willBeFullScreen;
@@ -273,7 +262,7 @@ namespace Microsoft.Xna.Framework
 
         internal void Moved()
         {
-            if (_supressMoved)
+            if(_supressMoved)
             {
                 _supressMoved = false;
                 return;
@@ -286,7 +275,7 @@ namespace Microsoft.Xna.Framework
         {
             // SDL reports many resize events even if the Size didn't change.
             // Only call the code below if it actually changed.
-            if (_game.GraphicsDevice.PresentationParameters.BackBufferWidth == width &&
+            if(_game.GraphicsDevice.PresentationParameters.BackBufferWidth == width &&
                 _game.GraphicsDevice.PresentationParameters.BackBufferHeight == height)
             {
                 return;
@@ -305,10 +294,7 @@ namespace Microsoft.Xna.Framework
             // Nothing to do here
         }
 
-        protected override void SetTitle(string title)
-        {
-            Sdl.Window.SetTitle(_handle, title);
-        }
+        protected override void SetTitle(string title) { Sdl.Window.SetTitle(_handle, title); }
 
         public void Dispose()
         {
@@ -318,13 +304,13 @@ namespace Microsoft.Xna.Framework
 
         protected virtual void Dispose(bool disposing)
         {
-            if (_disposed)
+            if(_disposed)
                 return;
 
             Sdl.Window.Destroy(_handle);
             _handle = IntPtr.Zero;
 
-            if (_icon != IntPtr.Zero)
+            if(_icon != IntPtr.Zero)
                 Sdl.FreeSurface(_icon);
 
             _disposed = true;

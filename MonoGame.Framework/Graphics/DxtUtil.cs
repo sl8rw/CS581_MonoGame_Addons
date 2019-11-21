@@ -47,7 +47,7 @@ namespace Microsoft.Xna.Framework.Graphics
     {
         internal static byte[] DecompressDxt1(byte[] imageData, int width, int height)
         {
-            using (MemoryStream imageStream = new MemoryStream(imageData))
+            using(MemoryStream imageStream = new MemoryStream(imageData))
                 return DecompressDxt1(imageStream, width, height);
         }
 
@@ -55,14 +55,14 @@ namespace Microsoft.Xna.Framework.Graphics
         {
             byte[] imageData = new byte[width * height * 4];
 
-            using (BinaryReader imageReader = new BinaryReader(imageStream))
+            using(BinaryReader imageReader = new BinaryReader(imageStream))
             {
                 int blockCountX = (width + 3) / 4;
                 int blockCountY = (height + 3) / 4;
 
-                for (int y = 0; y < blockCountY; y++)
+                for(int y = 0; y < blockCountY; y++)
                 {
-                    for (int x = 0; x < blockCountX; x++)
+                    for(int x = 0; x < blockCountX; x++)
                     {
                         DecompressDxt1Block(imageReader, x, y, blockCountX, width, height, imageData);
                     }
@@ -72,7 +72,13 @@ namespace Microsoft.Xna.Framework.Graphics
             return imageData;
         }
 
-        private static void DecompressDxt1Block(BinaryReader imageReader, int x, int y, int blockCountX, int width, int height, byte[] imageData)
+        private static void DecompressDxt1Block(BinaryReader imageReader,
+                                                int x,
+                                                int y,
+                                                int blockCountX,
+                                                int width,
+                                                int height,
+                                                byte[] imageData)
         {
             ushort c0 = imageReader.ReadUInt16();
             ushort c1 = imageReader.ReadUInt16();
@@ -84,16 +90,16 @@ namespace Microsoft.Xna.Framework.Graphics
 
             uint lookupTable = imageReader.ReadUInt32();
 
-            for (int blockY = 0; blockY < 4; blockY++)
+            for(int blockY = 0; blockY < 4; blockY++)
             {
-                for (int blockX = 0; blockX < 4; blockX++)
+                for(int blockX = 0; blockX < 4; blockX++)
                 {
                     byte r = 0, g = 0, b = 0, a = 255;
                     uint index = (lookupTable >> 2 * (4 * blockY + blockX)) & 0x03;
 
-                    if (c0 > c1)
+                    if(c0 > c1)
                     {
-                        switch (index)
+                        switch(index)
                         {
                             case 0:
                                 r = r0;
@@ -116,10 +122,9 @@ namespace Microsoft.Xna.Framework.Graphics
                                 b = (byte)((b0 + 2 * b1) / 3);
                                 break;
                         }
-                    }
-                    else
+                    } else
                     {
-                        switch (index)
+                        switch(index)
                         {
                             case 0:
                                 r = r0;
@@ -147,7 +152,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
                     int px = (x << 2) + blockX;
                     int py = (y << 2) + blockY;
-                    if ((px < width) && (py < height))
+                    if((px < width) && (py < height))
                     {
                         int offset = ((py * width) + px) << 2;
                         imageData[offset] = r;
@@ -161,7 +166,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         internal static byte[] DecompressDxt3(byte[] imageData, int width, int height)
         {
-            using (MemoryStream imageStream = new MemoryStream(imageData))
+            using(MemoryStream imageStream = new MemoryStream(imageData))
                 return DecompressDxt3(imageStream, width, height);
         }
 
@@ -169,14 +174,14 @@ namespace Microsoft.Xna.Framework.Graphics
         {
             byte[] imageData = new byte[width * height * 4];
 
-            using (BinaryReader imageReader = new BinaryReader(imageStream))
+            using(BinaryReader imageReader = new BinaryReader(imageStream))
             {
                 int blockCountX = (width + 3) / 4;
                 int blockCountY = (height + 3) / 4;
 
-                for (int y = 0; y < blockCountY; y++)
+                for(int y = 0; y < blockCountY; y++)
                 {
-                    for (int x = 0; x < blockCountX; x++)
+                    for(int x = 0; x < blockCountX; x++)
                     {
                         DecompressDxt3Block(imageReader, x, y, blockCountX, width, height, imageData);
                     }
@@ -186,7 +191,13 @@ namespace Microsoft.Xna.Framework.Graphics
             return imageData;
         }
 
-        private static void DecompressDxt3Block(BinaryReader imageReader, int x, int y, int blockCountX, int width, int height, byte[] imageData)
+        private static void DecompressDxt3Block(BinaryReader imageReader,
+                                                int x,
+                                                int y,
+                                                int blockCountX,
+                                                int width,
+                                                int height,
+                                                byte[] imageData)
         {
             byte a0 = imageReader.ReadByte();
             byte a1 = imageReader.ReadByte();
@@ -208,15 +219,15 @@ namespace Microsoft.Xna.Framework.Graphics
             uint lookupTable = imageReader.ReadUInt32();
 
             int alphaIndex = 0;
-            for (int blockY = 0; blockY < 4; blockY++)
+            for(int blockY = 0; blockY < 4; blockY++)
             {
-                for (int blockX = 0; blockX < 4; blockX++)
+                for(int blockX = 0; blockX < 4; blockX++)
                 {
                     byte r = 0, g = 0, b = 0, a = 0;
 
                     uint index = (lookupTable >> 2 * (4 * blockY + blockX)) & 0x03;
 
-                    switch (alphaIndex)
+                    switch(alphaIndex)
                     {
                         case 0:
                             a = (byte)((a0 & 0x0F) | ((a0 & 0x0F) << 4));
@@ -269,7 +280,7 @@ namespace Microsoft.Xna.Framework.Graphics
                     }
                     ++alphaIndex;
 
-                    switch (index)
+                    switch(index)
                     {
                         case 0:
                             r = r0;
@@ -295,7 +306,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
                     int px = (x << 2) + blockX;
                     int py = (y << 2) + blockY;
-                    if ((px < width) && (py < height))
+                    if((px < width) && (py < height))
                     {
                         int offset = ((py * width) + px) << 2;
                         imageData[offset] = r;
@@ -309,7 +320,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         internal static byte[] DecompressDxt5(byte[] imageData, int width, int height)
         {
-            using (MemoryStream imageStream = new MemoryStream(imageData))
+            using(MemoryStream imageStream = new MemoryStream(imageData))
                 return DecompressDxt5(imageStream, width, height);
         }
 
@@ -317,14 +328,14 @@ namespace Microsoft.Xna.Framework.Graphics
         {
             byte[] imageData = new byte[width * height * 4];
 
-            using (BinaryReader imageReader = new BinaryReader(imageStream))
+            using(BinaryReader imageReader = new BinaryReader(imageStream))
             {
                 int blockCountX = (width + 3) / 4;
                 int blockCountY = (height + 3) / 4;
 
-                for (int y = 0; y < blockCountY; y++)
+                for(int y = 0; y < blockCountY; y++)
                 {
-                    for (int x = 0; x < blockCountX; x++)
+                    for(int x = 0; x < blockCountX; x++)
                     {
                         DecompressDxt5Block(imageReader, x, y, blockCountX, width, height, imageData);
                     }
@@ -334,7 +345,13 @@ namespace Microsoft.Xna.Framework.Graphics
             return imageData;
         }
 
-        private static void DecompressDxt5Block(BinaryReader imageReader, int x, int y, int blockCountX, int width, int height, byte[] imageData)
+        private static void DecompressDxt5Block(BinaryReader imageReader,
+                                                int x,
+                                                int y,
+                                                int blockCountX,
+                                                int width,
+                                                int height,
+                                                byte[] imageData)
         {
             byte alpha0 = imageReader.ReadByte();
             byte alpha1 = imageReader.ReadByte();
@@ -356,40 +373,35 @@ namespace Microsoft.Xna.Framework.Graphics
 
             uint lookupTable = imageReader.ReadUInt32();
 
-            for (int blockY = 0; blockY < 4; blockY++)
+            for(int blockY = 0; blockY < 4; blockY++)
             {
-                for (int blockX = 0; blockX < 4; blockX++)
+                for(int blockX = 0; blockX < 4; blockX++)
                 {
                     byte r = 0, g = 0, b = 0, a = 255;
                     uint index = (lookupTable >> 2 * (4 * blockY + blockX)) & 0x03;
 
                     uint alphaIndex = (uint)((alphaMask >> 3 * (4 * blockY + blockX)) & 0x07);
-                    if (alphaIndex == 0)
+                    if(alphaIndex == 0)
                     {
                         a = alpha0;
-                    }
-                    else if (alphaIndex == 1)
+                    } else if(alphaIndex == 1)
                     {
                         a = alpha1;
-                    }
-                    else if (alpha0 > alpha1)
+                    } else if(alpha0 > alpha1)
                     {
                         a = (byte)(((8 - alphaIndex) * alpha0 + (alphaIndex - 1) * alpha1) / 7);
-                    }
-                    else if (alphaIndex == 6)
+                    } else if(alphaIndex == 6)
                     {
                         a = 0;
-                    }
-                    else if (alphaIndex == 7)
+                    } else if(alphaIndex == 7)
                     {
                         a = 0xff;
-                    }
-                    else
+                    } else
                     {
                         a = (byte)(((6 - alphaIndex) * alpha0 + (alphaIndex - 1) * alpha1) / 5);
                     }
 
-                    switch (index)
+                    switch(index)
                     {
                         case 0:
                             r = r0;
@@ -415,7 +427,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
                     int px = (x << 2) + blockX;
                     int py = (y << 2) + blockY;
-                    if ((px < width) && (py < height))
+                    if((px < width) && (py < height))
                     {
                         int offset = ((py * width) + px) << 2;
                         imageData[offset] = r;

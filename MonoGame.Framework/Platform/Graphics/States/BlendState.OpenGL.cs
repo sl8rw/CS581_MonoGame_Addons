@@ -11,45 +11,45 @@ namespace Microsoft.Xna.Framework.Graphics
         internal void PlatformApplyState(GraphicsDevice device, bool force = false)
         {
             var blendEnabled = !(this.ColorSourceBlend == Blend.One &&
-                                 this.ColorDestinationBlend == Blend.Zero &&
-                                 this.AlphaSourceBlend == Blend.One &&
-                                 this.AlphaDestinationBlend == Blend.Zero);
-            if (force || blendEnabled != device._lastBlendEnable)
+                this.ColorDestinationBlend == Blend.Zero &&
+                this.AlphaSourceBlend == Blend.One &&
+                this.AlphaDestinationBlend == Blend.Zero);
+            if(force || blendEnabled != device._lastBlendEnable)
             {
-                if (blendEnabled)
+                if(blendEnabled)
                     GL.Enable(EnableCap.Blend);
                 else
                     GL.Disable(EnableCap.Blend);
                 GraphicsExtensions.CheckGLError();
                 device._lastBlendEnable = blendEnabled;
             }
-            if (_independentBlendEnable)
+            if(_independentBlendEnable)
             {
-                for (int i = 0; i < 4; i++)
+                for(int i = 0; i < 4; i++)
                 {
-                    if (force ||
+                    if(force ||
                         _targetBlendState[i].ColorBlendFunction != device._lastBlendState[i].ColorBlendFunction ||
                         _targetBlendState[i].AlphaBlendFunction != device._lastBlendState[i].AlphaBlendFunction)
                     {
                         GL.BlendEquationSeparatei(i,
-                            _targetBlendState[i].ColorBlendFunction.GetBlendEquationMode(),
-                            _targetBlendState[i].AlphaBlendFunction.GetBlendEquationMode());
+                                                  _targetBlendState[i].ColorBlendFunction.GetBlendEquationMode(),
+                                                  _targetBlendState[i].AlphaBlendFunction.GetBlendEquationMode());
                         GraphicsExtensions.CheckGLError();
                         device._lastBlendState[i].ColorBlendFunction = this._targetBlendState[i].ColorBlendFunction;
                         device._lastBlendState[i].AlphaBlendFunction = this._targetBlendState[i].AlphaBlendFunction;
                     }
 
-                    if (force ||
+                    if(force ||
                         _targetBlendState[i].ColorSourceBlend != device._lastBlendState[i].ColorSourceBlend ||
                         _targetBlendState[i].ColorDestinationBlend != device._lastBlendState[i].ColorDestinationBlend ||
                         _targetBlendState[i].AlphaSourceBlend != device._lastBlendState[i].AlphaSourceBlend ||
                         _targetBlendState[i].AlphaDestinationBlend != device._lastBlendState[i].AlphaDestinationBlend)
                     {
                         GL.BlendFuncSeparatei(i,
-                            _targetBlendState[i].ColorSourceBlend.GetBlendFactorSrc(),
-                            _targetBlendState[i].ColorDestinationBlend.GetBlendFactorDest(),
-                            _targetBlendState[i].AlphaSourceBlend.GetBlendFactorSrc(),
-                            _targetBlendState[i].AlphaDestinationBlend.GetBlendFactorDest());
+                                              _targetBlendState[i].ColorSourceBlend.GetBlendFactorSrc(),
+                                              _targetBlendState[i].ColorDestinationBlend.GetBlendFactorDest(),
+                                              _targetBlendState[i].AlphaSourceBlend.GetBlendFactorSrc(),
+                                              _targetBlendState[i].AlphaDestinationBlend.GetBlendFactorDest());
                         GraphicsExtensions.CheckGLError();
                         device._lastBlendState[i].ColorSourceBlend = _targetBlendState[i].ColorSourceBlend;
                         device._lastBlendState[i].ColorDestinationBlend = _targetBlendState[i].ColorDestinationBlend;
@@ -57,37 +57,34 @@ namespace Microsoft.Xna.Framework.Graphics
                         device._lastBlendState[i].AlphaDestinationBlend = _targetBlendState[i].AlphaDestinationBlend;
                     }
                 }
-            }
-            else
+            } else
             {
-                if (force ||
+                if(force ||
                     this.ColorBlendFunction != device._lastBlendState.ColorBlendFunction ||
                     this.AlphaBlendFunction != device._lastBlendState.AlphaBlendFunction)
                 {
-                    GL.BlendEquationSeparate(
-                        this.ColorBlendFunction.GetBlendEquationMode(),
-                        this.AlphaBlendFunction.GetBlendEquationMode());
+                    GL.BlendEquationSeparate(this.ColorBlendFunction.GetBlendEquationMode(),
+                                             this.AlphaBlendFunction.GetBlendEquationMode());
                     GraphicsExtensions.CheckGLError();
-                    for (int i = 0; i < 4; i++)
+                    for(int i = 0; i < 4; i++)
                     {
                         device._lastBlendState[i].ColorBlendFunction = this.ColorBlendFunction;
                         device._lastBlendState[i].AlphaBlendFunction = this.AlphaBlendFunction;
                     }
                 }
 
-                if (force ||
+                if(force ||
                     this.ColorSourceBlend != device._lastBlendState.ColorSourceBlend ||
                     this.ColorDestinationBlend != device._lastBlendState.ColorDestinationBlend ||
                     this.AlphaSourceBlend != device._lastBlendState.AlphaSourceBlend ||
                     this.AlphaDestinationBlend != device._lastBlendState.AlphaDestinationBlend)
                 {
-                    GL.BlendFuncSeparate(
-                        this.ColorSourceBlend.GetBlendFactorSrc(),
-                        this.ColorDestinationBlend.GetBlendFactorDest(),
-                        this.AlphaSourceBlend.GetBlendFactorSrc(),
-                        this.AlphaDestinationBlend.GetBlendFactorDest());
+                    GL.BlendFuncSeparate(this.ColorSourceBlend.GetBlendFactorSrc(),
+                                         this.ColorDestinationBlend.GetBlendFactorDest(),
+                                         this.AlphaSourceBlend.GetBlendFactorSrc(),
+                                         this.AlphaDestinationBlend.GetBlendFactorDest());
                     GraphicsExtensions.CheckGLError();
-                    for (int i = 0; i < 4; i++)
+                    for(int i = 0; i < 4; i++)
                     {
                         device._lastBlendState[i].ColorSourceBlend = this.ColorSourceBlend;
                         device._lastBlendState[i].ColorDestinationBlend = this.ColorDestinationBlend;
@@ -97,13 +94,12 @@ namespace Microsoft.Xna.Framework.Graphics
                 }
             }
 
-            if (force || this.ColorWriteChannels != device._lastBlendState.ColorWriteChannels)
+            if(force || this.ColorWriteChannels != device._lastBlendState.ColorWriteChannels)
             {
-                GL.ColorMask(
-                    (this.ColorWriteChannels & ColorWriteChannels.Red) != 0,
-                    (this.ColorWriteChannels & ColorWriteChannels.Green) != 0,
-                    (this.ColorWriteChannels & ColorWriteChannels.Blue) != 0,
-                    (this.ColorWriteChannels & ColorWriteChannels.Alpha) != 0);
+                GL.ColorMask((this.ColorWriteChannels & ColorWriteChannels.Red) != 0,
+                             (this.ColorWriteChannels & ColorWriteChannels.Green) != 0,
+                             (this.ColorWriteChannels & ColorWriteChannels.Blue) != 0,
+                             (this.ColorWriteChannels & ColorWriteChannels.Alpha) != 0);
                 GraphicsExtensions.CheckGLError();
                 device._lastBlendState.ColorWriteChannels = this.ColorWriteChannels;
             }

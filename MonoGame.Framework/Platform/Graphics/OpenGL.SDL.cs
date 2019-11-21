@@ -9,18 +9,15 @@ namespace MonoGame.OpenGL
 {
     partial class GL
     {
-        static partial void LoadPlatformEntryPoints()
-        {
-            BoundApi = RenderApi.GL;
-        }
+        static partial void LoadPlatformEntryPoints() { BoundApi = RenderApi.GL; }
 
         private static T LoadFunction<T>(string function, bool throwIfNotFound = false)
         {
             var ret = Sdl.GL.GetProcAddress(function);
 
-            if (ret == IntPtr.Zero)
+            if(ret == IntPtr.Zero)
             {
-                if (throwIfNotFound)
+                if(throwIfNotFound)
                     throw new EntryPointNotFoundException(function);
 
                 return default(T);
@@ -33,10 +30,7 @@ namespace MonoGame.OpenGL
 #endif
         }
 
-        private static IGraphicsContext PlatformCreateContext(IWindowInfo info)
-        {
-            return new GraphicsContext(info);
-        }
+        private static IGraphicsContext PlatformCreateContext(IWindowInfo info) { return new GraphicsContext(info); }
     }
 }
 

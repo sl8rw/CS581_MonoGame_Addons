@@ -10,8 +10,12 @@ namespace Microsoft.Xna.Framework.Graphics
     {
         static SamplerState()
         {
-            AnisotropicClamp = new SamplerState("SamplerState.AnisotropicClamp", TextureFilter.Anisotropic, TextureAddressMode.Clamp);
-            AnisotropicWrap = new SamplerState("SamplerState.AnisotropicWrap", TextureFilter.Anisotropic, TextureAddressMode.Wrap);
+            AnisotropicClamp = new SamplerState("SamplerState.AnisotropicClamp",
+                                                TextureFilter.Anisotropic,
+                                                TextureAddressMode.Clamp);
+            AnisotropicWrap = new SamplerState("SamplerState.AnisotropicWrap",
+                                               TextureFilter.Anisotropic,
+                                               TextureAddressMode.Wrap);
             LinearClamp = new SamplerState("SamplerState.LinearClamp", TextureFilter.Linear, TextureAddressMode.Clamp);
             LinearWrap = new SamplerState("SamplerState.LinearWrap", TextureFilter.Linear, TextureAddressMode.Wrap);
             PointClamp = new SamplerState("SamplerState.PointClamp", TextureFilter.Point, TextureAddressMode.Clamp);
@@ -119,7 +123,8 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 
         /// <summary>
-        /// When using comparison sampling, also set <see cref="FilterMode"/> to <see cref="TextureFilterMode.Comparison"/>.
+        /// When using comparison sampling, also set <see cref="FilterMode"/> to <see
+        /// cref="TextureFilterMode.Comparison"/>.
         /// </summary>
         public CompareFunction ComparisonFunction
         {
@@ -143,18 +148,18 @@ namespace Microsoft.Xna.Framework.Graphics
 
         internal void BindToGraphicsDevice(GraphicsDevice device)
         {
-            if (_defaultStateObject)
+            if(_defaultStateObject)
                 throw new InvalidOperationException("You cannot bind a default state object.");
-            if (GraphicsDevice != null && GraphicsDevice != device)
+            if(GraphicsDevice != null && GraphicsDevice != device)
                 throw new InvalidOperationException("This sampler state is already bound to a different graphics device.");
             GraphicsDevice = device;
         }
 
         internal void ThrowIfBound()
         {
-            if (_defaultStateObject)
+            if(_defaultStateObject)
                 throw new InvalidOperationException("You cannot modify a default sampler state object.");
-            if (GraphicsDevice != null)
+            if(GraphicsDevice != null)
                 throw new InvalidOperationException("You cannot modify the sampler state after it has been bound to the graphics device!");
         }
 
@@ -172,8 +177,7 @@ namespace Microsoft.Xna.Framework.Graphics
             FilterMode = TextureFilterMode.Default;
         }
 
-        private SamplerState(string name, TextureFilter filter, TextureAddressMode addressMode)
-            : this()
+        private SamplerState(string name, TextureFilter filter, TextureAddressMode addressMode) : this()
         {
             Name = name;
             _filter = filter;
@@ -198,16 +202,13 @@ namespace Microsoft.Xna.Framework.Graphics
             _filterMode = cloneSource._filterMode;
         }
 
-        internal SamplerState Clone()
-        {
-            return new SamplerState(this);
-        }
+        internal SamplerState Clone() { return new SamplerState(this); }
 
         partial void PlatformDispose();
 
         protected override void Dispose(bool disposing)
         {
-            if (!IsDisposed)
+            if(!IsDisposed)
             {
                 PlatformDispose();
             }

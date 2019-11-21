@@ -26,14 +26,11 @@ namespace Microsoft.Xna.Framework.Media
 
         internal void SetEventHandler(FinishedPlayingHandler handler) { }
 
-        internal void OnFinishedPlaying()
-        {
-            MediaPlayer.OnSongFinishedPlaying(null, null);
-        }
+        internal void OnFinishedPlaying() { MediaPlayer.OnSongFinishedPlaying(null, null); }
 
         void PlatformDispose(bool disposing)
         {
-            if (stream == null)
+            if(stream == null)
                 return;
 
             stream.Dispose();
@@ -42,11 +39,11 @@ namespace Microsoft.Xna.Framework.Media
 
         internal void Play(TimeSpan? startPosition)
         {
-            if (stream == null)
+            if(stream == null)
                 return;
 
             stream.Play();
-            if (startPosition != null)
+            if(startPosition != null)
                 stream.SeekToPosition((TimeSpan)startPosition);
 
             _playCount++;
@@ -54,7 +51,7 @@ namespace Microsoft.Xna.Framework.Media
 
         internal void Resume()
         {
-            if (stream == null)
+            if(stream == null)
                 return;
 
             stream.Resume();
@@ -62,7 +59,7 @@ namespace Microsoft.Xna.Framework.Media
 
         internal void Pause()
         {
-            if (stream == null)
+            if(stream == null)
                 return;
 
             stream.Pause();
@@ -70,7 +67,7 @@ namespace Microsoft.Xna.Framework.Media
 
         internal void Stop()
         {
-            if (stream == null)
+            if(stream == null)
                 return;
 
             stream.Stop();
@@ -81,14 +78,14 @@ namespace Microsoft.Xna.Framework.Media
         {
             get
             {
-                if (stream == null)
+                if(stream == null)
                     return 0.0f;
                 return _volume;
             }
             set
             {
                 _volume = value;
-                if (stream != null)
+                if(stream != null)
                     stream.Volume = _volume;
             }
         }
@@ -97,61 +94,31 @@ namespace Microsoft.Xna.Framework.Media
         {
             get
             {
-                if (stream == null)
+                if(stream == null)
                     return TimeSpan.FromSeconds(0.0);
                 return stream.GetPosition();
             }
         }
 
-        private Album PlatformGetAlbum()
-        {
-            return null;
-        }
+        private Album PlatformGetAlbum() { return null; }
 
-        private Artist PlatformGetArtist()
-        {
-            return null;
-        }
+        private Artist PlatformGetArtist() { return null; }
 
-        private Genre PlatformGetGenre()
-        {
-            return null;
-        }
+        private Genre PlatformGetGenre() { return null; }
 
-        private TimeSpan PlatformGetDuration()
-        {
-            return _duration;
-        }
+        private TimeSpan PlatformGetDuration() { return _duration; }
 
-        private bool PlatformIsProtected()
-        {
-            return false;
-        }
+        private bool PlatformIsProtected() { return false; }
 
-        private bool PlatformIsRated()
-        {
-            return false;
-        }
+        private bool PlatformIsRated() { return false; }
 
-        private string PlatformGetName()
-        {
-            return Path.GetFileNameWithoutExtension(_name);
-        }
+        private string PlatformGetName() { return Path.GetFileNameWithoutExtension(_name); }
 
-        private int PlatformGetPlayCount()
-        {
-            return _playCount;
-        }
+        private int PlatformGetPlayCount() { return _playCount; }
 
-        private int PlatformGetRating()
-        {
-            return 0;
-        }
+        private int PlatformGetRating() { return 0; }
 
-        private int PlatformGetTrackNumber()
-        {
-            return 0;
-        }
+        private int PlatformGetTrackNumber() { return 0; }
     }
 }
 

@@ -10,7 +10,8 @@ namespace Microsoft.Xna.Framework.Graphics
     public enum SpriteSortMode
     {
         /// <summary>
-        /// All sprites are drawing when <see cref="SpriteBatch.End"/> invokes, in order of draw call sequence. Depth is ignored.
+        /// All sprites are drawing when <see cref="SpriteBatch.End"/> invokes, in order of draw call sequence. Depth is
+        /// ignored.
         /// </summary>
         Deferred,
         /// <summary>
@@ -18,15 +19,18 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </summary>
         Immediate,
         /// <summary>
-        /// Same as <see cref="SpriteSortMode.Deferred"/>, except sprites are sorted by texture prior to drawing. Depth is ignored.
+        /// Same as <see cref="SpriteSortMode.Deferred"/>, except sprites are sorted by texture prior to drawing. Depth
+        /// is ignored.
         /// </summary>
         Texture,
         /// <summary>
-        /// Same as <see cref="SpriteSortMode.Deferred"/>, except sprites are sorted by depth in back-to-front order prior to drawing.
+        /// Same as <see cref="SpriteSortMode.Deferred"/>, except sprites are sorted by depth in back-to-front order
+        /// prior to drawing.
         /// </summary>
         BackToFront,
         /// <summary>
-        /// Same as <see cref="SpriteSortMode.Deferred"/>, except sprites are sorted by depth in front-to-back order prior to drawing.
+        /// Same as <see cref="SpriteSortMode.Deferred"/>, except sprites are sorted by depth in front-to-back order
+        /// prior to drawing.
         /// </summary>
         FrontToBack
     }

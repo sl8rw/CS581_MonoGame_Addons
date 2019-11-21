@@ -14,11 +14,7 @@ namespace Microsoft.Xna.Framework.Graphics
     /// </summary>
     public class ModelBoneCollection : ReadOnlyCollection<ModelBone>
     {
-        public ModelBoneCollection(IList<ModelBone> list)
-            : base(list)
-        {
-
-        }
+        public ModelBoneCollection(IList<ModelBone> list) : base(list) { }
 
         /// <summary>
         /// Retrieves a ModelBone from the collection, given the name of the bone.
@@ -29,7 +25,7 @@ namespace Microsoft.Xna.Framework.Graphics
             get
             {
                 ModelBone ret;
-                if (!TryGetValue(boneName, out ret))
+                if(!TryGetValue(boneName, out ret))
                     throw new KeyNotFoundException();
                 return ret;
             }
@@ -43,12 +39,12 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <returns>true if the bone was found</returns>
         public bool TryGetValue(string boneName, out ModelBone value)
         {
-            if (string.IsNullOrEmpty(boneName))
-                throw new ArgumentNullException("boneName");
+            if(string.IsNullOrEmpty(boneName))
+                throw new ArgumentNullException(nameof(boneName));
 
-            foreach (ModelBone bone in this)
+            foreach(ModelBone bone in this)
             {
-                if (bone.Name == boneName)
+                if(bone.Name == boneName)
                 {
                     value = bone;
                     return true;
@@ -63,10 +59,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// Returns a ModelMeshCollection.Enumerator that can iterate through a ModelMeshCollection.
         /// </summary>
         /// <returns></returns>
-        public new Enumerator GetEnumerator()
-        {
-            return new Enumerator(this);
-        }
+        public new Enumerator GetEnumerator() { return new Enumerator(this); }
 
         /// <summary>
         /// Provides the ability to iterate through the bones in an ModelMeshCollection.
@@ -100,26 +93,17 @@ namespace Microsoft.Xna.Framework.Graphics
             #region IDisposable
 
             /// <summary>
-            /// Immediately releases the unmanaged resources used by this object.
-            /// </summary>
-            public void Dispose()
-            {
-            }
+/// Immediately releases the unmanaged resources used by this object.
+/// </summary>
+            public void Dispose() { }
 
             #endregion
 
             #region IEnumerator Members
 
-            object IEnumerator.Current
-            {
-                get { return _collection[_position]; }
-            }
+            object IEnumerator.Current { get { return _collection[_position]; } }
 
-            public void Reset()
-            {
-                _position = -1;
-            }
-
+            public void Reset() { _position = -1; }
             #endregion
         }
     }

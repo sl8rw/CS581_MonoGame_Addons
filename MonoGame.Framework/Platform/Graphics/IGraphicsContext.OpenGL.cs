@@ -9,9 +9,13 @@ namespace MonoGame.OpenGL
     internal interface IGraphicsContext : IDisposable
     {
         int SwapInterval { get; set; }
+
         bool IsDisposed { get; }
+
         void MakeCurrent(IWindowInfo info);
+
         void SwapBuffers();
+
         bool IsCurrent { get; }
     }
 }

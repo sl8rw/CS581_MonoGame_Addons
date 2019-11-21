@@ -14,22 +14,16 @@ namespace Microsoft.Xna.Framework.Graphics
         //internal uint vao;
         internal int vbo;
 
-        private void PlatformConstruct()
-        {
-            Threading.BlockOnUIThread(GenerateIfRequired);
-        }
+        private void PlatformConstruct() { Threading.BlockOnUIThread(GenerateIfRequired); }
 
-        private void PlatformGraphicsDeviceResetting()
-        {
-            vbo = 0;
-        }
+        private void PlatformGraphicsDeviceResetting() { vbo = 0; }
 
         /// <summary>
         /// If the VBO does not exist, create it.
         /// </summary>
         void GenerateIfRequired()
         {
-            if (vbo == 0)
+            if(vbo == 0)
             {
                 //GLExt.Oes.GenVertexArrays(1, out this.vao);
                 //GLExt.Oes.BindVertexArray(this.vao);
@@ -38,13 +32,15 @@ namespace Microsoft.Xna.Framework.Graphics
                 GL.BindBuffer(BufferTarget.ArrayBuffer, this.vbo);
                 GraphicsExtensions.CheckGLError();
                 GL.BufferData(BufferTarget.ArrayBuffer,
-                              new IntPtr(VertexDeclaration.VertexStride * VertexCount), IntPtr.Zero,
+                              new IntPtr(VertexDeclaration.VertexStride * VertexCount),
+                              IntPtr.Zero,
                               _isDynamic ? BufferUsageHint.StreamDraw : BufferUsageHint.StaticDraw);
                 GraphicsExtensions.CheckGLError();
             }
         }
 
-        private void PlatformGetData<T>(int offsetInBytes, T[] data, int startIndex, int elementCount, int vertexStride) where T : struct
+        private void PlatformGetData<T>(int offsetInBytes, T[] data, int startIndex, int elementCount, int vertexStride)
+            where T : struct
         {
 #if GLES
             // Buffers are write-only on OpenGL ES 1.1 and 2.0.  See the GL_OES_mapbuffer extension for more information.
@@ -57,7 +53,8 @@ namespace Microsoft.Xna.Framework.Graphics
 
 #if !GLES
 
-        private void GetBufferData<T>(int offsetInBytes, T[] data, int startIndex, int elementCount, int vertexStride) where T : struct
+        private void GetBufferData<T>(int offsetInBytes, T[] data, int startIndex, int elementCount, int vertexStride)
+            where T : struct
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
             GraphicsExtensions.CheckGLError();
@@ -68,13 +65,12 @@ namespace Microsoft.Xna.Framework.Graphics
 
             ptr = (IntPtr)(ptr.ToInt64() + offsetInBytes);
 
-            if (typeof(T) == typeof(byte) && vertexStride == 1)
+            if(typeof(T) == typeof(byte) && vertexStride == 1)
             {
                 // If data is already a byte[] and stride is 1 we can skip the temporary buffer
                 var buffer = data as byte[];
                 Marshal.Copy(ptr, buffer, startIndex * vertexStride, elementCount * vertexStride);
-            }
-            else
+            } else
             {
                 // Temporary buffer to store the copied section of data
                 var tmp = new byte[elementCount * vertexStride];
@@ -86,13 +82,12 @@ namespace Microsoft.Xna.Framework.Graphics
                 var tmpPtr = tmpHandle.AddrOfPinnedObject();
                 try
                 {
-                    for (var i = 0; i < elementCount; i++)
+                    for(var i = 0; i < elementCount; i++)
                     {
                         data[startIndex + i] = (T)Marshal.PtrToStructure(tmpPtr, typeof(T));
                         tmpPtr = (IntPtr)(tmpPtr.ToInt64() + vertexStride);
                     }
-                }
-                finally
+                } finally
                 {
                     tmpHandle.Free();
                 }
@@ -104,19 +99,42 @@ namespace Microsoft.Xna.Framework.Graphics
 
 #endif
 
-        private void PlatformSetDataInternal<T>(int offsetInBytes, T[] data, int startIndex, int elementCount, int vertexStride, SetDataOptions options, int bufferSize, int elementSizeInBytes) where T : struct
+        private void PlatformSetDataInternal<T>(int offsetInBytes,
+                                                T[] data,
+                                                int startIndex,
+                                                int elementCount,
+                                                int vertexStride,
+                                                SetDataOptions options,
+                                                int bufferSize,
+                                                int elementSizeInBytes)
+            where T : struct
         {
-            Threading.BlockOnUIThread(() => SetBufferData(bufferSize, elementSizeInBytes, offsetInBytes, data, startIndex, elementCount, vertexStride, options));
+            Threading.BlockOnUIThread(() => SetBufferData(bufferSize,
+                                                          elementSizeInBytes,
+                                                          offsetInBytes,
+                                                          data,
+                                                          startIndex,
+                                                          elementCount,
+                                                          vertexStride,
+                                                          options));
         }
 
-        private void SetBufferData<T>(int bufferSize, int elementSizeInBytes, int offsetInBytes, T[] data, int startIndex, int elementCount, int vertexStride, SetDataOptions options) where T : struct
+        private void SetBufferData<T>(int bufferSize,
+                                      int elementSizeInBytes,
+                                      int offsetInBytes,
+                                      T[] data,
+                                      int startIndex,
+                                      int elementCount,
+                                      int vertexStride,
+                                      SetDataOptions options)
+            where T : struct
         {
             GenerateIfRequired();
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
             GraphicsExtensions.CheckGLError();
 
-            if (options == SetDataOptions.Discard)
+            if(options == SetDataOptions.Discard)
             {
                 // By assigning NULL data to the buffer this gives a hint
                 // to the device to discard the previous content.
@@ -128,22 +146,23 @@ namespace Microsoft.Xna.Framework.Graphics
             }
 
             var elementSizeInByte = Marshal.SizeOf(typeof(T));
-            if (elementSizeInByte == vertexStride || elementSizeInByte % vertexStride == 0)
+            if(elementSizeInByte == vertexStride || elementSizeInByte % vertexStride == 0)
             {
                 // there are no gaps so we can copy in one go
                 var dataHandle = GCHandle.Alloc(data, GCHandleType.Pinned);
                 var dataPtr = (IntPtr)(dataHandle.AddrOfPinnedObject().ToInt64() + startIndex * elementSizeInBytes);
                 try
                 {
-                    GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)offsetInBytes, (IntPtr)(elementSizeInBytes * elementCount), dataPtr);
+                    GL.BufferSubData(BufferTarget.ArrayBuffer,
+                                     (IntPtr)offsetInBytes,
+                                     (IntPtr)(elementSizeInBytes * elementCount),
+                                     dataPtr);
                     GraphicsExtensions.CheckGLError();
-                }
-                finally
+                } finally
                 {
                     dataHandle.Free();
                 }
-            }
-            else
+            } else
             {
                 // else we must copy each element separately
                 var dataHandle = GCHandle.Alloc(data, GCHandleType.Pinned);
@@ -151,28 +170,29 @@ namespace Microsoft.Xna.Framework.Graphics
                 {
                     var dstOffset = offsetInBytes;
                     var dataPtr = (IntPtr)(dataHandle.AddrOfPinnedObject().ToInt64() + startIndex * elementSizeInByte);
-                    for (var i = 0; i < elementCount; i++)
+                    for(var i = 0; i < elementCount; i++)
                     {
-                        GL.BufferSubData(BufferTarget.ArrayBuffer, (IntPtr)dstOffset, (IntPtr)elementSizeInByte, dataPtr);
+                        GL.BufferSubData(BufferTarget.ArrayBuffer,
+                                         (IntPtr)dstOffset,
+                                         (IntPtr)elementSizeInByte,
+                                         dataPtr);
                         GraphicsExtensions.CheckGLError();
 
                         dstOffset += vertexStride;
                         dataPtr = (IntPtr)(dataPtr.ToInt64() + elementSizeInByte);
                     }
-                }
-                finally
+                } finally
                 {
                     dataHandle.Free();
                 }
             }
-
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (!IsDisposed)
+            if(!IsDisposed)
             {
-                if (GraphicsDevice != null)
+                if(GraphicsDevice != null)
                     GraphicsDevice.DisposeBuffer(vbo);
             }
             base.Dispose(disposing);

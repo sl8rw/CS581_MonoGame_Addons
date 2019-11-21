@@ -24,7 +24,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         protected override void Dispose(bool disposing)
         {
-            if (!IsDisposed)
+            if(!IsDisposed)
             {
                 DeleteGLTexture();
                 glLastSamplerState = null;
@@ -35,7 +35,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         private void DeleteGLTexture()
         {
-            if (glTexture > 0)
+            if(glTexture > 0)
             {
                 GraphicsDevice.DisposeTexture(glTexture);
             }

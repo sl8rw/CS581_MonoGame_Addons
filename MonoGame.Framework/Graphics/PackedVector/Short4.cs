@@ -17,10 +17,7 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// Initializes a new instance of the Short4 class.
         /// </summary>
         /// <param name="vector">A vector containing the initial values for the components of the Short4 structure.</param>
-        public Short4(Vector4 vector)
-        {
-            packedValue = Pack(ref vector);
-        }
+        public Short4(Vector4 vector) { packedValue = Pack(ref vector); }
 
         /// <summary>
         /// Initializes a new instance of the Short4 class.
@@ -62,17 +59,7 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// </summary>
         /// <value>The packed representation of the value.</value>
         [CLSCompliant(false)]
-        public ulong PackedValue
-        {
-            get
-            {
-                return packedValue;
-            }
-            set
-            {
-                packedValue = value;
-            }
-        }
+        public ulong PackedValue { get { return packedValue; } set { packedValue = value; } }
 
         /// <summary>
         /// Returns a value that indicates whether the current instance is equal to a specified object.
@@ -81,7 +68,7 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// <returns>true if the current instance is equal to the specified object; false otherwise.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is Short4)
+            if(obj is Short4)
                 return this == (Short4)obj;
             return false;
         }
@@ -91,28 +78,19 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// </summary>
         /// <param name="other">The object with which to make the comparison.</param>
         /// <returns>true if the current instance is equal to the specified object; false otherwise.</returns>
-        public bool Equals(Short4 other)
-        {
-            return this == other;
-        }
+        public bool Equals(Short4 other) { return this == other; }
 
         /// <summary>
         /// Gets the hash code for the current instance.
         /// </summary>
         /// <returns>Hash code for the instance.</returns>
-        public override int GetHashCode()
-        {
-            return packedValue.GetHashCode();
-        }
+        public override int GetHashCode() { return packedValue.GetHashCode(); }
 
         /// <summary>
         /// Returns a string representation of the current instance.
         /// </summary>
         /// <returns>String that represents the object.</returns>
-        public override string ToString()
-        {
-            return packedValue.ToString("x16");
-        }
+        public override string ToString() { return packedValue.ToString("x16"); }
 
         /// <summary>
         /// Packs a vector into a ulong.
@@ -138,10 +116,7 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// Sets the packed representation from a Vector4.
         /// </summary>
         /// <param name="vector">The vector to create the packed representation from.</param>
-        void IPackedVector.PackFromVector4(Vector4 vector)
-        {
-            packedValue = Pack(ref vector);
-        }
+        void IPackedVector.PackFromVector4(Vector4 vector) { packedValue = Pack(ref vector); }
 
         /// <summary>
         /// Expands the packed representation into a Vector4.
@@ -149,11 +124,10 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// <returns>The expanded vector.</returns>
         public Vector4 ToVector4()
         {
-            return new Vector4(
-                (short)(packedValue & 0xFFFF),
-                (short)((packedValue >> 0x10) & 0xFFFF),
-                (short)((packedValue >> 0x20) & 0xFFFF),
-                (short)((packedValue >> 0x30) & 0xFFFF));
+            return new Vector4((short)(packedValue & 0xFFFF),
+                               (short)((packedValue >> 0x10) & 0xFFFF),
+                               (short)((packedValue >> 0x20) & 0xFFFF),
+                               (short)((packedValue >> 0x30) & 0xFFFF));
         }
     }
 }

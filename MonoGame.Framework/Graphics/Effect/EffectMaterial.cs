@@ -39,13 +39,12 @@ purpose and non-infringement.
 #endregion License
 
 using System;
+
 namespace Microsoft.Xna.Framework.Graphics
 {
     public class EffectMaterial : Effect
     {
-        public EffectMaterial(Effect cloneSource) : base(cloneSource)
-        {
-        }
+        public EffectMaterial(Effect cloneSource) : base(cloneSource) { }
     }
 }
 

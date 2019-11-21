@@ -19,11 +19,8 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// Creates a new SpriteEffect.
         /// </summary>
-        public SpriteEffect(GraphicsDevice device)
-            : base(device, EffectResource.SpriteEffect.Bytecode)
-        {
-            CacheEffectParameters();
-        }
+        public SpriteEffect(GraphicsDevice device) : base(device, EffectResource.SpriteEffect.Bytecode)
+        { CacheEffectParameters(); }
 
         /// <summary>
         /// An optional matrix used to transform the sprite geometry. Uses <see cref="Matrix.Identity"/> if null.
@@ -33,29 +30,19 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// Creates a new SpriteEffect by cloning parameter settings from an existing instance.
         /// </summary>
-        protected SpriteEffect(SpriteEffect cloneSource)
-            : base(cloneSource)
-        {
-            CacheEffectParameters();
-        }
+        protected SpriteEffect(SpriteEffect cloneSource) : base(cloneSource) { CacheEffectParameters(); }
 
 
         /// <summary>
         /// Creates a clone of the current SpriteEffect instance.
         /// </summary>
-        public override Effect Clone()
-        {
-            return new SpriteEffect(this);
-        }
+        public override Effect Clone() { return new SpriteEffect(this); }
 
 
         /// <summary>
         /// Looks up shortcut references to our effect parameters.
         /// </summary>
-        void CacheEffectParameters()
-        {
-            _matrixParam = Parameters["MatrixTransform"];
-        }
+        void CacheEffectParameters() { _matrixParam = Parameters["MatrixTransform"]; }
 
         /// <summary>
         /// Lazily computes derived parameter values immediately before applying the effect.
@@ -63,14 +50,14 @@ namespace Microsoft.Xna.Framework.Graphics
         protected internal override void OnApply()
         {
             var vp = GraphicsDevice.Viewport;
-            if ((vp.Width != _lastViewport.Width) || (vp.Height != _lastViewport.Height))
+            if((vp.Width != _lastViewport.Width) || (vp.Height != _lastViewport.Height))
             {
                 // Normal 3D cameras look into the -z direction (z = 1 is in front of z = 0). The
                 // sprite batch layer depth is the opposite (z = 0 is in front of z = 1).
                 // --> We get the correct matrix with near plane 0 and far plane -1.
                 Matrix.CreateOrthographicOffCenter(0, vp.Width, vp.Height, 0, 0, -1, out _projection);
 
-                if (GraphicsDevice.UseHalfPixelOffset)
+                if(GraphicsDevice.UseHalfPixelOffset)
                 {
                     _projection.M41 += -0.5f * _projection.M11;
                     _projection.M42 += -0.5f * _projection.M22;
@@ -79,7 +66,7 @@ namespace Microsoft.Xna.Framework.Graphics
                 _lastViewport = vp;
             }
 
-            if (TransformMatrix.HasValue)
+            if(TransformMatrix.HasValue)
                 _matrixParam.SetValue(TransformMatrix.GetValueOrDefault() * _projection);
             else
                 _matrixParam.SetValue(_projection);

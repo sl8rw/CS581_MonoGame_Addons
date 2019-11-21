@@ -33,9 +33,9 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
             int e = ((i >> 23) & 0x000000ff) - (127 - 15);
             int m = i & 0x007fffff;
 
-            if (e <= 0)
+            if(e <= 0)
             {
-                if (e < -10)
+                if(e < -10)
                 {
                     return (UInt16)s;
                 }
@@ -49,30 +49,27 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
                 m = (m + a + b) >> t;
 
                 return (UInt16)(s | m);
-            }
-            else if (e == 0xff - (127 - 15))
+            } else if(e == 0xff - (127 - 15))
             {
-                if (m == 0)
+                if(m == 0)
                 {
                     return (UInt16)(s | 0x7c00);
-                }
-                else
+                } else
                 {
                     m >>= 13;
                     return (UInt16)(s | 0x7c00 | m | ((m == 0) ? 1 : 0));
                 }
-            }
-            else
+            } else
             {
                 m = m + 0x00000fff + ((m >> 13) & 1);
 
-                if ((m & 0x00800000) != 0)
+                if((m & 0x00800000) != 0)
                 {
                     m = 0;
                     e += 1;
                 }
 
-                if (e > 30)
+                if(e > 30)
                 {
                     return (UInt16)(s | 0x7c00);
                 }
@@ -87,26 +84,25 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
             uint mantissa = (uint)(value & 1023);
             uint exp = 0xfffffff2;
 
-            if ((value & -33792) == 0)
+            if((value & -33792) == 0)
             {
-                if (mantissa != 0)
+                if(mantissa != 0)
                 {
-                    while ((mantissa & 1024) == 0)
+                    while((mantissa & 1024) == 0)
                     {
                         exp--;
                         mantissa = mantissa << 1;
                     }
                     mantissa &= 0xfffffbff;
                     rst = ((((uint)value & 0x8000) << 16) | ((exp + 127) << 23)) | (mantissa << 13);
-                }
-                else
+                } else
                 {
                     rst = (uint)((value & 0x8000) << 16);
                 }
-            }
-            else
+            } else
             {
-                rst = (((((uint)value & 0x8000) << 16) | ((((((uint)value >> 10) & 0x1f) - 15) + 127) << 23)) | (mantissa << 13));
+                rst = (((((uint)value & 0x8000) << 16) | ((((((uint)value >> 10) & 0x1f) - 15) + 127) << 23)) |
+                    (mantissa << 13));
             }
 
             var uif = new uif();

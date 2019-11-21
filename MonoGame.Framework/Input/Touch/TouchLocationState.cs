@@ -52,18 +52,21 @@ namespace Microsoft.Xna.Framework.Input.Touch
         /// <summary>
         /// This touch location position is invalid.
         /// </summary>
-        /// <remarks>Typically, you will encounter this state when a new touch location attempts to get the previous state of itself.</remarks>
+        /// <remarks>
+        /// Typically, you will encounter this state when a new touch location attempts to get the previous state of
+        /// itself.
+        /// </remarks>
         Invalid,
         /// <summary>
         /// This touch location position was updated or pressed at the same position.
         /// </summary>
         Moved,
         /// <summary>
-        /// This touch location position is new. 
+        /// This touch location position is new.
         /// </summary>
         Pressed,
         /// <summary>
-        /// This touch location position was released. 
+        /// This touch location position was released.
         /// </summary>
         Released,
     }

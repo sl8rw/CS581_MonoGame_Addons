@@ -23,26 +23,23 @@ namespace Microsoft.Xna.Framework.Graphics
         private readonly string _name;
         private volatile byte[] _bytecode;
 
-        private EffectResource(string name)
-        {
-            _name = name;
-        }
+        private EffectResource(string name) { _name = name; }
 
         public byte[] Bytecode
         {
             get
             {
-                if (_bytecode == null)
+                if(_bytecode == null)
                 {
-                    lock (_locker)
+                    lock(_locker)
                     {
-                        if (_bytecode != null)
+                        if(_bytecode != null)
                             return _bytecode;
 
                         var assembly = ReflectionHelpers.GetAssembly(typeof(EffectResource));
 
                         var stream = assembly.GetManifestResourceStream(_name);
-                        using (var ms = new MemoryStream())
+                        using(var ms = new MemoryStream())
                         {
                             stream.CopyTo(ms);
                             _bytecode = ms.ToArray();

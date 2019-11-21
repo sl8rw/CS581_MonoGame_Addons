@@ -135,7 +135,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             set
             {
-                if (fogEnabled != value)
+                if(fogEnabled != value)
                 {
                     fogEnabled = value;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex | EffectDirtyFlags.FogEnable;
@@ -213,7 +213,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             set
             {
-                if (vertexColorEnabled != value)
+                if(vertexColorEnabled != value)
                 {
                     vertexColorEnabled = value;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex;
@@ -230,18 +230,14 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// Creates a new DualTextureEffect with default parameter settings.
         /// </summary>
-        public DualTextureEffect(GraphicsDevice device)
-            : base(device, EffectResource.DualTextureEffect.Bytecode)
-        {
-            CacheEffectParameters();
-        }
+        public DualTextureEffect(GraphicsDevice device) : base(device, EffectResource.DualTextureEffect.Bytecode)
+        { CacheEffectParameters(); }
 
 
         /// <summary>
         /// Creates a new DualTextureEffect by cloning parameter settings from an existing instance.
         /// </summary>
-        protected DualTextureEffect(DualTextureEffect cloneSource)
-            : base(cloneSource)
+        protected DualTextureEffect(DualTextureEffect cloneSource) : base(cloneSource)
         {
             CacheEffectParameters();
 
@@ -264,10 +260,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// Creates a clone of the current DualTextureEffect instance.
         /// </summary>
-        public override Effect Clone()
-        {
-            return new DualTextureEffect(this);
-        }
+        public override Effect Clone() { return new DualTextureEffect(this); }
 
 
         /// <summary>
@@ -275,10 +268,10 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </summary>
         void CacheEffectParameters()
         {
-            textureParam = Parameters["Texture"];
-            texture2Param = Parameters["Texture2"];
-            diffuseColorParam = Parameters["DiffuseColor"];
-            fogColorParam = Parameters["FogColor"];
+            textureParam = Parameters[nameof(Texture)];
+            texture2Param = Parameters[nameof(Texture2)];
+            diffuseColorParam = Parameters[nameof(DiffuseColor)];
+            fogColorParam = Parameters[nameof(FogColor)];
             fogVectorParam = Parameters["FogVector"];
             worldViewProjParam = Parameters["WorldViewProj"];
         }
@@ -290,10 +283,19 @@ namespace Microsoft.Xna.Framework.Graphics
         protected internal override void OnApply()
         {
             // Recompute the world+view+projection matrix or fog vector?
-            dirtyFlags = EffectHelpers.SetWorldViewProjAndFog(dirtyFlags, ref world, ref view, ref projection, ref worldView, fogEnabled, fogStart, fogEnd, worldViewProjParam, fogVectorParam);
+            dirtyFlags = EffectHelpers.SetWorldViewProjAndFog(dirtyFlags,
+                                                              ref world,
+                                                              ref view,
+                                                              ref projection,
+                                                              ref worldView,
+                                                              fogEnabled,
+                                                              fogStart,
+                                                              fogEnd,
+                                                              worldViewProjParam,
+                                                              fogVectorParam);
 
             // Recompute the diffuse/alpha material color parameter?
-            if ((dirtyFlags & EffectDirtyFlags.MaterialColor) != 0)
+            if((dirtyFlags & EffectDirtyFlags.MaterialColor) != 0)
             {
                 diffuseColorParam.SetValue(new Vector4(diffuseColor * alpha, alpha));
 
@@ -301,14 +303,14 @@ namespace Microsoft.Xna.Framework.Graphics
             }
 
             // Recompute the shader index?
-            if ((dirtyFlags & EffectDirtyFlags.ShaderIndex) != 0)
+            if((dirtyFlags & EffectDirtyFlags.ShaderIndex) != 0)
             {
                 int shaderIndex = 0;
 
-                if (!fogEnabled)
+                if(!fogEnabled)
                     shaderIndex += 1;
 
-                if (vertexColorEnabled)
+                if(vertexColorEnabled)
                     shaderIndex += 2;
 
                 dirtyFlags &= ~EffectDirtyFlags.ShaderIndex;
@@ -316,8 +318,6 @@ namespace Microsoft.Xna.Framework.Graphics
                 CurrentTechnique = Techniques[shaderIndex];
             }
         }
-
-
         #endregion
     }
 }

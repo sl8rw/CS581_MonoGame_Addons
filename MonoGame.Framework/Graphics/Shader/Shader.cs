@@ -7,7 +7,6 @@ using System.IO;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
-
     // TODO: We should convert the types below 
     // into the start of a Shader reflection API.
 
@@ -71,23 +70,22 @@ namespace Microsoft.Xna.Framework.Graphics
 
             var samplerCount = (int)reader.ReadByte();
             Samplers = new SamplerInfo[samplerCount];
-            for (var s = 0; s < samplerCount; s++)
+            for(var s = 0; s < samplerCount; s++)
             {
                 Samplers[s].type = (SamplerType)reader.ReadByte();
                 Samplers[s].textureSlot = reader.ReadByte();
                 Samplers[s].samplerSlot = reader.ReadByte();
 
-                if (reader.ReadBoolean())
+                if(reader.ReadBoolean())
                 {
                     Samplers[s].state = new SamplerState();
                     Samplers[s].state.AddressU = (TextureAddressMode)reader.ReadByte();
                     Samplers[s].state.AddressV = (TextureAddressMode)reader.ReadByte();
                     Samplers[s].state.AddressW = (TextureAddressMode)reader.ReadByte();
-                    Samplers[s].state.BorderColor = new Color(
-                        reader.ReadByte(),
-                        reader.ReadByte(),
-                        reader.ReadByte(),
-                        reader.ReadByte());
+                    Samplers[s].state.BorderColor = new Color(reader.ReadByte(),
+                                                              reader.ReadByte(),
+                                                              reader.ReadByte(),
+                                                              reader.ReadByte());
                     Samplers[s].state.Filter = (TextureFilter)reader.ReadByte();
                     Samplers[s].state.MaxAnisotropy = reader.ReadInt32();
                     Samplers[s].state.MaxMipLevel = reader.ReadInt32();
@@ -100,12 +98,12 @@ namespace Microsoft.Xna.Framework.Graphics
 
             var cbufferCount = (int)reader.ReadByte();
             CBuffers = new int[cbufferCount];
-            for (var c = 0; c < cbufferCount; c++)
+            for(var c = 0; c < cbufferCount; c++)
                 CBuffers[c] = reader.ReadByte();
 
             var attributeCount = (int)reader.ReadByte();
             Attributes = new VertexAttribute[attributeCount];
-            for (var a = 0; a < attributeCount; a++)
+            for(var a = 0; a < attributeCount; a++)
             {
                 Attributes[a].name = reader.ReadString();
                 Attributes[a].usage = (VertexElementUsage)reader.ReadByte();
@@ -116,10 +114,7 @@ namespace Microsoft.Xna.Framework.Graphics
             PlatformConstruct(isVertexShader, shaderBytecode);
         }
 
-        internal protected override void GraphicsDeviceResetting()
-        {
-            PlatformGraphicsDeviceResetting();
-        }
+        internal protected override void GraphicsDeviceResetting() { PlatformGraphicsDeviceResetting(); }
     }
 }
 

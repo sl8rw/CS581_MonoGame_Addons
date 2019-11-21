@@ -47,8 +47,11 @@ namespace Microsoft.Xna.Framework.Graphics
         Microsoft.Xna.Framework.Graphics.GraphicsDevice GraphicsDevice { get; }
 
         event EventHandler<EventArgs> DeviceCreated;
+
         event EventHandler<EventArgs> DeviceDisposing;
+
         event EventHandler<EventArgs> DeviceReset;
+
         event EventHandler<EventArgs> DeviceResetting;
     }
 }

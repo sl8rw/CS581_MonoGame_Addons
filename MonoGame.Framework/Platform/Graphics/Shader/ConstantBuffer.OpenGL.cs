@@ -22,7 +22,7 @@ namespace Microsoft.Xna.Framework.Graphics
         private void PlatformInitialize()
         {
             var data = new byte[_parameters.Length];
-            for (var i = 0; i < _parameters.Length; i++)
+            for(var i = 0; i < _parameters.Length; i++)
             {
                 unchecked
                 {
@@ -46,10 +46,10 @@ namespace Microsoft.Xna.Framework.Graphics
 
             // If the program changed then lookup the
             // uniform again and apply the state.
-            if (_shaderProgram != program)
+            if(_shaderProgram != program)
             {
                 var location = program.GetUniformLocation(_name);
-                if (location == -1)
+                if(location == -1)
                     return;
 
                 _shaderProgram = program;
@@ -58,15 +58,15 @@ namespace Microsoft.Xna.Framework.Graphics
             }
 
             // If the shader program is the same, the effect may still be different and have different values in the buffer
-            if (!Object.ReferenceEquals(this, _lastConstantBufferApplied))
+            if(!Object.ReferenceEquals(this, _lastConstantBufferApplied))
                 _dirty = true;
 
             // If the buffer content hasn't changed then we're
             // done... use the previously set uniform state.
-            if (!_dirty)
+            if(!_dirty)
                 return;
 
-            fixed (byte* bytePtr = _buffer)
+            fixed(byte* bytePtr = _buffer)
             {
                 // TODO: We need to know the type of buffer float/int/bool
                 // and cast this correctly... else it doesn't work as i guess

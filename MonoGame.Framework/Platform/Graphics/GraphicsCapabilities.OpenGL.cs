@@ -9,7 +9,6 @@ using GetParamName = MonoGame.OpenGL.GetPName;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
-
     internal partial class GraphicsCapabilities
     {
         /// <summary>
@@ -57,14 +56,14 @@ namespace Microsoft.Xna.Framework.Graphics
 #endif
             // Texture compression
             SupportsS3tc = GL.Extensions.Contains("GL_EXT_texture_compression_s3tc") ||
-                           GL.Extensions.Contains("GL_OES_texture_compression_S3TC") ||
-                           GL.Extensions.Contains("GL_EXT_texture_compression_dxt3") ||
-                           GL.Extensions.Contains("GL_EXT_texture_compression_dxt5");
+                GL.Extensions.Contains("GL_OES_texture_compression_S3TC") ||
+                GL.Extensions.Contains("GL_EXT_texture_compression_dxt3") ||
+                GL.Extensions.Contains("GL_EXT_texture_compression_dxt5");
             SupportsDxt1 = SupportsS3tc || GL.Extensions.Contains("GL_EXT_texture_compression_dxt1");
             SupportsPvrtc = GL.Extensions.Contains("GL_IMG_texture_compression_pvrtc");
             SupportsEtc1 = GL.Extensions.Contains("GL_OES_compressed_ETC1_RGB8_texture");
             SupportsAtitc = GL.Extensions.Contains("GL_ATI_texture_compression_atitc") ||
-                            GL.Extensions.Contains("GL_AMD_compressed_ATC_texture");
+                GL.Extensions.Contains("GL_AMD_compressed_ATC_texture");
 
             // Framebuffer objects
 #if GLES
@@ -77,12 +76,13 @@ namespace Microsoft.Xna.Framework.Graphics
 #else
             // if we're on GL 3.0+, frame buffer extensions are guaranteed to be present, but extensions may be missing
             // it is then safe to assume that GL_ARB_framebuffer_object is present so that the standard function are loaded
-            SupportsFramebufferObjectARB = device.glMajorVersion >= 3 || GL.Extensions.Contains("GL_ARB_framebuffer_object");
+            SupportsFramebufferObjectARB = device.glMajorVersion >= 3 ||
+                GL.Extensions.Contains("GL_ARB_framebuffer_object");
             SupportsFramebufferObjectEXT = GL.Extensions.Contains("GL_EXT_framebuffer_object");
 #endif
             // Anisotropic filtering
             int anisotropy = 0;
-            if (SupportsTextureFilterAnisotropic)
+            if(SupportsTextureFilterAnisotropic)
             {
                 GL.GetInteger(GetParamName.MaxTextureMaxAnisotropyExt, out anisotropy);
                 GraphicsExtensions.CheckGLError();
@@ -96,10 +96,16 @@ namespace Microsoft.Xna.Framework.Graphics
             SupportsHalfFloatTextures = GL.BoundApi == GL.RenderApi.ES && (device.glMajorVersion >= 3 || GL.Extensions.Contains("GL_EXT_color_buffer_half_float"));
             SupportsNormalized = GL.BoundApi == GL.RenderApi.ES && (device.glMajorVersion >= 3 && GL.Extensions.Contains("GL_EXT_texture_norm16"));
 #else
-            SupportsSRgb = GL.Extensions.Contains("GL_EXT_texture_sRGB") && GL.Extensions.Contains("GL_EXT_framebuffer_sRGB");
-            SupportsFloatTextures = GL.BoundApi == GL.RenderApi.GL && (device.glMajorVersion >= 3 || GL.Extensions.Contains("GL_ARB_texture_float"));
-            SupportsHalfFloatTextures = GL.BoundApi == GL.RenderApi.GL && (device.glMajorVersion >= 3 || GL.Extensions.Contains("GL_ARB_half_float_pixel")); ;
-            SupportsNormalized = GL.BoundApi == GL.RenderApi.GL && (device.glMajorVersion >= 3 || GL.Extensions.Contains("GL_EXT_texture_norm16")); ;
+            SupportsSRgb = GL.Extensions.Contains("GL_EXT_texture_sRGB") &&
+                GL.Extensions.Contains("GL_EXT_framebuffer_sRGB");
+            SupportsFloatTextures = GL.BoundApi == GL.RenderApi.GL &&
+                (device.glMajorVersion >= 3 || GL.Extensions.Contains("GL_ARB_texture_float"));
+            SupportsHalfFloatTextures = GL.BoundApi == GL.RenderApi.GL &&
+                (device.glMajorVersion >= 3 || GL.Extensions.Contains("GL_ARB_half_float_pixel"));
+            ;
+            SupportsNormalized = GL.BoundApi == GL.RenderApi.GL &&
+                (device.glMajorVersion >= 3 || GL.Extensions.Contains("GL_EXT_texture_norm16"));
+            ;
 #endif
 
             // TODO: Implement OpenGL support for texture arrays
@@ -118,9 +124,9 @@ namespace Microsoft.Xna.Framework.Graphics
 #if GLES
             SupportsSeparateBlendStates = false;
 #else
-            SupportsSeparateBlendStates = device.glMajorVersion >= 4 || GL.Extensions.Contains("GL_ARB_draw_buffers_blend");
+            SupportsSeparateBlendStates = device.glMajorVersion >= 4 ||
+                GL.Extensions.Contains("GL_ARB_draw_buffers_blend");
 #endif
         }
-
     }
 }

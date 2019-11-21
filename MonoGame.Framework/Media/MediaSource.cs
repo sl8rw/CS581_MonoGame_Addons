@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+
 #if IOS
 using UIKit;
 #endif
@@ -14,27 +15,16 @@ namespace Microsoft.Xna.Framework.Media
     {
         private MediaSourceType _type;
         private string _name;
+
         internal MediaSource(string name, MediaSourceType type)
         {
             _name = name;
             _type = type;
         }
 
-        public Microsoft.Xna.Framework.Media.MediaSourceType MediaSourceType
-        {
-            get
-            {
-                return _type;
-            }
-        }
+        public Microsoft.Xna.Framework.Media.MediaSourceType MediaSourceType { get { return _type; } }
 
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-        }
+        public string Name { get { return _name; } }
 
         public static IList<MediaSource> GetAvailableMediaSources()
         {

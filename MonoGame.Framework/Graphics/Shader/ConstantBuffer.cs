@@ -19,10 +19,8 @@ namespace Microsoft.Xna.Framework.Graphics
         private ulong _stateKey;
 
         private bool _dirty;
-        private bool Dirty
-        {
-            get { return _dirty; }
-        }
+
+        private bool Dirty { get { return _dirty; } }
 
         public ConstantBuffer(ConstantBuffer cloneSource)
         {
@@ -56,10 +54,7 @@ namespace Microsoft.Xna.Framework.Graphics
             PlatformInitialize();
         }
 
-        internal void Clear()
-        {
-            PlatformClear();
-        }
+        internal void Clear() { PlatformClear(); }
 
         private void SetData(int offset, int rows, int columns, object data)
         {
@@ -69,10 +64,10 @@ namespace Microsoft.Xna.Framework.Graphics
             const int rowSize = elementSize * 4;
 
             // Take care of a single element.
-            if (rows == 1 && columns == 1)
+            if(rows == 1 && columns == 1)
             {
                 // EffectParameter stores all values in arrays by default.             
-                if (data is Array)
+                if(data is Array)
                     Buffer.BlockCopy(data as Array, 0, _buffer, offset, elementSize);
                 else
                 {
@@ -81,23 +76,20 @@ namespace Microsoft.Xna.Framework.Graphics
                     throw new NotImplementedException();
                 }
             }
-
-
             // Take care of the single copy case!
-            else if (rows == 1 || (rows == 4 && columns == 4))
+ else if(rows == 1 || (rows == 4 && columns == 4))
             {
                 // take care of shader compiler optimization
                 int len = rows * columns * elementSize;
-                if (_buffer.Length - offset > len)
+                if(_buffer.Length - offset > len)
                     len = _buffer.Length - offset;
                 Buffer.BlockCopy(data as Array, 0, _buffer, offset, rows * columns * elementSize);
-            }
-            else
+            } else
             {
                 var source = data as Array;
 
                 var stride = (columns * elementSize);
-                for (var y = 0; y < rows; y++)
+                for(var y = 0; y < rows; y++)
                     Buffer.BlockCopy(source, stride * y, _buffer, offset + (rowSize * y), columns * elementSize);
             }
         }
@@ -110,30 +102,28 @@ namespace Microsoft.Xna.Framework.Graphics
             var rowsUsed = 0;
 
             var elements = param.Elements;
-            if (elements.Count > 0)
+            if(elements.Count > 0)
             {
-                for (var i = 0; i < elements.Count; i++)
+                for(var i = 0; i < elements.Count; i++)
                 {
                     var rowsUsedSubParam = SetParameter(offset, elements[i]);
                     offset += rowsUsedSubParam * rowSize;
                     rowsUsed += rowsUsedSubParam;
                 }
-            }
-            else if (param.Data != null)
+            } else if(param.Data != null)
             {
-                switch (param.ParameterType)
+                switch(param.ParameterType)
                 {
                     case EffectParameterType.Single:
                     case EffectParameterType.Int32:
                     case EffectParameterType.Bool:
                         // HLSL assumes matrices are column-major, whereas in-memory we use row-major.
                         // TODO: HLSL can be told to use row-major. We should handle that too.
-                        if (param.ParameterClass == EffectParameterClass.Matrix)
+                        if(param.ParameterClass == EffectParameterClass.Matrix)
                         {
                             rowsUsed = param.ColumnCount;
                             SetData(offset, param.ColumnCount, param.RowCount, param.Data);
-                        }
-                        else
+                        } else
                         {
                             rowsUsed = param.RowCount;
                             SetData(offset, param.RowCount, param.ColumnCount, param.Data);
@@ -160,15 +150,15 @@ namespace Microsoft.Xna.Framework.Graphics
             // If our state key becomes larger than the 
             // next state key then the keys have rolled 
             // over and we need to reset.
-            if (_stateKey > EffectParameter.NextStateKey)
+            if(_stateKey > EffectParameter.NextStateKey)
                 _stateKey = 0;
 
-            for (var p = 0; p < _parameters.Length; p++)
+            for(var p = 0; p < _parameters.Length; p++)
             {
                 var index = _parameters[p];
                 var param = parameters[index];
 
-                if (param.StateKey < _stateKey)
+                if(param.StateKey < _stateKey)
                     continue;
 
                 var offset = _offsets[p];

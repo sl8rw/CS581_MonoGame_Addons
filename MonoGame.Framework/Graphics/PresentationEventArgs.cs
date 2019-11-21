@@ -11,8 +11,6 @@ namespace Microsoft.Xna.Framework.Graphics
         public PresentationParameters PresentationParameters { get; private set; }
 
         public PresentationEventArgs(PresentationParameters presentationParameters)
-        {
-            PresentationParameters = presentationParameters;
-        }
+        { PresentationParameters = presentationParameters; }
     }
 }

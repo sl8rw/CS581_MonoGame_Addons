@@ -40,60 +40,38 @@ namespace Microsoft.Xna.Framework.Graphics
         #region Constructors
 
         /// <summary>
-        /// Create a <see cref="PresentationParameters"/> instance with default values for all properties.
-        /// </summary>
-        public PresentationParameters()
-        {
-            Clear();
-        }
+/// Create a <see cref="PresentationParameters"/> instance with default values for all properties.
+/// </summary>
+        public PresentationParameters() { Clear(); }
 
         #endregion Constructors
 
         #region Properties
 
         /// <summary>
-        /// Get or set the format of the back buffer.
-        /// </summary>
-        public SurfaceFormat BackBufferFormat
-        {
-            get { return backBufferFormat; }
-            set { backBufferFormat = value; }
-        }
+/// Get or set the format of the back buffer.
+/// </summary>
+        public SurfaceFormat BackBufferFormat { get { return backBufferFormat; } set { backBufferFormat = value; } }
 
         /// <summary>
         /// Get or set the height of the back buffer.
         /// </summary>
-        public int BackBufferHeight
-        {
-            get { return backBufferHeight; }
-            set { backBufferHeight = value; }
-        }
+        public int BackBufferHeight { get { return backBufferHeight; } set { backBufferHeight = value; } }
 
         /// <summary>
         /// Get or set the width of the back buffer.
         /// </summary>
-        public int BackBufferWidth
-        {
-            get { return backBufferWidth; }
-            set { backBufferWidth = value; }
-        }
+        public int BackBufferWidth { get { return backBufferWidth; } set { backBufferWidth = value; } }
 
         /// <summary>
         /// Get the bounds of the back buffer.
         /// </summary>
-        public Rectangle Bounds
-        {
-            get { return new Rectangle(0, 0, backBufferWidth, backBufferHeight); }
-        }
+        public Rectangle Bounds { get { return new Rectangle(0, 0, backBufferWidth, backBufferHeight); } }
 
         /// <summary>
         /// Get or set the handle of the window that will present the back buffer.
         /// </summary>
-        public IntPtr DeviceWindowHandle
-        {
-            get { return deviceWindowHandle; }
-            set { deviceWindowHandle = value; }
-        }
+        public IntPtr DeviceWindowHandle { get { return deviceWindowHandle; } set { deviceWindowHandle = value; } }
 
 #if WINDOWS_UAP
         [CLSCompliant(false)]
@@ -103,50 +81,34 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// Get or set the depth stencil format for the back buffer.
         /// </summary>
-		public DepthFormat DepthStencilFormat
-        {
-            get { return depthStencilFormat; }
-            set { depthStencilFormat = value; }
-        }
+        public DepthFormat DepthStencilFormat { get { return depthStencilFormat; } set { depthStencilFormat = value; } }
 
         /// <summary>
         /// Get or set a value indicating if we are in full screen mode.
         /// </summary>
         public bool IsFullScreen
         {
-            get
-            {
-                return isFullScreen;
-            }
+            get { return isFullScreen; }
             set
             {
                 isFullScreen = value;
 #if IOS && !TVOS
 				UIApplication.SharedApplication.StatusBarHidden = isFullScreen;
 #endif
-
             }
         }
 
         /// <summary>
-        /// If <code>true</code> the <see cref="GraphicsDevice"/> will do a mode switch
-        /// when going to full screen mode. If <code>false</code> it will instead do a
-        /// soft full screen by maximizing the window and making it borderless.
+        /// If <code>true</code> the <see cref="GraphicsDevice"/> will do a mode switch when going to full screen mode.
+        /// If <code>false</code> it will instead do a soft full screen by maximizing the window and making it
+        /// borderless.
         /// </summary>
-        public bool HardwareModeSwitch
-        {
-            get { return hardwareModeSwitch; }
-            set { hardwareModeSwitch = value; }
-        }
+        public bool HardwareModeSwitch { get { return hardwareModeSwitch; } set { hardwareModeSwitch = value; } }
 
         /// <summary>
         /// Get or set the multisample count for the back buffer.
         /// </summary>
-        public int MultiSampleCount
-        {
-            get { return multiSampleCount; }
-            set { multiSampleCount = value; }
-        }
+        public int MultiSampleCount { get { return multiSampleCount; } set { multiSampleCount = value; } }
 
         /// <summary>
         /// Get or set the presentation interval.
@@ -156,17 +118,11 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// Get or set the display orientation.
         /// </summary>
-		public DisplayOrientation DisplayOrientation
-        {
-            get;
-            set;
-        }
+        public DisplayOrientation DisplayOrientation { get; set; }
 
         /// <summary>
-        /// Get or set the RenderTargetUsage for the back buffer.
-        /// Determines if the back buffer is cleared when it is set as the
-        /// render target by the <see cref="GraphicsDevice"/>.
-        /// <see cref="GraphicsDevice"/> target.
+        /// Get or set the RenderTargetUsage for the back buffer. Determines if the back buffer is cleared when it is
+        /// set as the render target by the <see cref="GraphicsDevice"/>. <see cref="GraphicsDevice"/> target.
         /// </summary>
         public RenderTargetUsage RenderTargetUsage { get; set; }
 
@@ -176,8 +132,8 @@ namespace Microsoft.Xna.Framework.Graphics
         #region Methods
 
         /// <summary>
-        /// Reset all properties to their default values.
-        /// </summary>
+/// Reset all properties to their default values.
+/// </summary>
         public void Clear()
         {
             backBufferFormat = SurfaceFormat.Color;
@@ -197,6 +153,7 @@ namespace Microsoft.Xna.Framework.Graphics
 			backBufferWidth = width;
             backBufferHeight = height;
 #else
+
             backBufferWidth = GraphicsDeviceManager.DefaultBackBufferWidth;
             backBufferHeight = GraphicsDeviceManager.DefaultBackBufferHeight;
 #endif
@@ -232,8 +189,6 @@ namespace Microsoft.Xna.Framework.Graphics
             clone.RenderTargetUsage = this.RenderTargetUsage;
             return clone;
         }
-
         #endregion Methods
-
     }
 }

@@ -11,15 +11,9 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
     {
         private uint _packed;
 
-        public NormalizedByte4(Vector4 vector)
-        {
-            _packed = Pack(vector.X, vector.Y, vector.Z, vector.W);
-        }
+        public NormalizedByte4(Vector4 vector) { _packed = Pack(vector.X, vector.Y, vector.Z, vector.W); }
 
-        public NormalizedByte4(float x, float y, float z, float w)
-        {
-            _packed = Pack(x, y, z, w);
-        }
+        public NormalizedByte4(float x, float y, float z, float w) { _packed = Pack(x, y, z, w); }
 
         public static bool operator !=(NormalizedByte4 a, NormalizedByte4 b)
         {
@@ -32,38 +26,16 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         }
 
         [CLSCompliant(false)]
-        public uint PackedValue
-        {
-            get
-            {
-                return _packed;
-            }
-            set
-            {
-                _packed = value;
-            }
-        }
+        public uint PackedValue { get { return _packed; } set { _packed = value; } }
 
         public override bool Equals(object obj)
-        {
-            return (obj is NormalizedByte4) &&
-                    ((NormalizedByte4)obj)._packed == _packed;
-        }
+        { return (obj is NormalizedByte4) && ((NormalizedByte4)obj)._packed == _packed; }
 
-        public bool Equals(NormalizedByte4 other)
-        {
-            return _packed == other._packed;
-        }
+        public bool Equals(NormalizedByte4 other) { return _packed == other._packed; }
 
-        public override int GetHashCode()
-        {
-            return _packed.GetHashCode();
-        }
+        public override int GetHashCode() { return _packed.GetHashCode(); }
 
-        public override string ToString()
-        {
-            return _packed.ToString("X");
-        }
+        public override string ToString() { return _packed.ToString("X"); }
 
         private static uint Pack(float x, float y, float z, float w)
         {
@@ -75,18 +47,14 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
             return byte4 | byte3 | byte2 | byte1;
         }
 
-        void IPackedVector.PackFromVector4(Vector4 vector)
-        {
-            _packed = Pack(vector.X, vector.Y, vector.Z, vector.W);
-        }
+        void IPackedVector.PackFromVector4(Vector4 vector) { _packed = Pack(vector.X, vector.Y, vector.Z, vector.W); }
 
         public Vector4 ToVector4()
         {
-            return new Vector4(
-                ((sbyte)((_packed >> 0) & 0xFF)) / 127.0f,
-                ((sbyte)((_packed >> 8) & 0xFF)) / 127.0f,
-                ((sbyte)((_packed >> 16) & 0xFF)) / 127.0f,
-                ((sbyte)((_packed >> 24) & 0xFF)) / 127.0f);
+            return new Vector4(((sbyte)((_packed >> 0) & 0xFF)) / 127.0f,
+                               ((sbyte)((_packed >> 8) & 0xFF)) / 127.0f,
+                               ((sbyte)((_packed >> 16) & 0xFF)) / 127.0f,
+                               ((sbyte)((_packed >> 24) & 0xFF)) / 127.0f);
         }
     }
 }

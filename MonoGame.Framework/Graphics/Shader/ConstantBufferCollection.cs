@@ -9,6 +9,7 @@ namespace Microsoft.Xna.Framework.Graphics
         private readonly ConstantBuffer[] _buffers;
 
         private ShaderStage _stage;
+
         private ShaderStage Stage { get { return this._stage; } }
 
         private int _valid;
@@ -25,15 +26,14 @@ namespace Microsoft.Xna.Framework.Graphics
             get { return _buffers[index]; }
             set
             {
-                if (_buffers[index] == value)
+                if(_buffers[index] == value)
                     return;
 
-                if (value != null)
+                if(value != null)
                 {
                     _buffers[index] = value;
                     _valid |= 1 << index;
-                }
-                else
+                } else
                 {
                     _buffers[index] = null;
                     _valid &= ~(1 << index);
@@ -43,7 +43,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         internal void Clear()
         {
-            for (var i = 0; i < _buffers.Length; i++)
+            for(var i = 0; i < _buffers.Length; i++)
                 _buffers[i] = null;
 
             _valid = 0;
@@ -52,21 +52,23 @@ namespace Microsoft.Xna.Framework.Graphics
 #if WEB
         internal void SetConstantBuffers(GraphicsDevice device, int shaderProgram)
 #elif OPENGL
+
         internal void SetConstantBuffers(GraphicsDevice device, ShaderProgram shaderProgram)
 #else
         internal void SetConstantBuffers(GraphicsDevice device)
 #endif
+
         {
             // If there are no constant buffers then skip it.
-            if (_valid == 0)
+            if(_valid == 0)
                 return;
 
             var valid = _valid;
 
-            for (var i = 0; i < _buffers.Length; i++)
+            for(var i = 0; i < _buffers.Length; i++)
             {
                 var buffer = _buffers[i];
-                if (buffer != null && !buffer.IsDisposed)
+                if(buffer != null && !buffer.IsDisposed)
                 {
 #if OPENGL || WEB
                     buffer.PlatformApply(device, shaderProgram);
@@ -77,10 +79,9 @@ namespace Microsoft.Xna.Framework.Graphics
 
                 // Early out if this is the last one.
                 valid &= ~(1 << i);
-                if (valid == 0)
+                if(valid == 0)
                     return;
             }
         }
-
     }
 }

@@ -13,10 +13,10 @@ namespace Microsoft.Xna.Framework.Graphics
         {
             _parameters = parameters;
             _indexLookup = new Dictionary<string, int>(_parameters.Length);
-            for (int i = 0; i < _parameters.Length; i++)
+            for(int i = 0; i < _parameters.Length; i++)
             {
                 string name = _parameters[i].Name;
-                if (!string.IsNullOrWhiteSpace(name))
+                if(!string.IsNullOrWhiteSpace(name))
                     _indexLookup.Add(name, i);
             }
         }
@@ -29,45 +29,35 @@ namespace Microsoft.Xna.Framework.Graphics
 
         internal EffectParameterCollection Clone()
         {
-            if (_parameters.Length == 0)
+            if(_parameters.Length == 0)
                 return Empty;
 
             var parameters = new EffectParameter[_parameters.Length];
-            for (var i = 0; i < _parameters.Length; i++)
+            for(var i = 0; i < _parameters.Length; i++)
                 parameters[i] = new EffectParameter(_parameters[i]);
 
             return new EffectParameterCollection(parameters, _indexLookup);
         }
 
-        public int Count
-        {
-            get { return _parameters.Length; }
-        }
+        public int Count { get { return _parameters.Length; } }
 
-        public EffectParameter this[int index]
-        {
-            get { return _parameters[index]; }
-        }
+        public EffectParameter this[int index] { get { return _parameters[index]; } }
 
         public EffectParameter this[string name]
         {
             get
             {
                 int index;
-                if (_indexLookup.TryGetValue(name, out index))
+                if(_indexLookup.TryGetValue(name, out index))
                     return _parameters[index];
                 return null;
             }
         }
 
         public IEnumerator<EffectParameter> GetEnumerator()
-        {
-            return ((IEnumerable<EffectParameter>)_parameters).GetEnumerator();
-        }
+        { return ((IEnumerable<EffectParameter>)_parameters).GetEnumerator(); }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return _parameters.GetEnumerator();
-        }
+        { return _parameters.GetEnumerator(); }
     }
 }

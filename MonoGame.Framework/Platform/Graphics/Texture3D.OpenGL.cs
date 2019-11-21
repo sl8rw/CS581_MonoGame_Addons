@@ -10,8 +10,13 @@ namespace Microsoft.Xna.Framework.Graphics
 {
     public partial class Texture3D : Texture
     {
-
-        private void PlatformConstruct(GraphicsDevice graphicsDevice, int width, int height, int depth, bool mipMap, SurfaceFormat format, bool renderTarget)
+        private void PlatformConstruct(GraphicsDevice graphicsDevice,
+                                       int width,
+                                       int height,
+                                       int depth,
+                                       bool mipMap,
+                                       SurfaceFormat format,
+                                       bool renderTarget)
         {
 #if GLES
             throw new NotSupportedException("OpenGL ES 2.0 doesn't support 3D textures.");
@@ -32,14 +37,24 @@ namespace Microsoft.Xna.Framework.Graphics
                 GraphicsExtensions.CheckGLError();
             });
 
-            if (mipMap)
+            if(mipMap)
                 throw new NotImplementedException("Texture3D does not yet support mipmaps.");
 #endif
         }
 
         private void PlatformSetData<T>(int level,
-                                     int left, int top, int right, int bottom, int front, int back,
-                                     T[] data, int startIndex, int elementCount, int width, int height, int depth)
+                                        int left,
+                                        int top,
+                                        int right,
+                                        int bottom,
+                                        int front,
+                                        int back,
+                                        T[] data,
+                                        int startIndex,
+                                        int elementCount,
+                                        int width,
+                                        int height,
+                                        int depth)
         {
 #if GLES
             throw new NotSupportedException("OpenGL ES 2.0 doesn't support 3D textures.");
@@ -60,12 +75,18 @@ namespace Microsoft.Xna.Framework.Graphics
 #endif
         }
 
-        private void PlatformGetData<T>(int level, int left, int top, int right, int bottom, int front, int back, T[] data, int startIndex, int elementCount)
-             where T : struct
-        {
-
-            throw new NotImplementedException();
-        }
+        private void PlatformGetData<T>(int level,
+                                        int left,
+                                        int top,
+                                        int right,
+                                        int bottom,
+                                        int front,
+                                        int back,
+                                        T[] data,
+                                        int startIndex,
+                                        int elementCount)
+            where T : struct
+        { throw new NotImplementedException(); }
     }
 }
 

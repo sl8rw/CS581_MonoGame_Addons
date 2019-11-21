@@ -201,7 +201,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             set
             {
-                if (fogEnabled != value)
+                if(fogEnabled != value)
                 {
                     fogEnabled = value;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex | EffectDirtyFlags.FogEnable;
@@ -271,10 +271,9 @@ namespace Microsoft.Xna.Framework.Graphics
 
 
         /// <summary>
-        /// Gets or sets the amount of the environment map RGB that will be blended over 
-        /// the base texture. Range 0 to 1, default 1. If set to zero, the RGB channels 
-        /// of the environment map will completely ignored (but the environment map alpha 
-        /// may still be visible if EnvironmentMapSpecular is greater than zero).
+        /// Gets or sets the amount of the environment map RGB that will be blended over  the base texture. Range 0 to
+        /// 1, default 1. If set to zero, the RGB channels  of the environment map will completely ignored (but the
+        /// environment map alpha  may still be visible if EnvironmentMapSpecular is greater than zero).
         /// </summary>
         public float EnvironmentMapAmount
         {
@@ -284,11 +283,10 @@ namespace Microsoft.Xna.Framework.Graphics
 
 
         /// <summary>
-        /// Gets or sets the amount of the environment map alpha channel that will 
-        /// be added to the base texture. Range 0 to 1, default 0. This can be used 
-        /// to implement cheap specular lighting, by encoding one or more specular 
-        /// highlight patterns into the environment map alpha channel, then setting 
-        /// EnvironmentMapSpecular to the desired specular light color.
+        /// Gets or sets the amount of the environment map alpha channel that will  be added to the base texture. Range
+        /// 0 to 1, default 0. This can be used  to implement cheap specular lighting, by encoding one or more specular 
+        /// highlight patterns into the environment map alpha channel, then setting  EnvironmentMapSpecular to the
+        /// desired specular light color.
         /// </summary>
         public Vector3 EnvironmentMapSpecular
         {
@@ -300,7 +298,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
                 bool enabled = (value != Vector3.Zero);
 
-                if (specularEnabled != enabled)
+                if(specularEnabled != enabled)
                 {
                     specularEnabled = enabled;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex;
@@ -310,14 +308,12 @@ namespace Microsoft.Xna.Framework.Graphics
 
 
         /// <summary>
-        /// Gets or sets the Fresnel factor used for the environment map blending. 
-        /// Higher values make the environment map only visible around the silhouette 
-        /// edges of the object, while lower values make it visible everywhere. 
-        /// Setting this property to 0 disables Fresnel entirely, making the 
-        /// environment map equally visible regardless of view angle. The default is 
-        /// 1. Fresnel only affects the environment map RGB (the intensity of which is 
-        /// controlled by EnvironmentMapAmount). The alpha contribution (controlled by 
-        /// EnvironmentMapSpecular) is not affected by the Fresnel setting.
+        /// Gets or sets the Fresnel factor used for the environment map blending.  Higher values make the environment
+        /// map only visible around the silhouette  edges of the object, while lower values make it visible everywhere. 
+        /// Setting this property to 0 disables Fresnel entirely, making the  environment map equally visible regardless
+        /// of view angle. The default is  1. Fresnel only affects the environment map RGB (the intensity of which is 
+        /// controlled by EnvironmentMapAmount). The alpha contribution (controlled by  EnvironmentMapSpecular) is not
+        /// affected by the Fresnel setting.
         /// </summary>
         public float FresnelFactor
         {
@@ -329,7 +325,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
                 bool enabled = (value != 0);
 
-                if (fresnelEnabled != enabled)
+                if(fresnelEnabled != enabled)
                 {
                     fresnelEnabled = enabled;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex;
@@ -339,13 +335,17 @@ namespace Microsoft.Xna.Framework.Graphics
 
 
         /// <summary>
-        /// This effect requires lighting, so we explicitly implement
-        /// IEffectLights.LightingEnabled, and do not allow turning it off.
+        /// This effect requires lighting, so we explicitly implement IEffectLights.LightingEnabled, and do not allow turning it
+        /// off.
         /// </summary>
         bool IEffectLights.LightingEnabled
         {
             get { return true; }
-            set { if (!value) throw new NotSupportedException("EnvironmentMapEffect does not support setting LightingEnabled to false."); }
+            set
+            {
+                if(!value)
+                    throw new NotSupportedException("EnvironmentMapEffect does not support setting LightingEnabled to false.");
+            }
         }
 
 
@@ -357,8 +357,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// Creates a new EnvironmentMapEffect with default parameter settings.
         /// </summary>
-        public EnvironmentMapEffect(GraphicsDevice device)
-            : base(device, EffectResource.EnvironmentMapEffect.Bytecode)
+        public EnvironmentMapEffect(GraphicsDevice device) : base(device, EffectResource.EnvironmentMapEffect.Bytecode)
         {
             CacheEffectParameters(null);
 
@@ -373,8 +372,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// Creates a new EnvironmentMapEffect by cloning parameter settings from an existing instance.
         /// </summary>
-        protected EnvironmentMapEffect(EnvironmentMapEffect cloneSource)
-            : base(cloneSource)
+        protected EnvironmentMapEffect(EnvironmentMapEffect cloneSource) : base(cloneSource)
         {
             CacheEffectParameters(cloneSource);
 
@@ -400,19 +398,14 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// Creates a clone of the current EnvironmentMapEffect instance.
         /// </summary>
-        public override Effect Clone()
-        {
-            return new EnvironmentMapEffect(this);
-        }
+        public override Effect Clone() { return new EnvironmentMapEffect(this); }
 
 
         /// <summary>
         /// Sets up the standard key/fill/back lighting rig.
         /// </summary>
         public void EnableDefaultLighting()
-        {
-            AmbientLightColor = EffectHelpers.EnableDefaultLighting(light0, light1, light2);
-        }
+        { AmbientLightColor = EffectHelpers.EnableDefaultLighting(light0, light1, light2); }
 
 
         /// <summary>
@@ -420,17 +413,17 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </summary>
         void CacheEffectParameters(EnvironmentMapEffect cloneSource)
         {
-            textureParam = Parameters["Texture"];
-            environmentMapParam = Parameters["EnvironmentMap"];
-            environmentMapAmountParam = Parameters["EnvironmentMapAmount"];
-            environmentMapSpecularParam = Parameters["EnvironmentMapSpecular"];
-            fresnelFactorParam = Parameters["FresnelFactor"];
-            diffuseColorParam = Parameters["DiffuseColor"];
-            emissiveColorParam = Parameters["EmissiveColor"];
+            textureParam = Parameters[nameof(Texture)];
+            environmentMapParam = Parameters[nameof(EnvironmentMap)];
+            environmentMapAmountParam = Parameters[nameof(EnvironmentMapAmount)];
+            environmentMapSpecularParam = Parameters[nameof(EnvironmentMapSpecular)];
+            fresnelFactorParam = Parameters[nameof(FresnelFactor)];
+            diffuseColorParam = Parameters[nameof(DiffuseColor)];
+            emissiveColorParam = Parameters[nameof(EmissiveColor)];
             eyePositionParam = Parameters["EyePosition"];
-            fogColorParam = Parameters["FogColor"];
+            fogColorParam = Parameters[nameof(FogColor)];
             fogVectorParam = Parameters["FogVector"];
-            worldParam = Parameters["World"];
+            worldParam = Parameters[nameof(World)];
             worldInverseTransposeParam = Parameters["WorldInverseTranspose"];
             worldViewProjParam = Parameters["WorldViewProj"];
 
@@ -457,15 +450,35 @@ namespace Microsoft.Xna.Framework.Graphics
         protected internal override void OnApply()
         {
             // Recompute the world+view+projection matrix or fog vector?
-            dirtyFlags = EffectHelpers.SetWorldViewProjAndFog(dirtyFlags, ref world, ref view, ref projection, ref worldView, fogEnabled, fogStart, fogEnd, worldViewProjParam, fogVectorParam);
+            dirtyFlags = EffectHelpers.SetWorldViewProjAndFog(dirtyFlags,
+                                                              ref world,
+                                                              ref view,
+                                                              ref projection,
+                                                              ref worldView,
+                                                              fogEnabled,
+                                                              fogStart,
+                                                              fogEnd,
+                                                              worldViewProjParam,
+                                                              fogVectorParam);
 
             // Recompute the world inverse transpose and eye position?
-            dirtyFlags = EffectHelpers.SetLightingMatrices(dirtyFlags, ref world, ref view, worldParam, worldInverseTransposeParam, eyePositionParam);
+            dirtyFlags = EffectHelpers.SetLightingMatrices(dirtyFlags,
+                                                           ref world,
+                                                           ref view,
+                                                           worldParam,
+                                                           worldInverseTransposeParam,
+                                                           eyePositionParam);
 
             // Recompute the diffuse/emissive/alpha material color parameters?
-            if ((dirtyFlags & EffectDirtyFlags.MaterialColor) != 0)
+            if((dirtyFlags & EffectDirtyFlags.MaterialColor) != 0)
             {
-                EffectHelpers.SetMaterialColor(true, alpha, ref diffuseColor, ref emissiveColor, ref ambientLightColor, diffuseColorParam, emissiveColorParam);
+                EffectHelpers.SetMaterialColor(true,
+                                               alpha,
+                                               ref diffuseColor,
+                                               ref emissiveColor,
+                                               ref ambientLightColor,
+                                               diffuseColorParam,
+                                               emissiveColorParam);
 
                 dirtyFlags &= ~EffectDirtyFlags.MaterialColor;
             }
@@ -473,27 +486,27 @@ namespace Microsoft.Xna.Framework.Graphics
             // Check if we can use the only-bother-with-the-first-light shader optimization.
             bool newOneLight = !light1.Enabled && !light2.Enabled;
 
-            if (oneLight != newOneLight)
+            if(oneLight != newOneLight)
             {
                 oneLight = newOneLight;
                 dirtyFlags |= EffectDirtyFlags.ShaderIndex;
             }
 
             // Recompute the shader index?
-            if ((dirtyFlags & EffectDirtyFlags.ShaderIndex) != 0)
+            if((dirtyFlags & EffectDirtyFlags.ShaderIndex) != 0)
             {
                 int shaderIndex = 0;
 
-                if (!fogEnabled)
+                if(!fogEnabled)
                     shaderIndex += 1;
 
-                if (fresnelEnabled)
+                if(fresnelEnabled)
                     shaderIndex += 2;
 
-                if (specularEnabled)
+                if(specularEnabled)
                     shaderIndex += 4;
 
-                if (oneLight)
+                if(oneLight)
                     shaderIndex += 8;
 
                 dirtyFlags &= ~EffectDirtyFlags.ShaderIndex;
@@ -501,8 +514,6 @@ namespace Microsoft.Xna.Framework.Graphics
                 CurrentTechnique = Techniques[shaderIndex];
             }
         }
-
-
         #endregion
     }
 }

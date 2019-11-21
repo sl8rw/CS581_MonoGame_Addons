@@ -59,11 +59,10 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 #endif
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         string _description = string.Empty;
+
         public string Description { get { return _description; } private set { _description = value; } }
 
         public DisplayMode CurrentDisplayMode
@@ -99,16 +98,13 @@ namespace Microsoft.Xna.Framework.Graphics
             }
         }
 
-        public static GraphicsAdapter DefaultAdapter
-        {
-            get { return Adapters[0]; }
-        }
+        public static GraphicsAdapter DefaultAdapter { get { return Adapters[0]; } }
 
         public static ReadOnlyCollection<GraphicsAdapter> Adapters
         {
             get
             {
-                if (_adapters == null)
+                if(_adapters == null)
                 {
 #if IOS
 					_adapters = new ReadOnlyCollection<GraphicsAdapter>(
@@ -123,13 +119,12 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 
         /// <summary>
-        /// Used to request creation of the reference graphics device, 
-        /// or the default hardware accelerated device (when set to false).
+        /// Used to request creation of the reference graphics device,  or the default hardware accelerated device (when
+        /// set to false).
         /// </summary>
         /// <remarks>
-        /// This only works on DirectX platforms where a reference graphics
-        /// device is available and must be defined before the graphics device
-        /// is created. It defaults to false.
+        /// This only works on DirectX platforms where a reference graphics device is available and must be defined
+        /// before the graphics device is created. It defaults to false.
         /// </remarks>
         public static bool UseReferenceDevice
         {
@@ -141,8 +136,8 @@ namespace Microsoft.Xna.Framework.Graphics
         /// Used to request creation of a specific kind of driver.
         /// </summary>
         /// <remarks>
-        /// These values only work on DirectX platforms and must be defined before the graphics device
-        /// is created. <see cref="DriverType.Hardware"/> by default.
+        /// These values only work on DirectX platforms and must be defined before the graphics device is created. <see
+        /// cref="DriverType.Hardware"/> by default.
         /// </remarks>
         public static DriverType UseDriverType { get; set; }
 
@@ -157,21 +152,20 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <param name="selectedDepthFormat">Set to the best format supported by the adaptor for the requested depth stencil format.</param>
         /// <param name="selectedMultiSampleCount">Set to the best count supported by the adaptor for the requested multisample count.</param>
         /// <returns>True if the requested format is supported by the adaptor. False if one or more of the values was changed.</returns>
-		public bool QueryRenderTargetFormat(
-            GraphicsProfile graphicsProfile,
-            SurfaceFormat format,
-            DepthFormat depthFormat,
-            int multiSampleCount,
-            out SurfaceFormat selectedFormat,
-            out DepthFormat selectedDepthFormat,
-            out int selectedMultiSampleCount)
+        public bool QueryRenderTargetFormat(GraphicsProfile graphicsProfile,
+                                            SurfaceFormat format,
+                                            DepthFormat depthFormat,
+                                            int multiSampleCount,
+                                            out SurfaceFormat selectedFormat,
+                                            out DepthFormat selectedDepthFormat,
+                                            out int selectedMultiSampleCount)
         {
             selectedFormat = format;
             selectedDepthFormat = depthFormat;
             selectedMultiSampleCount = multiSampleCount;
 
             // fallback for unsupported renderTarget surface formats.
-            if (selectedFormat == SurfaceFormat.Alpha8 ||
+            if(selectedFormat == SurfaceFormat.Alpha8 ||
                 selectedFormat == SurfaceFormat.NormalizedByte2 ||
                 selectedFormat == SurfaceFormat.NormalizedByte4 ||
                 selectedFormat == SurfaceFormat.Dxt1 ||
@@ -184,7 +178,9 @@ namespace Microsoft.Xna.Framework.Graphics
                 selectedFormat = SurfaceFormat.Color;
 
 
-            return (format == selectedFormat) && (depthFormat == selectedDepthFormat) && (multiSampleCount == selectedMultiSampleCount);
+            return (format == selectedFormat) &&
+                (depthFormat == selectedDepthFormat) &&
+                (multiSampleCount == selectedMultiSampleCount);
         }
 
         /*
@@ -295,7 +291,7 @@ namespace Microsoft.Xna.Framework.Graphics
                 var displayIndex = Sdl.Display.GetWindowDisplayIndex(SdlGameWindow.Instance.Handle);
                 displayChanged = displayIndex != _displayIndex;
 #endif
-                if (_supportedDisplayModes == null || displayChanged)
+                if(_supportedDisplayModes == null || displayChanged)
                 {
                     var modes = new List<DisplayMode>(new[] { CurrentDisplayMode, });
 
@@ -305,7 +301,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
                     var modeCount = Sdl.Display.GetNumDisplayModes(displayIndex);
 
-                    for (int i = 0; i < modeCount; i++)
+                    for(int i = 0; i < modeCount; i++)
                     {
                         Sdl.Display.Mode mode;
                         Sdl.Display.GetDisplayMode(displayIndex, i, out mode);
@@ -313,7 +309,7 @@ namespace Microsoft.Xna.Framework.Graphics
                         // We are only using one format, Color
                         // mode.Format gets the Color format from SDL
                         var displayMode = new DisplayMode(mode.Width, mode.Height, SurfaceFormat.Color);
-                        if (!modes.Contains(displayMode))
+                        if(!modes.Contains(displayMode))
                             modes.Add(displayMode);
                     }
 #elif DIRECTX
@@ -337,10 +333,13 @@ namespace Microsoft.Xna.Framework.Graphics
                     adapter.Dispose();
                     dxgiFactory.Dispose();
 #endif
-                    modes.Sort(delegate (DisplayMode a, DisplayMode b)
+
+                    modes.Sort(delegate(DisplayMode a, DisplayMode b)
                     {
-                        if (a == b) return 0;
-                        if (a.Format <= b.Format && a.Width <= b.Width && a.Height <= b.Height) return -1;
+                        if(a == b)
+                            return 0;
+                        if(a.Format <= b.Format && a.Width <= b.Width && a.Height <= b.Height)
+                            return -1;
                         else return 1;
                     });
                     _supportedDisplayModes = new DisplayModeCollection(modes);
@@ -361,10 +360,9 @@ namespace Microsoft.Xna.Framework.Graphics
         */
 
         /// <summary>
-        /// Gets a <see cref="System.Boolean"/> indicating whether
-        /// <see cref="GraphicsAdapter.CurrentDisplayMode"/> has a
-        /// Width:Height ratio corresponding to a widescreen <see cref="DisplayMode"/>.
-        /// Common widescreen modes include 16:9, 16:10 and 2:1.
+        /// Gets a <see cref="System.Boolean"/> indicating whether <see cref="GraphicsAdapter.CurrentDisplayMode"/> has
+        /// a Width:Height ratio corresponding to a widescreen <see cref="DisplayMode"/>. Common widescreen modes
+        /// include 16:9, 16:10 and 2:1.
         /// </summary>
         public bool IsWideScreen
         {
@@ -381,10 +379,10 @@ namespace Microsoft.Xna.Framework.Graphics
 
         public bool IsProfileSupported(GraphicsProfile graphicsProfile)
         {
-            if (UseReferenceDevice)
+            if(UseReferenceDevice)
                 return true;
 
-            switch (graphicsProfile)
+            switch(graphicsProfile)
             {
                 case GraphicsProfile.Reach:
                     return true;

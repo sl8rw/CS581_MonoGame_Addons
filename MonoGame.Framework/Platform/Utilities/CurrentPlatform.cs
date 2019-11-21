@@ -25,11 +25,11 @@ namespace MonoGame.Utilities
 
         private static void Init()
         {
-            if (!_init)
+            if(!_init)
             {
                 PlatformID pid = Environment.OSVersion.Platform;
 
-                switch (pid)
+                switch(pid)
                 {
                     case PlatformID.Win32NT:
                     case PlatformID.Win32S:
@@ -48,22 +48,20 @@ namespace MonoGame.Utilities
                         {
                             buf = Marshal.AllocHGlobal(8192);
 
-                            if (uname(buf) == 0)
+                            if(uname(buf) == 0)
                             {
                                 string sos = Marshal.PtrToStringAnsi(buf);
-                                if (sos == "Darwin")
+                                if(sos == "Darwin")
                                 {
                                     _os = OS.MacOSX;
                                     return;
                                 }
                             }
-                        }
-                        catch
+                        } catch
                         {
-                        }
-                        finally
+                        } finally
                         {
-                            if (buf != IntPtr.Zero)
+                            if(buf != IntPtr.Zero)
                                 Marshal.FreeHGlobal(buf);
                         }
 

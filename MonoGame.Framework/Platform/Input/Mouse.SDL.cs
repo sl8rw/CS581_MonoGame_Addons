@@ -11,14 +11,9 @@ namespace Microsoft.Xna.Framework.Input
         internal static int ScrollX;
         internal static int ScrollY;
 
-        private static IntPtr PlatformGetWindowHandle()
-        {
-            return PrimaryWindow.Handle;
-        }
+        private static IntPtr PlatformGetWindowHandle() { return PrimaryWindow.Handle; }
 
-        private static void PlatformSetWindowHandle(IntPtr windowHandle)
-        {
-        }
+        private static void PlatformSetWindowHandle(IntPtr windowHandle) { }
 
         private static MouseState PlatformGetState(GameWindow window)
         {
@@ -26,19 +21,28 @@ namespace Microsoft.Xna.Framework.Input
             var winFlags = Sdl.Window.GetWindowFlags(window.Handle);
             var state = Sdl.Mouse.GetGlobalState(out x, out y);
 
-            if ((winFlags & Sdl.Window.State.MouseFocus) != 0)
+            if((winFlags & Sdl.Window.State.MouseFocus) != 0)
             {
                 // Window has mouse focus, position will be set from the motion event
-                window.MouseState.LeftButton = (state & Sdl.Mouse.Button.Left) != 0 ? ButtonState.Pressed : ButtonState.Released;
-                window.MouseState.MiddleButton = (state & Sdl.Mouse.Button.Middle) != 0 ? ButtonState.Pressed : ButtonState.Released;
-                window.MouseState.RightButton = (state & Sdl.Mouse.Button.Right) != 0 ? ButtonState.Pressed : ButtonState.Released;
-                window.MouseState.XButton1 = (state & Sdl.Mouse.Button.X1Mask) != 0 ? ButtonState.Pressed : ButtonState.Released;
-                window.MouseState.XButton2 = (state & Sdl.Mouse.Button.X2Mask) != 0 ? ButtonState.Pressed : ButtonState.Released;
+                window.MouseState.LeftButton = (state & Sdl.Mouse.Button.Left) != 0
+                    ? ButtonState.Pressed
+                    : ButtonState.Released;
+                window.MouseState.MiddleButton = (state & Sdl.Mouse.Button.Middle) != 0
+                    ? ButtonState.Pressed
+                    : ButtonState.Released;
+                window.MouseState.RightButton = (state & Sdl.Mouse.Button.Right) != 0
+                    ? ButtonState.Pressed
+                    : ButtonState.Released;
+                window.MouseState.XButton1 = (state & Sdl.Mouse.Button.X1Mask) != 0
+                    ? ButtonState.Pressed
+                    : ButtonState.Released;
+                window.MouseState.XButton2 = (state & Sdl.Mouse.Button.X2Mask) != 0
+                    ? ButtonState.Pressed
+                    : ButtonState.Released;
 
                 window.MouseState.HorizontalScrollWheelValue = ScrollX;
                 window.MouseState.ScrollWheelValue = ScrollY;
-            }
-            else
+            } else
             {
                 // Window does not have mouse focus, we need to manually get the position
                 var clientBounds = window.ClientBounds;
@@ -57,9 +61,6 @@ namespace Microsoft.Xna.Framework.Input
             Sdl.Mouse.WarpInWindow(PrimaryWindow.Handle, x, y);
         }
 
-        private static void PlatformSetCursor(MouseCursor cursor)
-        {
-            Sdl.Mouse.SetCursor(cursor.Handle);
-        }
+        private static void PlatformSetCursor(MouseCursor cursor) { Sdl.Mouse.SetCursor(cursor.Handle); }
     }
 }

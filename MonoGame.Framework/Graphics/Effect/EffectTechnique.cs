@@ -1,4 +1,5 @@
 using System;
+
 namespace Microsoft.Xna.Framework.Graphics
 {
     public class EffectTechnique
@@ -19,14 +20,15 @@ namespace Microsoft.Xna.Framework.Graphics
             Passes = cloneSource.Passes.Clone(effect);
         }
 
-        internal EffectTechnique(Effect effect, string name, EffectPassCollection passes, EffectAnnotationCollection annotations)
+        internal EffectTechnique(Effect effect,
+                                 string name,
+                                 EffectPassCollection passes,
+                                 EffectAnnotationCollection annotations)
         {
             Name = name;
             Passes = passes;
             Annotations = annotations;
         }
     }
-
-
 }
 

@@ -13,53 +13,34 @@ namespace Microsoft.Xna.Framework.Media
 {
     public static partial class MediaPlayer
     {
-
         #region Properties
 
-        private static void PlatformInitialize()
-        {
+        private static void PlatformInitialize() { }
 
-        }
-
-        private static bool PlatformGetIsMuted()
-        {
-            return _isMuted;
-        }
+        private static bool PlatformGetIsMuted() { return _isMuted; }
 
         private static void PlatformSetIsMuted(bool muted)
         {
             _isMuted = muted;
 
-            if (_queue.Count == 0)
+            if(_queue.Count == 0)
                 return;
 
             var newVolume = _isMuted ? 0.0f : _volume;
             _queue.SetVolume(newVolume);
         }
 
-        private static bool PlatformGetIsRepeating()
-        {
-            return _isRepeating;
-        }
+        private static bool PlatformGetIsRepeating() { return _isRepeating; }
 
-        private static void PlatformSetIsRepeating(bool repeating)
-        {
-            _isRepeating = repeating;
-        }
+        private static void PlatformSetIsRepeating(bool repeating) { _isRepeating = repeating; }
 
-        private static bool PlatformGetIsShuffled()
-        {
-            return _isShuffled;
-        }
+        private static bool PlatformGetIsShuffled() { return _isShuffled; }
 
-        private static void PlatformSetIsShuffled(bool shuffled)
-        {
-            _isShuffled = shuffled;
-        }
+        private static void PlatformSetIsShuffled(bool shuffled) { _isShuffled = shuffled; }
 
         private static TimeSpan PlatformGetPlayPosition()
         {
-            if (_queue.ActiveSong == null)
+            if(_queue.ActiveSong == null)
                 return TimeSpan.Zero;
 
             return _queue.ActiveSong.Position;
@@ -73,21 +54,15 @@ namespace Microsoft.Xna.Framework.Media
         }
 #endif
 
-        private static MediaState PlatformGetState()
-        {
-            return _state;
-        }
+        private static MediaState PlatformGetState() { return _state; }
 
-        private static float PlatformGetVolume()
-        {
-            return _volume;
-        }
+        private static float PlatformGetVolume() { return _volume; }
 
         private static void PlatformSetVolume(float volume)
         {
             _volume = volume;
 
-            if (_queue.ActiveSong == null)
+            if(_queue.ActiveSong == null)
                 return;
 
             _queue.SetVolume(_isMuted ? 0.0f : _volume);
@@ -106,7 +81,7 @@ namespace Microsoft.Xna.Framework.Media
 
         private static void PlatformPause()
         {
-            if (_queue.ActiveSong == null)
+            if(_queue.ActiveSong == null)
                 return;
 
             _queue.ActiveSong.Pause();
@@ -114,7 +89,7 @@ namespace Microsoft.Xna.Framework.Media
 
         private static void PlatformPlaySong(Song song, TimeSpan? startPosition)
         {
-            if (_queue.ActiveSong == null)
+            if(_queue.ActiveSong == null)
                 return;
 
             song.SetEventHandler(OnSongFinishedPlaying);
@@ -125,7 +100,7 @@ namespace Microsoft.Xna.Framework.Media
 
         private static void PlatformResume()
         {
-            if (_queue.ActiveSong == null)
+            if(_queue.ActiveSong == null)
                 return;
 
             _queue.ActiveSong.Resume();
@@ -134,7 +109,7 @@ namespace Microsoft.Xna.Framework.Media
         private static void PlatformStop()
         {
             // Loop through so that we reset the PlayCount as well
-            foreach (var song in Queue.Songs)
+            foreach(var song in Queue.Songs)
                 _queue.ActiveSong.Stop();
         }
     }

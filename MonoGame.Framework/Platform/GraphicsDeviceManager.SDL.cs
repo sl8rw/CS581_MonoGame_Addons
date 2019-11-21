@@ -19,7 +19,7 @@ namespace Microsoft.Xna.Framework
             Sdl.GL.SetAttribute(Sdl.GL.Attribute.BlueSize, surfaceFormat.B);
             Sdl.GL.SetAttribute(Sdl.GL.Attribute.AlphaSize, surfaceFormat.A);
 
-            switch (depthStencilFormat)
+            switch(depthStencilFormat)
             {
                 case DepthFormat.None:
                     Sdl.GL.SetAttribute(Sdl.GL.Attribute.DepthSize, 0);

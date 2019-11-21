@@ -14,21 +14,16 @@ namespace Microsoft.Xna.Framework.Graphics
         internal int ibo;
 
         private void PlatformConstruct(IndexElementSize indexElementSize, int indexCount)
-        {
-            Threading.BlockOnUIThread(GenerateIfRequired);
-        }
+        { Threading.BlockOnUIThread(GenerateIfRequired); }
 
-        private void PlatformGraphicsDeviceResetting()
-        {
-            ibo = 0;
-        }
+        private void PlatformGraphicsDeviceResetting() { ibo = 0; }
 
         /// <summary>
         /// If the IBO does not exist, create it.
         /// </summary>
         void GenerateIfRequired()
         {
-            if (ibo == 0)
+            if(ibo == 0)
             {
                 var sizeInBytes = IndexCount * (this.IndexElementSize == IndexElementSize.SixteenBits ? 2 : 4);
 
@@ -37,12 +32,15 @@ namespace Microsoft.Xna.Framework.Graphics
                 GL.BindBuffer(BufferTarget.ElementArrayBuffer, ibo);
                 GraphicsExtensions.CheckGLError();
                 GL.BufferData(BufferTarget.ElementArrayBuffer,
-                              (IntPtr)sizeInBytes, IntPtr.Zero, _isDynamic ? BufferUsageHint.StreamDraw : BufferUsageHint.StaticDraw);
+                              (IntPtr)sizeInBytes,
+                              IntPtr.Zero,
+                              _isDynamic ? BufferUsageHint.StreamDraw : BufferUsageHint.StaticDraw);
                 GraphicsExtensions.CheckGLError();
             }
         }
 
-        private void PlatformGetData<T>(int offsetInBytes, T[] data, int startIndex, int elementCount) where T : struct
+        private void PlatformGetData<T>(int offsetInBytes, T[] data, int startIndex, int elementCount)
+            where T : struct
         {
 #if GLES
             // Buffers are write-only on OpenGL ES 1.1 and 2.0.  See the GL_OES_mapbuffer extension for more information.
@@ -50,11 +48,10 @@ namespace Microsoft.Xna.Framework.Graphics
             throw new NotSupportedException("Index buffers are write-only on OpenGL ES platforms");
 #endif
 #if !GLES
-            if (Threading.IsOnUIThread())
+            if(Threading.IsOnUIThread())
             {
                 GetBufferData(offsetInBytes, data, startIndex, elementCount);
-            }
-            else
+            } else
             {
                 Threading.BlockOnUIThread(() => GetBufferData(offsetInBytes, data, startIndex, elementCount));
             }
@@ -62,7 +59,8 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 
 #if !GLES
-        private void GetBufferData<T>(int offsetInBytes, T[] data, int startIndex, int elementCount) where T : struct
+        private void GetBufferData<T>(int offsetInBytes, T[] data, int startIndex, int elementCount)
+            where T : struct
         {
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, ibo);
             GraphicsExtensions.CheckGLError();
@@ -70,14 +68,13 @@ namespace Microsoft.Xna.Framework.Graphics
             IntPtr ptr = GL.MapBuffer(BufferTarget.ElementArrayBuffer, BufferAccess.ReadOnly);
             // Pointer to the start of data to read in the index buffer
             ptr = new IntPtr(ptr.ToInt64() + offsetInBytes);
-            if (typeof(T) == typeof(byte))
+            if(typeof(T) == typeof(byte))
             {
                 byte[] buffer = data as byte[];
                 // If data is already a byte[] we can skip the temporary buffer
                 // Copy from the index buffer to the destination array
                 Marshal.Copy(ptr, buffer, startIndex * elementSizeInByte, elementCount * elementSizeInByte);
-            }
-            else
+            } else
             {
                 // Temporary buffer to store the copied section of data
                 byte[] buffer = new byte[elementCount * elementSizeInByte];
@@ -91,19 +88,28 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 #endif
 
-        private void PlatformSetDataInternal<T>(int offsetInBytes, T[] data, int startIndex, int elementCount, SetDataOptions options) where T : struct
+        private void PlatformSetDataInternal<T>(int offsetInBytes,
+                                                T[] data,
+                                                int startIndex,
+                                                int elementCount,
+                                                SetDataOptions options)
+            where T : struct
         {
-            if (Threading.IsOnUIThread())
+            if(Threading.IsOnUIThread())
             {
                 BufferData(offsetInBytes, data, startIndex, elementCount, options);
-            }
-            else
+            } else
             {
                 Threading.BlockOnUIThread(() => BufferData(offsetInBytes, data, startIndex, elementCount, options));
             }
         }
 
-        private void BufferData<T>(int offsetInBytes, T[] data, int startIndex, int elementCount, SetDataOptions options) where T : struct
+        private void BufferData<T>(int offsetInBytes,
+                                   T[] data,
+                                   int startIndex,
+                                   int elementCount,
+                                   SetDataOptions options)
+            where T : struct
         {
             GenerateIfRequired();
 
@@ -116,7 +122,7 @@ namespace Microsoft.Xna.Framework.Graphics
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, ibo);
             GraphicsExtensions.CheckGLError();
 
-            if (options == SetDataOptions.Discard)
+            if(options == SetDataOptions.Discard)
             {
                 // By assigning NULL data to the buffer this gives a hint
                 // to the device to discard the previous content.
@@ -135,9 +141,9 @@ namespace Microsoft.Xna.Framework.Graphics
 
         protected override void Dispose(bool disposing)
         {
-            if (!IsDisposed)
+            if(!IsDisposed)
             {
-                if (GraphicsDevice != null)
+                if(GraphicsDevice != null)
                     GraphicsDevice.DisposeBuffer(ibo);
             }
             base.Dispose(disposing);

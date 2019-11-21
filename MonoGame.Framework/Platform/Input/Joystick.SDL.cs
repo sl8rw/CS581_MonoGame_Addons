@@ -16,20 +16,20 @@ namespace Microsoft.Xna.Framework.Input
             var jdevice = Sdl.Joystick.Open(deviceId);
             var id = 0;
 
-            while (Joysticks.ContainsKey(id))
+            while(Joysticks.ContainsKey(id))
                 id++;
 
             Joysticks.Add(id, jdevice);
 
-            if (Sdl.GameController.IsGameController(deviceId) == 1)
+            if(Sdl.GameController.IsGameController(deviceId) == 1)
                 GamePad.AddDevice(deviceId);
         }
 
         internal static void RemoveDevice(int instanceid)
         {
-            foreach (KeyValuePair<int, IntPtr> entry in Joysticks)
+            foreach(KeyValuePair<int, IntPtr> entry in Joysticks)
             {
-                if (Sdl.Joystick.InstanceID(entry.Value) == instanceid)
+                if(Sdl.Joystick.InstanceID(entry.Value) == instanceid)
                 {
                     Sdl.Joystick.Close(Joysticks[entry.Key]);
                     Joysticks.Remove(entry.Key);
@@ -42,7 +42,7 @@ namespace Microsoft.Xna.Framework.Input
         {
             GamePad.CloseDevices();
 
-            foreach (var entry in Joysticks)
+            foreach(var entry in Joysticks)
                 Sdl.Joystick.Close(entry.Value);
 
             Joysticks.Clear();
@@ -53,7 +53,7 @@ namespace Microsoft.Xna.Framework.Input
         private static JoystickCapabilities PlatformGetCapabilities(int index)
         {
             IntPtr joystickPtr = IntPtr.Zero;
-            if (!Joysticks.TryGetValue(index, out joystickPtr))
+            if(!Joysticks.TryGetValue(index, out joystickPtr))
                 return new JoystickCapabilities
                 {
                     IsConnected = false,
@@ -79,22 +79,22 @@ namespace Microsoft.Xna.Framework.Input
         private static JoystickState PlatformGetState(int index)
         {
             IntPtr joystickPtr = IntPtr.Zero;
-            if (!Joysticks.TryGetValue(index, out joystickPtr))
+            if(!Joysticks.TryGetValue(index, out joystickPtr))
                 return _defaultJoystickState;
 
             var jcap = PlatformGetCapabilities(index);
             var jdevice = joystickPtr;
 
             var axes = new int[jcap.AxisCount];
-            for (var i = 0; i < axes.Length; i++)
+            for(var i = 0; i < axes.Length; i++)
                 axes[i] = Sdl.Joystick.GetAxis(jdevice, i);
 
             var buttons = new ButtonState[jcap.ButtonCount];
-            for (var i = 0; i < buttons.Length; i++)
+            for(var i = 0; i < buttons.Length; i++)
                 buttons[i] = (Sdl.Joystick.GetButton(jdevice, i) == 0) ? ButtonState.Released : ButtonState.Pressed;
 
             var hats = new JoystickHat[jcap.HatCount];
-            for (var i = 0; i < hats.Length; i++)
+            for(var i = 0; i < hats.Length; i++)
             {
                 var hatstate = Sdl.Joystick.GetHat(jdevice, i);
 
@@ -107,19 +107,13 @@ namespace Microsoft.Xna.Framework.Input
                 };
             }
 
-            return new JoystickState
-            {
-                IsConnected = true,
-                Axes = axes,
-                Buttons = buttons,
-                Hats = hats
-            };
+            return new JoystickState { IsConnected = true, Axes = axes, Buttons = buttons, Hats = hats };
         }
 
         private static void PlatformGetState(ref JoystickState joystickState, int index)
         {
             IntPtr joystickPtr = IntPtr.Zero;
-            if (!Joysticks.TryGetValue(index, out joystickPtr))
+            if(!Joysticks.TryGetValue(index, out joystickPtr))
             {
                 joystickState.IsConnected = false;
                 return;
@@ -129,28 +123,30 @@ namespace Microsoft.Xna.Framework.Input
             var jdevice = joystickPtr;
 
             //Resize each array if the length is less than the count returned by the capabilities
-            if (joystickState.Axes.Length < jcap.AxisCount)
+            if(joystickState.Axes.Length < jcap.AxisCount)
             {
                 joystickState.Axes = new int[jcap.AxisCount];
             }
 
-            if (joystickState.Buttons.Length < jcap.ButtonCount)
+            if(joystickState.Buttons.Length < jcap.ButtonCount)
             {
                 joystickState.Buttons = new ButtonState[jcap.ButtonCount];
             }
 
-            if (joystickState.Hats.Length < jcap.HatCount)
+            if(joystickState.Hats.Length < jcap.HatCount)
             {
                 joystickState.Hats = new JoystickHat[jcap.HatCount];
             }
 
-            for (var i = 0; i < jcap.AxisCount; i++)
+            for(var i = 0; i < jcap.AxisCount; i++)
                 joystickState.Axes[i] = Sdl.Joystick.GetAxis(jdevice, i);
 
-            for (var i = 0; i < jcap.ButtonCount; i++)
-                joystickState.Buttons[i] = (Sdl.Joystick.GetButton(jdevice, i) == 0) ? ButtonState.Released : ButtonState.Pressed;
+            for(var i = 0; i < jcap.ButtonCount; i++)
+                joystickState.Buttons[i] = (Sdl.Joystick.GetButton(jdevice, i) == 0)
+                    ? ButtonState.Released
+                    : ButtonState.Pressed;
 
-            for (var i = 0; i < jcap.HatCount; i++)
+            for(var i = 0; i < jcap.HatCount; i++)
             {
                 var hatstate = Sdl.Joystick.GetHat(jdevice, i);
 

@@ -61,45 +61,52 @@ namespace Microsoft.Xna.Framework.Input
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current <see cref="T:Microsoft.Xna.Framework.Input.JoystickHat"/>.
+        /// Determines whether the specified <see cref="object"/> is equal to the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickHat"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current <see cref="T:Microsoft.Xna.Framework.Input.JoystickHat"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current
-        /// <see cref="T:Microsoft.Xna.Framework.Input.JoystickHat"/>; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
-        {
-            return (obj is JoystickHat) && (this == (JoystickHat)obj);
-        }
+        /// <param name="obj">
+        /// The <see cref="object"/> to compare with the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickHat"/>.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the specified <see cref="object"/> is equal to the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickHat"/>; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj) { return (obj is JoystickHat) && (this == (JoystickHat)obj); }
 
         /// <summary>
         /// Serves as a hash function for a <see cref="T:Microsoft.Xna.Framework.Input.JoystickHat"/> object.
         /// </summary>
-        /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
-        /// hash table.</returns>
+        /// <returns>
+        /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+        /// hash table.
+        /// </returns>
         public override int GetHashCode()
         {
             var hash = 0;
 
-            if (Left == ButtonState.Pressed)
+            if(Left == ButtonState.Pressed)
                 hash |= (1 << 3);
-            if (Up == ButtonState.Pressed)
+            if(Up == ButtonState.Pressed)
                 hash |= (1 << 2);
-            if (Right == ButtonState.Pressed)
+            if(Right == ButtonState.Pressed)
                 hash |= (1 << 1);
-            if (Down == ButtonState.Pressed)
+            if(Down == ButtonState.Pressed)
                 hash |= (1 << 0);
 
             return hash;
         }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Microsoft.Xna.Framework.Input.JoystickHat"/> in a format of 0000 where each number represents a boolean value of each respecting object property: Left, Up, Right, Down.
+        /// Returns a <see cref="T:System.String"/> that represents the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickHat"/> in a format of 0000 where each number represents a
+        /// boolean value of each respecting object property: Left, Up, Right, Down.
         /// </summary>
-        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Microsoft.Xna.Framework.Input.JoystickHat"/>.</returns>
-        public override string ToString()
-        {
-            return string.Empty + (int)Left + (int)Up + (int)Right + (int)Down;
-        }
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickHat"/>.
+        /// </returns>
+        public override string ToString() { return string.Empty + (int)Left + (int)Up + (int)Right + (int)Down; }
     }
 }
 

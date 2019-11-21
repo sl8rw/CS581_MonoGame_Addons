@@ -214,7 +214,6 @@ namespace Microsoft.Xna.Framework.Graphics
                     ((mask & ColorWriteChannels.Alpha) != 0 ? SharpDX.Direct3D11.ColorWriteMaskFlags.Alpha : 0);
         }
 #endif
-
     }
 }
 

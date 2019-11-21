@@ -6,21 +6,17 @@ using System.Collections.Generic;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
-
     internal class ShaderProgram
     {
         public readonly int Program;
 
         private readonly Dictionary<string, int> _uniformLocations = new Dictionary<string, int>();
 
-        public ShaderProgram(int program)
-        {
-            Program = program;
-        }
+        public ShaderProgram(int program) { Program = program; }
 
         public int GetUniformLocation(string name)
         {
-            if (_uniformLocations.ContainsKey(name))
+            if(_uniformLocations.ContainsKey(name))
                 return _uniformLocations[name];
 
             var location = GL.GetUniformLocation(Program, name);
@@ -31,9 +27,9 @@ namespace Microsoft.Xna.Framework.Graphics
     }
 
     /// <summary>
-    /// This class is used to Cache the links between Vertex/Pixel Shaders and Constant Buffers.
-    /// It will be responsible for linking the programs under OpenGL if they have not been linked
-    /// before. If an existing link exists it will be resused.
+    /// This class is used to Cache the links between Vertex/Pixel Shaders and Constant Buffers. It will be responsible
+    /// for linking the programs under OpenGL if they have not been linked before. If an existing link exists it will be
+    /// resused.
     /// </summary>
     internal class ShaderProgramCache : IDisposable
     {
@@ -41,22 +37,16 @@ namespace Microsoft.Xna.Framework.Graphics
         GraphicsDevice _graphicsDevice;
         bool disposed;
 
-        public ShaderProgramCache(GraphicsDevice graphicsDevice)
-        {
-            _graphicsDevice = graphicsDevice;
-        }
+        public ShaderProgramCache(GraphicsDevice graphicsDevice) { _graphicsDevice = graphicsDevice; }
 
-        ~ShaderProgramCache()
-        {
-            Dispose(false);
-        }
+        ~ShaderProgramCache() { Dispose(false); }
 
         /// <summary>
         /// Clear the program cache releasing all shader programs.
         /// </summary>
         public void Clear()
         {
-            foreach (var pair in _programCache)
+            foreach(var pair in _programCache)
             {
                 _graphicsDevice.DisposeProgram(pair.Value.Program);
             }
@@ -70,7 +60,7 @@ namespace Microsoft.Xna.Framework.Graphics
             // setting uniforms to only when a constant buffer changes.
 
             var key = vertexShader.HashKey | pixelShader.HashKey;
-            if (!_programCache.ContainsKey(key))
+            if(!_programCache.ContainsKey(key))
             {
                 // the key does not exist so we need to link the programs
                 _programCache.Add(key, Link(vertexShader, pixelShader));
@@ -109,7 +99,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             GL.GetProgram(program, GetProgramParameterName.LinkStatus, out linked);
             GraphicsExtensions.LogGLError("VertexShaderCache.Link(), GL.GetProgram");
-            if (linked == (int)Bool.False)
+            if(linked == (int)Bool.False)
             {
                 var log = GL.GetProgramInfoLog(program);
                 Console.WriteLine(log);
@@ -131,9 +121,9 @@ namespace Microsoft.Xna.Framework.Graphics
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if(!disposed)
             {
-                if (disposing)
+                if(disposing)
                     Clear();
                 disposed = true;
             }

@@ -15,27 +15,28 @@ namespace Microsoft.Xna.Framework.Graphics
         internal VertexDeclarationAttributeInfo GetAttributeInfo(Shader shader, int programHash)
         {
             VertexDeclarationAttributeInfo attrInfo;
-            if (_shaderAttributeInfo.TryGetValue(programHash, out attrInfo))
+            if(_shaderAttributeInfo.TryGetValue(programHash, out attrInfo))
                 return attrInfo;
 
             // Get the vertex attribute info and cache it
             attrInfo = new VertexDeclarationAttributeInfo(GraphicsDevice.MaxVertexAttributes);
 
-            foreach (var ve in InternalVertexElements)
+            foreach(var ve in InternalVertexElements)
             {
                 var attributeLocation = shader.GetAttribLocation(ve.VertexElementUsage, ve.UsageIndex);
                 // XNA appears to ignore usages it can't find a match for, so we will do the same
-                if (attributeLocation < 0)
+                if(attributeLocation < 0)
                     continue;
 
-                attrInfo.Elements.Add(new VertexDeclarationAttributeInfo.Element
-                {
-                    Offset = ve.Offset,
-                    AttributeLocation = attributeLocation,
-                    NumberOfElements = ve.VertexElementFormat.OpenGLNumberOfElements(),
-                    VertexAttribPointerType = ve.VertexElementFormat.OpenGLVertexAttribPointerType(),
-                    Normalized = ve.OpenGLVertexAttribNormalized(),
-                });
+                attrInfo.Elements
+                    .Add(new VertexDeclarationAttributeInfo.Element
+                    {
+                        Offset = ve.Offset,
+                        AttributeLocation = attributeLocation,
+                        NumberOfElements = ve.VertexElementFormat.OpenGLNumberOfElements(),
+                        VertexAttribPointerType = ve.VertexElementFormat.OpenGLVertexAttribPointerType(),
+                        Normalized = ve.OpenGLVertexAttribNormalized(),
+                    });
                 attrInfo.EnabledAttributes[attributeLocation] = true;
             }
 
@@ -49,16 +50,16 @@ namespace Microsoft.Xna.Framework.Graphics
             var attrInfo = GetAttributeInfo(shader, programHash);
 
             // Apply the vertex attribute info
-            foreach (var element in attrInfo.Elements)
+            foreach(var element in attrInfo.Elements)
             {
                 GL.VertexAttribPointer(element.AttributeLocation,
-                    element.NumberOfElements,
-                    element.VertexAttribPointerType,
-                    element.Normalized,
-                    VertexStride,
-                    (IntPtr)(offset.ToInt64() + element.Offset));
+                                       element.NumberOfElements,
+                                       element.VertexAttribPointerType,
+                                       element.Normalized,
+                                       VertexStride,
+                                       (IntPtr)(offset.ToInt64() + element.Offset));
 #if !(GLES || MONOMAC)
-                if (GraphicsDevice.GraphicsCapabilities.SupportsInstancing)
+                if(GraphicsDevice.GraphicsCapabilities.SupportsInstancing)
                     GL.VertexAttribDivisor(element.AttributeLocation, 0);
 #endif
                 GraphicsExtensions.CheckGLError();

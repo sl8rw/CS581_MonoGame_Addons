@@ -14,35 +14,33 @@ namespace Microsoft.Xna.Framework.Graphics
             // When rendering offscreen the faces change order.
             var offscreen = device.IsRenderTargetBound;
 
-            if (force)
+            if(force)
             {
                 // Turn off dithering to make sure data returned by Texture.GetData is accurate
                 GL.Disable(EnableCap.Dither);
             }
 
-            if (CullMode == CullMode.None)
+            if(CullMode == CullMode.None)
             {
                 GL.Disable(EnableCap.CullFace);
                 GraphicsExtensions.CheckGLError();
-            }
-            else
+            } else
             {
                 GL.Enable(EnableCap.CullFace);
                 GraphicsExtensions.CheckGLError();
                 GL.CullFace(CullFaceMode.Back);
                 GraphicsExtensions.CheckGLError();
 
-                if (CullMode == CullMode.CullClockwiseFace)
+                if(CullMode == CullMode.CullClockwiseFace)
                 {
-                    if (offscreen)
+                    if(offscreen)
                         GL.FrontFace(FrontFaceDirection.Cw);
                     else
                         GL.FrontFace(FrontFaceDirection.Ccw);
                     GraphicsExtensions.CheckGLError();
-                }
-                else
+                } else
                 {
-                    if (offscreen)
+                    if(offscreen)
                         GL.FrontFace(FrontFaceDirection.Ccw);
                     else
                         GL.FrontFace(FrontFaceDirection.Cw);
@@ -51,7 +49,7 @@ namespace Microsoft.Xna.Framework.Graphics
             }
 
 #if WINDOWS || DESKTOPGL
-            if (FillMode == FillMode.Solid)
+            if(FillMode == FillMode.Solid)
                 GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
             else
                 GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
@@ -60,9 +58,9 @@ namespace Microsoft.Xna.Framework.Graphics
                 throw new NotImplementedException();
 #endif
 
-            if (force || this.ScissorTestEnable != device._lastRasterizerState.ScissorTestEnable)
+            if(force || this.ScissorTestEnable != device._lastRasterizerState.ScissorTestEnable)
             {
-                if (ScissorTestEnable)
+                if(ScissorTestEnable)
                     GL.Enable(EnableCap.ScissorTest);
                 else
                     GL.Disable(EnableCap.ScissorTest);
@@ -70,17 +68,17 @@ namespace Microsoft.Xna.Framework.Graphics
                 device._lastRasterizerState.ScissorTestEnable = this.ScissorTestEnable;
             }
 
-            if (force ||
+            if(force ||
                 this.DepthBias != device._lastRasterizerState.DepthBias ||
                 this.SlopeScaleDepthBias != device._lastRasterizerState.SlopeScaleDepthBias)
             {
-                if (this.DepthBias != 0 || this.SlopeScaleDepthBias != 0)
+                if(this.DepthBias != 0 || this.SlopeScaleDepthBias != 0)
                 {
                     // from the docs it seems this works the same as for Direct3D
                     // https://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml
                     // explanation for Direct3D is  in https://github.com/MonoGame/MonoGame/issues/4826
                     int depthMul;
-                    switch (device.ActiveDepthFormat)
+                    switch(device.ActiveDepthFormat)
                     {
                         case DepthFormat.None:
                             depthMul = 0;
@@ -97,18 +95,17 @@ namespace Microsoft.Xna.Framework.Graphics
                     }
                     GL.Enable(EnableCap.PolygonOffsetFill);
                     GL.PolygonOffset(this.SlopeScaleDepthBias, this.DepthBias * depthMul);
-                }
-                else
+                } else
                     GL.Disable(EnableCap.PolygonOffsetFill);
                 GraphicsExtensions.CheckGLError();
                 device._lastRasterizerState.DepthBias = this.DepthBias;
                 device._lastRasterizerState.SlopeScaleDepthBias = this.SlopeScaleDepthBias;
             }
 
-            if (device.GraphicsCapabilities.SupportsDepthClamp &&
+            if(device.GraphicsCapabilities.SupportsDepthClamp &&
                 (force || this.DepthClipEnable != device._lastRasterizerState.DepthClipEnable))
             {
-                if (!DepthClipEnable)
+                if(!DepthClipEnable)
                     GL.Enable((EnableCap)0x864F); // should be EnableCap.DepthClamp, but not available in OpenTK.Graphics.ES20.EnableCap
                 else
                     GL.Disable((EnableCap)0x864F);

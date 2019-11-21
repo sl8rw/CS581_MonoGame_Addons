@@ -15,10 +15,7 @@ namespace Microsoft.Xna.Framework
 {
     internal class SdlGamePlatform : GamePlatform
     {
-        public override GameRunBehavior DefaultRunBehavior
-        {
-            get { return GameRunBehavior.Synchronous; }
-        }
+        public override GameRunBehavior DefaultRunBehavior { get { return GameRunBehavior.Synchronous; } }
 
         private readonly Game _game;
         private readonly List<Keys> _keys;
@@ -26,8 +23,7 @@ namespace Microsoft.Xna.Framework
         private int _isExiting;
         private SdlGameWindow _view;
 
-        public SdlGamePlatform(Game game)
-            : base(game)
+        public SdlGamePlatform(Game game) : base(game)
         {
             _game = game;
             _keys = new List<Keys>();
@@ -42,19 +38,17 @@ namespace Microsoft.Xna.Framework
 
             var version = 100 * Sdl.Major + 10 * Sdl.Minor + Sdl.Patch;
 
-            if (version <= 204)
+            if(version <= 204)
                 Debug.WriteLine("Please use SDL 2.0.5 or higher.");
 
             // Needed so VS can debug the project on Windows
-            if (version >= 205 && CurrentPlatform.OS == OS.Windows && Debugger.IsAttached)
+            if(version >= 205 && CurrentPlatform.OS == OS.Windows && Debugger.IsAttached)
                 Sdl.SetHint("SDL_WINDOWS_DISABLE_THREAD_NAMING", "1");
 
-            Sdl.Init((int)(
-                Sdl.InitFlags.Video |
+            Sdl.Init((int)(Sdl.InitFlags.Video |
                 Sdl.InitFlags.Joystick |
                 Sdl.InitFlags.GameController |
-                Sdl.InitFlags.Haptic
-            ));
+                Sdl.InitFlags.Haptic));
 
             Sdl.DisableScreenSaver();
 
@@ -69,10 +63,7 @@ namespace Microsoft.Xna.Framework
             base.BeforeInitialize();
         }
 
-        protected override void OnIsMouseVisibleChanged()
-        {
-            _view.SetCursorVisible(_game.IsMouseVisible);
-        }
+        protected override void OnIsMouseVisibleChanged() { _view.SetCursorVisible(_game.IsMouseVisible); }
 
         internal override void OnPresentationChanged(PresentationParameters pp)
         {
@@ -86,14 +77,14 @@ namespace Microsoft.Xna.Framework
         {
             Sdl.Window.Show(Window.Handle);
 
-            while (true)
+            while(true)
             {
                 SdlRunLoop();
                 Game.Tick();
                 Threading.Run();
                 GraphicsDevice.DisposeContexts();
 
-                if (_isExiting > 0)
+                if(_isExiting > 0)
                     break;
             }
         }
@@ -102,9 +93,9 @@ namespace Microsoft.Xna.Framework
         {
             Sdl.Event ev;
 
-            while (Sdl.PollEvent(out ev) == 1)
+            while(Sdl.PollEvent(out ev) == 1)
             {
-                switch (ev.Type)
+                switch(ev.Type)
                 {
                     case Sdl.EventType.Quit:
                         _isExiting++;
@@ -133,25 +124,25 @@ namespace Microsoft.Xna.Framework
                         Window.MouseState.Y = ev.Motion.Y;
                         break;
                     case Sdl.EventType.KeyDown:
-                        {
-                            var key = KeyboardUtil.ToXna(ev.Key.Keysym.Sym);
-                            if (!_keys.Contains(key))
-                                _keys.Add(key);
-                            char character = (char)ev.Key.Keysym.Sym;
-                            _view.OnKeyDown(new InputKeyEventArgs(key));
-                            if (char.IsControl(character))
-                                _view.OnTextInput(new TextInputEventArgs(character, key));
-                            break;
-                        }
+                    {
+                        var key = KeyboardUtil.ToXna(ev.Key.Keysym.Sym);
+                        if(!_keys.Contains(key))
+                            _keys.Add(key);
+                        char character = (char)ev.Key.Keysym.Sym;
+                        _view.OnKeyDown(new InputKeyEventArgs(key));
+                        if(char.IsControl(character))
+                            _view.OnTextInput(new TextInputEventArgs(character, key));
+                        break;
+                    }
                     case Sdl.EventType.KeyUp:
-                        {
-                            var key = KeyboardUtil.ToXna(ev.Key.Keysym.Sym);
-                            _keys.Remove(key);
-                            _view.OnKeyUp(new InputKeyEventArgs(key));
-                            break;
-                        }
+                    {
+                        var key = KeyboardUtil.ToXna(ev.Key.Keysym.Sym);
+                        _keys.Remove(key);
+                        _view.OnKeyUp(new InputKeyEventArgs(key));
+                        break;
+                    }
                     case Sdl.EventType.TextInput:
-                        if (_view.IsTextInputHandled)
+                        if(_view.IsTextInputHandled)
                         {
                             int len = 0;
                             int utf8character = 0; // using an int to encode multibyte characters longer than 2 bytes
@@ -160,54 +151,54 @@ namespace Microsoft.Xna.Framework
                             int remainingShift = 0;
                             unsafe
                             {
-                                while ((currentByte = Marshal.ReadByte((IntPtr)ev.Text.Text, len)) != 0)
-                                {
-                                    // we're reading the first UTF8 byte, we need to check if it's multibyte
-                                    if (charByteSize == 0)
-                                    {
-                                        if (currentByte < 192)
-                                            charByteSize = 1;
-                                        else if (currentByte < 224)
-                                            charByteSize = 2;
-                                        else if (currentByte < 240)
-                                            charByteSize = 3;
+    while((currentByte = Marshal.ReadByte((IntPtr)ev.Text.Text, len)) != 0)
+    {
+        // we're reading the first UTF8 byte, we need to check if it's multibyte
+        if(charByteSize == 0)
+        {
+            if(currentByte < 192)
+                charByteSize = 1;
+                                        else if(currentByte < 224)
+                charByteSize = 2;
+                                        else if(currentByte < 240)
+                charByteSize = 3;
                                         else
-                                            charByteSize = 4;
+                charByteSize = 4;
 
-                                        utf8character = 0;
-                                        remainingShift = 4;
-                                    }
+            utf8character = 0;
+            remainingShift = 4;
+        }
 
-                                    // assembling the character
-                                    utf8character <<= 8;
-                                    utf8character |= currentByte;
+        // assembling the character
+        utf8character <<= 8;
+        utf8character |= currentByte;
 
-                                    charByteSize--;
-                                    remainingShift--;
+        charByteSize--;
+        remainingShift--;
 
-                                    if (charByteSize == 0) // finished decoding the current character
-                                    {
-                                        utf8character <<= remainingShift * 8; // shifting it to full UTF8 scope
+        if(charByteSize == 0) // finished decoding the current character
+        {
+            utf8character <<= remainingShift * 8; // shifting it to full UTF8 scope
 
-                                        // SDL returns UTF8-encoded characters while C# char type is UTF16-encoded (and limited to the 0-FFFF range / does not support surrogate pairs)
-                                        // so we need to convert it to Unicode codepoint and check if it's within the supported range
-                                        int codepoint = UTF8ToUnicode(utf8character);
+            // SDL returns UTF8-encoded characters while C# char type is UTF16-encoded (and limited to the 0-FFFF range / does not support surrogate pairs)
+            // so we need to convert it to Unicode codepoint and check if it's within the supported range
+            int codepoint = UTF8ToUnicode(utf8character);
 
-                                        if (codepoint >= 0 && codepoint < 0xFFFF)
-                                        {
-                                            _view.OnTextInput(new TextInputEventArgs((char)codepoint, KeyboardUtil.ToXna(codepoint)));
-                                            // UTF16 characters beyond 0xFFFF are not supported (and would require a surrogate encoding that is not supported by the char type)
-                                        }
-                                    }
+            if(codepoint >= 0 && codepoint < 0xFFFF)
+            {
+                _view.OnTextInput(new TextInputEventArgs((char)codepoint, KeyboardUtil.ToXna(codepoint)));
+                // UTF16 characters beyond 0xFFFF are not supported (and would require a surrogate encoding that is not supported by the char type)
+            }
+        }
 
-                                    len++;
-                                }
+        len++;
+    }
                             }
                         }
                         break;
                     case Sdl.EventType.WindowEvent:
 
-                        switch (ev.Window.EventID)
+                        switch(ev.Window.EventID)
                         {
                             case Sdl.Window.EventId.Resized:
                             case Sdl.Window.EventId.SizeChanged:
@@ -236,72 +227,65 @@ namespace Microsoft.Xna.Framework
                 byte2 = (utf8 >> 16) & 0xFF,
                 byte1 = (utf8 >> 24) & 0xFF;
 
-            if (byte1 < 0x80)
+            if(byte1 < 0x80)
                 return byte1;
-            else if (byte1 < 0xC0)
+            else if(byte1 < 0xC0)
                 return -1;
-            else if (byte1 < 0xE0 && byte2 >= 0x80 && byte2 < 0xC0)
+            else if(byte1 < 0xE0 && byte2 >= 0x80 && byte2 < 0xC0)
                 return (byte1 % 0x20) * 0x40 + (byte2 % 0x40);
-            else if (byte1 < 0xF0 && byte2 >= 0x80 && byte2 < 0xC0 && byte3 >= 0x80 && byte3 < 0xC0)
+            else if(byte1 < 0xF0 && byte2 >= 0x80 && byte2 < 0xC0 && byte3 >= 0x80 && byte3 < 0xC0)
                 return (byte1 % 0x10) * 0x40 * 0x40 + (byte2 % 0x40) * 0x40 + (byte3 % 0x40);
-            else if (byte1 < 0xF8 && byte2 >= 0x80 && byte2 < 0xC0 && byte3 >= 0x80 && byte3 < 0xC0 && byte4 >= 0x80 && byte4 < 0xC0)
-                return (byte1 % 0x8) * 0x40 * 0x40 * 0x40 + (byte2 % 0x40) * 0x40 * 0x40 + (byte3 % 0x40) * 0x40 + (byte4 % 0x40);
+            else if(byte1 < 0xF8 &&
+                byte2 >= 0x80 &&
+                byte2 < 0xC0 &&
+                byte3 >= 0x80 &&
+                byte3 < 0xC0 &&
+                byte4 >= 0x80 &&
+                byte4 < 0xC0)
+                return (byte1 % 0x8) *
+                    0x40 *
+                    0x40 *
+                    0x40 +
+                    (byte2 % 0x40) *
+                    0x40 *
+                    0x40 +
+                    (byte3 % 0x40) *
+                    0x40 +
+                    (byte4 % 0x40);
             else
                 return -1;
         }
 
         public override void StartRunLoop()
-        {
-            throw new NotSupportedException("The desktop platform does not support asynchronous run loops");
-        }
+        { throw new NotSupportedException("The desktop platform does not support asynchronous run loops"); }
 
-        public override void Exit()
-        {
-            Interlocked.Increment(ref _isExiting);
-        }
+        public override void Exit() { Interlocked.Increment(ref _isExiting); }
 
-        public override bool BeforeUpdate(GameTime gameTime)
-        {
-            return true;
-        }
+        public override bool BeforeUpdate(GameTime gameTime) { return true; }
 
-        public override bool BeforeDraw(GameTime gameTime)
-        {
-            return true;
-        }
+        public override bool BeforeDraw(GameTime gameTime) { return true; }
 
-        public override void EnterFullScreen()
-        {
-        }
+        public override void EnterFullScreen() { }
 
-        public override void ExitFullScreen()
-        {
-        }
+        public override void ExitFullScreen() { }
 
         public override void BeginScreenDeviceChange(bool willBeFullScreen)
-        {
-            _view.BeginScreenDeviceChange(willBeFullScreen);
-        }
+        { _view.BeginScreenDeviceChange(willBeFullScreen); }
 
         public override void EndScreenDeviceChange(string screenDeviceName, int clientWidth, int clientHeight)
-        {
-            _view.EndScreenDeviceChange(screenDeviceName, clientWidth, clientHeight);
-        }
+        { _view.EndScreenDeviceChange(screenDeviceName, clientWidth, clientHeight); }
 
-        public override void Log(string message)
-        {
-            Console.WriteLine(message);
-        }
+        public override void Log(string message) { Console.WriteLine(message); }
 
         public override void Present()
         {
-            if (Game.GraphicsDevice != null)
+            if(Game.GraphicsDevice != null)
                 Game.GraphicsDevice.Present();
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (_view != null)
+            if(_view != null)
             {
                 _view.Dispose();
                 _view = null;

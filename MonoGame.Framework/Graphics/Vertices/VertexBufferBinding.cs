@@ -19,42 +19,30 @@ namespace Microsoft.Xna.Framework.Graphics
         /// Gets the vertex buffer.
         /// </summary>
         /// <value>The vertex buffer.</value>
-        public VertexBuffer VertexBuffer
-        {
-            get { return _vertexBuffer; }
-        }
+        public VertexBuffer VertexBuffer { get { return _vertexBuffer; } }
 
         /// <summary>
         /// Gets the index of the first vertex in the vertex buffer to use.
         /// </summary>
         /// <value>The index of the first vertex in the vertex buffer to use.</value>
-        public int VertexOffset
-        {
-            get { return _vertexOffset; }
-        }
+        public int VertexOffset { get { return _vertexOffset; } }
 
         /// <summary>
-        /// Gets the number of instances to draw using the same per-instance data before advancing
-        /// in the buffer by one element.
+        /// Gets the number of instances to draw using the same per-instance data before advancing in the buffer by one
+        /// element.
         /// </summary>
         /// <value>
-        /// The number of instances to draw using the same per-instance data before advancing in the
-        /// buffer by one element. This value must be 0 for an element that contains per-vertex
-        /// data and greater than 0 for per-instance data.
+        /// The number of instances to draw using the same per-instance data before advancing in the buffer by one
+        /// element. This value must be 0 for an element that contains per-vertex data and greater than 0 for per-
+        /// instance data.
         /// </value>
-        public int InstanceFrequency
-        {
-            get { return _instanceFrequency; }
-        }
+        public int InstanceFrequency { get { return _instanceFrequency; } }
 
         /// <summary>
         /// Creates an instance of <see cref="VertexBufferBinding"/>.
         /// </summary>
         /// <param name="vertexBuffer">The vertex buffer to bind.</param>
-        public VertexBufferBinding(VertexBuffer vertexBuffer)
-            : this(vertexBuffer, 0, 0)
-        {
-        }
+        public VertexBufferBinding(VertexBuffer vertexBuffer) : this(vertexBuffer, 0, 0) { }
 
         /// <summary>
         /// Creates an instance of <see cref="VertexBufferBinding"/>.
@@ -63,10 +51,8 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <param name="vertexOffset">
         /// The index of the first vertex in the vertex buffer to use.
         /// </param>
-        public VertexBufferBinding(VertexBuffer vertexBuffer, int vertexOffset)
-            : this(vertexBuffer, vertexOffset, 0)
-        {
-        }
+        public VertexBufferBinding(VertexBuffer vertexBuffer, int vertexOffset) : this(vertexBuffer, vertexOffset, 0)
+        { }
 
         /// <summary>
         /// Creates an instance of VertexBufferBinding.
@@ -76,9 +62,9 @@ namespace Microsoft.Xna.Framework.Graphics
         /// The index of the first vertex in the vertex buffer to use.
         /// </param>
         /// <param name="instanceFrequency">
-        /// The number of instances to draw using the same per-instance data before advancing in the
-        /// buffer by one element. This value must be 0 for an element that contains per-vertex data
-        /// and greater than 0 for per-instance data.
+        /// The number of instances to draw using the same per-instance data before advancing in the buffer by one
+        /// element. This value must be 0 for an element that contains per-vertex data and greater than 0 for per-
+        /// instance data.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="vertexBuffer"/> is <see langword="null"/>.
@@ -88,12 +74,12 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </exception>
         public VertexBufferBinding(VertexBuffer vertexBuffer, int vertexOffset, int instanceFrequency)
         {
-            if (vertexBuffer == null)
-                throw new ArgumentNullException("vertexBuffer");
-            if (vertexOffset < 0 || vertexOffset >= vertexBuffer.VertexCount)
-                throw new ArgumentOutOfRangeException("vertexOffset");
-            if (instanceFrequency < 0)
-                throw new ArgumentOutOfRangeException("instanceFrequency");
+            if(vertexBuffer == null)
+                throw new ArgumentNullException(nameof(vertexBuffer));
+            if(vertexOffset < 0 || vertexOffset >= vertexBuffer.VertexCount)
+                throw new ArgumentOutOfRangeException(nameof(vertexOffset));
+            if(instanceFrequency < 0)
+                throw new ArgumentOutOfRangeException(nameof(instanceFrequency));
 
             _vertexBuffer = vertexBuffer;
             _vertexOffset = vertexOffset;

@@ -12,6 +12,7 @@ namespace Microsoft.Xna.Framework.Media
         private int _playCount = 0;
         private TimeSpan _duration = TimeSpan.Zero;
         bool disposed;
+
         /// <summary>
         /// Gets the Album on which the Song appears.
         /// </summary>
@@ -26,23 +27,14 @@ namespace Microsoft.Xna.Framework.Media
         /// <summary>
         /// Gets the Artist of the Song.
         /// </summary>
-        public Artist Artist
-        {
-            get { return PlatformGetArtist(); }
-        }
+        public Artist Artist { get { return PlatformGetArtist(); } }
 
         /// <summary>
         /// Gets the Genre of the Song.
         /// </summary>
-        public Genre Genre
-        {
-            get { return PlatformGetGenre(); }
-        }
+        public Genre Genre { get { return PlatformGetGenre(); } }
 
-        public bool IsDisposed
-        {
-            get { return disposed; }
-        }
+        public bool IsDisposed { get { return disposed; } }
 
 #if ANDROID || OPENAL || WEB || IOS
         internal delegate void FinishedPlayingHandler(object sender, EventArgs args);
@@ -50,11 +42,8 @@ namespace Microsoft.Xna.Framework.Media
         event FinishedPlayingHandler DonePlaying;
 #endif
 #endif
-        internal Song(string fileName, int durationMS)
-            : this(fileName)
-        {
-            _duration = TimeSpan.FromMilliseconds(durationMS);
-        }
+        internal Song(string fileName, int durationMS) : this(fileName)
+        { _duration = TimeSpan.FromMilliseconds(durationMS); }
 
         internal Song(string fileName)
         {
@@ -63,15 +52,9 @@ namespace Microsoft.Xna.Framework.Media
             PlatformInitialize(fileName);
         }
 
-        ~Song()
-        {
-            Dispose(false);
-        }
+        ~Song() { Dispose(false); }
 
-        internal string FilePath
-        {
-            get { return _name; }
-        }
+        internal string FilePath { get { return _name; } }
 
         /// <summary>
         /// Returns a song that can be played via <see cref="MediaPlayer"/>.
@@ -94,9 +77,9 @@ namespace Microsoft.Xna.Framework.Media
 
         void Dispose(bool disposing)
         {
-            if (!disposed)
+            if(!disposed)
             {
-                if (disposing)
+                if(disposing)
                 {
                     PlatformDispose(disposing);
                 }
@@ -105,10 +88,7 @@ namespace Microsoft.Xna.Framework.Media
             }
         }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+        public override int GetHashCode() { return base.GetHashCode(); }
 
         public bool Equals(Song song)
         {
@@ -122,7 +102,7 @@ namespace Microsoft.Xna.Framework.Media
 
         public override bool Equals(Object obj)
         {
-            if (obj == null)
+            if(obj == null)
             {
                 return false;
             }
@@ -132,7 +112,7 @@ namespace Microsoft.Xna.Framework.Media
 
         public static bool operator ==(Song song1, Song song2)
         {
-            if ((object)song1 == null)
+            if((object)song1 == null)
             {
                 return (object)song2 == null;
             }
@@ -145,40 +125,19 @@ namespace Microsoft.Xna.Framework.Media
             return !(song1 == song2);
         }
 
-        public TimeSpan Duration
-        {
-            get { return PlatformGetDuration(); }
-        }
+        public TimeSpan Duration { get { return PlatformGetDuration(); } }
 
-        public bool IsProtected
-        {
-            get { return PlatformIsProtected(); }
-        }
+        public bool IsProtected { get { return PlatformIsProtected(); } }
 
-        public bool IsRated
-        {
-            get { return PlatformIsRated(); }
-        }
+        public bool IsRated { get { return PlatformIsRated(); } }
 
-        public string Name
-        {
-            get { return PlatformGetName(); }
-        }
+        public string Name { get { return PlatformGetName(); } }
 
-        public int PlayCount
-        {
-            get { return PlatformGetPlayCount(); }
-        }
+        public int PlayCount { get { return PlatformGetPlayCount(); } }
 
-        public int Rating
-        {
-            get { return PlatformGetRating(); }
-        }
+        public int Rating { get { return PlatformGetRating(); } }
 
-        public int TrackNumber
-        {
-            get { return PlatformGetTrackNumber(); }
-        }
+        public int TrackNumber { get { return PlatformGetTrackNumber(); } }
     }
 }
 

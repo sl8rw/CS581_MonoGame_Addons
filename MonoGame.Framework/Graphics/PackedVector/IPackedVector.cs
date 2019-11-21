@@ -58,8 +58,6 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
     {
         TPacked PackedValue { get; set; }
     }
-
 }
-
 
 

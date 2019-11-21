@@ -15,15 +15,15 @@ namespace MonoGame.Utilities
         /// </summary>
         public static unsafe string Utf8ToString(IntPtr handle)
         {
-            if (handle == IntPtr.Zero)
+            if(handle == IntPtr.Zero)
                 return string.Empty;
 
             var ptr = (byte*)handle;
-            while (*ptr != 0)
+            while(*ptr != 0)
                 ptr++;
 
             var len = ptr - (byte*)handle;
-            if (len == 0)
+            if(len == 0)
                 return string.Empty;
 
             var bytes = new byte[len];

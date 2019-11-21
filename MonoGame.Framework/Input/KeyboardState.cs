@@ -9,7 +9,7 @@ namespace Microsoft.Xna.Framework.Input
     /// <summary>
     /// Holds the state of keystrokes by a keyboard.
     /// </summary>
-	public struct KeyboardState
+    public struct KeyboardState
     {
         // Used for the common situation where GetPressedKeys will return an empty array
         static Keys[] empty = new Keys[0];
@@ -24,17 +24,35 @@ namespace Microsoft.Xna.Framework.Input
             uint mask = (uint)1 << (((int)key) & 0x1f);
 
             uint element;
-            switch (((int)key) >> 5)
+            switch(((int)key) >> 5)
             {
-                case 0: element = keys0; break;
-                case 1: element = keys1; break;
-                case 2: element = keys2; break;
-                case 3: element = keys3; break;
-                case 4: element = keys4; break;
-                case 5: element = keys5; break;
-                case 6: element = keys6; break;
-                case 7: element = keys7; break;
-                default: element = 0; break;
+                case 0:
+                    element = keys0;
+                    break;
+                case 1:
+                    element = keys1;
+                    break;
+                case 2:
+                    element = keys2;
+                    break;
+                case 3:
+                    element = keys3;
+                    break;
+                case 4:
+                    element = keys4;
+                    break;
+                case 5:
+                    element = keys5;
+                    break;
+                case 6:
+                    element = keys6;
+                    break;
+                case 7:
+                    element = keys7;
+                    break;
+                default:
+                    element = 0;
+                    break;
             }
 
             return (element & mask) != 0;
@@ -43,32 +61,64 @@ namespace Microsoft.Xna.Framework.Input
         internal void InternalSetKey(Keys key)
         {
             uint mask = (uint)1 << (((int)key) & 0x1f);
-            switch (((int)key) >> 5)
+            switch(((int)key) >> 5)
             {
-                case 0: keys0 |= mask; break;
-                case 1: keys1 |= mask; break;
-                case 2: keys2 |= mask; break;
-                case 3: keys3 |= mask; break;
-                case 4: keys4 |= mask; break;
-                case 5: keys5 |= mask; break;
-                case 6: keys6 |= mask; break;
-                case 7: keys7 |= mask; break;
+                case 0:
+                    keys0 |= mask;
+                    break;
+                case 1:
+                    keys1 |= mask;
+                    break;
+                case 2:
+                    keys2 |= mask;
+                    break;
+                case 3:
+                    keys3 |= mask;
+                    break;
+                case 4:
+                    keys4 |= mask;
+                    break;
+                case 5:
+                    keys5 |= mask;
+                    break;
+                case 6:
+                    keys6 |= mask;
+                    break;
+                case 7:
+                    keys7 |= mask;
+                    break;
             }
         }
 
         internal void InternalClearKey(Keys key)
         {
             uint mask = (uint)1 << (((int)key) & 0x1f);
-            switch (((int)key) >> 5)
+            switch(((int)key) >> 5)
             {
-                case 0: keys0 &= ~mask; break;
-                case 1: keys1 &= ~mask; break;
-                case 2: keys2 &= ~mask; break;
-                case 3: keys3 &= ~mask; break;
-                case 4: keys4 &= ~mask; break;
-                case 5: keys5 &= ~mask; break;
-                case 6: keys6 &= ~mask; break;
-                case 7: keys7 &= ~mask; break;
+                case 0:
+                    keys0 &= ~mask;
+                    break;
+                case 1:
+                    keys1 &= ~mask;
+                    break;
+                case 2:
+                    keys2 &= ~mask;
+                    break;
+                case 3:
+                    keys3 &= ~mask;
+                    break;
+                case 4:
+                    keys4 &= ~mask;
+                    break;
+                case 5:
+                    keys5 &= ~mask;
+                    break;
+                case 6:
+                    keys6 &= ~mask;
+                    break;
+                case 7:
+                    keys7 &= ~mask;
+                    break;
             }
         }
 
@@ -90,8 +140,8 @@ namespace Microsoft.Xna.Framework.Input
         #region XNA Interface
 
         /// <summary>
-        /// Gets the current state of the Caps Lock key.
-        /// </summary>
+/// Gets the current state of the Caps Lock key.
+/// </summary>
         public bool CapsLock { get; private set; }
 
         /// <summary>
@@ -113,8 +163,8 @@ namespace Microsoft.Xna.Framework.Input
             keys6 = 0;
             keys7 = 0;
 
-            if (keys != null)
-                foreach (Keys k in keys)
+            if(keys != null)
+                foreach(Keys k in keys)
                     InternalSetKey(k);
         }
 
@@ -138,8 +188,8 @@ namespace Microsoft.Xna.Framework.Input
             keys6 = 0;
             keys7 = 0;
 
-            if (keys != null)
-                foreach (Keys k in keys)
+            if(keys != null)
+                foreach(Keys k in keys)
                     InternalSetKey(k);
         }
 
@@ -161,8 +211,8 @@ namespace Microsoft.Xna.Framework.Input
             keys6 = 0;
             keys7 = 0;
 
-            if (keys != null)
-                foreach (Keys k in keys)
+            if(keys != null)
+                foreach(Keys k in keys)
                     InternalSetKey(k);
         }
 
@@ -171,30 +221,21 @@ namespace Microsoft.Xna.Framework.Input
         /// </summary>
         /// <param name="key">The key to query.</param>
         /// <returns>The state of the key.</returns>
-        public KeyState this[Keys key]
-        {
-            get { return InternalGetKey(key) ? KeyState.Down : KeyState.Up; }
-        }
+        public KeyState this[Keys key] { get { return InternalGetKey(key) ? KeyState.Down : KeyState.Up; } }
 
         /// <summary>
         /// Gets whether given key is currently being pressed.
         /// </summary>
         /// <param name="key">The key to query.</param>
         /// <returns>true if the key is pressed; false otherwise.</returns>
-        public bool IsKeyDown(Keys key)
-        {
-            return InternalGetKey(key);
-        }
+        public bool IsKeyDown(Keys key) { return InternalGetKey(key); }
 
         /// <summary>
         /// Gets whether given key is currently being not pressed.
         /// </summary>
         /// <param name="key">The key to query.</param>
         /// <returns>true if the key is not pressed; false otherwise.</returns>
-        public bool IsKeyUp(Keys key)
-        {
-            return !InternalGetKey(key);
-        }
+        public bool IsKeyUp(Keys key) { return !InternalGetKey(key); }
 
         #endregion
 
@@ -202,13 +243,19 @@ namespace Microsoft.Xna.Framework.Input
         #region GetPressedKeys()
 
         /// <summary>
-        /// Returns the number of pressed keys in this <see cref="KeyboardState"/>.
-        /// </summary>
+/// Returns the number of pressed keys in this <see cref="KeyboardState"/>.
+/// </summary>
         /// <returns>An integer representing the number of keys currently pressed in this <see cref="KeyboardState"/>.</returns>
         public int GetPressedKeyCount()
         {
-            uint count = CountBits(keys0) + CountBits(keys1) + CountBits(keys2) + CountBits(keys3)
-                    + CountBits(keys4) + CountBits(keys5) + CountBits(keys6) + CountBits(keys7);
+            uint count = CountBits(keys0) +
+                CountBits(keys1) +
+                CountBits(keys2) +
+                CountBits(keys3) +
+                CountBits(keys4) +
+                CountBits(keys5) +
+                CountBits(keys6) +
+                CountBits(keys7);
             return (int)count;
         }
 
@@ -222,9 +269,9 @@ namespace Microsoft.Xna.Framework.Input
 
         private static int AddKeysToArray(uint keys, int offset, Keys[] pressedKeys, int index)
         {
-            for (int i = 0; i < 32; i++)
+            for(int i = 0; i < 32; i++)
             {
-                if ((keys & (1 << i)) != 0)
+                if((keys & (1 << i)) != 0)
                     pressedKeys[index++] = (Keys)(offset + i);
             }
             return index;
@@ -236,21 +283,35 @@ namespace Microsoft.Xna.Framework.Input
         /// <returns>The keys that are currently being pressed.</returns>
         public Keys[] GetPressedKeys()
         {
-            uint count = CountBits(keys0) + CountBits(keys1) + CountBits(keys2) + CountBits(keys3)
-                    + CountBits(keys4) + CountBits(keys5) + CountBits(keys6) + CountBits(keys7);
-            if (count == 0)
+            uint count = CountBits(keys0) +
+                CountBits(keys1) +
+                CountBits(keys2) +
+                CountBits(keys3) +
+                CountBits(keys4) +
+                CountBits(keys5) +
+                CountBits(keys6) +
+                CountBits(keys7);
+            if(count == 0)
                 return empty;
             Keys[] keys = new Keys[count];
 
             int index = 0;
-            if (keys0 != 0) index = AddKeysToArray(keys0, 0 * 32, keys, index);
-            if (keys1 != 0) index = AddKeysToArray(keys1, 1 * 32, keys, index);
-            if (keys2 != 0) index = AddKeysToArray(keys2, 2 * 32, keys, index);
-            if (keys3 != 0) index = AddKeysToArray(keys3, 3 * 32, keys, index);
-            if (keys4 != 0) index = AddKeysToArray(keys4, 4 * 32, keys, index);
-            if (keys5 != 0) index = AddKeysToArray(keys5, 5 * 32, keys, index);
-            if (keys6 != 0) index = AddKeysToArray(keys6, 6 * 32, keys, index);
-            if (keys7 != 0) index = AddKeysToArray(keys7, 7 * 32, keys, index);
+            if(keys0 != 0)
+                index = AddKeysToArray(keys0, 0 * 32, keys, index);
+            if(keys1 != 0)
+                index = AddKeysToArray(keys1, 1 * 32, keys, index);
+            if(keys2 != 0)
+                index = AddKeysToArray(keys2, 2 * 32, keys, index);
+            if(keys3 != 0)
+                index = AddKeysToArray(keys3, 3 * 32, keys, index);
+            if(keys4 != 0)
+                index = AddKeysToArray(keys4, 4 * 32, keys, index);
+            if(keys5 != 0)
+                index = AddKeysToArray(keys5, 5 * 32, keys, index);
+            if(keys6 != 0)
+                index = AddKeysToArray(keys6, 6 * 32, keys, index);
+            if(keys7 != 0)
+                index = AddKeysToArray(keys7, 7 * 32, keys, index);
 
             return keys;
         }
@@ -258,30 +319,46 @@ namespace Microsoft.Xna.Framework.Input
         /// <summary>
         /// Fills an array of values holding keys that are currently being pressed.
         /// </summary>
-        /// <param name="keys">The keys array to fill.
-        /// This array is not cleared, and it must be equal to or larger than the number of keys pressed.</param>
+        /// <param name="keys">
+        /// The keys array to fill. This array is not cleared, and it must be equal to or larger than the number of keys
+        /// pressed.
+        /// </param>
         public void GetPressedKeys(Keys[] keys)
         {
-            if (keys == null)
-                throw new System.ArgumentNullException("keys");
+            if(keys == null)
+                throw new System.ArgumentNullException(nameof(keys));
 
-            uint count = CountBits(keys0) + CountBits(keys1) + CountBits(keys2) + CountBits(keys3)
-                    + CountBits(keys4) + CountBits(keys5) + CountBits(keys6) + CountBits(keys7);
-            if (count > keys.Length)
+            uint count = CountBits(keys0) +
+                CountBits(keys1) +
+                CountBits(keys2) +
+                CountBits(keys3) +
+                CountBits(keys4) +
+                CountBits(keys5) +
+                CountBits(keys6) +
+                CountBits(keys7);
+            if(count > keys.Length)
             {
-                throw new System.ArgumentOutOfRangeException("keys",
-                    "The supplied array cannot fit the number of pressed keys. Call GetPressedKeyCount() to get the number of pressed keys.");
+                throw new System.ArgumentOutOfRangeException(nameof(keys),
+                                                             "The supplied array cannot fit the number of pressed keys. Call GetPressedKeyCount() to get the number of pressed keys.");
             }
 
             int index = 0;
-            if (keys0 != 0 && index < keys.Length) index = AddKeysToArray(keys0, 0 * 32, keys, index);
-            if (keys1 != 0 && index < keys.Length) index = AddKeysToArray(keys1, 1 * 32, keys, index);
-            if (keys2 != 0 && index < keys.Length) index = AddKeysToArray(keys2, 2 * 32, keys, index);
-            if (keys3 != 0 && index < keys.Length) index = AddKeysToArray(keys3, 3 * 32, keys, index);
-            if (keys4 != 0 && index < keys.Length) index = AddKeysToArray(keys4, 4 * 32, keys, index);
-            if (keys5 != 0 && index < keys.Length) index = AddKeysToArray(keys5, 5 * 32, keys, index);
-            if (keys6 != 0 && index < keys.Length) index = AddKeysToArray(keys6, 6 * 32, keys, index);
-            if (keys7 != 0 && index < keys.Length) index = AddKeysToArray(keys7, 7 * 32, keys, index);
+            if(keys0 != 0 && index < keys.Length)
+                index = AddKeysToArray(keys0, 0 * 32, keys, index);
+            if(keys1 != 0 && index < keys.Length)
+                index = AddKeysToArray(keys1, 1 * 32, keys, index);
+            if(keys2 != 0 && index < keys.Length)
+                index = AddKeysToArray(keys2, 2 * 32, keys, index);
+            if(keys3 != 0 && index < keys.Length)
+                index = AddKeysToArray(keys3, 3 * 32, keys, index);
+            if(keys4 != 0 && index < keys.Length)
+                index = AddKeysToArray(keys4, 4 * 32, keys, index);
+            if(keys5 != 0 && index < keys.Length)
+                index = AddKeysToArray(keys5, 5 * 32, keys, index);
+            if(keys6 != 0 && index < keys.Length)
+                index = AddKeysToArray(keys6, 6 * 32, keys, index);
+            if(keys7 != 0 && index < keys.Length)
+                index = AddKeysToArray(keys7, 7 * 32, keys, index);
         }
 
         #endregion
@@ -290,13 +367,11 @@ namespace Microsoft.Xna.Framework.Input
         #region Object and Equality
 
         /// <summary>
-        /// Gets the hash code for <see cref="KeyboardState"/> instance.
-        /// </summary>
+/// Gets the hash code for <see cref="KeyboardState"/> instance.
+/// </summary>
         /// <returns>Hash code of the object.</returns>
         public override int GetHashCode()
-        {
-            return (int)(keys0 ^ keys1 ^ keys2 ^ keys3 ^ keys4 ^ keys5 ^ keys6 ^ keys7);
-        }
+        { return (int)(keys0 ^ keys1 ^ keys2 ^ keys3 ^ keys4 ^ keys5 ^ keys6 ^ keys7); }
 
         /// <summary>
         /// Compares whether two <see cref="KeyboardState"/> instances are equal.
@@ -306,14 +381,14 @@ namespace Microsoft.Xna.Framework.Input
         /// <returns>true if the instances are equal; false otherwise.</returns>
         public static bool operator ==(KeyboardState a, KeyboardState b)
         {
-            return a.keys0 == b.keys0
-                && a.keys1 == b.keys1
-                && a.keys2 == b.keys2
-                && a.keys3 == b.keys3
-                && a.keys4 == b.keys4
-                && a.keys5 == b.keys5
-                && a.keys6 == b.keys6
-                && a.keys7 == b.keys7;
+            return a.keys0 == b.keys0 &&
+                a.keys1 == b.keys1 &&
+                a.keys2 == b.keys2 &&
+                a.keys3 == b.keys3 &&
+                a.keys4 == b.keys4 &&
+                a.keys5 == b.keys5 &&
+                a.keys6 == b.keys6 &&
+                a.keys7 == b.keys7;
         }
 
         /// <summary>
@@ -332,12 +407,7 @@ namespace Microsoft.Xna.Framework.Input
         /// </summary>
         /// <param name="obj">The <see cref="KeyboardState"/> to compare.</param>
         /// <returns>true if the provided <see cref="KeyboardState"/> instance is same with current; false otherwise.</returns>
-        public override bool Equals(object obj)
-        {
-            return obj is KeyboardState && this == (KeyboardState)obj;
-        }
-
+        public override bool Equals(object obj) { return obj is KeyboardState && this == (KeyboardState)obj; }
         #endregion
-
     }
 }

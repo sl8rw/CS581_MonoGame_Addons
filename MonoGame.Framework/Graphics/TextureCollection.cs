@@ -24,16 +24,13 @@ namespace Microsoft.Xna.Framework.Graphics
 
         public Texture this[int index]
         {
-            get
-            {
-                return _textures[index];
-            }
+            get { return _textures[index]; }
             set
             {
-                if (_applyToVertexStage && !_graphicsDevice.GraphicsCapabilities.SupportsVertexTextures)
+                if(_applyToVertexStage && !_graphicsDevice.GraphicsCapabilities.SupportsVertexTextures)
                     throw new NotSupportedException("Vertex textures are not supported on this device.");
 
-                if (_textures[index] == value)
+                if(_textures[index] == value)
                     return;
 
                 _textures[index] = value;
@@ -43,7 +40,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         internal void Clear()
         {
-            for (var i = 0; i < _textures.Length; i++)
+            for(var i = 0; i < _textures.Length; i++)
                 _textures[i] = null;
 
             PlatformClear();
@@ -53,14 +50,11 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// Marks all texture slots as dirty.
         /// </summary>
-        internal void Dirty()
-        {
-            _dirty = int.MaxValue;
-        }
+        internal void Dirty() { _dirty = int.MaxValue; }
 
         internal void SetTextures(GraphicsDevice device)
         {
-            if (_applyToVertexStage && !device.GraphicsCapabilities.SupportsVertexTextures)
+            if(_applyToVertexStage && !device.GraphicsCapabilities.SupportsVertexTextures)
                 return;
             PlatformSetTextures(device);
         }

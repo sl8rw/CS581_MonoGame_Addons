@@ -11,15 +11,9 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
     {
         private ulong short4Packed;
 
-        public NormalizedShort4(Vector4 vector)
-        {
-            short4Packed = PackInFour(vector.X, vector.Y, vector.Z, vector.W);
-        }
+        public NormalizedShort4(Vector4 vector) { short4Packed = PackInFour(vector.X, vector.Y, vector.Z, vector.W); }
 
-        public NormalizedShort4(float x, float y, float z, float w)
-        {
-            short4Packed = PackInFour(x, y, z, w);
-        }
+        public NormalizedShort4(float x, float y, float z, float w) { short4Packed = PackInFour(x, y, z, w); }
 
         public static bool operator !=(NormalizedShort4 a, NormalizedShort4 b)
         {
@@ -32,37 +26,15 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         }
 
         [CLSCompliant(false)]
-        public ulong PackedValue
-        {
-            get
-            {
-                return short4Packed;
-            }
-            set
-            {
-                short4Packed = value;
-            }
-        }
+        public ulong PackedValue { get { return short4Packed; } set { short4Packed = value; } }
 
-        public override bool Equals(object obj)
-        {
-            return (obj is NormalizedShort4) && Equals((NormalizedShort4)obj);
-        }
+        public override bool Equals(object obj) { return (obj is NormalizedShort4) && Equals((NormalizedShort4)obj); }
 
-        public bool Equals(NormalizedShort4 other)
-        {
-            return short4Packed.Equals(other.short4Packed);
-        }
+        public bool Equals(NormalizedShort4 other) { return short4Packed.Equals(other.short4Packed); }
 
-        public override int GetHashCode()
-        {
-            return short4Packed.GetHashCode();
-        }
+        public override int GetHashCode() { return short4Packed.GetHashCode(); }
 
-        public override string ToString()
-        {
-            return short4Packed.ToString("X");
-        }
+        public override string ToString() { return short4Packed.ToString("X"); }
 
         private static ulong PackInFour(float vectorX, float vectorY, float vectorZ, float vectorW)
         {
@@ -80,9 +52,7 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         }
 
         void IPackedVector.PackFromVector4(Vector4 vector)
-        {
-            short4Packed = PackInFour(vector.X, vector.Y, vector.Z, vector.W);
-        }
+        { short4Packed = PackInFour(vector.X, vector.Y, vector.Z, vector.W); }
 
         public Vector4 ToVector4()
         {

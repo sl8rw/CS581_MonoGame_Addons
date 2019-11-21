@@ -6,9 +6,6 @@ namespace MonoGame.OpenGL
     {
         public IntPtr Handle { get; private set; }
 
-        public WindowInfo(IntPtr handle)
-        {
-            Handle = handle;
-        }
+        public WindowInfo(IntPtr handle) { Handle = handle; }
     }
 }

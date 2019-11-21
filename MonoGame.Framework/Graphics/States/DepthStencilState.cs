@@ -189,18 +189,18 @@ namespace Microsoft.Xna.Framework.Graphics
 
         internal void BindToGraphicsDevice(GraphicsDevice device)
         {
-            if (_defaultStateObject)
+            if(_defaultStateObject)
                 throw new InvalidOperationException("You cannot bind a default state object.");
-            if (GraphicsDevice != null && GraphicsDevice != device)
+            if(GraphicsDevice != null && GraphicsDevice != device)
                 throw new InvalidOperationException("This depth stencil state is already bound to a different graphics device.");
             GraphicsDevice = device;
         }
 
         internal void ThrowIfBound()
         {
-            if (_defaultStateObject)
+            if(_defaultStateObject)
                 throw new InvalidOperationException("You cannot modify a default depth stencil state object.");
-            if (GraphicsDevice != null)
+            if(GraphicsDevice != null)
                 throw new InvalidOperationException("You cannot modify the depth stencil state after it has been bound to the graphics device!");
         }
 
@@ -224,8 +224,7 @@ namespace Microsoft.Xna.Framework.Graphics
             ReferenceStencil = 0;
         }
 
-        private DepthStencilState(string name, bool depthBufferEnable, bool depthBufferWriteEnable)
-            : this()
+        private DepthStencilState(string name, bool depthBufferEnable, bool depthBufferWriteEnable) : this()
         {
             Name = name;
             _depthBufferEnable = depthBufferEnable;
@@ -265,16 +264,13 @@ namespace Microsoft.Xna.Framework.Graphics
             None = new DepthStencilState("DepthStencilState.None", false, false);
         }
 
-        internal DepthStencilState Clone()
-        {
-            return new DepthStencilState(this);
-        }
+        internal DepthStencilState Clone() { return new DepthStencilState(this); }
 
         partial void PlatformDispose();
 
         protected override void Dispose(bool disposing)
         {
-            if (!IsDisposed)
+            if(!IsDisposed)
             {
                 PlatformDispose();
             }

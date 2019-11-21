@@ -18,9 +18,6 @@ namespace Microsoft.Xna.Framework.Input
                                      (modifiers & Sdl.Keyboard.Keymod.NumLock) == Sdl.Keyboard.Keymod.NumLock);
         }
 
-        internal static void SetKeys(List<Keys> keys)
-        {
-            _keys = keys;
-        }
+        internal static void SetKeys(List<Keys> keys) { _keys = keys; }
     }
 }

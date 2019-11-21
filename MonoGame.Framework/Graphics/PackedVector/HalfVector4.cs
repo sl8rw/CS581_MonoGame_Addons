@@ -30,19 +30,13 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// Initializes a new instance of the HalfVector4 structure.
         /// </summary>
         /// <param name="vector">A vector containing the initial values for the components of the HalfVector4 structure.</param>
-        public HalfVector4(Vector4 vector)
-        {
-            packedValue = PackHelper(ref vector);
-        }
+        public HalfVector4(Vector4 vector) { packedValue = PackHelper(ref vector); }
 
         /// <summary>
         /// Sets the packed representation from a Vector4.
         /// </summary>
         /// <param name="vector">The vector to create the packed representation from.</param>
-        void IPackedVector.PackFromVector4(Vector4 vector)
-        {
-            packedValue = PackHelper(ref vector);
-        }
+        void IPackedVector.PackFromVector4(Vector4 vector) { packedValue = PackHelper(ref vector); }
 
         /// <summary>
         /// Packs a vector into a ulong.
@@ -64,11 +58,10 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// <returns>The expanded vector.</returns>
         public Vector4 ToVector4()
         {
-            return new Vector4(
-                HalfTypeHelper.Convert((ushort)packedValue),
-                HalfTypeHelper.Convert((ushort)(packedValue >> 0x10)),
-                HalfTypeHelper.Convert((ushort)(packedValue >> 0x20)),
-                HalfTypeHelper.Convert((ushort)(packedValue >> 0x30)));
+            return new Vector4(HalfTypeHelper.Convert((ushort)packedValue),
+                               HalfTypeHelper.Convert((ushort)(packedValue >> 0x10)),
+                               HalfTypeHelper.Convert((ushort)(packedValue >> 0x20)),
+                               HalfTypeHelper.Convert((ushort)(packedValue >> 0x30)));
         }
 
         /// <summary>
@@ -76,55 +69,33 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// </summary>
         /// <value>The packed representation of the value.</value>
         [CLSCompliant(false)]
-        public ulong PackedValue
-        {
-            get
-            {
-                return packedValue;
-            }
-            set
-            {
-                packedValue = value;
-            }
-        }
+        public ulong PackedValue { get { return packedValue; } set { packedValue = value; } }
 
         /// <summary>
         /// Returns a string representation of the current instance.
         /// </summary>
         /// <returns>String that represents the object.</returns>
-        public override string ToString()
-        {
-            return ToVector4().ToString();
-        }
+        public override string ToString() { return ToVector4().ToString(); }
 
         /// <summary>
         /// Gets the hash code for the current instance.
         /// </summary>
         /// <returns>Hash code for the instance.</returns>
-        public override int GetHashCode()
-        {
-            return packedValue.GetHashCode();
-        }
+        public override int GetHashCode() { return packedValue.GetHashCode(); }
 
         /// <summary>
         /// Returns a value that indicates whether the current instance is equal to a specified object.
         /// </summary>
         /// <param name="obj">The object with which to make the comparison.</param>
         /// <returns>true if the current instance is equal to the specified object; false otherwise.</returns>
-        public override bool Equals(object obj)
-        {
-            return ((obj is HalfVector4) && Equals((HalfVector4)obj));
-        }
+        public override bool Equals(object obj) { return ((obj is HalfVector4) && Equals((HalfVector4)obj)); }
 
         /// <summary>
         /// Returns a value that indicates whether the current instance is equal to a specified object.
         /// </summary>
         /// <param name="other">The object with which to make the comparison.</param>
         /// <returns>true if the current instance is equal to the specified object; false otherwise.</returns>
-        public bool Equals(HalfVector4 other)
-        {
-            return packedValue.Equals(other.packedValue);
-        }
+        public bool Equals(HalfVector4 other) { return packedValue.Equals(other.packedValue); }
 
         /// <summary>
         /// Compares the current instance of a class to another instance to determine whether they are the same.

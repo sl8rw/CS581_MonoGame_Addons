@@ -46,9 +46,9 @@ namespace Microsoft.Xna.Framework.Input
         public static bool operator ==(JoystickState left, JoystickState right)
         {
             return left.IsConnected == right.IsConnected &&
-               left.Axes.SequenceEqual(right.Axes) &&
-               left.Buttons.SequenceEqual(right.Buttons) &&
-               left.Hats.SequenceEqual(right.Hats);
+                left.Axes.SequenceEqual(right.Axes) &&
+                left.Buttons.SequenceEqual(right.Buttons) &&
+                left.Hats.SequenceEqual(right.Hats);
         }
 
         /// <summary>
@@ -64,36 +64,41 @@ namespace Microsoft.Xna.Framework.Input
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current <see cref="T:Microsoft.Xna.Framework.Input.JoystickState"/>.
+        /// Determines whether the specified <see cref="object"/> is equal to the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickState"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current <see cref="T:Microsoft.Xna.Framework.Input.JoystickState"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current
-        /// <see cref="T:Microsoft.Xna.Framework.Input.JoystickState"/>; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
-        {
-            return (obj is JoystickState) && (this == (JoystickState)obj);
-        }
+        /// <param name="obj">
+        /// The <see cref="object"/> to compare with the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickState"/>.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the specified <see cref="object"/> is equal to the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickState"/>; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj) { return (obj is JoystickState) && (this == (JoystickState)obj); }
 
         /// <summary>
         /// Serves as a hash function for a <see cref="T:Microsoft.Xna.Framework.Input.JoystickState"/> object.
         /// </summary>
-        /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
-        /// hash table.</returns>
+        /// <returns>
+        /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+        /// hash table.
+        /// </returns>
         public override int GetHashCode()
         {
             var hash = 0;
 
-            if (IsConnected)
+            if(IsConnected)
             {
                 unchecked
                 {
-                    foreach (var axis in Axes)
+                    foreach(var axis in Axes)
                         hash = (hash * 397) ^ axis;
 
-                    for (int i = 0; i < Buttons.Length; i++)
+                    for(int i = 0; i < Buttons.Length; i++)
                         hash = hash ^ ((int)Buttons[i] << (i % 32));
 
-                    foreach (var hat in Hats)
+                    foreach(var hat in Hats)
                         hash = (hash * 397) ^ hat.GetHashCode();
                 }
             }
@@ -102,28 +107,32 @@ namespace Microsoft.Xna.Framework.Input
         }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Microsoft.Xna.Framework.Input.JoystickState"/>.
+        /// Returns a <see cref="T:System.String"/> that represents the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickState"/>.
         /// </summary>
-        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Microsoft.Xna.Framework.Input.JoystickState"/>.</returns>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickState"/>.
+        /// </returns>
         public override string ToString()
         {
             var ret = new StringBuilder(54 - 2 + Axes.Length * 7 + Buttons.Length + Hats.Length * 5);
-            ret.Append("[JoystickState: IsConnected=" + (IsConnected ? 1 : 0));
+            ret.Append($"[JoystickState: IsConnected={((IsConnected ? 1 : 0))}");
 
-            if (IsConnected)
+            if(IsConnected)
             {
                 ret.Append(", Axes=");
-                foreach (var axis in Axes)
-                    ret.Append((axis > 0 ? "+" : string.Empty) + axis.ToString("00000") + " ");
+                foreach(var axis in Axes)
+                    ret.Append($"{((axis > 0 ? "+" : string.Empty))}{axis:00000} ");
                 ret.Length--;
 
                 ret.Append(", Buttons=");
-                foreach (var button in Buttons)
+                foreach(var button in Buttons)
                     ret.Append((int)button);
 
                 ret.Append(", Hats=");
-                foreach (var hat in Hats)
-                    ret.Append(hat + " ");
+                foreach(var hat in Hats)
+                    ret.Append($"{hat} ");
                 ret.Length--;
             }
 

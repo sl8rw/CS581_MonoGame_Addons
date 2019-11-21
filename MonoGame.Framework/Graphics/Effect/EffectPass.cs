@@ -18,13 +18,13 @@ namespace Microsoft.Xna.Framework.Graphics
         public EffectAnnotationCollection Annotations { get; private set; }
 
         internal EffectPass(Effect effect,
-                                string name,
-                                Shader vertexShader,
-                                Shader pixelShader,
-                                BlendState blendState,
-                                DepthStencilState depthStencilState,
-                                RasterizerState rasterizerState,
-                                EffectAnnotationCollection annotations)
+                            string name,
+                            Shader vertexShader,
+                            Shader pixelShader,
+                            BlendState blendState,
+                            DepthStencilState depthStencilState,
+                            RasterizerState rasterizerState,
+                            EffectAnnotationCollection annotations)
         {
             Debug.Assert(effect != null, "Got a null effect!");
             Debug.Assert(annotations != null, "Got a null annotation collection!");
@@ -64,13 +64,13 @@ namespace Microsoft.Xna.Framework.Graphics
         {
             // Set/get the correct shader handle/cleanups.
 
-            if (_effect.CurrentTechnique == null)
+            if(_effect.CurrentTechnique == null)
             {
                 throw new System.ArgumentException("invalid effect parameter string.");
             }
             var current = _effect.CurrentTechnique;
             _effect.OnApply();
-            if (_effect.CurrentTechnique != current)
+            if(_effect.CurrentTechnique != current)
             {
                 _effect.CurrentTechnique.Passes[0].Apply();
                 return;
@@ -78,7 +78,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             var device = _effect.GraphicsDevice;
 
-            if (_vertexShader != null)
+            if(_vertexShader != null)
             {
                 device.VertexShader = _vertexShader;
 
@@ -86,7 +86,7 @@ namespace Microsoft.Xna.Framework.Graphics
                 SetShaderSamplers(_vertexShader, device.VertexTextures, device.VertexSamplerStates);
 
                 // Update the constant buffers.
-                for (var c = 0; c < _vertexShader.CBuffers.Length; c++)
+                for(var c = 0; c < _vertexShader.CBuffers.Length; c++)
                 {
                     var cb = _effect.ConstantBuffers[_vertexShader.CBuffers[c]];
                     cb.Update(_effect.Parameters);
@@ -94,7 +94,7 @@ namespace Microsoft.Xna.Framework.Graphics
                 }
             }
 
-            if (_pixelShader != null)
+            if(_pixelShader != null)
             {
                 device.PixelShader = _pixelShader;
 
@@ -102,7 +102,7 @@ namespace Microsoft.Xna.Framework.Graphics
                 SetShaderSamplers(_pixelShader, device.Textures, device.SamplerStates);
 
                 // Update the constant buffers.
-                for (var c = 0; c < _pixelShader.CBuffers.Length; c++)
+                for(var c = 0; c < _pixelShader.CBuffers.Length; c++)
                 {
                     var cb = _effect.ConstantBuffers[_pixelShader.CBuffers[c]];
                     cb.Update(_effect.Parameters);
@@ -111,17 +111,17 @@ namespace Microsoft.Xna.Framework.Graphics
             }
 
             // Set the render states if we have some.
-            if (_rasterizerState != null)
+            if(_rasterizerState != null)
                 device.RasterizerState = _rasterizerState;
-            if (_blendState != null)
+            if(_blendState != null)
                 device.BlendState = _blendState;
-            if (_depthStencilState != null)
+            if(_depthStencilState != null)
                 device.DepthStencilState = _depthStencilState;
         }
 
         private void SetShaderSamplers(Shader shader, TextureCollection textures, SamplerStateCollection samplerStates)
         {
-            foreach (var sampler in shader.Samplers)
+            foreach(var sampler in shader.Samplers)
             {
                 var param = _effect.Parameters[sampler.parameter];
                 var texture = param.Data as Texture;
@@ -129,7 +129,7 @@ namespace Microsoft.Xna.Framework.Graphics
                 textures[sampler.textureSlot] = texture;
 
                 // If there is a sampler state set it.
-                if (sampler.state != null)
+                if(sampler.state != null)
                     samplerStates[sampler.samplerSlot] = sampler.state;
             }
         }

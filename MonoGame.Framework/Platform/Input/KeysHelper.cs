@@ -15,7 +15,7 @@ namespace Microsoft.Xna.Framework.Input
         {
             _map = new HashSet<int>();
             var allKeys = (Keys[])Enum.GetValues(typeof(Keys));
-            foreach (var key in allKeys)
+            foreach(var key in allKeys)
             {
                 _map.Add((int)key);
             }
@@ -26,9 +26,6 @@ namespace Microsoft.Xna.Framework.Input
         /// </summary>
         /// <param name="value">Keys base value</param>
         /// <returns>Returns true if value is valid Key, false otherwise</returns>
-        public static bool IsKey(int value)
-        {
-            return _map.Contains(value);
-        }
+        public static bool IsKey(int value) { return _map.Contains(value); }
     }
 }

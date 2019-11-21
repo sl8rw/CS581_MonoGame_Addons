@@ -8,33 +8,27 @@ namespace Microsoft.Xna.Framework.Graphics
 
         public int Count { get { return _techniques.Length; } }
 
-        internal EffectTechniqueCollection(EffectTechnique[] techniques)
-        {
-            _techniques = techniques;
-        }
+        internal EffectTechniqueCollection(EffectTechnique[] techniques) { _techniques = techniques; }
 
         internal EffectTechniqueCollection Clone(Effect effect)
         {
             var techniques = new EffectTechnique[_techniques.Length];
-            for (var i = 0; i < _techniques.Length; i++)
+            for(var i = 0; i < _techniques.Length; i++)
                 techniques[i] = new EffectTechnique(effect, _techniques[i]);
 
             return new EffectTechniqueCollection(techniques);
         }
 
-        public EffectTechnique this[int index]
-        {
-            get { return _techniques[index]; }
-        }
+        public EffectTechnique this[int index] { get { return _techniques[index]; } }
 
         public EffectTechnique this[string name]
         {
             get
             {
                 // TODO: Add a name to technique lookup table.
-                foreach (var technique in _techniques)
+                foreach(var technique in _techniques)
                 {
-                    if (technique.Name == name)
+                    if(technique.Name == name)
                         return technique;
                 }
 
@@ -43,13 +37,9 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 
         public IEnumerator<EffectTechnique> GetEnumerator()
-        {
-            return ((IEnumerable<EffectTechnique>)_techniques).GetEnumerator();
-        }
+        { return ((IEnumerable<EffectTechnique>)_techniques).GetEnumerator(); }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return _techniques.GetEnumerator();
-        }
+        { return _techniques.GetEnumerator(); }
     }
 }

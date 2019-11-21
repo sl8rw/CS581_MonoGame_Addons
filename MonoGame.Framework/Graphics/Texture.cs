@@ -20,30 +20,22 @@ namespace Microsoft.Xna.Framework.Graphics
         /// Gets a unique identifier of this texture for sorting purposes.
         /// </summary>
         /// <remarks>
-        /// <para>For example, this value is used by <see cref="SpriteBatch"/> when drawing with <see cref="SpriteSortMode.Texture"/>.</para>
-        /// <para>The value is an implementation detail and may change between application launches or MonoGame versions.
-        /// It is only guaranteed to stay consistent during application lifetime.</para>
+        /// <para>For example, this value is used by <see cref="SpriteBatch"/> when drawing with <see
+        /// cref="SpriteSortMode.Texture"/>.</para> <para>The value is an implementation detail and may change between
+        /// application launches or MonoGame versions. It is only guaranteed to stay consistent during application
+        /// lifetime.</para>
         /// </remarks>
-        internal int SortingKey
-        {
-            get { return _sortingKey; }
-        }
+        internal int SortingKey { get { return _sortingKey; } }
 
-        public SurfaceFormat Format
-        {
-            get { return _format; }
-        }
+        public SurfaceFormat Format { get { return _format; } }
 
-        public int LevelCount
-        {
-            get { return _levelCount; }
-        }
+        public int LevelCount { get { return _levelCount; } }
 
         internal static int CalculateMipLevels(int width, int height = 0, int depth = 0)
         {
             int levels = 1;
             int size = Math.Max(Math.Max(width, height), depth);
-            while (size > 1)
+            while(size > 1)
             {
                 size = size / 2;
                 levels++;
@@ -55,35 +47,41 @@ namespace Microsoft.Xna.Framework.Graphics
         {
             w = width;
             h = height;
-            while (level > 0)
+            while(level > 0)
             {
                 --level;
                 w /= 2;
                 h /= 2;
             }
-            if (w == 0)
+            if(w == 0)
                 w = 1;
-            if (h == 0)
+            if(h == 0)
                 h = 1;
         }
 
-        internal static void GetSizeForLevel(int width, int height, int depth, int level, out int w, out int h, out int d)
+        internal static void GetSizeForLevel(int width,
+                                             int height,
+                                             int depth,
+                                             int level,
+                                             out int w,
+                                             out int h,
+                                             out int d)
         {
             w = width;
             h = height;
             d = depth;
-            while (level > 0)
+            while(level > 0)
             {
                 --level;
                 w /= 2;
                 h /= 2;
                 d /= 2;
             }
-            if (w == 0)
+            if(w == 0)
                 w = 1;
-            if (h == 0)
+            if(h == 0)
                 h = 1;
-            if (d == 0)
+            if(d == 0)
                 d = 1;
         }
 
@@ -93,7 +91,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             int pitch;
 
-            switch (_format)
+            switch(_format)
             {
                 case SurfaceFormat.Dxt1:
                 case SurfaceFormat.Dxt1SRgb:
@@ -113,15 +111,13 @@ namespace Microsoft.Xna.Framework.Graphics
                 default:
                     pitch = width * _format.GetSize();
                     break;
-            };
+            }
+            ;
 
             return pitch;
         }
 
-        internal protected override void GraphicsDeviceResetting()
-        {
-            PlatformGraphicsDeviceResetting();
-        }
+        internal protected override void GraphicsDeviceResetting() { PlatformGraphicsDeviceResetting(); }
     }
 }
 

@@ -17,17 +17,16 @@ namespace Microsoft.Xna.Framework.Graphics
         /// Gets a value indicating whether the occlusion query has completed.
         /// </summary>
         /// <value>
-        /// <see langword="true"/> if the occlusion query has completed; otherwise,
-        /// <see langword="false"/>.
+        /// <see langword="true"/> if the occlusion query has completed; otherwise, <see langword="false"/>.
         /// </value>
         public bool IsComplete
         {
             get
             {
-                if (_isComplete)
+                if(_isComplete)
                     return true;
 
-                if (!_queryPerformed || _inBeginEndPair)
+                if(!_queryPerformed || _inBeginEndPair)
                     return false;
 
                 _isComplete = PlatformGetResult(out _pixelCount);
@@ -41,14 +40,13 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </summary>
         /// <value>The number of visible pixels.</value>
         /// <exception cref="InvalidOperationException">
-        /// The occlusion query has not yet completed. Check <see cref="IsComplete"/> before reading
-        /// the result!
+        /// The occlusion query has not yet completed. Check <see cref="IsComplete"/> before reading the result!
         /// </exception>
         public int PixelCount
         {
             get
             {
-                if (!IsComplete)
+                if(!IsComplete)
                     throw new InvalidOperationException("The occlusion query has not yet completed. Check IsComplete before reading the result.");
 
                 return _pixelCount;
@@ -67,9 +65,9 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </exception>
         public OcclusionQuery(GraphicsDevice graphicsDevice)
         {
-            if (graphicsDevice == null)
-                throw new ArgumentNullException("graphicsDevice");
-            if (graphicsDevice.GraphicsProfile == GraphicsProfile.Reach)
+            if(graphicsDevice == null)
+                throw new ArgumentNullException(nameof(graphicsDevice));
+            if(graphicsDevice.GraphicsProfile == GraphicsProfile.Reach)
                 throw new NotSupportedException("The Reach profile does not support occlusion queries.");
 
             GraphicsDevice = graphicsDevice;
@@ -85,7 +83,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </exception>
         public void Begin()
         {
-            if (_inBeginEndPair)
+            if(_inBeginEndPair)
                 throw new InvalidOperationException("End() must be called before calling Begin() again.");
 
             _inBeginEndPair = true;
@@ -102,7 +100,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </exception>
         public void End()
         {
-            if (!_inBeginEndPair)
+            if(!_inBeginEndPair)
                 throw new InvalidOperationException("Begin() must be called before calling End().");
 
             _inBeginEndPair = false;

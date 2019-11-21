@@ -17,39 +17,51 @@ namespace Microsoft.Xna.Framework.Audio
 
         public static ALFormat GetSoundFormat(int format, int channels, int bits)
         {
-            switch (format)
+            switch(format)
             {
                 case FormatPcm:
                     // PCM
-                    switch (channels)
+                    switch(channels)
                     {
-                        case 1: return bits == 8 ? ALFormat.Mono8 : ALFormat.Mono16;
-                        case 2: return bits == 8 ? ALFormat.Stereo8 : ALFormat.Stereo16;
-                        default: throw new NotSupportedException("The specified channel count is not supported.");
+                        case 1:
+                            return bits == 8 ? ALFormat.Mono8 : ALFormat.Mono16;
+                        case 2:
+                            return bits == 8 ? ALFormat.Stereo8 : ALFormat.Stereo16;
+                        default:
+                            throw new NotSupportedException("The specified channel count is not supported.");
                     }
                 case FormatMsAdpcm:
                     // Microsoft ADPCM
-                    switch (channels)
+                    switch(channels)
                     {
-                        case 1: return ALFormat.MonoMSAdpcm;
-                        case 2: return ALFormat.StereoMSAdpcm;
-                        default: throw new NotSupportedException("The specified channel count is not supported.");
+                        case 1:
+                            return ALFormat.MonoMSAdpcm;
+                        case 2:
+                            return ALFormat.StereoMSAdpcm;
+                        default:
+                            throw new NotSupportedException("The specified channel count is not supported.");
                     }
                 case FormatIeee:
                     // IEEE Float
-                    switch (channels)
+                    switch(channels)
                     {
-                        case 1: return ALFormat.MonoFloat32;
-                        case 2: return ALFormat.StereoFloat32;
-                        default: throw new NotSupportedException("The specified channel count is not supported.");
+                        case 1:
+                            return ALFormat.MonoFloat32;
+                        case 2:
+                            return ALFormat.StereoFloat32;
+                        default:
+                            throw new NotSupportedException("The specified channel count is not supported.");
                     }
                 case FormatIma4:
                     // IMA4 ADPCM
-                    switch (channels)
+                    switch(channels)
                     {
-                        case 1: return ALFormat.MonoIma4;
-                        case 2: return ALFormat.StereoIma4;
-                        default: throw new NotSupportedException("The specified channel count is not supported.");
+                        case 1:
+                            return ALFormat.MonoIma4;
+                        case 2:
+                            return ALFormat.StereoIma4;
+                        default:
+                            throw new NotSupportedException("The specified channel count is not supported.");
                     }
                 default:
                     throw new NotSupportedException($"The specified sound format ({format}) is not supported.");
@@ -60,7 +72,7 @@ namespace Microsoft.Xna.Framework.Audio
         // Calculation of sample alignment from http://kcat.strangesoft.net/openal-extensions/SOFT_block_alignment.txt
         public static int SampleAlignment(ALFormat format, int blockAlignment)
         {
-            switch (format)
+            switch(format)
             {
                 case ALFormat.MonoIma4:
                     return (blockAlignment - 4) / 4 * 8 + 1;
@@ -86,31 +98,52 @@ namespace Microsoft.Xna.Framework.Audio
         /// <param name="samplesPerBlock">Gets the number of samples per block.</param>
         /// <param name="sampleCount">Gets the total number of samples.</param>
         /// <returns>The byte buffer containing the waveform data or compressed blocks.</returns>
-        public static byte[] Load(Stream stream, out ALFormat format, out int frequency, out int channels, out int blockAlignment, out int bitsPerSample, out int samplesPerBlock, out int sampleCount)
+        public static byte[] Load(Stream stream,
+                                  out ALFormat format,
+                                  out int frequency,
+                                  out int channels,
+                                  out int blockAlignment,
+                                  out int bitsPerSample,
+                                  out int samplesPerBlock,
+                                  out int sampleCount)
         {
             byte[] audioData = null;
 
-            using (BinaryReader reader = new BinaryReader(stream))
+            using(BinaryReader reader = new BinaryReader(stream))
             {
                 // for now we'll only support wave files
-                audioData = LoadWave(reader, out format, out frequency, out channels, out blockAlignment, out bitsPerSample, out samplesPerBlock, out sampleCount);
+                audioData = LoadWave(reader,
+                                     out format,
+                                     out frequency,
+                                     out channels,
+                                     out blockAlignment,
+                                     out bitsPerSample,
+                                     out samplesPerBlock,
+                                     out sampleCount);
             }
 
             return audioData;
         }
 
-        private static byte[] LoadWave(BinaryReader reader, out ALFormat format, out int frequency, out int channels, out int blockAlignment, out int bitsPerSample, out int samplesPerBlock, out int sampleCount)
+        private static byte[] LoadWave(BinaryReader reader,
+                                       out ALFormat format,
+                                       out int frequency,
+                                       out int channels,
+                                       out int blockAlignment,
+                                       out int bitsPerSample,
+                                       out int samplesPerBlock,
+                                       out int sampleCount)
         {
             byte[] audioData = null;
 
             //header
             string signature = new string(reader.ReadChars(4));
-            if (signature != "RIFF")
+            if(signature != "RIFF")
                 throw new ArgumentException("Specified stream is not a wave file.");
             reader.ReadInt32(); // riff_chunk_size
 
             string wformat = new string(reader.ReadChars(4));
-            if (wformat != "WAVE")
+            if(wformat != "WAVE")
                 throw new ArgumentException("Specified stream is not a wave file.");
 
             int audioFormat = 0;
@@ -123,57 +156,57 @@ namespace Microsoft.Xna.Framework.Audio
             sampleCount = 0;
 
             // WAVE header
-            while (audioData == null)
+            while(audioData == null)
             {
                 string chunkType = new string(reader.ReadChars(4));
                 int chunkSize = reader.ReadInt32();
-                switch (chunkType)
+                switch(chunkType)
                 {
                     case "fmt ":
-                        {
-                            audioFormat = reader.ReadInt16(); // 2
-                            channels = reader.ReadInt16(); // 4
-                            frequency = reader.ReadInt32();  // 8
-                            int byteRate = reader.ReadInt32();    // 12
-                            blockAlignment = (int)reader.ReadInt16();  // 14
-                            bitsPerSample = reader.ReadInt16(); // 16
+                    {
+                        audioFormat = reader.ReadInt16(); // 2
+                        channels = reader.ReadInt16(); // 4
+                        frequency = reader.ReadInt32();  // 8
+                        int byteRate = reader.ReadInt32();    // 12
+                        blockAlignment = (int)reader.ReadInt16();  // 14
+                        bitsPerSample = reader.ReadInt16(); // 16
 
-                            // Read extra data if present
-                            if (chunkSize > 16)
+                        // Read extra data if present
+                        if(chunkSize > 16)
+                        {
+                            int extraDataSize = reader.ReadInt16();
+                            if(audioFormat == FormatIma4)
                             {
-                                int extraDataSize = reader.ReadInt16();
-                                if (audioFormat == FormatIma4)
-                                {
-                                    samplesPerBlock = reader.ReadInt16();
-                                    extraDataSize -= 2;
-                                }
-                                if (extraDataSize > 0)
-                                {
-                                    if (reader.BaseStream.CanSeek)
-                                        reader.BaseStream.Seek(extraDataSize, SeekOrigin.Current);
+                                samplesPerBlock = reader.ReadInt16();
+                                extraDataSize -= 2;
+                            }
+                            if(extraDataSize > 0)
+                            {
+                                if(reader.BaseStream.CanSeek)
+                                    reader.BaseStream.Seek(extraDataSize, SeekOrigin.Current);
                                     else
-                                    {
-                                        for (int i = 0; i < extraDataSize; ++i)
-                                            reader.ReadByte();
-                                    }
+                                {
+                                    for(int i = 0; i < extraDataSize; ++i)
+                                        reader.ReadByte();
                                 }
                             }
                         }
+                    }
                         break;
                     case "fact":
-                        if (audioFormat == FormatIma4)
+                        if(audioFormat == FormatIma4)
                         {
                             sampleCount = reader.ReadInt32() * channels;
                             chunkSize -= 4;
                         }
                         // Skip any remaining chunk data
-                        if (chunkSize > 0)
+                        if(chunkSize > 0)
                         {
-                            if (reader.BaseStream.CanSeek)
+                            if(reader.BaseStream.CanSeek)
                                 reader.BaseStream.Seek(chunkSize, SeekOrigin.Current);
                             else
                             {
-                                for (int i = 0; i < chunkSize; ++i)
+                                for(int i = 0; i < chunkSize; ++i)
                                     reader.ReadByte();
                             }
                         }
@@ -183,11 +216,11 @@ namespace Microsoft.Xna.Framework.Audio
                         break;
                     default:
                         // Skip this chunk
-                        if (reader.BaseStream.CanSeek)
+                        if(reader.BaseStream.CanSeek)
                             reader.BaseStream.Seek(chunkSize, SeekOrigin.Current);
                         else
                         {
-                            for (int i = 0; i < chunkSize; ++i)
+                            for(int i = 0; i < chunkSize; ++i)
                                 reader.ReadByte();
                         }
                         break;
@@ -197,25 +230,26 @@ namespace Microsoft.Xna.Framework.Audio
             // Calculate fields we didn't read from the file
             format = GetSoundFormat(audioFormat, channels, bitsPerSample);
 
-            if (samplesPerBlock == 0)
+            if(samplesPerBlock == 0)
             {
                 samplesPerBlock = SampleAlignment(format, blockAlignment);
             }
 
-            if (sampleCount == 0)
+            if(sampleCount == 0)
             {
-                switch (audioFormat)
+                switch(audioFormat)
                 {
                     case FormatIma4:
                     case FormatMsAdpcm:
-                        sampleCount = ((audioData.Length / blockAlignment) * samplesPerBlock) + SampleAlignment(format, audioData.Length % blockAlignment);
+                        sampleCount = ((audioData.Length / blockAlignment) * samplesPerBlock) +
+                            SampleAlignment(format, audioData.Length % blockAlignment);
                         break;
                     case FormatPcm:
                     case FormatIeee:
                         sampleCount = audioData.Length / ((channels * bitsPerSample) / 8);
                         break;
                     default:
-                        throw new InvalidDataException("Unhandled WAV format " + format.ToString());
+                        throw new InvalidDataException($"Unhandled WAV format {format}");
                 }
             }
 
@@ -225,18 +259,18 @@ namespace Microsoft.Xna.Framework.Audio
         // Convert buffer containing 24-bit signed PCM wav data to a 16-bit signed PCM buffer
         internal static unsafe byte[] Convert24To16(byte[] data, int offset, int count)
         {
-            if ((offset + count > data.Length) || ((count % 3) != 0))
+            if((offset + count > data.Length) || ((count % 3) != 0))
                 throw new ArgumentException("Invalid 24-bit PCM data received");
             // Sample count includes both channels if stereo
             var sampleCount = count / 3;
             var outData = new byte[sampleCount * sizeof(short)];
-            fixed (byte* src = &data[offset])
+            fixed(byte* src = &data[offset])
             {
-                fixed (byte* dst = &outData[0])
+                fixed(byte* dst = &outData[0])
                 {
                     var srcIndex = 0;
                     var dstIndex = 0;
-                    for (int i = 0; i < sampleCount; ++i)
+                    for(int i = 0; i < sampleCount; ++i)
                     {
                         // Drop the least significant byte from the 24-bit sample to get the 16-bit sample
                         dst[dstIndex] = src[srcIndex + 1];
@@ -252,18 +286,18 @@ namespace Microsoft.Xna.Framework.Audio
         // Convert buffer containing IEEE 32-bit float wav data to a 16-bit signed PCM buffer
         internal static unsafe byte[] ConvertFloatTo16(byte[] data, int offset, int count)
         {
-            if ((offset + count > data.Length) || ((count % 4) != 0))
+            if((offset + count > data.Length) || ((count % 4) != 0))
                 throw new ArgumentException("Invalid 32-bit float PCM data received");
             // Sample count includes both channels if stereo
             var sampleCount = count / 4;
             var outData = new byte[sampleCount * sizeof(short)];
-            fixed (byte* src = &data[offset])
+            fixed(byte* src = &data[offset])
             {
                 float* f = (float*)src;
-                fixed (byte* dst = &outData[0])
+                fixed(byte* dst = &outData[0])
                 {
                     byte* d = dst;
-                    for (int i = 0; i < sampleCount; ++i)
+                    for(int i = 0; i < sampleCount; ++i)
                     {
                         short s = (short)(*f * 32767.0f);
                         *d++ = (byte)(s & 0xff);
@@ -280,17 +314,94 @@ namespace Microsoft.Xna.Framework.Audio
         // Step table
         static int[] stepTable = new int[]
         {
-            7, 8, 9, 10, 11, 12, 13, 14,
-            16, 17, 19, 21, 23, 25, 28, 31,
-            34, 37, 41, 45, 50, 55, 60, 66,
-            73, 80, 88, 97, 107, 118, 130, 143,
-            157, 173, 190, 209, 230, 253, 279, 307,
-            337, 371, 408, 449, 494, 544, 598, 658,
-            724, 796, 876, 963, 1060, 1166, 1282, 1411,
-            1552, 1707, 1878, 2066, 2272, 2499, 2749, 3024,
-            3327, 3660, 4026, 4428, 4871, 5358, 5894, 6484,
-            7132, 7845, 8630, 9493, 10442, 11487, 12635, 13899,
-            15289, 16818, 18500, 20350, 22385, 24623, 27086, 29794,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            16,
+            17,
+            19,
+            21,
+            23,
+            25,
+            28,
+            31,
+            34,
+            37,
+            41,
+            45,
+            50,
+            55,
+            60,
+            66,
+            73,
+            80,
+            88,
+            97,
+            107,
+            118,
+            130,
+            143,
+            157,
+            173,
+            190,
+            209,
+            230,
+            253,
+            279,
+            307,
+            337,
+            371,
+            408,
+            449,
+            494,
+            544,
+            598,
+            658,
+            724,
+            796,
+            876,
+            963,
+            1060,
+            1166,
+            1282,
+            1411,
+            1552,
+            1707,
+            1878,
+            2066,
+            2272,
+            2499,
+            2749,
+            3024,
+            3327,
+            3660,
+            4026,
+            4428,
+            4871,
+            5358,
+            5894,
+            6484,
+            7132,
+            7845,
+            8630,
+            9493,
+            10442,
+            11487,
+            12635,
+            13899,
+            15289,
+            16818,
+            18500,
+            20350,
+            22385,
+            24623,
+            27086,
+            29794,
             32767
         };
 
@@ -298,8 +409,22 @@ namespace Microsoft.Xna.Framework.Audio
         static int[] indexTable = new int[]
         {
             // ADPCM data size is 4
-            -1, -1, -1, -1, 2, 4, 6, 8,
-            -1, -1, -1, -1, 2, 4, 6, 8
+            -1,
+            -1,
+            -1,
+            -1,
+            2,
+            4,
+            6,
+            8,
+            -1,
+            -1,
+            -1,
+            -1,
+            2,
+            4,
+            6,
+            8
         };
 
         struct ImaState
@@ -311,27 +436,27 @@ namespace Microsoft.Xna.Framework.Audio
         static int AdpcmImaWavExpandNibble(ref ImaState channel, int nibble)
         {
             int diff = stepTable[channel.stepIndex] >> 3;
-            if ((nibble & 0x04) != 0)
+            if((nibble & 0x04) != 0)
                 diff += stepTable[channel.stepIndex];
-            if ((nibble & 0x02) != 0)
+            if((nibble & 0x02) != 0)
                 diff += stepTable[channel.stepIndex] >> 1;
-            if ((nibble & 0x01) != 0)
+            if((nibble & 0x01) != 0)
                 diff += stepTable[channel.stepIndex] >> 2;
-            if ((nibble & 0x08) != 0)
+            if((nibble & 0x08) != 0)
                 channel.predictor -= diff;
             else
                 channel.predictor += diff;
 
-            if (channel.predictor < -32768)
+            if(channel.predictor < -32768)
                 channel.predictor = -32768;
-            else if (channel.predictor > 32767)
+            else if(channel.predictor > 32767)
                 channel.predictor = 32767;
 
             channel.stepIndex += indexTable[nibble];
 
-            if (channel.stepIndex < 0)
+            if(channel.stepIndex < 0)
                 channel.stepIndex = 0;
-            else if (channel.stepIndex > 88)
+            else if(channel.stepIndex > 88)
                 channel.stepIndex = 88;
 
             return channel.predictor;
@@ -345,25 +470,25 @@ namespace Microsoft.Xna.Framework.Audio
 
             int sampleCountFullBlock = ((blockAlignment / channels) - 4) / 4 * 8 + 1;
             int sampleCountLastBlock = 0;
-            if ((count % blockAlignment) > 0)
+            if((count % blockAlignment) > 0)
                 sampleCountLastBlock = (((count % blockAlignment) / channels) - 4) / 4 * 8 + 1;
             int sampleCount = ((count / blockAlignment) * sampleCountFullBlock) + sampleCountLastBlock;
             var samples = new byte[sampleCount * sizeof(short) * channels];
             int sampleOffset = 0;
 
-            while (count > 0)
+            while(count > 0)
             {
                 int blockSize = blockAlignment;
-                if (count < blockSize)
+                if(count < blockSize)
                     blockSize = count;
                 count -= blockAlignment;
 
                 channel0.predictor = buffer[offset++];
                 channel0.predictor |= buffer[offset++] << 8;
-                if ((channel0.predictor & 0x8000) != 0)
+                if((channel0.predictor & 0x8000) != 0)
                     channel0.predictor -= 0x10000;
                 channel0.stepIndex = buffer[offset++];
-                if (channel0.stepIndex > 88)
+                if(channel0.stepIndex > 88)
                     channel0.stepIndex = 88;
                 offset++;
                 int index = sampleOffset * 2;
@@ -371,11 +496,18 @@ namespace Microsoft.Xna.Framework.Audio
                 samples[index + 1] = (byte)(channel0.predictor >> 8);
                 ++sampleOffset;
 
-                if (channels == 2)
-                    AdjustAudioForIma4ToPcmChannels(buffer, ref offset, ref channel0, out channel1, samples, ref sampleOffset, blockSize, out index);
+                if(channels == 2)
+                    AdjustAudioForIma4ToPcmChannels(buffer,
+                                                    ref offset,
+                                                    ref channel0,
+                                                    out channel1,
+                                                    samples,
+                                                    ref sampleOffset,
+                                                    blockSize,
+                                                    out index);
                 else
                 {
-                    for (int nibbles = 2 * (blockSize - 4); nibbles > 0; nibbles -= 2)
+                    for(int nibbles = 2 * (blockSize - 4); nibbles > 0; nibbles -= 2)
                     {
                         index = (sampleOffset * 2);
                         int b = buffer[offset];
@@ -396,14 +528,21 @@ namespace Microsoft.Xna.Framework.Audio
             return samples;
         }
 
-        private static void AdjustAudioForIma4ToPcmChannels(byte[] buffer, ref int offset, ref ImaState channel0, out ImaState channel1, byte[] samples, ref int sampleOffset, int blockSize, out int index)
+        private static void AdjustAudioForIma4ToPcmChannels(byte[] buffer,
+                                                            ref int offset,
+                                                            ref ImaState channel0,
+                                                            out ImaState channel1,
+                                                            byte[] samples,
+                                                            ref int sampleOffset,
+                                                            int blockSize,
+                                                            out int index)
         {
             channel1.predictor = buffer[offset++];
             channel1.predictor |= buffer[offset++] << 8;
-            if ((channel1.predictor & 0x8000) != 0)
+            if((channel1.predictor & 0x8000) != 0)
                 channel1.predictor -= 0x10000;
             channel1.stepIndex = buffer[offset++];
-            if (channel1.stepIndex > 88)
+            if(channel1.stepIndex > 88)
                 channel1.stepIndex = 88;
             offset++;
             index = sampleOffset * 2;
@@ -411,9 +550,9 @@ namespace Microsoft.Xna.Framework.Audio
             samples[index + 1] = (byte)(channel1.predictor >> 8);
             ++sampleOffset;
 
-            for (int nibbles = 2 * (blockSize - 8); nibbles > 0; nibbles -= 16)
+            for(int nibbles = 2 * (blockSize - 8); nibbles > 0; nibbles -= 16)
             {
-                for (int i = 0; i < 4; i++)
+                for(int i = 0; i < 4; i++)
                 {
                     index = (sampleOffset + i * 4) * 2;
                     int sample = AdpcmImaWavExpandNibble(ref channel0, buffer[offset + i] & 0x0f);
@@ -427,7 +566,7 @@ namespace Microsoft.Xna.Framework.Audio
                 }
                 offset += 4;
 
-                for (int i = 0; i < 4; i++)
+                for(int i = 0; i < 4; i++)
                 {
                     index = (sampleOffset + i * 4 + 1) * 2;
                     int sample = AdpcmImaWavExpandNibble(ref channel1, buffer[offset + i] & 0x0f);
@@ -441,7 +580,6 @@ namespace Microsoft.Xna.Framework.Audio
                 }
                 offset += 4;
                 sampleOffset += 16;
-
             }
         }
 
@@ -450,20 +588,11 @@ namespace Microsoft.Xna.Framework.Audio
         #region MS-ADPCM decoding
 
         static int[] adaptationTable = new int[]
-        {
-            230, 230, 230, 230, 307, 409, 512, 614,
-            768, 614, 512, 409, 307, 230, 230, 230
-        };
+        { 230, 230, 230, 230, 307, 409, 512, 614, 768, 614, 512, 409, 307, 230, 230, 230 };
 
-        static int[] adaptationCoeff1 = new int[]
-        {
-            256, 512, 0, 192, 240, 460, 392
-        };
+        static int[] adaptationCoeff1 = new int[] { 256, 512, 0, 192, 240, 460, 392 };
 
-        static int[] adaptationCoeff2 = new int[]
-        {
-            0, -256, 0, 64, 0, -208, -232
-        };
+        static int[] adaptationCoeff2 = new int[] { 0, -256, 0, 64, 0, -208, -232 };
 
         struct MsAdpcmState
         {
@@ -477,25 +606,31 @@ namespace Microsoft.Xna.Framework.Audio
         static int AdpcmMsExpandNibble(ref MsAdpcmState channel, int nibble)
         {
             int nibbleSign = nibble - (((nibble & 0x08) != 0) ? 0x10 : 0);
-            int predictor = ((channel.sample1 * channel.coeff1) + (channel.sample2 * channel.coeff2)) / 256 + (nibbleSign * channel.delta);
+            int predictor = ((channel.sample1 * channel.coeff1) + (channel.sample2 * channel.coeff2)) /
+                256 +
+                (nibbleSign * channel.delta);
 
-            if (predictor < -32768)
+            if(predictor < -32768)
                 predictor = -32768;
-            else if (predictor > 32767)
+            else if(predictor > 32767)
                 predictor = 32767;
 
             channel.sample2 = channel.sample1;
             channel.sample1 = predictor;
 
             channel.delta = (adaptationTable[nibble] * channel.delta) / 256;
-            if (channel.delta < 16)
+            if(channel.delta < 16)
                 channel.delta = 16;
 
             return predictor;
         }
 
         // Convert buffer containing MS-ADPCM wav data to a 16-bit signed PCM buffer
-        internal static byte[] ConvertMsAdpcmToPcm(byte[] buffer, int offset, int count, int channels, int blockAlignment)
+        internal static byte[] ConvertMsAdpcmToPcm(byte[] buffer,
+                                                   int offset,
+                                                   int count,
+                                                   int channels,
+                                                   int blockAlignment)
         {
             MsAdpcmState channel0 = new MsAdpcmState();
             MsAdpcmState channel1 = new MsAdpcmState();
@@ -503,7 +638,7 @@ namespace Microsoft.Xna.Framework.Audio
 
             int sampleCountFullBlock = ((blockAlignment / channels) - 7) * 2 + 2;
             int sampleCountLastBlock = 0;
-            if ((count % blockAlignment) > 0)
+            if((count % blockAlignment) > 0)
                 sampleCountLastBlock = (((count % blockAlignment) / channels) - 7) * 2 + 2;
             int sampleCount = ((count / blockAlignment) * sampleCountFullBlock) + sampleCountLastBlock;
             var samples = new byte[sampleCount * sizeof(short) * channels];
@@ -511,29 +646,29 @@ namespace Microsoft.Xna.Framework.Audio
 
             bool stereo = channels == 2;
 
-            while (count > 0)
+            while(count > 0)
             {
                 int blockSize = blockAlignment;
-                if (count < blockSize)
+                if(count < blockSize)
                     blockSize = count;
                 count -= blockAlignment;
 
                 int totalSamples = ((blockSize / channels) - 7) * 2 + 2;
-                if (totalSamples < 2)
+                if(totalSamples < 2)
                     break;
 
                 int offsetStart = offset;
                 blockPredictor = buffer[offset];
                 ++offset;
-                if (blockPredictor > 6)
+                if(blockPredictor > 6)
                     blockPredictor = 6;
                 channel0.coeff1 = adaptationCoeff1[blockPredictor];
                 channel0.coeff2 = adaptationCoeff2[blockPredictor];
-                if (stereo)
+                if(stereo)
                 {
                     blockPredictor = buffer[offset];
                     ++offset;
-                    if (blockPredictor > 6)
+                    if(blockPredictor > 6)
                         blockPredictor = 6;
                     channel1.coeff1 = adaptationCoeff1[blockPredictor];
                     channel1.coeff2 = adaptationCoeff2[blockPredictor];
@@ -541,47 +676,47 @@ namespace Microsoft.Xna.Framework.Audio
 
                 channel0.delta = buffer[offset];
                 channel0.delta |= buffer[offset + 1] << 8;
-                if ((channel0.delta & 0x8000) != 0)
+                if((channel0.delta & 0x8000) != 0)
                     channel0.delta -= 0x10000;
                 offset += 2;
-                if (stereo)
+                if(stereo)
                 {
                     channel1.delta = buffer[offset];
                     channel1.delta |= buffer[offset + 1] << 8;
-                    if ((channel1.delta & 0x8000) != 0)
+                    if((channel1.delta & 0x8000) != 0)
                         channel1.delta -= 0x10000;
                     offset += 2;
                 }
 
                 channel0.sample1 = buffer[offset];
                 channel0.sample1 |= buffer[offset + 1] << 8;
-                if ((channel0.sample1 & 0x8000) != 0)
+                if((channel0.sample1 & 0x8000) != 0)
                     channel0.sample1 -= 0x10000;
                 offset += 2;
-                if (stereo)
+                if(stereo)
                 {
                     channel1.sample1 = buffer[offset];
                     channel1.sample1 |= buffer[offset + 1] << 8;
-                    if ((channel1.sample1 & 0x8000) != 0)
+                    if((channel1.sample1 & 0x8000) != 0)
                         channel1.sample1 -= 0x10000;
                     offset += 2;
                 }
 
                 channel0.sample2 = buffer[offset];
                 channel0.sample2 |= buffer[offset + 1] << 8;
-                if ((channel0.sample2 & 0x8000) != 0)
+                if((channel0.sample2 & 0x8000) != 0)
                     channel0.sample2 -= 0x10000;
                 offset += 2;
-                if (stereo)
+                if(stereo)
                 {
                     channel1.sample2 = buffer[offset];
                     channel1.sample2 |= buffer[offset + 1] << 8;
-                    if ((channel1.sample2 & 0x8000) != 0)
+                    if((channel1.sample2 & 0x8000) != 0)
                         channel1.sample2 -= 0x10000;
                     offset += 2;
                 }
 
-                if (stereo)
+                if(stereo)
                 {
                     samples[sampleOffset] = (byte)channel0.sample2;
                     samples[sampleOffset + 1] = (byte)(channel0.sample2 >> 8);
@@ -592,8 +727,7 @@ namespace Microsoft.Xna.Framework.Audio
                     samples[sampleOffset + 6] = (byte)channel1.sample1;
                     samples[sampleOffset + 7] = (byte)(channel1.sample1 >> 8);
                     sampleOffset += 8;
-                }
-                else
+                } else
                 {
                     samples[sampleOffset] = (byte)channel0.sample2;
                     samples[sampleOffset + 1] = (byte)(channel0.sample2 >> 8);
@@ -603,9 +737,9 @@ namespace Microsoft.Xna.Framework.Audio
                 }
 
                 blockSize -= (offset - offsetStart);
-                if (stereo)
+                if(stereo)
                 {
-                    for (int i = 0; i < blockSize; ++i)
+                    for(int i = 0; i < blockSize; ++i)
                     {
                         int nibbles = buffer[offset];
 
@@ -620,10 +754,9 @@ namespace Microsoft.Xna.Framework.Audio
                         sampleOffset += 4;
                         ++offset;
                     }
-                }
-                else
+                } else
                 {
-                    for (int i = 0; i < blockSize; ++i)
+                    for(int i = 0; i < blockSize; ++i)
                     {
                         int nibbles = buffer[offset];
 
@@ -643,7 +776,6 @@ namespace Microsoft.Xna.Framework.Audio
 
             return samples;
         }
-
         #endregion
     }
 }

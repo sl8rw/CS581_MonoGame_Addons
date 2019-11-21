@@ -34,7 +34,7 @@ namespace Microsoft.Xna.Framework.Graphics
             GL.GetQueryObject(glQueryId, GetQueryObjectParam.QueryResultAvailable, out resultReady);
             GraphicsExtensions.CheckGLError();
 
-            if (resultReady == 0)
+            if(resultReady == 0)
             {
                 pixelCount = 0;
                 return false;
@@ -48,9 +48,9 @@ namespace Microsoft.Xna.Framework.Graphics
 
         protected override void Dispose(bool disposing)
         {
-            if (!IsDisposed)
+            if(!IsDisposed)
             {
-                if (glQueryId > -1)
+                if(glQueryId > -1)
                 {
                     GraphicsDevice.DisposeQuery(glQueryId);
                     glQueryId = -1;

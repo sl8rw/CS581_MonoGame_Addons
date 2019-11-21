@@ -30,10 +30,13 @@ namespace Microsoft.Xna.Framework.Audio
         readonly string oggFileName;
 
         internal VorbisReader Reader { get; private set; }
+
         internal bool Ready { get; private set; }
+
         internal bool Preparing { get; private set; }
 
         public Action FinishedAction { get; private set; }
+
         public int BufferCount { get; private set; }
 
         public OggStream(string filename, Action finishedAction = null, int bufferCount = DefaultBufferCount)
@@ -46,15 +49,16 @@ namespace Microsoft.Xna.Framework.Audio
             ALHelper.CheckError("Failed to generate buffers.");
             alSourceId = OpenALSoundController.Instance.ReserveSource();
 
-            if (OggStreamer.Instance.XRam.IsInitialized)
+            if(OggStreamer.Instance.XRam.IsInitialized)
             {
-                OggStreamer.Instance.XRam.SetBufferMode(BufferCount, ref alBufferIds[0], XRamExtension.XRamStorage.Hardware);
+                OggStreamer.Instance.XRam
+                    .SetBufferMode(BufferCount, ref alBufferIds[0], XRamExtension.XRamStorage.Hardware);
                 ALHelper.CheckError("Failed to activate Xram.");
             }
 
             Volume = 1;
 
-            if (OggStreamer.Instance.Efx.IsInitialized)
+            if(OggStreamer.Instance.Efx.IsInitialized)
             {
                 alFilterId = OggStreamer.Instance.Efx.GenFilter();
                 ALHelper.CheckError("Failed to generate Efx filter.");
@@ -68,21 +72,22 @@ namespace Microsoft.Xna.Framework.Audio
 
         public void Prepare()
         {
-            if (Preparing) return;
+            if(Preparing)
+                return;
 
             var state = AL.GetSourceState(alSourceId);
             ALHelper.CheckError("Failed to get source state.");
 
-            lock (stopMutex)
+            lock(stopMutex)
             {
-                switch (state)
+                switch(state)
                 {
                     case ALSourceState.Playing:
                     case ALSourceState.Paused:
                         return;
 
                     case ALSourceState.Stopped:
-                        lock (prepareMutex)
+                        lock(prepareMutex)
                         {
                             Close();
                             Empty();
@@ -90,9 +95,9 @@ namespace Microsoft.Xna.Framework.Audio
                         break;
                 }
 
-                if (!Ready)
+                if(!Ready)
                 {
-                    lock (prepareMutex)
+                    lock(prepareMutex)
                     {
                         Preparing = true;
                         Open(precache: true);
@@ -106,9 +111,10 @@ namespace Microsoft.Xna.Framework.Audio
             var state = AL.GetSourceState(alSourceId);
             ALHelper.CheckError("Failed to get source state.");
 
-            switch (state)
+            switch(state)
             {
-                case ALSourceState.Playing: return;
+                case ALSourceState.Playing:
+                    return;
                 case ALSourceState.Paused:
                     Resume();
                     return;
@@ -128,7 +134,7 @@ namespace Microsoft.Xna.Framework.Audio
         {
             var state = AL.GetSourceState(alSourceId);
             ALHelper.CheckError("Failed to get source state.");
-            if (state != ALSourceState.Playing)
+            if(state != ALSourceState.Playing)
                 return;
 
             OggStreamer.Instance.RemoveStream(this);
@@ -140,7 +146,7 @@ namespace Microsoft.Xna.Framework.Audio
         {
             var state = AL.GetSourceState(alSourceId);
             ALHelper.CheckError("Failed to get source state.");
-            if (state != ALSourceState.Paused)
+            if(state != ALSourceState.Paused)
                 return;
 
             OggStreamer.Instance.AddStream(this);
@@ -152,16 +158,16 @@ namespace Microsoft.Xna.Framework.Audio
         {
             var state = AL.GetSourceState(alSourceId);
             ALHelper.CheckError("Failed to get source state.");
-            if (state == ALSourceState.Playing || state == ALSourceState.Paused)
+            if(state == ALSourceState.Playing || state == ALSourceState.Paused)
                 StopPlayback();
 
-            lock (stopMutex)
+            lock(stopMutex)
             {
                 OggStreamer.Instance.RemoveStream(this);
 
-                lock (prepareMutex)
+                lock(prepareMutex)
                 {
-                    if (state != ALSourceState.Initial)
+                    if(state != ALSourceState.Initial)
                         Empty(); // force the queued buffers to be unqueued to avoid issues on Mac
                 }
             }
@@ -178,24 +184,22 @@ namespace Microsoft.Xna.Framework.Audio
 
         public TimeSpan GetPosition()
         {
-            if (Reader == null)
+            if(Reader == null)
                 return TimeSpan.Zero;
 
             return Reader.DecodedTime;
         }
 
-        public TimeSpan GetLength()
-        {
-            return Reader.TotalTime;
-        }
+        public TimeSpan GetLength() { return Reader.TotalTime; }
 
         float lowPassHfGain;
+
         public float LowPassHFGain
         {
             get { return lowPassHfGain; }
             set
             {
-                if (OggStreamer.Instance.Efx.IsInitialized)
+                if(OggStreamer.Instance.Efx.IsInitialized)
                 {
                     OggStreamer.Instance.Efx.Filter(alFilterId, EfxFilterf.LowpassGainHF, lowPassHfGain = value);
                     ALHelper.CheckError("Failed to set Efx filter.");
@@ -206,6 +210,7 @@ namespace Microsoft.Xna.Framework.Audio
         }
 
         float volume;
+
         public float Volume
         {
             get { return volume; }
@@ -222,14 +227,14 @@ namespace Microsoft.Xna.Framework.Audio
         {
             var state = AL.GetSourceState(alSourceId);
             ALHelper.CheckError("Failed to get the source state.");
-            if (state == ALSourceState.Playing || state == ALSourceState.Paused)
+            if(state == ALSourceState.Playing || state == ALSourceState.Paused)
                 StopPlayback();
 
-            lock (prepareMutex)
+            lock(prepareMutex)
             {
                 OggStreamer.Instance.RemoveStream(this);
 
-                if (state != ALSourceState.Initial)
+                if(state != ALSourceState.Initial)
                     Empty();
 
                 Close();
@@ -240,13 +245,11 @@ namespace Microsoft.Xna.Framework.Audio
             OpenALSoundController.Instance.RecycleSource(alSourceId);
             AL.DeleteBuffers(alBufferIds);
             ALHelper.CheckError("Failed to delete buffer.");
-            if (OggStreamer.Instance.Efx.IsInitialized)
+            if(OggStreamer.Instance.Efx.IsInitialized)
             {
                 OggStreamer.Instance.Efx.DeleteFilter(alFilterId);
                 ALHelper.CheckError("Failed to delete EFX filter.");
             }
-
-
         }
 
         void StopPlayback()
@@ -260,14 +263,13 @@ namespace Microsoft.Xna.Framework.Audio
             int queued;
             AL.GetSource(alSourceId, ALGetSourcei.BuffersQueued, out queued);
             ALHelper.CheckError("Failed to fetch queued buffers.");
-            if (queued > 0)
+            if(queued > 0)
             {
                 try
                 {
                     AL.SourceUnqueueBuffers(alSourceId, queued);
                     ALHelper.CheckError("Failed to unqueue buffers (first attempt).");
-                }
-                catch (InvalidOperationException)
+                } catch(InvalidOperationException)
                 {
                     // This is a bug in the OpenAL implementation
                     // Salvage what we can
@@ -275,7 +277,7 @@ namespace Microsoft.Xna.Framework.Audio
                     AL.GetSource(alSourceId, ALGetSourcei.BuffersProcessed, out processed);
                     ALHelper.CheckError("Failed to fetch processed buffers.");
                     var salvaged = new int[processed];
-                    if (processed > 0)
+                    if(processed > 0)
                     {
                         AL.SourceUnqueueBuffers(alSourceId, processed, out salvaged);
                         ALHelper.CheckError("Failed to unqueue buffers (second attempt).");
@@ -294,7 +296,7 @@ namespace Microsoft.Xna.Framework.Audio
         {
             Reader = new VorbisReader(oggFileName);
 
-            if (precache)
+            if(precache)
             {
                 // Fill first buffer synchronously
                 OggStreamer.Instance.FillBuffer(this, alBufferIds[0]);
@@ -307,7 +309,7 @@ namespace Microsoft.Xna.Framework.Audio
 
         internal void Close()
         {
-            if (Reader != null)
+            if(Reader != null)
             {
                 Reader.Dispose();
                 Reader = null;
@@ -341,21 +343,27 @@ namespace Microsoft.Xna.Framework.Audio
         bool pendingFinish;
 
         public float UpdateRate { get; private set; }
+
         public int BufferSize { get; private set; }
 
         static OggStreamer instance;
+
         public static OggStreamer Instance
         {
             get
             {
-                lock (singletonMutex)
+                lock(singletonMutex)
                 {
-                    if (instance == null)
+                    if(instance == null)
                         throw new InvalidOperationException("No instance running");
                     return instance;
                 }
             }
-            private set { lock (singletonMutex) instance = value; }
+            private set
+            {
+                lock(singletonMutex)
+                    instance = value;
+            }
         }
 
         public OggStreamer(int bufferSize = DefaultBufferSize, float updateRate = DefaultUpdateRate)
@@ -364,17 +372,14 @@ namespace Microsoft.Xna.Framework.Audio
             BufferSize = bufferSize;
             pendingFinish = false;
 
-            lock (singletonMutex)
+            lock(singletonMutex)
             {
-                if (instance != null)
+                if(instance != null)
                     throw new InvalidOperationException("Already running");
 
                 Instance = this;
                 underlyingThread = new Thread(EnsureBuffersFilled)
-                {
-                    Priority = ThreadPriority.Lowest,
-                    IsBackground = true
-                };
+                { Priority = ThreadPriority.Lowest, IsBackground = true };
                 underlyingThread.Start();
             }
 
@@ -384,12 +389,12 @@ namespace Microsoft.Xna.Framework.Audio
 
         public void Dispose()
         {
-            lock (singletonMutex)
+            lock(singletonMutex)
             {
                 Debug.Assert(Instance == this, "Two instances running, somehow...?");
 
                 cancelled = true;
-                lock (iterationMutex)
+                lock(iterationMutex)
                     streams.Clear();
 
                 Instance = null;
@@ -398,58 +403,69 @@ namespace Microsoft.Xna.Framework.Audio
 
         internal bool AddStream(OggStream stream)
         {
-            lock (iterationMutex)
+            lock(iterationMutex)
                 return streams.Add(stream);
         }
 
         internal bool RemoveStream(OggStream stream)
         {
-            lock (iterationMutex)
+            lock(iterationMutex)
                 return streams.Remove(stream);
         }
 
         public bool FillBuffer(OggStream stream, int bufferId)
         {
             int readSamples;
-            lock (readMutex)
+            lock(readMutex)
             {
                 readSamples = stream.Reader.ReadSamples(readSampleBuffer, 0, BufferSize);
                 CastBuffer(readSampleBuffer, castBuffer, readSamples);
             }
-            AL.BufferData(bufferId, stream.Reader.Channels == 1 ? ALFormat.Mono16 : ALFormat.Stereo16, castBuffer,
-                readSamples * sizeof(short), stream.Reader.SampleRate);
-            ALHelper.CheckError("Failed to fill buffer, readSamples = {0}, SampleRate = {1}, buffer.Length = {2}.", readSamples, stream.Reader.SampleRate, castBuffer.Length);
+            AL.BufferData(bufferId,
+                          stream.Reader.Channels == 1 ? ALFormat.Mono16 : ALFormat.Stereo16,
+                          castBuffer,
+                          readSamples * sizeof(short),
+                          stream.Reader.SampleRate);
+            ALHelper.CheckError("Failed to fill buffer, readSamples = {0}, SampleRate = {1}, buffer.Length = {2}.",
+                                readSamples,
+                                stream.Reader.SampleRate,
+                                castBuffer.Length);
 
 
             return readSamples != BufferSize;
         }
+
         static void CastBuffer(float[] inBuffer, short[] outBuffer, int length)
         {
-            for (int i = 0; i < length; i++)
+            for(int i = 0; i < length; i++)
             {
                 var temp = (int)(32767f * inBuffer[i]);
-                if (temp > short.MaxValue) temp = short.MaxValue;
-                else if (temp < short.MinValue) temp = short.MinValue;
+                if(temp > short.MaxValue)
+                    temp = short.MaxValue;
+                else if(temp < short.MinValue)
+                    temp = short.MinValue;
                 outBuffer[i] = (short)temp;
             }
         }
 
         void EnsureBuffersFilled()
         {
-            while (!cancelled)
+            while(!cancelled)
             {
                 Thread.Sleep((int)(1000 / ((UpdateRate <= 0) ? 1 : UpdateRate)));
-                if (cancelled) break;
+                if(cancelled)
+                    break;
 
                 threadLocalStreams.Clear();
-                lock (iterationMutex) threadLocalStreams.AddRange(streams);
+                lock(iterationMutex)
+                    threadLocalStreams.AddRange(streams);
 
-                foreach (var stream in threadLocalStreams)
+                foreach(var stream in threadLocalStreams)
                 {
-                    lock (stream.prepareMutex)
+                    lock(stream.prepareMutex)
                     {
-                        lock (iterationMutex)
-                            if (!streams.Contains(stream))
+                        lock(iterationMutex)
+                            if(!streams.Contains(stream))
                                 continue;
 
                         bool finished = false;
@@ -461,65 +477,63 @@ namespace Microsoft.Xna.Framework.Audio
                         AL.GetSource(stream.alSourceId, ALGetSourcei.BuffersProcessed, out processed);
                         ALHelper.CheckError("Failed to fetch processed buffers.");
 
-                        if (processed == 0 && queued == stream.BufferCount) continue;
+                        if(processed == 0 && queued == stream.BufferCount)
+                            continue;
 
                         int[] tempBuffers;
-                        if (processed > 0)
+                        if(processed > 0)
                         {
                             tempBuffers = AL.SourceUnqueueBuffers(stream.alSourceId, processed);
                             ALHelper.CheckError("Failed to unqueue buffers.");
-                        }
-                        else
+                        } else
                             tempBuffers = stream.alBufferIds.Skip(queued).ToArray();
 
                         int bufferFilled = 0;
-                        for (int i = 0; i < tempBuffers.Length && !pendingFinish; i++)
+                        for(int i = 0; i < tempBuffers.Length && !pendingFinish; i++)
                         {
                             finished |= FillBuffer(stream, tempBuffers[i]);
                             bufferFilled++;
 
-                            if (finished)
+                            if(finished)
                             {
-                                if (stream.IsLooped)
+                                if(stream.IsLooped)
                                 {
                                     stream.Close();
                                     stream.Open();
-                                }
-                                else
+                                } else
                                 {
                                     pendingFinish = true;
                                 }
                             }
                         }
 
-                        if (pendingFinish && queued == 0)
+                        if(pendingFinish && queued == 0)
                         {
                             pendingFinish = false;
-                            lock (iterationMutex)
+                            lock(iterationMutex)
                                 streams.Remove(stream);
-                            if (stream.FinishedAction != null)
+                            if(stream.FinishedAction != null)
                                 stream.FinishedAction.Invoke();
-                        }
-                        else if (!finished && bufferFilled > 0) // queue only successfully filled buffers
+                        } else if(!finished && bufferFilled > 0) // queue only successfully filled buffers
                         {
                             AL.SourceQueueBuffers(stream.alSourceId, bufferFilled, tempBuffers);
                             ALHelper.CheckError("Failed to queue buffers.");
-                        }
-                        else if (!stream.IsLooped)
+                        } else if(!stream.IsLooped)
                             continue;
                     }
 
-                    lock (stream.stopMutex)
+                    lock(stream.stopMutex)
                     {
-                        if (stream.Preparing) continue;
+                        if(stream.Preparing)
+                            continue;
 
-                        lock (iterationMutex)
-                            if (!streams.Contains(stream))
+                        lock(iterationMutex)
+                            if(!streams.Contains(stream))
                                 continue;
 
                         var state = AL.GetSourceState(stream.alSourceId);
                         ALHelper.CheckError("Failed to get source state.");
-                        if (state == ALSourceState.Stopped)
+                        if(state == ALSourceState.Stopped)
                         {
                             AL.SourcePlay(stream.alSourceId);
                             ALHelper.CheckError("Failed to play.");

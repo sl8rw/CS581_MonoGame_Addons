@@ -8,36 +8,33 @@ namespace Microsoft.Xna.Framework.Graphics
 
         public Effect Effect
         {
-            get
-            {
-                return _effect;
-            }
+            get { return _effect; }
             set
             {
-                if (value == _effect)
+                if(value == _effect)
                     return;
 
-                if (_effect != null)
+                if(_effect != null)
                 {
                     // First check to see any other parts are also using this effect.
                     var removeEffect = true;
-                    foreach (var part in parent.MeshParts)
+                    foreach(var part in parent.MeshParts)
                     {
-                        if (part != this && part._effect == _effect)
+                        if(part != this && part._effect == _effect)
                         {
                             removeEffect = false;
                             break;
                         }
                     }
 
-                    if (removeEffect)
+                    if(removeEffect)
                         parent.Effects.Remove(_effect);
                 }
 
                 // Set the new effect.
                 _effect = value;
 
-                if (_effect != null && !parent.Effects.Contains(_effect))
+                if(_effect != null && !parent.Effects.Contains(_effect))
                     parent.Effects.Add(_effect);
             }
         }

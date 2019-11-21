@@ -14,11 +14,7 @@ namespace Microsoft.Xna.Framework.Graphics
     /// </summary>
     public sealed class ModelMeshCollection : ReadOnlyCollection<ModelMesh>
     {
-        internal ModelMeshCollection(IList<ModelMesh> list)
-            : base(list)
-        {
-
-        }
+        internal ModelMeshCollection(IList<ModelMesh> list) : base(list) { }
 
         /// <summary>
         /// Retrieves a ModelMesh from the collection, given the name of the mesh.
@@ -29,7 +25,7 @@ namespace Microsoft.Xna.Framework.Graphics
             get
             {
                 ModelMesh ret;
-                if (!TryGetValue(meshName, out ret))
+                if(!TryGetValue(meshName, out ret))
                     throw new KeyNotFoundException();
                 return ret;
             }
@@ -43,12 +39,12 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <returns>true if a mesh was found</returns>
         public bool TryGetValue(string meshName, out ModelMesh value)
         {
-            if (string.IsNullOrEmpty(meshName))
-                throw new ArgumentNullException("meshName");
+            if(string.IsNullOrEmpty(meshName))
+                throw new ArgumentNullException(nameof(meshName));
 
-            foreach (var mesh in this)
+            foreach(var mesh in this)
             {
-                if (string.Compare(mesh.Name, meshName, StringComparison.Ordinal) == 0)
+                if(string.Compare(mesh.Name, meshName, StringComparison.Ordinal) == 0)
                 {
                     value = mesh;
                     return true;
@@ -63,10 +59,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// Returns a ModelMeshCollection.Enumerator that can iterate through a ModelMeshCollection.
         /// </summary>
         /// <returns></returns>
-        public new Enumerator GetEnumerator()
-        {
-            return new Enumerator(this);
-        }
+        public new Enumerator GetEnumerator() { return new Enumerator(this); }
 
         /// <summary>
         /// Provides the ability to iterate through the bones in an ModelMeshCollection.
@@ -100,26 +93,17 @@ namespace Microsoft.Xna.Framework.Graphics
             #region IDisposable
 
             /// <summary>
-            /// Immediately releases the unmanaged resources used by this object.
-            /// </summary>
-            public void Dispose()
-            {
-            }
+/// Immediately releases the unmanaged resources used by this object.
+/// </summary>
+            public void Dispose() { }
 
             #endregion
 
             #region IEnumerator Members
 
-            object IEnumerator.Current
-            {
-                get { return _collection[_position]; }
-            }
+            object IEnumerator.Current { get { return _collection[_position]; } }
 
-            public void Reset()
-            {
-                _position = -1;
-            }
-
+            public void Reset() { _position = -1; }
             #endregion
         }
     }

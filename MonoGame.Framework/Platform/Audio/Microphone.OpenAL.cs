@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 
 #if OPENAL
 using MonoGame.OpenAL;
+
 #if IOS || MONOMAC
 using AudioToolbox;
 using AudioUnit;
@@ -19,7 +20,7 @@ using AVFoundation;
 namespace Microsoft.Xna.Framework.Audio
 {
     /// <summary>
-    /// Provides microphones capture features.  
+    /// Provides microphones capture features.
     /// </summary>
     public sealed partial class Microphone
     {
@@ -29,20 +30,18 @@ namespace Microsoft.Xna.Framework.Audio
         {
             AlcError error = Alc.GetErrorForDevice(_captureDevice);
 
-            if (error == AlcError.NoError)
+            if(error == AlcError.NoError)
                 return;
 
             string errorFmt = "OpenAL Error: {0}";
 
-            throw new NoMicrophoneConnectedException(String.Format("{0} - {1}",
-                            operation,
-                            string.Format(errorFmt, error)));
+            throw new NoMicrophoneConnectedException($"{operation} - {(string.Format(errorFmt, error))}");
         }
 
         internal static void PopulateCaptureDevices()
         {
             // clear microphones
-            if (_allMicrophones != null)
+            if(_allMicrophones != null)
                 _allMicrophones.Clear();
             else
                 _allMicrophones = new List<Microphone>();
@@ -59,16 +58,16 @@ namespace Microsoft.Xna.Framework.Audio
             // Marshal native UTF-8 character array to .NET string
             // The native string is a null-char separated list of known capture device specifiers ending with an empty string
 
-            while (true)
+            while(true)
             {
                 var deviceIdentifier = InteropHelpers.Utf8ToString(deviceList);
 
-                if (string.IsNullOrEmpty(deviceIdentifier))
+                if(string.IsNullOrEmpty(deviceIdentifier))
                     break;
 
                 var microphone = new Microphone(deviceIdentifier);
                 _allMicrophones.Add(microphone);
-                if (deviceIdentifier == defaultDevice)
+                if(deviceIdentifier == defaultDevice)
                     _default = microphone;
 
                 // increase the offset, add one extra for the terminator
@@ -85,25 +84,23 @@ namespace Microsoft.Xna.Framework.Audio
 
         internal void PlatformStart()
         {
-            if (_state == MicrophoneState.Started)
+            if(_state == MicrophoneState.Started)
                 return;
 
-            _captureDevice = Alc.CaptureOpenDevice(
-                Name,
-                (uint)_sampleRate,
-                ALFormat.Mono16,
-                GetSampleSizeInBytes(_bufferDuration));
+            _captureDevice = Alc.CaptureOpenDevice(Name,
+                                                   (uint)_sampleRate,
+                                                   ALFormat.Mono16,
+                                                   GetSampleSizeInBytes(_bufferDuration));
 
             CheckALCError("Failed to open capture device.");
 
-            if (_captureDevice != IntPtr.Zero)
+            if(_captureDevice != IntPtr.Zero)
             {
                 Alc.CaptureStart(_captureDevice);
                 CheckALCError("Failed to start capture.");
 
                 _state = MicrophoneState.Started;
-            }
-            else
+            } else
             {
                 throw new NoMicrophoneConnectedException("Failed to open capture device.");
             }
@@ -111,7 +108,7 @@ namespace Microsoft.Xna.Framework.Audio
 
         internal void PlatformStop()
         {
-            if (_state == MicrophoneState.Started)
+            if(_state == MicrophoneState.Started)
             {
                 Alc.CaptureStop(_captureDevice);
                 CheckALCError("Failed to stop capture.");
@@ -124,7 +121,7 @@ namespace Microsoft.Xna.Framework.Audio
 
         internal int GetQueuedSampleCount()
         {
-            if (_state == MicrophoneState.Stopped || BufferReady == null)
+            if(_state == MicrophoneState.Stopped || BufferReady == null)
                 return 0;
 
             int[] values = new int[1];
@@ -137,7 +134,7 @@ namespace Microsoft.Xna.Framework.Audio
 
         internal void Update()
         {
-            if (GetQueuedSampleCount() > 0)
+            if(GetQueuedSampleCount() > 0)
             {
                 BufferReady.Invoke(this, EventArgs.Empty);
             }
@@ -148,7 +145,7 @@ namespace Microsoft.Xna.Framework.Audio
             int sampleCount = GetQueuedSampleCount();
             sampleCount = Math.Min(count / 2, sampleCount); // 16bit adjust
 
-            if (sampleCount > 0)
+            if(sampleCount > 0)
             {
                 GCHandle handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
                 Alc.CaptureSamples(_captureDevice, handle.AddrOfPinnedObject() + offset, sampleCount);

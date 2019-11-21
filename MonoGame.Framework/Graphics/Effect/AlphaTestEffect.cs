@@ -142,7 +142,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             set
             {
-                if (fogEnabled != value)
+                if(fogEnabled != value)
                 {
                     fogEnabled = value;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex | EffectDirtyFlags.FogEnable;
@@ -210,7 +210,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             set
             {
-                if (vertexColorEnabled != value)
+                if(vertexColorEnabled != value)
                 {
                     vertexColorEnabled = value;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex;
@@ -254,19 +254,15 @@ namespace Microsoft.Xna.Framework.Graphics
         #region Methods
 
         /// <summary>
-        /// Creates a new AlphaTestEffect with default parameter settings.
-        /// </summary>
-        public AlphaTestEffect(GraphicsDevice device)
-            : base(device, EffectResource.AlphaTestEffect.Bytecode)
-        {
-            CacheEffectParameters();
-        }
+/// Creates a new AlphaTestEffect with default parameter settings.
+/// </summary>
+        public AlphaTestEffect(GraphicsDevice device) : base(device, EffectResource.AlphaTestEffect.Bytecode)
+        { CacheEffectParameters(); }
 
         /// <summary>
         /// Creates a new AlphaTestEffect by cloning parameter settings from an existing instance.
         /// </summary>
-        protected AlphaTestEffect(AlphaTestEffect cloneSource)
-            : base(cloneSource)
+        protected AlphaTestEffect(AlphaTestEffect cloneSource) : base(cloneSource)
         {
             CacheEffectParameters();
 
@@ -286,26 +282,22 @@ namespace Microsoft.Xna.Framework.Graphics
 
             alphaFunction = cloneSource.alphaFunction;
             referenceAlpha = cloneSource.referenceAlpha;
-
         }
 
         /// <summary>
         /// Creates a clone of the current AlphaTestEffect instance.
         /// </summary>
-        public override Effect Clone()
-        {
-            return new AlphaTestEffect(this);
-        }
+        public override Effect Clone() { return new AlphaTestEffect(this); }
 
         /// <summary>
         /// Looks up shortcut references to our effect parameters.
         /// </summary>
         void CacheEffectParameters()
         {
-            textureParam = Parameters["Texture"];
-            diffuseColorParam = Parameters["DiffuseColor"];
+            textureParam = Parameters[nameof(Texture)];
+            diffuseColorParam = Parameters[nameof(DiffuseColor)];
             alphaTestParam = Parameters["AlphaTest"];
-            fogColorParam = Parameters["FogColor"];
+            fogColorParam = Parameters[nameof(FogColor)];
             fogVectorParam = Parameters["FogVector"];
             worldViewProjParam = Parameters["WorldViewProj"];
         }
@@ -316,10 +308,19 @@ namespace Microsoft.Xna.Framework.Graphics
         protected internal override void OnApply()
         {
             // Recompute the world+view+projection matrix or fog vector?
-            dirtyFlags = EffectHelpers.SetWorldViewProjAndFog(dirtyFlags, ref world, ref view, ref projection, ref worldView, fogEnabled, fogStart, fogEnd, worldViewProjParam, fogVectorParam);
+            dirtyFlags = EffectHelpers.SetWorldViewProjAndFog(dirtyFlags,
+                                                              ref world,
+                                                              ref view,
+                                                              ref projection,
+                                                              ref worldView,
+                                                              fogEnabled,
+                                                              fogStart,
+                                                              fogEnd,
+                                                              worldViewProjParam,
+                                                              fogVectorParam);
 
             // Recompute the diffuse/alpha material color parameter?
-            if ((dirtyFlags & EffectDirtyFlags.MaterialColor) != 0)
+            if((dirtyFlags & EffectDirtyFlags.MaterialColor) != 0)
             {
                 diffuseColorParam.SetValue(new Vector4(diffuseColor * alpha, alpha));
 
@@ -327,7 +328,7 @@ namespace Microsoft.Xna.Framework.Graphics
             }
 
             // Recompute the alpha test settings?
-            if ((dirtyFlags & EffectDirtyFlags.AlphaTest) != 0)
+            if((dirtyFlags & EffectDirtyFlags.AlphaTest) != 0)
             {
                 Vector4 alphaTest = new Vector4();
                 bool eqNe = false;
@@ -338,7 +339,7 @@ namespace Microsoft.Xna.Framework.Graphics
                 // Comparison tolerance of half the 8 bit integer precision.
                 const float threshold = 0.5f / 255f;
 
-                switch (alphaFunction)
+                switch(alphaFunction)
                 {
                     case CompareFunction.Less:
                         // Shader will evaluate: clip((a < x) ? z : w)
@@ -406,7 +407,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
                 // If we changed between less/greater vs. equal/notequal
                 // compare modes, we must also update the shader index.
-                if (isEqNe != eqNe)
+                if(isEqNe != eqNe)
                 {
                     isEqNe = eqNe;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex;
@@ -414,17 +415,17 @@ namespace Microsoft.Xna.Framework.Graphics
             }
 
             // Recompute the shader index?
-            if ((dirtyFlags & EffectDirtyFlags.ShaderIndex) != 0)
+            if((dirtyFlags & EffectDirtyFlags.ShaderIndex) != 0)
             {
                 int shaderIndex = 0;
 
-                if (!fogEnabled)
+                if(!fogEnabled)
                     shaderIndex += 1;
 
-                if (vertexColorEnabled)
+                if(vertexColorEnabled)
                     shaderIndex += 2;
 
-                if (isEqNe)
+                if(isEqNe)
                     shaderIndex += 4;
 
                 dirtyFlags &= ~EffectDirtyFlags.ShaderIndex;
@@ -432,8 +433,6 @@ namespace Microsoft.Xna.Framework.Graphics
                 CurrentTechnique = Techniques[shaderIndex];
             }
         }
-
-
         #endregion
     }
 }

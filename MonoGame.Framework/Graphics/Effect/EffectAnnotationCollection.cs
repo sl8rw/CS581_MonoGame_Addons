@@ -8,28 +8,19 @@ namespace Microsoft.Xna.Framework.Graphics
 
         private readonly EffectAnnotation[] _annotations;
 
-        internal EffectAnnotationCollection(EffectAnnotation[] annotations)
-        {
-            _annotations = annotations;
-        }
+        internal EffectAnnotationCollection(EffectAnnotation[] annotations) { _annotations = annotations; }
 
-        public int Count
-        {
-            get { return _annotations.Length; }
-        }
+        public int Count { get { return _annotations.Length; } }
 
-        public EffectAnnotation this[int index]
-        {
-            get { return _annotations[index]; }
-        }
+        public EffectAnnotation this[int index] { get { return _annotations[index]; } }
 
         public EffectAnnotation this[string name]
         {
             get
             {
-                foreach (var annotation in _annotations)
+                foreach(var annotation in _annotations)
                 {
-                    if (annotation.Name == name)
+                    if(annotation.Name == name)
                         return annotation;
                 }
                 return null;
@@ -37,14 +28,10 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 
         public IEnumerator<EffectAnnotation> GetEnumerator()
-        {
-            return ((IEnumerable<EffectAnnotation>)_annotations).GetEnumerator();
-        }
+        { return ((IEnumerable<EffectAnnotation>)_annotations).GetEnumerator(); }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return _annotations.GetEnumerator();
-        }
+        { return _annotations.GetEnumerator(); }
     }
 }
 

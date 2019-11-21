@@ -24,10 +24,7 @@ namespace Microsoft.Xna.Framework.Audio
             _queuedBuffers = new Queue<OALSoundBuffer>();
         }
 
-        private int PlatformGetPendingBufferCount()
-        {
-            return _queuedBuffers.Count;
-        }
+        private int PlatformGetPendingBufferCount() { return _queuedBuffers.Count; }
 
         private void PlatformPlay()
         {
@@ -63,7 +60,7 @@ namespace Microsoft.Xna.Framework.Audio
 
             // Remove all queued buffers
             AL.Source(SourceId, ALSourcei.Buffer, 0);
-            while (_queuedBuffers.Count > 0)
+            while(_queuedBuffers.Count > 0)
             {
                 var buffer = _queuedBuffers.Dequeue();
                 buffer.Dispose();
@@ -76,11 +73,10 @@ namespace Microsoft.Xna.Framework.Audio
             OALSoundBuffer oalBuffer = new OALSoundBuffer();
 
             // Bind the data
-            if (offset == 0)
+            if(offset == 0)
             {
                 oalBuffer.BindDataBuffer(buffer, _format, count, _sampleRate);
-            }
-            else
+            } else
             {
                 // BindDataBuffer does not support offset
                 var offsetBuffer = new byte[count];
@@ -95,7 +91,7 @@ namespace Microsoft.Xna.Framework.Audio
 
             // If the source has run out of buffers, restart it
             var sourceState = AL.GetSourceState(SourceId);
-            if (_state == SoundState.Playing && sourceState == ALSourceState.Stopped)
+            if(_state == SoundState.Playing && sourceState == ALSourceState.Stopped)
             {
                 AL.SourcePlay(SourceId);
                 ALHelper.CheckError("Failed to resume source playback.");
@@ -106,7 +102,7 @@ namespace Microsoft.Xna.Framework.Audio
         {
             // Stop the source and bind null buffer so that it can be recycled
             AL.GetError();
-            if (AL.IsSource(SourceId))
+            if(AL.IsSource(SourceId))
             {
                 AL.SourceStop(SourceId);
                 AL.Source(SourceId, ALSourcei.Buffer, 0);
@@ -114,9 +110,9 @@ namespace Microsoft.Xna.Framework.Audio
                 controller.RecycleSource(SourceId);
             }
 
-            if (disposing)
+            if(disposing)
             {
-                while (_queuedBuffers.Count > 0)
+                while(_queuedBuffers.Count > 0)
                 {
                     var buffer = _queuedBuffers.Dequeue();
                     buffer.Dispose();
@@ -135,11 +131,11 @@ namespace Microsoft.Xna.Framework.Audio
             ALHelper.CheckError("Failed to get processed buffer count.");
 
             // Unqueue them
-            if (numBuffers > 0)
+            if(numBuffers > 0)
             {
                 AL.SourceUnqueueBuffers(SourceId, numBuffers);
                 ALHelper.CheckError("Failed to unqueue buffers.");
-                for (int i = 0; i < numBuffers; i++)
+                for(int i = 0; i < numBuffers; i++)
                 {
                     var buffer = _queuedBuffers.Dequeue();
                     buffer.Dispose();
@@ -147,7 +143,7 @@ namespace Microsoft.Xna.Framework.Audio
             }
 
             // Raise the event for each removed buffer, if needed
-            for (int i = 0; i < numBuffers; i++)
+            for(int i = 0; i < numBuffers; i++)
                 CheckBufferCount();
         }
     }

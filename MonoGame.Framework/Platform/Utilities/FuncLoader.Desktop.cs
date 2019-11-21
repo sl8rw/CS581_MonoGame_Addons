@@ -36,10 +36,10 @@ namespace MonoGame.Utilities
 
         public static IntPtr LoadLibrary(string libname)
         {
-            if (CurrentPlatform.OS == OS.Windows)
+            if(CurrentPlatform.OS == OS.Windows)
                 return Windows.LoadLibraryW(libname);
 
-            if (CurrentPlatform.OS == OS.MacOSX)
+            if(CurrentPlatform.OS == OS.MacOSX)
                 return OSX.dlopen(libname, RTLD_LAZY);
 
             return Linux.dlopen(libname, RTLD_LAZY);
@@ -49,16 +49,16 @@ namespace MonoGame.Utilities
         {
             var ret = IntPtr.Zero;
 
-            if (CurrentPlatform.OS == OS.Windows)
+            if(CurrentPlatform.OS == OS.Windows)
                 ret = Windows.GetProcAddress(library, function);
-            else if (CurrentPlatform.OS == OS.MacOSX)
+            else if(CurrentPlatform.OS == OS.MacOSX)
                 ret = OSX.dlsym(library, function);
             else
                 ret = Linux.dlsym(library, function);
 
-            if (ret == IntPtr.Zero)
+            if(ret == IntPtr.Zero)
             {
-                if (throwIfNotFound)
+                if(throwIfNotFound)
                     throw new EntryPointNotFoundException(function);
 
                 return default(T);

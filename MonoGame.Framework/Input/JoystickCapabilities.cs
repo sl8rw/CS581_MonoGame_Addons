@@ -55,11 +55,11 @@ namespace Microsoft.Xna.Framework.Input
         public static bool operator ==(JoystickCapabilities left, JoystickCapabilities right)
         {
             return left.IsConnected == right.IsConnected &&
-               left.Identifier == right.Identifier &&
-               left.IsGamepad == right.IsGamepad &&
-               left.AxisCount == right.AxisCount &&
-               left.ButtonCount == right.ButtonCount &&
-               left.HatCount == right.HatCount;
+                left.Identifier == right.Identifier &&
+                left.IsGamepad == right.IsGamepad &&
+                left.AxisCount == right.AxisCount &&
+                left.ButtonCount == right.ButtonCount &&
+                left.HatCount == right.HatCount;
         }
 
         /// <summary>
@@ -75,33 +75,40 @@ namespace Microsoft.Xna.Framework.Input
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current <see cref="T:Microsoft.Xna.Framework.Input.JoystickCapabilities"/>.
+        /// Determines whether the specified <see cref="object"/> is equal to the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickCapabilities"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current <see cref="T:Microsoft.Xna.Framework.Input.JoystickCapabilities"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current
-        /// <see cref="T:Microsoft.Xna.Framework.Input.JoystickCapabilities"/>; otherwise, <c>false</c>.</returns>
+        /// <param name="obj">
+        /// The <see cref="object"/> to compare with the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickCapabilities"/>.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the specified <see cref="object"/> is equal to the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickCapabilities"/>; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj)
-        {
-            return (obj is JoystickCapabilities) && (this == (JoystickCapabilities)obj);
-        }
+        { return (obj is JoystickCapabilities) && (this == (JoystickCapabilities)obj); }
 
         /// <summary>
         /// Serves as a hash function for a <see cref="T:Microsoft.Xna.Framework.Input.JoystickCapabilities"/> object.
         /// </summary>
-        /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
-        /// hash table.</returns>
-        public override int GetHashCode()
-        {
-            return Identifier.GetHashCode();
-        }
+        /// <returns>
+        /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+        /// hash table.
+        /// </returns>
+        public override int GetHashCode() { return Identifier.GetHashCode(); }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Microsoft.Xna.Framework.Input.JoystickCapabilities"/>.
+        /// Returns a <see cref="T:System.String"/> that represents the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickCapabilities"/>.
         /// </summary>
-        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Microsoft.Xna.Framework.Input.JoystickCapabilities"/>.</returns>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.JoystickCapabilities"/>.
+        /// </returns>
         public override string ToString()
         {
-            return "[JoystickCapabilities: IsConnected=" + IsConnected + ", Identifier=" + Identifier + ", IsGamepad=" + IsGamepad + " , AxisCount=" + AxisCount + ", ButtonCount=" + ButtonCount + ", HatCount=" + HatCount + "]";
+            return $"[JoystickCapabilities: IsConnected={IsConnected}, Identifier={Identifier}, IsGamepad={IsGamepad} , AxisCount={AxisCount}, ButtonCount={ButtonCount}, HatCount={HatCount}]";
         }
     }
 }

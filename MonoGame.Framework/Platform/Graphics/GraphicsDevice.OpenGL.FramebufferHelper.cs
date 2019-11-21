@@ -18,14 +18,13 @@ namespace Microsoft.Xna.Framework.Graphics
 
             public static FramebufferHelper Create(GraphicsDevice gd)
             {
-                if (gd.GraphicsCapabilities.SupportsFramebufferObjectARB || gd.GraphicsCapabilities.SupportsFramebufferObjectEXT)
+                if(gd.GraphicsCapabilities.SupportsFramebufferObjectARB ||
+                    gd.GraphicsCapabilities.SupportsFramebufferObjectEXT)
                 {
                     _instance = new FramebufferHelper(gd);
-                }
-                else
+                } else
                 {
-                    throw new PlatformNotSupportedException(
-                        "MonoGame requires either ARB_framebuffer_object or EXT_framebuffer_object." +
+                    throw new PlatformNotSupportedException("MonoGame requires either ARB_framebuffer_object or EXT_framebuffer_object." +
                         "Try updating your graphics drivers.");
                 }
 
@@ -34,7 +33,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             public static FramebufferHelper Get()
             {
-                if (_instance == null)
+                if(_instance == null)
                     throw new InvalidOperationException("The FramebufferHelper has not been created yet!");
                 return _instance;
             }
@@ -69,10 +68,17 @@ namespace Microsoft.Xna.Framework.Graphics
 
             internal virtual void RenderbufferStorageMultisample(int samples, int internalFormat, int width, int height)
             {
-                if (samples > 0 && GL.RenderbufferStorageMultisample != null)
-                    GL.RenderbufferStorageMultisample(RenderbufferTarget.RenderbufferExt, samples, (RenderbufferStorage)internalFormat, width, height);
+                if(samples > 0 && GL.RenderbufferStorageMultisample != null)
+                    GL.RenderbufferStorageMultisample(RenderbufferTarget.RenderbufferExt,
+                                                      samples,
+                                                      (RenderbufferStorage)internalFormat,
+                                                      width,
+                                                      height);
                 else
-                    GL.RenderbufferStorage(RenderbufferTarget.Renderbuffer, (RenderbufferStorage)internalFormat, width, height);
+                    GL.RenderbufferStorage(RenderbufferTarget.Renderbuffer,
+                                           (RenderbufferStorage)internalFormat,
+                                           width,
+                                           height);
                 GraphicsExtensions.CheckGLError();
             }
 
@@ -94,7 +100,8 @@ namespace Microsoft.Xna.Framework.Graphics
                 GraphicsExtensions.CheckGLError();
             }
 
-            static readonly FramebufferAttachment[] FramebufferAttachements = {
+            static readonly FramebufferAttachment[] FramebufferAttachements =
+            {
                 FramebufferAttachment.ColorAttachment0,
                 FramebufferAttachment.DepthAttachment,
                 FramebufferAttachment.StencilAttachment,
@@ -118,15 +125,26 @@ namespace Microsoft.Xna.Framework.Graphics
                 GraphicsExtensions.CheckGLError();
             }
 
-            internal virtual void FramebufferTexture2D(int attachement, int target, int texture, int level = 0, int samples = 0)
+            internal virtual void FramebufferTexture2D(int attachement,
+                                                       int target,
+                                                       int texture,
+                                                       int level = 0,
+                                                       int samples = 0)
             {
-                GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, (FramebufferAttachment)attachement, (TextureTarget)target, texture, level);
+                GL.FramebufferTexture2D(FramebufferTarget.Framebuffer,
+                                        (FramebufferAttachment)attachement,
+                                        (TextureTarget)target,
+                                        texture,
+                                        level);
                 GraphicsExtensions.CheckGLError();
             }
 
             internal virtual void FramebufferRenderbuffer(int attachement, int renderbuffer, int level = 0)
             {
-                GL.FramebufferRenderbuffer(FramebufferTarget.Framebuffer, (FramebufferAttachment)attachement, RenderbufferTarget.Renderbuffer, renderbuffer);
+                GL.FramebufferRenderbuffer(FramebufferTarget.Framebuffer,
+                                           (FramebufferAttachment)attachement,
+                                           RenderbufferTarget.Renderbuffer,
+                                           renderbuffer);
                 GraphicsExtensions.CheckGLError();
             }
 
@@ -134,33 +152,47 @@ namespace Microsoft.Xna.Framework.Graphics
             {
                 GL.GenerateMipmap((GenerateMipmapTarget)target);
                 GraphicsExtensions.CheckGLError();
-
             }
 
             internal virtual void BlitFramebuffer(int iColorAttachment, int width, int height)
             {
-
                 GL.ReadBuffer(ReadBufferMode.ColorAttachment0 + iColorAttachment);
                 GraphicsExtensions.CheckGLError();
                 GL.DrawBuffer(DrawBufferMode.ColorAttachment0 + iColorAttachment);
                 GraphicsExtensions.CheckGLError();
-                GL.BlitFramebuffer(0, 0, width, height, 0, 0, width, height, ClearBufferMask.ColorBufferBit, BlitFramebufferFilter.Nearest);
+                GL.BlitFramebuffer(0,
+                                   0,
+                                   width,
+                                   height,
+                                   0,
+                                   0,
+                                   width,
+                                   height,
+                                   ClearBufferMask.ColorBufferBit,
+                                   BlitFramebufferFilter.Nearest);
                 GraphicsExtensions.CheckGLError();
-
             }
 
             internal virtual void CheckFramebufferStatus()
             {
                 var status = GL.CheckFramebufferStatus(FramebufferTarget.Framebuffer);
-                if (status != FramebufferErrorCode.FramebufferComplete)
+                if(status != FramebufferErrorCode.FramebufferComplete)
                 {
                     string message = "Framebuffer Incomplete.";
-                    switch (status)
+                    switch(status)
                     {
-                        case FramebufferErrorCode.FramebufferIncompleteAttachment: message = "Not all framebuffer attachment points are framebuffer attachment complete."; break;
-                        case FramebufferErrorCode.FramebufferIncompleteMissingAttachment: message = "No images are attached to the framebuffer."; break;
-                        case FramebufferErrorCode.FramebufferUnsupported: message = "The combination of internal formats of the attached images violates an implementation-dependent set of restrictions."; break;
-                        case FramebufferErrorCode.FramebufferIncompleteMultisample: message = "Not all attached images have the same number of samples."; break;
+                        case FramebufferErrorCode.FramebufferIncompleteAttachment:
+                            message = "Not all framebuffer attachment points are framebuffer attachment complete.";
+                            break;
+                        case FramebufferErrorCode.FramebufferIncompleteMissingAttachment:
+                            message = "No images are attached to the framebuffer.";
+                            break;
+                        case FramebufferErrorCode.FramebufferUnsupported:
+                            message = "The combination of internal formats of the attached images violates an implementation-dependent set of restrictions.";
+                            break;
+                        case FramebufferErrorCode.FramebufferIncompleteMultisample:
+                            message = "Not all attached images have the same number of samples.";
+                            break;
                     }
                     throw new InvalidOperationException(message);
                 }

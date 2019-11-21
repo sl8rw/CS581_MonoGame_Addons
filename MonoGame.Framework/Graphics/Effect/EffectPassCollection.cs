@@ -7,58 +7,42 @@ namespace Microsoft.Xna.Framework.Graphics
     {
         private readonly EffectPass[] _passes;
 
-        internal EffectPassCollection(EffectPass[] passes)
-        {
-            _passes = passes;
-        }
+        internal EffectPassCollection(EffectPass[] passes) { _passes = passes; }
 
         internal EffectPassCollection Clone(Effect effect)
         {
             var passes = new EffectPass[_passes.Length];
-            for (var i = 0; i < _passes.Length; i++)
+            for(var i = 0; i < _passes.Length; i++)
                 passes[i] = new EffectPass(effect, _passes[i]);
 
             return new EffectPassCollection(passes);
         }
 
-        public EffectPass this[int index]
-        {
-            get { return _passes[index]; }
-        }
+        public EffectPass this[int index] { get { return _passes[index]; } }
 
         public EffectPass this[string name]
         {
             get
             {
                 // TODO: Add a name to pass lookup table.
-                foreach (var pass in _passes)
+                foreach(var pass in _passes)
                 {
-                    if (pass.Name == name)
+                    if(pass.Name == name)
                         return pass;
                 }
                 return null;
             }
         }
 
-        public int Count
-        {
-            get { return _passes.Length; }
-        }
+        public int Count { get { return _passes.Length; } }
 
-        public Enumerator GetEnumerator()
-        {
-            return new Enumerator(_passes);
-        }
+        public Enumerator GetEnumerator() { return new Enumerator(_passes); }
 
         IEnumerator<EffectPass> IEnumerable<EffectPass>.GetEnumerator()
-        {
-            return ((IEnumerable<EffectPass>)_passes).GetEnumerator();
-        }
+        { return ((IEnumerable<EffectPass>)_passes).GetEnumerator(); }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return _passes.GetEnumerator();
-        }
+        { return _passes.GetEnumerator(); }
 
         public struct Enumerator : IEnumerator<EffectPass>
         {
@@ -75,7 +59,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             public bool MoveNext()
             {
-                if (_index < _array.Length)
+                if(_index < _array.Length)
                 {
                     _current = _array[_index];
                     _index++;
@@ -86,21 +70,15 @@ namespace Microsoft.Xna.Framework.Graphics
                 return false;
             }
 
-            public EffectPass Current
-            {
-                get { return _current; }
-            }
+            public EffectPass Current { get { return _current; } }
 
-            public void Dispose()
-            {
-
-            }
+            public void Dispose() { }
 
             object System.Collections.IEnumerator.Current
             {
                 get
                 {
-                    if (_index == _array.Length + 1)
+                    if(_index == _array.Length + 1)
                         throw new InvalidOperationException();
                     return Current;
                 }

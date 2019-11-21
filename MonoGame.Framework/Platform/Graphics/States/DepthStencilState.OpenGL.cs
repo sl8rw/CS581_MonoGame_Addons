@@ -10,14 +10,13 @@ namespace Microsoft.Xna.Framework.Graphics
     {
         internal void PlatformApplyState(GraphicsDevice device, bool force = false)
         {
-            if (force || this.DepthBufferEnable != device._lastDepthStencilState.DepthBufferEnable)
+            if(force || this.DepthBufferEnable != device._lastDepthStencilState.DepthBufferEnable)
             {
-                if (!DepthBufferEnable)
+                if(!DepthBufferEnable)
                 {
                     GL.Disable(EnableCap.DepthTest);
                     GraphicsExtensions.CheckGLError();
-                }
-                else
+                } else
                 {
                     // enable Depth Buffer
                     GL.Enable(EnableCap.DepthTest);
@@ -26,28 +25,27 @@ namespace Microsoft.Xna.Framework.Graphics
                 device._lastDepthStencilState.DepthBufferEnable = this.DepthBufferEnable;
             }
 
-            if (force || this.DepthBufferFunction != device._lastDepthStencilState.DepthBufferFunction)
+            if(force || this.DepthBufferFunction != device._lastDepthStencilState.DepthBufferFunction)
             {
                 GL.DepthFunc(DepthBufferFunction.GetDepthFunction());
                 GraphicsExtensions.CheckGLError();
                 device._lastDepthStencilState.DepthBufferFunction = this.DepthBufferFunction;
             }
 
-            if (force || this.DepthBufferWriteEnable != device._lastDepthStencilState.DepthBufferWriteEnable)
+            if(force || this.DepthBufferWriteEnable != device._lastDepthStencilState.DepthBufferWriteEnable)
             {
                 GL.DepthMask(DepthBufferWriteEnable);
                 GraphicsExtensions.CheckGLError();
                 device._lastDepthStencilState.DepthBufferWriteEnable = this.DepthBufferWriteEnable;
             }
 
-            if (force || this.StencilEnable != device._lastDepthStencilState.StencilEnable)
+            if(force || this.StencilEnable != device._lastDepthStencilState.StencilEnable)
             {
-                if (!StencilEnable)
+                if(!StencilEnable)
                 {
                     GL.Disable(EnableCap.StencilTest);
                     GraphicsExtensions.CheckGLError();
-                }
-                else
+                } else
                 {
                     // enable Stencil
                     GL.Enable(EnableCap.StencilTest);
@@ -57,35 +55,40 @@ namespace Microsoft.Xna.Framework.Graphics
             }
 
             // set function
-            if (this.TwoSidedStencilMode)
+            if(this.TwoSidedStencilMode)
             {
                 var cullFaceModeFront = StencilFace.Front;
                 var cullFaceModeBack = StencilFace.Back;
                 var stencilFaceFront = StencilFace.Front;
                 var stencilFaceBack = StencilFace.Back;
 
-                if (force ||
+                if(force ||
                     this.TwoSidedStencilMode != device._lastDepthStencilState.TwoSidedStencilMode ||
                     this.StencilFunction != device._lastDepthStencilState.StencilFunction ||
                     this.ReferenceStencil != device._lastDepthStencilState.ReferenceStencil ||
                     this.StencilMask != device._lastDepthStencilState.StencilMask)
                 {
-                    GL.StencilFuncSeparate(cullFaceModeFront, GetStencilFunc(this.StencilFunction),
-                                           this.ReferenceStencil, this.StencilMask);
+                    GL.StencilFuncSeparate(cullFaceModeFront,
+                                           GetStencilFunc(this.StencilFunction),
+                                           this.ReferenceStencil,
+                                           this.StencilMask);
                     GraphicsExtensions.CheckGLError();
                     device._lastDepthStencilState.StencilFunction = this.StencilFunction;
                     device._lastDepthStencilState.ReferenceStencil = this.ReferenceStencil;
                     device._lastDepthStencilState.StencilMask = this.StencilMask;
                 }
 
-                if (force ||
+                if(force ||
                     this.TwoSidedStencilMode != device._lastDepthStencilState.TwoSidedStencilMode ||
-                    this.CounterClockwiseStencilFunction != device._lastDepthStencilState.CounterClockwiseStencilFunction ||
+                    this.CounterClockwiseStencilFunction !=
+                    device._lastDepthStencilState.CounterClockwiseStencilFunction ||
                     this.ReferenceStencil != device._lastDepthStencilState.ReferenceStencil ||
                     this.StencilMask != device._lastDepthStencilState.StencilMask)
                 {
-                    GL.StencilFuncSeparate(cullFaceModeBack, GetStencilFunc(this.CounterClockwiseStencilFunction),
-                                           this.ReferenceStencil, this.StencilMask);
+                    GL.StencilFuncSeparate(cullFaceModeBack,
+                                           GetStencilFunc(this.CounterClockwiseStencilFunction),
+                                           this.ReferenceStencil,
+                                           this.StencilMask);
                     GraphicsExtensions.CheckGLError();
                     device._lastDepthStencilState.CounterClockwiseStencilFunction = this.CounterClockwiseStencilFunction;
                     device._lastDepthStencilState.ReferenceStencil = this.ReferenceStencil;
@@ -93,13 +96,14 @@ namespace Microsoft.Xna.Framework.Graphics
                 }
 
 
-                if (force ||
+                if(force ||
                     this.TwoSidedStencilMode != device._lastDepthStencilState.TwoSidedStencilMode ||
                     this.StencilFail != device._lastDepthStencilState.StencilFail ||
                     this.StencilDepthBufferFail != device._lastDepthStencilState.StencilDepthBufferFail ||
                     this.StencilPass != device._lastDepthStencilState.StencilPass)
                 {
-                    GL.StencilOpSeparate(stencilFaceFront, GetStencilOp(this.StencilFail),
+                    GL.StencilOpSeparate(stencilFaceFront,
+                                         GetStencilOp(this.StencilFail),
                                          GetStencilOp(this.StencilDepthBufferFail),
                                          GetStencilOp(this.StencilPass));
                     GraphicsExtensions.CheckGLError();
@@ -108,13 +112,15 @@ namespace Microsoft.Xna.Framework.Graphics
                     device._lastDepthStencilState.StencilPass = this.StencilPass;
                 }
 
-                if (force ||
+                if(force ||
                     this.TwoSidedStencilMode != device._lastDepthStencilState.TwoSidedStencilMode ||
                     this.CounterClockwiseStencilFail != device._lastDepthStencilState.CounterClockwiseStencilFail ||
-                    this.CounterClockwiseStencilDepthBufferFail != device._lastDepthStencilState.CounterClockwiseStencilDepthBufferFail ||
+                    this.CounterClockwiseStencilDepthBufferFail !=
+                    device._lastDepthStencilState.CounterClockwiseStencilDepthBufferFail ||
                     this.CounterClockwiseStencilPass != device._lastDepthStencilState.CounterClockwiseStencilPass)
                 {
-                    GL.StencilOpSeparate(stencilFaceBack, GetStencilOp(this.CounterClockwiseStencilFail),
+                    GL.StencilOpSeparate(stencilFaceBack,
+                                         GetStencilOp(this.CounterClockwiseStencilFail),
                                          GetStencilOp(this.CounterClockwiseStencilDepthBufferFail),
                                          GetStencilOp(this.CounterClockwiseStencilPass));
                     GraphicsExtensions.CheckGLError();
@@ -122,10 +128,9 @@ namespace Microsoft.Xna.Framework.Graphics
                     device._lastDepthStencilState.CounterClockwiseStencilDepthBufferFail = this.CounterClockwiseStencilDepthBufferFail;
                     device._lastDepthStencilState.CounterClockwiseStencilPass = this.CounterClockwiseStencilPass;
                 }
-            }
-            else
+            } else
             {
-                if (force ||
+                if(force ||
                     this.TwoSidedStencilMode != device._lastDepthStencilState.TwoSidedStencilMode ||
                     this.StencilFunction != device._lastDepthStencilState.StencilFunction ||
                     this.ReferenceStencil != device._lastDepthStencilState.ReferenceStencil ||
@@ -138,7 +143,7 @@ namespace Microsoft.Xna.Framework.Graphics
                     device._lastDepthStencilState.StencilMask = this.StencilMask;
                 }
 
-                if (force ||
+                if(force ||
                     this.TwoSidedStencilMode != device._lastDepthStencilState.TwoSidedStencilMode ||
                     this.StencilFail != device._lastDepthStencilState.StencilFail ||
                     this.StencilDepthBufferFail != device._lastDepthStencilState.StencilDepthBufferFail ||
@@ -156,7 +161,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             device._lastDepthStencilState.TwoSidedStencilMode = this.TwoSidedStencilMode;
 
-            if (force || this.StencilWriteMask != device._lastDepthStencilState.StencilWriteMask)
+            if(force || this.StencilWriteMask != device._lastDepthStencilState.StencilWriteMask)
             {
                 GL.StencilMask(this.StencilWriteMask);
                 GraphicsExtensions.CheckGLError();
@@ -166,7 +171,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         private static GLStencilFunction GetStencilFunc(CompareFunction function)
         {
-            switch (function)
+            switch(function)
             {
                 case CompareFunction.Always:
                     return GLStencilFunction.Always;
@@ -191,7 +196,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         private static StencilOp GetStencilOp(StencilOperation operation)
         {
-            switch (operation)
+            switch(operation)
             {
                 case StencilOperation.Keep:
                     return StencilOp.Keep;

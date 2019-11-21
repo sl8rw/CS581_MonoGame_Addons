@@ -20,18 +20,18 @@ namespace Microsoft.Xna.Framework.Graphics
 
         internal void BindToGraphicsDevice(GraphicsDevice device)
         {
-            if (_defaultStateObject)
+            if(_defaultStateObject)
                 throw new InvalidOperationException("You cannot bind a default state object.");
-            if (GraphicsDevice != null && GraphicsDevice != device)
+            if(GraphicsDevice != null && GraphicsDevice != device)
                 throw new InvalidOperationException("This blend state is already bound to a different graphics device.");
             GraphicsDevice = device;
         }
 
         internal void ThrowIfBound()
         {
-            if (_defaultStateObject)
+            if(_defaultStateObject)
                 throw new InvalidOperationException("You cannot modify a default blend state object.");
-            if (GraphicsDevice != null)
+            if(GraphicsDevice != null)
                 throw new InvalidOperationException("You cannot modify the blend state after it has been bound to the graphics device!");
         }
 
@@ -40,10 +40,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </summary>
         /// <param name="index">The 0 to 3 target blend state index.</param>
         /// <returns>A target blend state.</returns>
-        public TargetBlendState this[int index]
-        {
-            get { return _targetBlendState[index]; }
-        }
+        public TargetBlendState this[int index] { get { return _targetBlendState[index]; } }
 
         public BlendFunction AlphaBlendFunction
         {
@@ -149,10 +146,10 @@ namespace Microsoft.Xna.Framework.Graphics
         /// The color used as blend factor when alpha blending.
         /// </summary>
         /// <remarks>
-        /// <see cref="P:Microsoft.Xna.Framework.Graphics.GraphicsDevice.BlendFactor"/> is set to this value when this <see cref="BlendState"/>
-        /// is bound to a GraphicsDevice.
+        /// <see cref="P:Microsoft.Xna.Framework.Graphics.GraphicsDevice.BlendFactor"/> is set to this value when this
+        /// <see cref="BlendState"/> is bound to a GraphicsDevice.
         /// </remarks>
-	    public Color BlendFactor
+        public Color BlendFactor
         {
             get { return _blendFactor; }
             set
@@ -204,8 +201,7 @@ namespace Microsoft.Xna.Framework.Graphics
             _independentBlendEnable = false;
         }
 
-        private BlendState(string name, Blend sourceBlend, Blend destinationBlend)
-            : this()
+        private BlendState(string name, Blend sourceBlend, Blend destinationBlend) : this()
         {
             Name = name;
             ColorSourceBlend = sourceBlend;
@@ -234,22 +230,21 @@ namespace Microsoft.Xna.Framework.Graphics
         {
             Additive = new BlendState("BlendState.Additive", Blend.SourceAlpha, Blend.One);
             AlphaBlend = new BlendState("BlendState.AlphaBlend", Blend.One, Blend.InverseSourceAlpha);
-            NonPremultiplied = new BlendState("BlendState.NonPremultiplied", Blend.SourceAlpha, Blend.InverseSourceAlpha);
+            NonPremultiplied = new BlendState("BlendState.NonPremultiplied",
+                                              Blend.SourceAlpha,
+                                              Blend.InverseSourceAlpha);
             Opaque = new BlendState("BlendState.Opaque", Blend.One, Blend.Zero);
         }
 
-        internal BlendState Clone()
-        {
-            return new BlendState(this);
-        }
+        internal BlendState Clone() { return new BlendState(this); }
 
         partial void PlatformDispose();
 
         protected override void Dispose(bool disposing)
         {
-            if (!IsDisposed)
+            if(!IsDisposed)
             {
-                for (int i = 0; i < _targetBlendState.Length; ++i)
+                for(int i = 0; i < _targetBlendState.Length; ++i)
                     _targetBlendState[i] = null;
 
                 PlatformDispose();

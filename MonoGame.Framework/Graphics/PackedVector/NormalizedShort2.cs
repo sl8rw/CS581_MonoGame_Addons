@@ -11,15 +11,9 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
     {
         private uint short2Packed;
 
-        public NormalizedShort2(Vector2 vector)
-        {
-            short2Packed = PackInTwo(vector.X, vector.Y);
-        }
+        public NormalizedShort2(Vector2 vector) { short2Packed = PackInTwo(vector.X, vector.Y); }
 
-        public NormalizedShort2(float x, float y)
-        {
-            short2Packed = PackInTwo(x, y);
-        }
+        public NormalizedShort2(float x, float y) { short2Packed = PackInTwo(x, y); }
 
         public static bool operator !=(NormalizedShort2 a, NormalizedShort2 b)
         {
@@ -32,37 +26,15 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         }
 
         [CLSCompliant(false)]
-        public uint PackedValue
-        {
-            get
-            {
-                return short2Packed;
-            }
-            set
-            {
-                short2Packed = value;
-            }
-        }
+        public uint PackedValue { get { return short2Packed; } set { short2Packed = value; } }
 
-        public override bool Equals(object obj)
-        {
-            return (obj is NormalizedShort2) && Equals((NormalizedShort2)obj);
-        }
+        public override bool Equals(object obj) { return (obj is NormalizedShort2) && Equals((NormalizedShort2)obj); }
 
-        public bool Equals(NormalizedShort2 other)
-        {
-            return short2Packed.Equals(other.short2Packed);
-        }
+        public bool Equals(NormalizedShort2 other) { return short2Packed.Equals(other.short2Packed); }
 
-        public override int GetHashCode()
-        {
-            return short2Packed.GetHashCode();
-        }
+        public override int GetHashCode() { return short2Packed.GetHashCode(); }
 
-        public override string ToString()
-        {
-            return short2Packed.ToString("X");
-        }
+        public override string ToString() { return short2Packed.ToString("X"); }
 
         public Vector2 ToVector2()
         {
@@ -82,21 +54,19 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
             // clamp the value between min and max values
             // Round rather than truncate.
             var word2 = (uint)((int)MathHelper.Clamp((float)Math.Round(vectorX * maxPos), minNeg, maxPos) & 0xFFFF);
-            var word1 = (uint)(((int)MathHelper.Clamp((float)Math.Round(vectorY * maxPos), minNeg, maxPos) & 0xFFFF) << 0x10);
+            var word1 = (uint)(((int)MathHelper.Clamp((float)Math.Round(vectorY * maxPos), minNeg, maxPos) & 0xFFFF) <<
+                0x10);
 
             return (word2 | word1);
         }
 
-        void IPackedVector.PackFromVector4(Vector4 vector)
-        {
-            short2Packed = PackInTwo(vector.X, vector.Y);
-        }
+        void IPackedVector.PackFromVector4(Vector4 vector) { short2Packed = PackInTwo(vector.X, vector.Y); }
 
         /// <summary>
         /// Gets the packed vector in Vector4 format.
         /// </summary>
         /// <returns>The packed vector in Vector4 format</returns>
-		public Vector4 ToVector4()
+        public Vector4 ToVector4()
         {
             const float maxVal = 0x7FFF;
 

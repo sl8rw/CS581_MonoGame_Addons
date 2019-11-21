@@ -90,18 +90,18 @@ namespace Microsoft.Xna.Framework.Graphics
 
         internal void BindToGraphicsDevice(GraphicsDevice device)
         {
-            if (_defaultStateObject)
+            if(_defaultStateObject)
                 throw new InvalidOperationException("You cannot bind a default state object.");
-            if (GraphicsDevice != null && GraphicsDevice != device)
+            if(GraphicsDevice != null && GraphicsDevice != device)
                 throw new InvalidOperationException("This rasterizer state is already bound to a different graphics device.");
             GraphicsDevice = device;
         }
 
         internal void ThrowIfBound()
         {
-            if (_defaultStateObject)
+            if(_defaultStateObject)
                 throw new InvalidOperationException("You cannot modify a default rasterizer state object.");
-            if (GraphicsDevice != null)
+            if(GraphicsDevice != null)
                 throw new InvalidOperationException("You cannot modify the rasterizer state after it has been bound to the graphics device!");
         }
 
@@ -120,8 +120,7 @@ namespace Microsoft.Xna.Framework.Graphics
             DepthClipEnable = true;
         }
 
-        private RasterizerState(string name, CullMode cullMode)
-            : this()
+        private RasterizerState(string name, CullMode cullMode) : this()
         {
             Name = name;
             _cullMode = cullMode;
@@ -143,20 +142,18 @@ namespace Microsoft.Xna.Framework.Graphics
         static RasterizerState()
         {
             CullClockwise = new RasterizerState("RasterizerState.CullClockwise", CullMode.CullClockwiseFace);
-            CullCounterClockwise = new RasterizerState("RasterizerState.CullCounterClockwise", CullMode.CullCounterClockwiseFace);
+            CullCounterClockwise = new RasterizerState("RasterizerState.CullCounterClockwise",
+                                                       CullMode.CullCounterClockwiseFace);
             CullNone = new RasterizerState("RasterizerState.CullNone", CullMode.None);
         }
 
-        internal RasterizerState Clone()
-        {
-            return new RasterizerState(this);
-        }
+        internal RasterizerState Clone() { return new RasterizerState(this); }
 
         partial void PlatformDispose();
 
         protected override void Dispose(bool disposing)
         {
-            if (!IsDisposed)
+            if(!IsDisposed)
             {
                 PlatformDispose();
             }

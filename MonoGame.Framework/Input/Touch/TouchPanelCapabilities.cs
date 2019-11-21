@@ -3,6 +3,7 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using System;
+
 #if ANDROID
 using Android.Content.PM;
 #endif
@@ -25,7 +26,7 @@ namespace Microsoft.Xna.Framework.Input.Touch
 
         internal void Initialize()
         {
-            if (!initialized)
+            if(!initialized)
             {
                 initialized = true;
 
@@ -72,35 +73,17 @@ namespace Microsoft.Xna.Framework.Input.Touch
             }
         }
 
-        public bool HasPressure
-        {
-            get
-            {
-                return hasPressure;
-            }
-        }
+        public bool HasPressure { get { return hasPressure; } }
 
         /// <summary>
         /// Returns true if a device is available for use.
         /// </summary>
-        public bool IsConnected
-        {
-            get
-            {
-                return isConnected;
-            }
-        }
+        public bool IsConnected { get { return isConnected; } }
 
         /// <summary>
         /// Returns the maximum number of touch locations tracked by the touch panel device.
         /// </summary>
-        public int MaximumTouchCount
-        {
-            get
-            {
-                return maximumTouchCount;
-            }
-        }
+        public int MaximumTouchCount { get { return maximumTouchCount; } }
 
 #if WINDOWS
         [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto, ExactSpelling = true)]

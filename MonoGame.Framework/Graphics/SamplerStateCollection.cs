@@ -43,17 +43,14 @@ namespace Microsoft.Xna.Framework.Graphics
 
         public SamplerState this[int index]
         {
-            get
-            {
-                return _samplers[index];
-            }
+            get { return _samplers[index]; }
 
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException("value");
+                if(value == null)
+                    throw new ArgumentNullException(nameof(value));
 
-                if (_samplers[index] == value)
+                if(_samplers[index] == value)
                     return;
 
                 _samplers[index] = value;
@@ -61,17 +58,17 @@ namespace Microsoft.Xna.Framework.Graphics
                 // Static state properties never actually get bound;
                 // instead we use our GraphicsDevice-specific version of them.
                 var newSamplerState = value;
-                if (ReferenceEquals(value, SamplerState.AnisotropicClamp))
+                if(ReferenceEquals(value, SamplerState.AnisotropicClamp))
                     newSamplerState = _samplerStateAnisotropicClamp;
-                else if (ReferenceEquals(value, SamplerState.AnisotropicWrap))
+                else if(ReferenceEquals(value, SamplerState.AnisotropicWrap))
                     newSamplerState = _samplerStateAnisotropicWrap;
-                else if (ReferenceEquals(value, SamplerState.LinearClamp))
+                else if(ReferenceEquals(value, SamplerState.LinearClamp))
                     newSamplerState = _samplerStateLinearClamp;
-                else if (ReferenceEquals(value, SamplerState.LinearWrap))
+                else if(ReferenceEquals(value, SamplerState.LinearWrap))
                     newSamplerState = _samplerStateLinearWrap;
-                else if (ReferenceEquals(value, SamplerState.PointClamp))
+                else if(ReferenceEquals(value, SamplerState.PointClamp))
                     newSamplerState = _samplerStatePointClamp;
-                else if (ReferenceEquals(value, SamplerState.PointWrap))
+                else if(ReferenceEquals(value, SamplerState.PointWrap))
                     newSamplerState = _samplerStatePointWrap;
 
                 newSamplerState.BindToGraphicsDevice(_graphicsDevice);
@@ -84,7 +81,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         internal void Clear()
         {
-            for (var i = 0; i < _samplers.Length; i++)
+            for(var i = 0; i < _samplers.Length; i++)
             {
                 _samplers[i] = SamplerState.LinearWrap;
 
@@ -98,9 +95,6 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// Mark all the sampler slots as dirty.
         /// </summary>
-        internal void Dirty()
-        {
-            PlatformDirty();
-        }
+        internal void Dirty() { PlatformDirty(); }
     }
 }

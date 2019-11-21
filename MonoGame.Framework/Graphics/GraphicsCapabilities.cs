@@ -7,27 +7,24 @@ using System;
 namespace Microsoft.Xna.Framework.Graphics
 {
     /// <summary>
-    /// Provides information about the capabilities of the
-    /// current graphics device. A very useful thread for investigating GL extenion names
-    /// http://stackoverflow.com/questions/3881197/opengl-es-2-0-extensions-on-android-devices
+    /// Provides information about the capabilities of the current graphics device. A very useful thread for
+    /// investigating GL extenion names http://stackoverflow.com/questions/3881197/opengl-es-2-0-extensions-on-android-
+    /// devices
     /// </summary>
     internal partial class GraphicsCapabilities
     {
-        internal void Initialize(GraphicsDevice device)
-        {
-            PlatformInitialize(device);
-        }
+        internal void Initialize(GraphicsDevice device) { PlatformInitialize(device); }
 
         /// <summary>
-        /// Whether the device fully supports non power-of-two textures, including
-        /// mip maps and wrap modes other than CLAMP_TO_EDGE
+        /// Whether the device fully supports non power-of-two textures, including mip maps and wrap modes other than
+        /// CLAMP_TO_EDGE
         /// </summary>
         internal bool SupportsNonPowerOfTwo { get; private set; }
 
         /// <summary>
         /// Whether the device supports anisotropic texture filtering
         /// </summary>
-		internal bool SupportsTextureFilterAnisotropic { get; private set; }
+        internal bool SupportsTextureFilterAnisotropic { get; private set; }
 
         internal bool SupportsDepth24 { get; private set; }
 
@@ -63,9 +60,8 @@ namespace Microsoft.Xna.Framework.Graphics
         internal bool SupportsTextureMaxLevel { get; private set; }
 
         /// <summary>
-        /// True, if sRGB is supported. On Direct3D platforms, this is always <code>true</code>.
-        /// On OpenGL platforms, it is <code>true</code> if both framebuffer sRGB
-        /// and texture sRGB are supported.
+        /// True, if sRGB is supported. On Direct3D platforms, this is always <code>true</code>. On OpenGL platforms, it
+        /// is <code>true</code> if both framebuffer sRGB and texture sRGB are supported.
         /// </summary>
         internal bool SupportsSRgb { get; private set; }
 
@@ -76,31 +72,26 @@ namespace Microsoft.Xna.Framework.Graphics
         internal bool SupportsVertexTextures { get; private set; }
 
         /// <summary>
-        /// True, if the underlying platform supports floating point textures. 
-        /// For Direct3D platforms this is always <code>true</code>.
-        /// For OpenGL Desktop platforms it is always <code>true</code>.
-        /// For OpenGL Mobile platforms it requires `GL_EXT_color_buffer_float`.
-        /// If the requested format is not supported an <code>NotSupportedException</code>
-        /// will be thrown.
+        /// True, if the underlying platform supports floating point textures.  For Direct3D platforms this is always
+        /// <code>true</code>. For OpenGL Desktop platforms it is always <code>true</code>. For OpenGL Mobile platforms
+        /// it requires `GL_EXT_color_buffer_float`. If the requested format is not supported an
+        /// <code>NotSupportedException</code> will be thrown.
         /// </summary>
         internal bool SupportsFloatTextures { get; private set; }
 
         /// <summary>
-        /// True, if the underlying platform supports half floating point textures. 
-        /// For Direct3D platforms this is always <code>true</code>.
-        /// For OpenGL Desktop platforms it is always <code>true</code>.
-        /// For OpenGL Mobile platforms it requires `GL_EXT_color_buffer_half_float`.
-        /// If the requested format is not supported an <code>NotSupportedException</code>
-        /// will be thrown.
+        /// True, if the underlying platform supports half floating point textures.  For Direct3D platforms this is
+        /// always <code>true</code>. For OpenGL Desktop platforms it is always <code>true</code>. For OpenGL Mobile
+        /// platforms it requires `GL_EXT_color_buffer_half_float`. If the requested format is not supported an
+        /// <code>NotSupportedException</code> will be thrown.
         /// </summary>
         internal bool SupportsHalfFloatTextures { get; private set; }
 
         internal bool SupportsNormalized { get; private set; }
 
         /// <summary>
-        /// Gets the max texture anisotropy. This value typically lies
-        /// between 0 and 16, where 0 means anisotropic filtering is not
-        /// supported.
+        /// Gets the max texture anisotropy. This value typically lies between 0 and 16, where 0 means anisotropic
+        /// filtering is not supported.
         /// </summary>
         internal int MaxTextureAnisotropy { get; private set; }
 
@@ -109,10 +100,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         private int _maxMultiSampleCount;
 
-        internal int MaxMultiSampleCount
-        {
-            get { return _maxMultiSampleCount; }
-        }
+        internal int MaxMultiSampleCount { get { return _maxMultiSampleCount; } }
 
         internal bool SupportsInstancing { get; private set; }
 

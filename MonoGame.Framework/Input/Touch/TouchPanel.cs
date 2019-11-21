@@ -53,36 +53,24 @@ namespace Microsoft.Xna.Framework.Input.Touch
         /// Gets the current state of the touch panel.
         /// </summary>
         /// <returns><see cref="TouchCollection"/></returns>
-        public static TouchCollection GetState()
-        {
-            return PrimaryWindow.TouchPanelState.GetState();
-        }
+        public static TouchCollection GetState() { return PrimaryWindow.TouchPanelState.GetState(); }
 
-        public static TouchPanelState GetState(GameWindow window)
-        {
-            return window.TouchPanelState;
-        }
+        public static TouchPanelState GetState(GameWindow window) { return window.TouchPanelState; }
 
         public static TouchPanelCapabilities GetCapabilities()
-        {
-            return PrimaryWindow.TouchPanelState.GetCapabilities();
-        }
+        { return PrimaryWindow.TouchPanelState.GetCapabilities(); }
 
         internal static void AddEvent(int id, TouchLocationState state, Vector2 position)
-        {
-            AddEvent(id, state, position, false);
-        }
+        { AddEvent(id, state, position, false); }
 
         internal static void AddEvent(int id, TouchLocationState state, Vector2 position, bool isMouse)
-        {
-            PrimaryWindow.TouchPanelState.AddEvent(id, state, position, isMouse);
-        }
+        { PrimaryWindow.TouchPanelState.AddEvent(id, state, position, isMouse); }
 
         /// <summary>
         /// Returns the next available gesture on touch panel device.
         /// </summary>
         /// <returns><see cref="GestureSample"/></returns>
-		public static GestureSample ReadGesture()
+        public static GestureSample ReadGesture()
         {
             // Return the next gesture.
             return PrimaryWindow.TouchPanelState.GestureList.Dequeue();
@@ -148,9 +136,6 @@ namespace Microsoft.Xna.Framework.Input.Touch
         /// <summary>
         /// Returns true if a touch gesture is available.
         /// </summary>
-        public static bool IsGestureAvailable
-        {
-            get { return PrimaryWindow.TouchPanelState.IsGestureAvailable; }
-        }
+        public static bool IsGestureAvailable { get { return PrimaryWindow.TouchPanelState.IsGestureAvailable; } }
     }
 }

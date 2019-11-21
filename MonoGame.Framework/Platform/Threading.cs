@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+
 #if IOS
 using Foundation;
 using OpenGLES;
@@ -27,24 +28,19 @@ namespace Microsoft.Xna.Framework
         public static EAGLContext BackgroundContext;
 #endif
 
-        static Threading()
-        {
-            mainThreadId = Thread.CurrentThread.ManagedThreadId;
-        }
+        static Threading() { mainThreadId = Thread.CurrentThread.ManagedThreadId; }
 #if ANDROID
         internal static void ResetThread (int id)
         {
             mainThreadId = id;
         }
 #endif
+
         /// <summary>
         /// Checks if the code is currently running on the UI thread.
         /// </summary>
         /// <returns>true if the code is currently running on the UI thread.</returns>
-        public static bool IsOnUIThread()
-        {
-            return mainThreadId == Thread.CurrentThread.ManagedThreadId;
-        }
+        public static bool IsOnUIThread() { return mainThreadId == Thread.CurrentThread.ManagedThreadId; }
 
         /// <summary>
         /// Throws an exception if the code is not currently running on the UI thread.
@@ -52,25 +48,25 @@ namespace Microsoft.Xna.Framework
         /// <exception cref="InvalidOperationException">Thrown if the code is not currently running on the UI thread.</exception>
         public static void EnsureUIThread()
         {
-            if (!IsOnUIThread())
+            if(!IsOnUIThread())
                 throw new InvalidOperationException("Operation not called on UI thread.");
         }
 
         /// <summary>
-        /// Runs the given action on the UI thread and blocks the current thread while the action is running.
-        /// If the current thread is the UI thread, the action will run immediately.
+        /// Runs the given action on the UI thread and blocks the current thread while the action is running. If the
+        /// current thread is the UI thread, the action will run immediately.
         /// </summary>
         /// <param name="action">The action to be run on the UI thread</param>
         internal static void BlockOnUIThread(Action action)
         {
-            if (action == null)
-                throw new ArgumentNullException("action");
+            if(action == null)
+                throw new ArgumentNullException(nameof(action));
 
 #if DIRECTX || PSM
             action();
 #else
             // If we are already on the UI thread, just call the action and be done with it
-            if (IsOnUIThread())
+            if(IsOnUIThread())
             {
                 action();
                 return;
@@ -107,7 +103,7 @@ namespace Microsoft.Xna.Framework
 #if ANDROID || WINDOWS || DESKTOPGL || ANGLE
         static void Add(Action action)
         {
-            lock (actions)
+            lock(actions)
             {
                 actions.Add(action);
             }
@@ -120,9 +116,9 @@ namespace Microsoft.Xna.Framework
         {
             EnsureUIThread();
 
-            lock (actions)
+            lock(actions)
             {
-                foreach (Action action in actions)
+                foreach(Action action in actions)
                 {
                     action();
                 }

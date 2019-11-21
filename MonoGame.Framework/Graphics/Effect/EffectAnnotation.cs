@@ -6,14 +6,13 @@ namespace Microsoft.Xna.Framework.Graphics
 
     public class EffectAnnotation
     {
-        internal EffectAnnotation(
-            EffectParameterClass class_,
-            EffectParameterType type,
-            string name,
-            int rowCount,
-            int columnCount,
-            string semantic,
-            object data)
+        internal EffectAnnotation(EffectParameterClass class_,
+                                  EffectParameterType type,
+                                  string name,
+                                  int rowCount,
+                                  int columnCount,
+                                  string semantic,
+                                  object data)
         {
             ParameterClass = class_;
             ParameterType = type;
@@ -34,10 +33,15 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 
         public EffectParameterClass ParameterClass { get; private set; }
+
         public EffectParameterType ParameterType { get; private set; }
+
         public string Name { get; private set; }
+
         public int RowCount { get; private set; }
+
         public int ColumnCount { get; private set; }
+
         public string Semantic { get; private set; }
     }
 }

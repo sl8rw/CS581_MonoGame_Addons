@@ -26,7 +26,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </summary>
         Vector4,
         /// <summary>
-        /// Four component, packed unsigned byte, mapped to 0 to 1 range. 
+        /// Four component, packed unsigned byte, mapped to 0 to 1 range.
         /// </summary>
         Color,
         /// <summary>

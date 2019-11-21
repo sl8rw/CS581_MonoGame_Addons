@@ -2,7 +2,6 @@
 
 namespace Microsoft.Xna.Framework.Graphics
 {
-
     // Summary:
     //     Represents a mesh that is part of a Model.
     public sealed class ModelMesh
@@ -16,7 +15,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             MeshParts = new ModelMeshPartCollection(parts);
 
-            for (int i = 0; i < parts.Count; i++)
+            for(int i = 0; i < parts.Count; i++)
             {
                 parts[i].parent = this;
             }
@@ -41,25 +40,30 @@ namespace Microsoft.Xna.Framework.Graphics
         // Summary:
         //     Gets the BoundingSphere that contains this mesh.
         public BoundingSphere BoundingSphere { get; set; }
+
         //
         // Summary:
         //     Gets a collection of effects associated with this mesh.
         public ModelEffectCollection Effects { get; internal set; }
+
         //
         // Summary:
         //     Gets the ModelMeshPart objects that make up this mesh. Each part of a mesh
         //     is composed of a set of primitives that share the same material.
         public ModelMeshPartCollection MeshParts { get; set; }
+
         //
         // Summary:
         //     Gets the name of this mesh.
         public string Name { get; set; }
+
         //
         // Summary:
         //     Gets the parent bone for this mesh. The parent bone of a mesh contains a
         //     transformation matrix that describes how the mesh is located relative to
         //     any parent meshes in a model.
         public ModelBone ParentBone { get; set; }
+
         //
         // Summary:
         //     Gets or sets an object identifying this mesh.
@@ -70,20 +74,23 @@ namespace Microsoft.Xna.Framework.Graphics
         //     Effect settings.
         public void Draw()
         {
-            for (int i = 0; i < MeshParts.Count; i++)
+            for(int i = 0; i < MeshParts.Count; i++)
             {
                 var part = MeshParts[i];
                 var effect = part.Effect;
 
-                if (part.PrimitiveCount > 0)
+                if(part.PrimitiveCount > 0)
                 {
                     this.graphicsDevice.SetVertexBuffer(part.VertexBuffer);
                     this.graphicsDevice.Indices = part.IndexBuffer;
 
-                    for (int j = 0; j < effect.CurrentTechnique.Passes.Count; j++)
+                    for(int j = 0; j < effect.CurrentTechnique.Passes.Count; j++)
                     {
                         effect.CurrentTechnique.Passes[j].Apply();
-                        graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, part.VertexOffset, part.StartIndex, part.PrimitiveCount);
+                        graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList,
+                                                             part.VertexOffset,
+                                                             part.StartIndex,
+                                                             part.PrimitiveCount);
                     }
                 }
             }

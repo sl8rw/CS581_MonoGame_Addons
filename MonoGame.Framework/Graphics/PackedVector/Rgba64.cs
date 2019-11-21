@@ -15,17 +15,7 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// Gets and sets the packed value.
         /// </summary>
         [CLSCompliant(false)]
-        public ulong PackedValue
-        {
-            get
-            {
-                return packedValue;
-            }
-            set
-            {
-                packedValue = value;
-            }
-        }
+        public ulong PackedValue { get { return packedValue; } set { packedValue = value; } }
 
         private ulong packedValue;
 
@@ -36,10 +26,7 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// <param name="y">The y component</param>
         /// <param name="z">The z component</param>
         /// <param name="w">The w component</param>
-        public Rgba64(float x, float y, float z, float w)
-        {
-            packedValue = Pack(x, y, z, w);
-        }
+        public Rgba64(float x, float y, float z, float w) { packedValue = Pack(x, y, z, w); }
 
         /// <summary>
         /// Creates a new instance of Rgba64.
@@ -47,10 +34,7 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// <param name="vector">
         /// Vector containing the components for the packed vector.
         /// </param>
-        public Rgba64(Vector4 vector)
-        {
-            packedValue = Pack(vector.X, vector.Y, vector.Z, vector.W);
-        }
+        public Rgba64(Vector4 vector) { packedValue = Pack(vector.X, vector.Y, vector.Z, vector.W); }
 
         /// <summary>
         /// Gets the packed vector in Vector4 format.
@@ -62,8 +46,7 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 (((packedValue) & 0xFFFF) / 65535.0f),
 (((packedValue >> 16) & 0xFFFF) / 65535.0f),
 (((packedValue >> 32) & 0xFFFF) / 65535.0f),
-(((packedValue >> 48) & 0xFFFF) / 65535.0f)
-            );
+(((packedValue >> 48) & 0xFFFF) / 65535.0f));
         }
 
         /// <summary>
@@ -71,47 +54,33 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
         /// </summary>
         /// <param name="vector">Vector containing the components.</param>
         void IPackedVector.PackFromVector4(Vector4 vector)
-        {
-            packedValue = Pack(vector.X, vector.Y, vector.Z, vector.W);
-        }
+        { packedValue = Pack(vector.X, vector.Y, vector.Z, vector.W); }
 
         /// <summary>
         /// Compares an object with the packed vector.
         /// </summary>
         /// <param name="obj">The object to compare.</param>
         /// <returns>True if the object is equal to the packed vector.</returns>
-        public override bool Equals(object obj)
-        {
-            return (obj is Rgba64) && Equals((Rgba64)obj);
-        }
+        public override bool Equals(object obj) { return (obj is Rgba64) && Equals((Rgba64)obj); }
 
         /// <summary>
         /// Compares another Rgba64 packed vector with the packed vector.
         /// </summary>
         /// <param name="other">The Rgba64 packed vector to compare.</param>
         /// <returns>True if the packed vectors are equal.</returns>
-        public bool Equals(Rgba64 other)
-        {
-            return packedValue == other.packedValue;
-        }
+        public bool Equals(Rgba64 other) { return packedValue == other.packedValue; }
 
         /// <summary>
         /// Gets a string representation of the packed vector.
         /// </summary>
         /// <returns>A string representation of the packed vector.</returns>
-        public override string ToString()
-        {
-            return ToVector4().ToString();
-        }
+        public override string ToString() { return ToVector4().ToString(); }
 
         /// <summary>
         /// Gets a hash code of the packed vector.
         /// </summary>
         /// <returns>The hash code for the packed vector.</returns>
-        public override int GetHashCode()
-        {
-            return packedValue.GetHashCode();
-        }
+        public override int GetHashCode() { return packedValue.GetHashCode(); }
 
         public static bool operator ==(Rgba64 lhs, Rgba64 rhs)
         {
@@ -125,12 +94,10 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 
         private static ulong Pack(float x, float y, float z, float w)
         {
-            return (
-                (((ulong)Math.Round(MathHelper.Clamp(x * 0xFFFF, 0, 65535f)))) |
+            return ((((ulong)Math.Round(MathHelper.Clamp(x * 0xFFFF, 0, 65535f)))) |
                 (((ulong)Math.Round(MathHelper.Clamp(y * 0xFFFF, 0, 65535f))) << 16) |
                 (((ulong)Math.Round(MathHelper.Clamp(z * 0xFFFF, 0, 65535f))) << 32) |
-                (((ulong)Math.Round(MathHelper.Clamp(w * 0xFFFF, 0, 65535f))) << 48)
-            );
+                (((ulong)Math.Round(MathHelper.Clamp(w * 0xFFFF, 0, 65535f))) << 48));
         }
     }
 }

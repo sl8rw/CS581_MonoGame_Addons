@@ -43,9 +43,10 @@ using System;
 namespace Microsoft.Xna.Framework.Input.Touch
 {
     /// <summary>
-    /// Enumuration of values that represent different gestures that can be processed by <see cref="TouchPanel.ReadGesture"/>.
+    /// Enumuration of values that represent different gestures that can be processed by <see
+    /// cref="TouchPanel.ReadGesture"/>.
     /// </summary>
-	[Flags]
+    [Flags]
     public enum GestureType
     {
         /// <summary>
@@ -60,17 +61,20 @@ namespace Microsoft.Xna.Framework.Input.Touch
         /// States completion of a drag gesture(VerticalDrag, HorizontalDrag, or FreeDrag).
         /// </summary>
         /// <remarks>No position or delta information is available for this sample.</remarks>
-		DragComplete = 2,
+        DragComplete = 2,
         /// <summary>
         /// States that a touch was combined with a quick swipe.
         /// </summary>    
-        /// <remarks>Flicks does not contain position information. The velocity of it can be read from <see cref="GestureSample.Delta"/></remarks>
+        /// <remarks>
+        /// Flicks does not contain position information. The velocity of it can be read from <see
+        /// cref="GestureSample.Delta"/>
+        /// </remarks>
         Flick = 4,
         /// <summary>
         /// The use touched a point and then performed a free-form drag.
         /// </summary>
         FreeDrag = 8,
-        /// <summary>        
+        /// <summary>
         /// The use touched a single point for approximately one second.
         /// </summary>
         /// <remarks>As this is a single event, it will not be contionusly fired while the user is holding the touch-point.</remarks>

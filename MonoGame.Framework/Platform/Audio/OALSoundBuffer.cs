@@ -20,37 +20,30 @@ namespace Microsoft.Xna.Framework.Audio
             ALHelper.CheckError("Failed to generate OpenAL data buffer.");
         }
 
-        ~OALSoundBuffer()
-        {
-            Dispose(false);
-        }
+        ~OALSoundBuffer() { Dispose(false); }
 
-        public int OpenALDataBuffer
-        {
-            get
-            {
-                return openALDataBuffer;
-            }
-        }
+        public int OpenALDataBuffer { get { return openALDataBuffer; } }
 
-        public double Duration
-        {
-            get;
-            set;
-        }
+        public double Duration { get; set; }
 
-        public void BindDataBuffer(byte[] dataBuffer, ALFormat format, int size, int sampleRate, int sampleAlignment = 0)
+        public void BindDataBuffer(byte[] dataBuffer,
+                                   ALFormat format,
+                                   int size,
+                                   int sampleRate,
+                                   int sampleAlignment = 0)
         {
-            if ((format == ALFormat.MonoMSAdpcm || format == ALFormat.StereoMSAdpcm) && !OpenALSoundController.Instance.SupportsAdpcm)
+            if((format == ALFormat.MonoMSAdpcm || format == ALFormat.StereoMSAdpcm) &&
+                !OpenALSoundController.Instance.SupportsAdpcm)
                 throw new InvalidOperationException("MS-ADPCM is not supported by this OpenAL driver");
-            if ((format == ALFormat.MonoIma4 || format == ALFormat.StereoIma4) && !OpenALSoundController.Instance.SupportsIma4)
+            if((format == ALFormat.MonoIma4 || format == ALFormat.StereoIma4) &&
+                !OpenALSoundController.Instance.SupportsIma4)
                 throw new InvalidOperationException("IMA/ADPCM is not supported by this OpenAL driver");
 
             openALFormat = format;
             dataSize = size;
             int unpackedSize = 0;
 
-            if (sampleAlignment > 0)
+            if(sampleAlignment > 0)
             {
                 AL.Bufferi(openALDataBuffer, ALBufferi.UnpackBlockAlignmentSoft, sampleAlignment);
                 ALHelper.CheckError("Failed to fill buffer.");
@@ -78,14 +71,14 @@ namespace Microsoft.Xna.Framework.Audio
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!_isDisposed)
+            if(!_isDisposed)
             {
-                if (disposing)
+                if(disposing)
                 {
                     // Clean up managed objects
                 }
                 // Release unmanaged resources
-                if (AL.IsBuffer(openALDataBuffer))
+                if(AL.IsBuffer(openALDataBuffer))
                 {
                     ALHelper.CheckError("Failed to fetch buffer state.");
                     AL.DeleteBuffers(1, ref openALDataBuffer);

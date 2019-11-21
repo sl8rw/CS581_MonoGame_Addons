@@ -58,17 +58,19 @@ namespace Microsoft.Xna.Framework.Input
         /// Returns a value indicating whether this instance is equal to a specified object.
         /// </summary>
         /// <param name="obj">An object to compare to this instance.</param>
-        /// <returns>true if <paramref name="obj"/> is a <see cref="GamePadTriggers"/> and has the same value as this instance; otherwise, false.</returns>
-        public override bool Equals(object obj)
-        {
-            return (obj is GamePadTriggers) && (this == (GamePadTriggers)obj);
-        }
+        /// <returns>
+        /// true if <paramref name="obj"/> is a <see cref="GamePadTriggers"/> and has the same value as this instance;
+        /// otherwise, false.
+        /// </returns>
+        public override bool Equals(object obj) { return (obj is GamePadTriggers) && (this == (GamePadTriggers)obj); }
 
         /// <summary>
         /// Serves as a hash function for a <see cref="T:Microsoft.Xna.Framework.Input.GamePadTriggers"/> object.
         /// </summary>
-        /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
-        /// hash table.</returns>
+        /// <returns>
+        /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+        /// hash table.
+        /// </returns>
         public override int GetHashCode()
         {
             unchecked
@@ -78,12 +80,13 @@ namespace Microsoft.Xna.Framework.Input
         }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Microsoft.Xna.Framework.Input.GamePadTriggers"/>.
+        /// Returns a <see cref="T:System.String"/> that represents the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.GamePadTriggers"/>.
         /// </summary>
-        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Microsoft.Xna.Framework.Input.GamePadTriggers"/>.</returns>
-        public override string ToString()
-        {
-            return "[GamePadTriggers: Left=" + Left + ", Right=" + Right + "]";
-        }
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see
+        /// cref="T:Microsoft.Xna.Framework.Input.GamePadTriggers"/>.
+        /// </returns>
+        public override string ToString() { return $"[GamePadTriggers: Left={Left}, Right={Right}]"; }
     }
 }

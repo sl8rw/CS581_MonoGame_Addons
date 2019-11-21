@@ -16,22 +16,22 @@ namespace MonoGame.Utilities
 
             // When running unit tests this can return null.
             var assembly = Assembly.GetEntryAssembly();
-            if (assembly != null)
+            if(assembly != null)
             {
                 // Use the Title attribute of the Assembly if possible.
                 try
                 {
-                    var assemblyTitleAtt = ((AssemblyTitleAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyTitleAttribute)));
-                    if (assemblyTitleAtt != null)
+                    var assemblyTitleAtt = ((AssemblyTitleAttribute)Attribute.GetCustomAttribute(assembly,
+                                                                                                 typeof(AssemblyTitleAttribute)));
+                    if(assemblyTitleAtt != null)
                         windowTitle = assemblyTitleAtt.Title;
-                }
-                catch
+                } catch
                 {
                     // Nope, wasn't possible :/
                 }
 
                 // Otherwise, fallback to the Name of the assembly.
-                if (string.IsNullOrEmpty(windowTitle))
+                if(string.IsNullOrEmpty(windowTitle))
                     windowTitle = assembly.GetName().Name;
             }
 

@@ -185,7 +185,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             set
             {
-                if (lightingEnabled != value)
+                if(lightingEnabled != value)
                 {
                     lightingEnabled = value;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex | EffectDirtyFlags.MaterialColor;
@@ -203,7 +203,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             set
             {
-                if (preferPerPixelLighting != value)
+                if(preferPerPixelLighting != value)
                 {
                     preferPerPixelLighting = value;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex;
@@ -244,7 +244,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             set
             {
-                if (fogEnabled != value)
+                if(fogEnabled != value)
                 {
                     fogEnabled = value;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex | EffectDirtyFlags.FogEnable;
@@ -296,7 +296,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             set
             {
-                if (textureEnabled != value)
+                if(textureEnabled != value)
                 {
                     textureEnabled = value;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex;
@@ -324,7 +324,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             set
             {
-                if (vertexColorEnabled != value)
+                if(vertexColorEnabled != value)
                 {
                     vertexColorEnabled = value;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex;
@@ -338,10 +338,9 @@ namespace Microsoft.Xna.Framework.Graphics
         #region Methods
 
         /// <summary>
-        /// Creates a new BasicEffect with default parameter settings.
-        /// </summary>
-        public BasicEffect(GraphicsDevice device)
-            : base(device, EffectResource.BasicEffect.Bytecode)
+/// Creates a new BasicEffect with default parameter settings.
+/// </summary>
+        public BasicEffect(GraphicsDevice device) : base(device, EffectResource.BasicEffect.Bytecode)
         {
             CacheEffectParameters(null);
 
@@ -353,8 +352,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// Creates a new BasicEffect by cloning parameter settings from an existing instance.
         /// </summary>
-        protected BasicEffect(BasicEffect cloneSource)
-            : base(cloneSource)
+        protected BasicEffect(BasicEffect cloneSource) : base(cloneSource)
         {
             CacheEffectParameters(cloneSource);
 
@@ -382,10 +380,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// Creates a clone of the current BasicEffect instance.
         /// </summary>
-        public override Effect Clone()
-        {
-            return new BasicEffect(this);
-        }
+        public override Effect Clone() { return new BasicEffect(this); }
 
 
         /// <inheritdoc/>
@@ -402,15 +397,15 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </summary>
         void CacheEffectParameters(BasicEffect cloneSource)
         {
-            textureParam = Parameters["Texture"];
-            diffuseColorParam = Parameters["DiffuseColor"];
-            emissiveColorParam = Parameters["EmissiveColor"];
-            specularColorParam = Parameters["SpecularColor"];
-            specularPowerParam = Parameters["SpecularPower"];
+            textureParam = Parameters[nameof(Texture)];
+            diffuseColorParam = Parameters[nameof(DiffuseColor)];
+            emissiveColorParam = Parameters[nameof(EmissiveColor)];
+            specularColorParam = Parameters[nameof(SpecularColor)];
+            specularPowerParam = Parameters[nameof(SpecularPower)];
             eyePositionParam = Parameters["EyePosition"];
-            fogColorParam = Parameters["FogColor"];
+            fogColorParam = Parameters[nameof(FogColor)];
             fogVectorParam = Parameters["FogVector"];
-            worldParam = Parameters["World"];
+            worldParam = Parameters[nameof(World)];
             worldInverseTransposeParam = Parameters["WorldInverseTranspose"];
             worldViewProjParam = Parameters["WorldViewProj"];
 
@@ -437,26 +432,46 @@ namespace Microsoft.Xna.Framework.Graphics
         protected internal override void OnApply()
         {
             // Recompute the world+view+projection matrix or fog vector?
-            dirtyFlags = EffectHelpers.SetWorldViewProjAndFog(dirtyFlags, ref world, ref view, ref projection, ref worldView, fogEnabled, fogStart, fogEnd, worldViewProjParam, fogVectorParam);
+            dirtyFlags = EffectHelpers.SetWorldViewProjAndFog(dirtyFlags,
+                                                              ref world,
+                                                              ref view,
+                                                              ref projection,
+                                                              ref worldView,
+                                                              fogEnabled,
+                                                              fogStart,
+                                                              fogEnd,
+                                                              worldViewProjParam,
+                                                              fogVectorParam);
 
             // Recompute the diffuse/emissive/alpha material color parameters?
-            if ((dirtyFlags & EffectDirtyFlags.MaterialColor) != 0)
+            if((dirtyFlags & EffectDirtyFlags.MaterialColor) != 0)
             {
-                EffectHelpers.SetMaterialColor(lightingEnabled, alpha, ref diffuseColor, ref emissiveColor, ref ambientLightColor, diffuseColorParam, emissiveColorParam);
+                EffectHelpers.SetMaterialColor(lightingEnabled,
+                                               alpha,
+                                               ref diffuseColor,
+                                               ref emissiveColor,
+                                               ref ambientLightColor,
+                                               diffuseColorParam,
+                                               emissiveColorParam);
 
                 dirtyFlags &= ~EffectDirtyFlags.MaterialColor;
             }
 
-            if (lightingEnabled)
+            if(lightingEnabled)
             {
                 // Recompute the world inverse transpose and eye position?
-                dirtyFlags = EffectHelpers.SetLightingMatrices(dirtyFlags, ref world, ref view, worldParam, worldInverseTransposeParam, eyePositionParam);
+                dirtyFlags = EffectHelpers.SetLightingMatrices(dirtyFlags,
+                                                               ref world,
+                                                               ref view,
+                                                               worldParam,
+                                                               worldInverseTransposeParam,
+                                                               eyePositionParam);
 
 
                 // Check if we can use the only-bother-with-the-first-light shader optimization.
                 bool newOneLight = !light1.Enabled && !light2.Enabled;
 
-                if (oneLight != newOneLight)
+                if(oneLight != newOneLight)
                 {
                     oneLight = newOneLight;
                     dirtyFlags |= EffectDirtyFlags.ShaderIndex;
@@ -464,24 +479,24 @@ namespace Microsoft.Xna.Framework.Graphics
             }
 
             // Recompute the shader index?
-            if ((dirtyFlags & EffectDirtyFlags.ShaderIndex) != 0)
+            if((dirtyFlags & EffectDirtyFlags.ShaderIndex) != 0)
             {
                 int shaderIndex = 0;
 
-                if (!fogEnabled)
+                if(!fogEnabled)
                     shaderIndex += 1;
 
-                if (vertexColorEnabled)
+                if(vertexColorEnabled)
                     shaderIndex += 2;
 
-                if (textureEnabled)
+                if(textureEnabled)
                     shaderIndex += 4;
 
-                if (lightingEnabled)
+                if(lightingEnabled)
                 {
-                    if (preferPerPixelLighting)
+                    if(preferPerPixelLighting)
                         shaderIndex += 24;
-                    else if (oneLight)
+                    else if(oneLight)
                         shaderIndex += 16;
                     else
                         shaderIndex += 8;
@@ -492,8 +507,6 @@ namespace Microsoft.Xna.Framework.Graphics
                 CurrentTechnique = Techniques[shaderIndex];
             }
         }
-
-
         #endregion
     }
 }

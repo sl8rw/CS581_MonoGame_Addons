@@ -16,10 +16,7 @@ namespace Microsoft.Xna.Framework.Graphics
         // We keep this around for recompiling on context lost and debugging.
         private string _glslCode;
 
-        private static int PlatformProfile()
-        {
-            return 0;
-        }
+        private static int PlatformProfile() { return 0; }
 
         private void PlatformConstruct(bool isVertexShader, byte[] shaderBytecode)
         {
@@ -31,11 +28,13 @@ namespace Microsoft.Xna.Framework.Graphics
         internal int GetShaderHandle()
         {
             // If the shader has already been created then return it.
-            if (_shaderHandle != -1)
+            if(_shaderHandle != -1)
                 return _shaderHandle;
 
             //
-            _shaderHandle = GL.CreateShader(Stage == ShaderStage.Vertex ? ShaderType.VertexShader : ShaderType.FragmentShader);
+            _shaderHandle = GL.CreateShader(Stage == ShaderStage.Vertex
+                ? ShaderType.VertexShader
+                : ShaderType.FragmentShader);
             GraphicsExtensions.CheckGLError();
             GL.ShaderSource(_shaderHandle, _glslCode);
             GraphicsExtensions.CheckGLError();
@@ -44,7 +43,7 @@ namespace Microsoft.Xna.Framework.Graphics
             int compiled = 0;
             GL.GetShader(_shaderHandle, ShaderParameter.CompileStatus, out compiled);
             GraphicsExtensions.CheckGLError();
-            if (compiled != (int)Bool.True)
+            if(compiled != (int)Bool.True)
             {
                 var log = GL.GetShaderInfoLog(_shaderHandle);
                 Debug.WriteLine(log);
@@ -60,7 +59,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         internal void GetVertexAttributeLocations(int program)
         {
-            for (int i = 0; i < Attributes.Length; ++i)
+            for(int i = 0; i < Attributes.Length; ++i)
             {
                 Attributes[i].location = GL.GetAttribLocation(program, Attributes[i].name);
                 GraphicsExtensions.CheckGLError();
@@ -69,9 +68,9 @@ namespace Microsoft.Xna.Framework.Graphics
 
         internal int GetAttribLocation(VertexElementUsage usage, int index)
         {
-            for (int i = 0; i < Attributes.Length; ++i)
+            for(int i = 0; i < Attributes.Length; ++i)
             {
-                if ((Attributes[i].usage == usage) && (Attributes[i].index == index))
+                if((Attributes[i].usage == usage) && (Attributes[i].index == index))
                     return Attributes[i].location;
             }
             return -1;
@@ -80,11 +79,11 @@ namespace Microsoft.Xna.Framework.Graphics
         internal void ApplySamplerTextureUnits(int program)
         {
             // Assign the texture unit index to the sampler uniforms.
-            foreach (var sampler in Samplers)
+            foreach(var sampler in Samplers)
             {
                 var loc = GL.GetUniformLocation(program, sampler.name);
                 GraphicsExtensions.CheckGLError();
-                if (loc != -1)
+                if(loc != -1)
                 {
                     GL.Uniform1(loc, sampler.textureSlot);
                     GraphicsExtensions.CheckGLError();
@@ -94,7 +93,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         private void PlatformGraphicsDeviceResetting()
         {
-            if (_shaderHandle != -1)
+            if(_shaderHandle != -1)
             {
                 GraphicsDevice.DisposeShader(_shaderHandle);
                 _shaderHandle = -1;
@@ -103,7 +102,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
         protected override void Dispose(bool disposing)
         {
-            if (!IsDisposed && _shaderHandle != -1)
+            if(!IsDisposed && _shaderHandle != -1)
             {
                 GraphicsDevice.DisposeShader(_shaderHandle);
                 _shaderHandle = -1;
