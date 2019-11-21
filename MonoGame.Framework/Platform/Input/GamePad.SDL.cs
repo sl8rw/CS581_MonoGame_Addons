@@ -25,7 +25,7 @@ namespace Microsoft.Xna.Framework.Input
         private static Sdl.Haptic.Effect _hapticLeftRightEffect = new Sdl.Haptic.Effect
         {
             type = Sdl.Haptic.EffectId.LeftRight,
-            leftright = new Sdl.Haptic.LeftRight
+            leftRight = new Sdl.Haptic.LeftRight
             {
                 Type = Sdl.Haptic.EffectId.LeftRight,
                 Length = Sdl.Haptic.Infinity,
@@ -323,8 +323,8 @@ namespace Microsoft.Xna.Framework.Input
                 Sdl.Haptic.StopAll(gamepad.HapticDevice);
             else if (gamepad.HapticType == 1)
             {
-                _hapticLeftRightEffect.leftright.LargeMagnitude = (ushort)(65535f * leftMotor);
-                _hapticLeftRightEffect.leftright.SmallMagnitude = (ushort)(65535f * rightMotor);
+                _hapticLeftRightEffect.leftRight.LargeMagnitude = (ushort)(65535f * leftMotor);
+                _hapticLeftRightEffect.leftRight.SmallMagnitude = (ushort)(65535f * rightMotor);
 
                 Sdl.Haptic.UpdateEffect(gamepad.HapticDevice, 0, ref _hapticLeftRightEffect);
                 Sdl.Haptic.RunEffect(gamepad.HapticDevice, 0, 1);

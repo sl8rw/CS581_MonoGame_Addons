@@ -6231,12 +6231,8 @@ namespace MonoGame.Utilities
             config = Config.Lookup(compressionLevel);
             SetDeflater();
 
-            strstart = 0;
-            block_start = 0;
-            lookahead = 0;
+            strstart = block_start = lookahead = match_available = ins_h = 0;
             match_length = prev_length = MIN_MATCH - 1;
-            match_available = 0;
-            ins_h = 0;
         }
 
         // Initialize the tree data structures for a new zlib stream.

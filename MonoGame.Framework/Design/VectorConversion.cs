@@ -9,38 +9,32 @@ namespace Microsoft.Xna.Framework.Design
     {
         public static bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            if (destinationType == typeof(float))
-                return true;
-            if (destinationType == typeof(Vector2))
-                return true;
-            if (destinationType == typeof(Vector3))
-                return true;
-            if (destinationType == typeof(Vector4))
-                return true;
-            if (destinationType.GetInterface("IPackedVector") != null)
-                return true;
-
-            return false;
+            return (destinationType == typeof(float) || destinationType == typeof(Vector2) ||
+                    destinationType == typeof(Vector3) || destinationType == typeof(Vector4) ||
+                    destinationType.GetInterface("IPackedVector") != null);
         }
 
         public static object ConvertToFromVector4(ITypeDescriptorContext context, CultureInfo culture, Vector4 value, Type destinationType)
         {
-            if (destinationType == typeof(float))
-                return value.X;
-            if (destinationType == typeof(Vector2))
-                return new Vector2(value.X, value.Y);
-            if (destinationType == typeof(Vector3))
-                return new Vector3(value.X, value.Y, value.Z);
-            if (destinationType == typeof(Vector4))
-                return new Vector4(value.X, value.Y, value.Z, value.W);
-            if (destinationType.GetInterface("IPackedVector") != null)
+            switch (destinationType.Name)
             {
-                var packedVec = (IPackedVector)Activator.CreateInstance(destinationType);
-                packedVec.PackFromVector4(value);
-                return packedVec;
-            }            
-
-            return null;
+                case "float":
+                    return value.X;
+                case "Vector2":
+                    return new Vector2(value.X, value.Y);
+                case "Vector3":
+                    return new Vector3(value.X, value.Y, value.Z);
+                case "Vector4":
+                    return new Vector4(value.X, value.Y, value.Z, value.W);
+                default:
+                    if (destinationType.GetInterface("IPackedVector") != null)
+                    {
+                        var packedVec = (IPackedVector)Activator.CreateInstance(destinationType);
+                        packedVec.PackFromVector4(value);
+                        return packedVec;
+                    }
+                    return null;
+            }
         }         
     }
 }

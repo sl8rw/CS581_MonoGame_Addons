@@ -52,7 +52,7 @@ namespace Microsoft.Xna.Framework.Audio
                         default: throw new NotSupportedException("The specified channel count is not supported.");
                     }
                 default:
-                    throw new NotSupportedException("The specified sound format (" + format.ToString() + ") is not supported.");
+                    throw new NotSupportedException($"The specified sound format ({format}) is not supported.");
             }
         }
 
