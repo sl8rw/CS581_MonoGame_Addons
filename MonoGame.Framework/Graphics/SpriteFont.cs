@@ -39,7 +39,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             public int GetHashCode(char b) { return (b); }
 
-            static public readonly CharComparer Default = new CharComparer();
+            public static readonly CharComparer Default = new CharComparer();
         }
 
         /// <summary>

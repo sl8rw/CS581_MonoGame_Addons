@@ -7,9 +7,9 @@
     internal class VertexDeclarationCache<T>
         where T : struct, IVertexType
     {
-        static private VertexDeclaration _cached;
+        private static VertexDeclaration _cached;
 
-        static public VertexDeclaration VertexDeclaration
+        public static VertexDeclaration VertexDeclaration
         {
             get
             {

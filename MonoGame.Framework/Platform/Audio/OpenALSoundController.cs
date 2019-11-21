@@ -1,6 +1,7 @@
 using MonoGame.OpenAL;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 #if ANDROID
@@ -19,8 +20,8 @@ namespace Microsoft.Xna.Framework.Audio
 {
     internal static class ALHelper
     {
-        [System.Diagnostics.Conditional("DEBUG")]
-        [System.Diagnostics.DebuggerHidden]
+        [Conditional("DEBUG")]
+        [DebuggerHidden]
         internal static void CheckError(string message = "", params object[] args)
         {
             ALError error;
@@ -45,8 +46,8 @@ namespace Microsoft.Xna.Framework.Audio
 
     internal static class AlcHelper
     {
-        [System.Diagnostics.Conditional("DEBUG")]
-        [System.Diagnostics.DebuggerHidden]
+        [Conditional("DEBUG")]
+        [DebuggerHidden]
         internal static void CheckError(string message = "", params object[] args)
         {
             AlcError error;

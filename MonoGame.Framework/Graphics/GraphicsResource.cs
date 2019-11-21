@@ -67,7 +67,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// recreated after the device reset. Warning: This may be called after a call to Dispose() up until the
         /// resource is garbage collected.
         /// </summary>
-        internal protected virtual void GraphicsDeviceResetting() { }
+        protected internal virtual void GraphicsDeviceResetting() { }
 
         public void Dispose()
         {

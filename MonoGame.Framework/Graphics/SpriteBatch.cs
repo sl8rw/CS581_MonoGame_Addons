@@ -25,8 +25,6 @@ namespace Microsoft.Xna.Framework.Graphics
 
         SpriteEffect _spriteEffect;
         readonly EffectPass _spritePass;
-
-        Rectangle _tempRect = new Rectangle(0, 0, 0, 0);
         Vector2 _texCoordTL = new Vector2(0, 0);
         Vector2 _texCoordBR = new Vector2(0, 0);
         #endregion
@@ -465,7 +463,7 @@ namespace Microsoft.Xna.Framework.Graphics
         public void Draw(Texture2D texture, Rectangle destinationRectangle, Rectangle? sourceRectangle, Color color)
         {
             if(Array.Exists(GraphicsDevice.GetRenderTargets(), element => element.RenderTarget == texture))
-                throw new System.ArgumentException("RenderTarget2D self reference error.");
+                throw new ArgumentException("RenderTarget2D self reference error.");
 
             CheckValid(texture);
 
@@ -509,7 +507,7 @@ namespace Microsoft.Xna.Framework.Graphics
         public void Draw(Texture2D texture, Vector2 position, Color color)
         {
             if(Array.Exists(GraphicsDevice.GetRenderTargets(), element => element.RenderTarget == texture))
-                throw new System.ArgumentException("RenderTarget2D self reference error.");
+                throw new ArgumentException("RenderTarget2D self reference error.");
 
             CheckValid(texture);
 
@@ -533,7 +531,7 @@ namespace Microsoft.Xna.Framework.Graphics
         public void Draw(Texture2D texture, Rectangle destinationRectangle, Color color)
         {
             if(Array.Exists(GraphicsDevice.GetRenderTargets(), element => element.RenderTarget == texture))
-                throw new System.ArgumentException("RenderTarget2D self reference error.");
+                throw new ArgumentException("RenderTarget2D self reference error.");
             CheckValid(texture);
 
             var item = _batcher.CreateBatchItem();

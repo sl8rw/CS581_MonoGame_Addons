@@ -497,7 +497,7 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 
 #if DESKTOPGL || ANGLE
-        static internal void DisposeContext(IntPtr resource)
+        internal static void DisposeContext(IntPtr resource)
         {
             lock(_disposeContextsLock)
             {
@@ -505,7 +505,7 @@ namespace Microsoft.Xna.Framework.Graphics
             }
         }
 
-        static internal void DisposeContexts()
+        internal static void DisposeContexts()
         {
             lock(_disposeContextsLock)
             {
@@ -1292,9 +1292,9 @@ namespace Microsoft.Xna.Framework.Graphics
             public int Vbo;
 
             public BufferBindingInfo(VertexDeclaration.VertexDeclarationAttributeInfo attributeInfo,
-                                     IntPtr vertexOffset,
-                                     int instanceFrequency,
-                                     int vbo)
+                IntPtr vertexOffset,
+                int instanceFrequency,
+                int vbo)
             {
                 AttributeInfo = attributeInfo;
                 VertexOffset = vertexOffset;
@@ -1302,31 +1302,5 @@ namespace Microsoft.Xna.Framework.Graphics
                 Vbo = vbo;
             }
         }
-
-#if DESKTOPGL
-        private void GetModeSwitchedSize(out int width, out int height)
-        {
-            var mode = new Sdl.Display.Mode
-            {
-                Width = PresentationParameters.BackBufferWidth,
-                Height = PresentationParameters.BackBufferHeight,
-                Format = 0,
-                RefreshRate = 0,
-                DriverData = IntPtr.Zero
-            };
-            Sdl.Display.Mode closest;
-            Sdl.Display.GetClosestDisplayMode(0, mode, out closest);
-            width = closest.Width;
-            height = closest.Height;
-        }
-
-        private void GetDisplayResolution(out int width, out int height)
-        {
-            Sdl.Display.Mode mode;
-            Sdl.Display.GetCurrentDisplayMode(0, out mode);
-            width = mode.Width;
-            height = mode.Height;
-        }
-#endif
     }
 }

@@ -22,7 +22,7 @@ namespace Microsoft.Xna.Framework.Media
             _type = type;
         }
 
-        public Microsoft.Xna.Framework.Media.MediaSourceType MediaSourceType { get { return _type; } }
+        public MediaSourceType MediaSourceType { get { return _type; } }
 
         public string Name { get { return _name; } }
 

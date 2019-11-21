@@ -3,6 +3,7 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using MonoGame.OpenGL;
+using MonoGame.Utilities;
 using System;
 
 namespace Microsoft.Xna.Framework.Graphics
@@ -30,7 +31,7 @@ namespace Microsoft.Xna.Framework.Graphics
                 }
             }
 
-            HashKey = MonoGame.Utilities.Hash.ComputeHash(data);
+            HashKey = Hash.ComputeHash(data);
         }
 
         private void PlatformClear()

@@ -20,8 +20,6 @@ namespace Microsoft.Xna.Framework.Graphics
 
         private bool _dirty;
 
-        private bool Dirty { get { return _dirty; } }
-
         public ConstantBuffer(ConstantBuffer cloneSource)
         {
             GraphicsDevice = cloneSource.GraphicsDevice;

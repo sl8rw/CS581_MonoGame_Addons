@@ -69,14 +69,9 @@ namespace MonoGame.Utilities.Deflate
         private const int MANY = 1440;
 
         private const int Z_OK = 0;
-        private const int Z_STREAM_END = 1;
-        private const int Z_NEED_DICT = 2;
-        private const int Z_ERRNO = -1;
-        private const int Z_STREAM_ERROR = -2;
         private const int Z_DATA_ERROR = -3;
         private const int Z_MEM_ERROR = -4;
         private const int Z_BUF_ERROR = -5;
-        private const int Z_VERSION_ERROR = -6;
 
         internal const int fixed_bl = 9;
         internal const int fixed_bd = 5;

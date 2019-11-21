@@ -11,7 +11,7 @@ namespace Microsoft.Xna.Framework.Graphics
 {
     public partial class Texture2D : Texture
     {
-        internal protected enum SurfaceType
+        protected internal enum SurfaceType
         {
             Texture,
             RenderTarget,
@@ -349,17 +349,6 @@ namespace Microsoft.Xna.Framework.Graphics
         // This method allows games that use Texture2D.FromStream 
         // to reload their textures after the GL context is lost.
         public void Reload(Stream textureStream) { PlatformReload(textureStream); }
-
-        //Converts Pixel Data from ARGB to ABGR
-        private static void ConvertToABGR(int pixelHeight, int pixelWidth, int[] pixels)
-        {
-            int pixelCount = pixelWidth * pixelHeight;
-            for(int i = 0; i < pixelCount; ++i)
-            {
-                uint pixel = (uint)pixels[i];
-                pixels[i] = (int)((pixel & 0xFF00FF00) | ((pixel & 0x00FF0000) >> 16) | ((pixel & 0x000000FF) << 16));
-            }
-        }
 
         private void ValidateParams<T>(int level,
                                        int arraySlice,

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 
 namespace Microsoft.Xna.Framework.Audio
 {
@@ -86,13 +87,13 @@ namespace Microsoft.Xna.Framework.Audio
                     _waveBanks = new WaveBank[numWaveBanks];
                     _waveBankNames = new string[numWaveBanks];
                     for(int i = 0; i < numWaveBanks; i++)
-                        _waveBankNames[i] = System.Text.Encoding.UTF8
+                        _waveBankNames[i] = Encoding.UTF8
                             .GetString(reader.ReadBytes(64), 0, 64)
                             .Replace("\0", string.Empty);
 
                     //parse cue name table
                     stream.Seek(cueNamesOffset, SeekOrigin.Begin);
-                    string[] cueNames = System.Text.Encoding.UTF8
+                    string[] cueNames = Encoding.UTF8
                         .GetString(reader.ReadBytes((int)cueNameTableLen), 0, (int)cueNameTableLen)
                         .Split('\0');
 

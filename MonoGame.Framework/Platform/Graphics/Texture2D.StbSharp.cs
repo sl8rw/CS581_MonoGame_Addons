@@ -11,7 +11,7 @@ namespace Microsoft.Xna.Framework.Graphics
 {
     public partial class Texture2D
     {
-        private unsafe static Texture2D PlatformFromStream(GraphicsDevice graphicsDevice, Stream stream)
+        private static unsafe Texture2D PlatformFromStream(GraphicsDevice graphicsDevice, Stream stream)
         {
             byte[] bytes;
 

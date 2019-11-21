@@ -27,6 +27,7 @@
 
 
 using System;
+using System.IO;
 
 namespace MonoGame.Utilities.Deflate
 {
@@ -56,7 +57,7 @@ namespace MonoGame.Utilities.Deflate
         /// </summary>
         /// <param name="input">The stream over which to calculate the CRC32</param>
         /// <returns>the CRC32 calculation</returns>
-        public Int32 GetCrc32(System.IO.Stream input) { return GetCrc32AndCopy(input, null); }
+        public Int32 GetCrc32(Stream input) { return GetCrc32AndCopy(input, null); }
 
         /// <summary>
         /// Returns the CRC32 for the specified stream, and writes the input into the output stream.
@@ -64,7 +65,7 @@ namespace MonoGame.Utilities.Deflate
         /// <param name="input">The stream over which to calculate the CRC32</param>
         /// <param name="output">The stream into which to deflate the input</param>
         /// <returns>the CRC32 calculation</returns>
-        public Int32 GetCrc32AndCopy(System.IO.Stream input, System.IO.Stream output)
+        public Int32 GetCrc32AndCopy(Stream input, Stream output)
         {
             if(input == null)
                 throw new Exception("The input stream must not be null.");
@@ -158,7 +159,7 @@ namespace MonoGame.Utilities.Deflate
         /// Process a run of N identical bytes into the CRC.
         /// </summary>
         /// <remarks>
-        /// <para> This method serves as an optimization for updating the CRC when a run of identical bytes is found.
+        /// <para>This method serves as an optimization for updating the CRC when a run of identical bytes is found.
         /// Rather than passing in a buffer of length n, containing all identical bytes b, this method accepts the byte
         /// value and the length of the (virtual) buffer - the length of the run.</para>
         /// </remarks>
@@ -357,7 +358,7 @@ namespace MonoGame.Utilities.Deflate
         /// specify true if the instance should reverse data bits.
         /// </param>
         /// <remarks>
-        /// <para> In the CRC-32 used by BZip2, the bits are reversed. Therefore if you want a CRC32 with compatibility
+        /// <para>In the CRC-32 used by BZip2, the bits are reversed. Therefore if you want a CRC32 with compatibility
         /// with BZip2, you should pass true here. In the CRC-32 used by GZIP and PKZIP, the bits are not reversed;
         /// Therefore if you want a CRC32 with compatibility with those, you should pass false.</para>
         /// </remarks>
@@ -378,7 +379,7 @@ namespace MonoGame.Utilities.Deflate
         /// </param>
         ///
         /// <remarks>
-        /// <para> In the CRC-32 used by BZip2, the bits are reversed. Therefore if you want a CRC32 with compatibility
+        /// <para>In the CRC-32 used by BZip2, the bits are reversed. Therefore if you want a CRC32 with compatibility
         /// with BZip2, you should pass true here for the <c>reverseBits</c> parameter. In the CRC-32 used by GZIP and
         /// PKZIP, the bits are not reversed; Therefore if you want a CRC32 with compatibility with those, you should
         /// pass false for the<c>reverseBits</c> parameter.</para>
@@ -394,7 +395,7 @@ namespace MonoGame.Utilities.Deflate
         /// Reset the CRC-32 class - clear the CRC "remainder register."
         /// </summary>
         /// <remarks>
-        /// <para> Use this when employing a single instance of this class to compute multiple, distinct CRCs on
+        /// <para>Use this when employing a single instance of this class to compute multiple, distinct CRCs on
         /// multiple, distinct data blocks.</para>
         /// </remarks>
         public void Reset() { _register = 0xFFFFFFFFU; }
@@ -414,16 +415,16 @@ namespace MonoGame.Utilities.Deflate
     /// </summary>
     ///
     /// <remarks>
-    /// <para> This class can be used to verify the CRC of a ZipEntry when reading from a stream, or to calculate a CRC
+    /// <para>This class can be used to verify the CRC of a ZipEntry when reading from a stream, or to calculate a CRC
     /// when writing to a stream.  The stream should be used to either read, or write, but not both.  If you intermix
-    /// reads and writes, the results are not defined.</para> <para> This class is intended primarily for use internally
+    /// reads and writes, the results are not defined.</para> <para>This class is intended primarily for use internally
     /// by the DotNetZip library.</para>
     /// </remarks>
-    public class CrcCalculatorStream : System.IO.Stream
+    public class CrcCalculatorStream : Stream
     {
         private static readonly Int64 UnsetLengthLimit = -99;
 
-        internal System.IO.Stream _innerStream;
+        internal Stream _innerStream;
         private CRC32 _Crc32;
         private Int64 _lengthLimit = -99;
         private bool _leaveOpen;
@@ -432,42 +433,38 @@ namespace MonoGame.Utilities.Deflate
         /// The default constructor.
         /// </summary>
         /// <remarks>
-        /// <para> Instances returned from this constructor will leave the underlying stream open upon Close().  The
+        /// <para>Instances returned from this constructor will leave the underlying stream open upon Close().  The
         /// stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para>
         /// </remarks>
         /// <param name="stream">The underlying stream</param>
-        public CrcCalculatorStream(System.IO.Stream stream) : this(true,
-                                                                   CrcCalculatorStream.UnsetLengthLimit,
-                                                                   stream,
-                                                                   null)
-        { }
+        public CrcCalculatorStream(Stream stream) : this(true, CrcCalculatorStream.UnsetLengthLimit, stream, null) { }
 
         /// <summary>
         /// The constructor allows the caller to specify how to handle the   underlying stream at close.
         /// </summary>
         /// <remarks>
-        /// <para> The stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para>
+        /// <para>The stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para>
         /// </remarks>
         /// <param name="stream">The underlying stream</param>
         /// <param name="leaveOpen">
         /// true to leave the underlying stream open upon close of the <c>CrcCalculatorStream</c>; false otherwise.
         /// </param>
-        public CrcCalculatorStream(System.IO.Stream stream, bool leaveOpen) : this(leaveOpen,
-                                                                                   CrcCalculatorStream.UnsetLengthLimit,
-                                                                                   stream,
-                                                                                   null)
+        public CrcCalculatorStream(Stream stream, bool leaveOpen) : this(leaveOpen,
+                                                                         CrcCalculatorStream.UnsetLengthLimit,
+                                                                         stream,
+                                                                         null)
         { }
 
         /// <summary>
         /// A constructor allowing the specification of the length of the stream   to read.
         /// </summary>
         /// <remarks>
-        /// <para> The stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para> <para>
+        /// <para>The stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para> <para>
         /// Instances returned from this constructor will leave the underlying stream open upon Close().</para>
         /// </remarks>
         /// <param name="stream">The underlying stream</param>
         /// <param name="length">The length of the stream to slurp</param>
-        public CrcCalculatorStream(System.IO.Stream stream, Int64 length) : this(true, length, stream, null)
+        public CrcCalculatorStream(Stream stream, Int64 length) : this(true, length, stream, null)
         {
             if(length < 0)
                 throw new ArgumentException(nameof(length));
@@ -478,17 +475,14 @@ namespace MonoGame.Utilities.Deflate
         /// the underlying stream open upon   Close().
         /// </summary>
         /// <remarks>
-        /// <para> The stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para>
+        /// <para>The stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para>
         /// </remarks>
         /// <param name="stream">The underlying stream</param>
         /// <param name="length">The length of the stream to slurp</param>
         /// <param name="leaveOpen">
         /// true to leave the underlying stream open upon close of the <c>CrcCalculatorStream</c>; false otherwise.
         /// </param>
-        public CrcCalculatorStream(System.IO.Stream stream, Int64 length, bool leaveOpen) : this(leaveOpen,
-                                                                                                 length,
-                                                                                                 stream,
-                                                                                                 null)
+        public CrcCalculatorStream(Stream stream, Int64 length, bool leaveOpen) : this(leaveOpen, length, stream, null)
         {
             if(length < 0)
                 throw new ArgumentException(nameof(length));
@@ -499,8 +493,8 @@ namespace MonoGame.Utilities.Deflate
         /// the underlying stream open upon   Close(), and the CRC32 instance to use.
         /// </summary>
         /// <remarks>
-        /// <para> The stream uses the specified CRC32 instance, which allows the application to specify how the CRC
-        /// gets calculated.</para>
+        /// <para>The stream uses the specified CRC32 instance, which allows the application to specify how the CRC gets
+        /// calculated.</para>
         /// </remarks>
         /// <param name="stream">The underlying stream</param>
         /// <param name="length">The length of the stream to slurp</param>
@@ -508,10 +502,10 @@ namespace MonoGame.Utilities.Deflate
         /// true to leave the underlying stream open upon close of the <c>CrcCalculatorStream</c>; false otherwise.
         /// </param>
         /// <param name="crc32">the CRC32 instance to use to calculate the CRC32</param>
-        public CrcCalculatorStream(System.IO.Stream stream, Int64 length, bool leaveOpen, CRC32 crc32) : this(leaveOpen,
-                                                                                                              length,
-                                                                                                              stream,
-                                                                                                              crc32)
+        public CrcCalculatorStream(Stream stream, Int64 length, bool leaveOpen, CRC32 crc32) : this(leaveOpen,
+                                                                                                    length,
+                                                                                                    stream,
+                                                                                                    crc32)
         {
             if(length < 0)
                 throw new ArgumentException(nameof(length));
@@ -523,7 +517,7 @@ namespace MonoGame.Utilities.Deflate
         // is no length set.  So we validate the length limit in those ctors that use an
         // explicit param, otherwise we don't validate, because it could be our special
         // value.
-        private CrcCalculatorStream(bool leaveOpen, Int64 length, System.IO.Stream stream, CRC32 crc32) : base()
+        private CrcCalculatorStream(bool leaveOpen, Int64 length, Stream stream, CRC32 crc32) : base()
         {
             _innerStream = stream;
             _Crc32 = crc32 ?? new CRC32();
@@ -546,7 +540,7 @@ namespace MonoGame.Utilities.Deflate
         /// Provides the current CRC for all blocks slurped in.
         /// </summary>
         /// <remarks>
-        /// <para> The running total of the CRC is kept as data is written or read through the stream.  read this
+        /// <para>The running total of the CRC is kept as data is written or read through the stream.  read this
         /// property after all reads or writes to get an accurate CRC for the entire stream.</para>
         /// </remarks>
         public Int32 Crc { get { return _Crc32.Crc32Result; } }
@@ -555,7 +549,7 @@ namespace MonoGame.Utilities.Deflate
         /// Indicates whether the underlying stream will be left open when the   <c>CrcCalculatorStream</c> is Closed.
         /// </summary>
         /// <remarks>
-        /// <para> Set this at any point before calling <see cref="Close()"/>.</para>
+        /// <para>Set this at any point before calling <see cref="Close()"/>.</para>
         /// </remarks>
         public bool LeaveOpen { get { return _leaveOpen; } set { _leaveOpen = value; } }
 
@@ -614,7 +608,7 @@ namespace MonoGame.Utilities.Deflate
         /// Indicates whether the stream supports seeking.
         /// </summary>
         /// <remarks>
-        /// <para> Always returns false.</para>
+        /// <para>Always returns false.</para>
         /// </remarks>
         public override bool CanSeek { get { return false; } }
 
@@ -636,8 +630,7 @@ namespace MonoGame.Utilities.Deflate
             get
             {
                 if(_lengthLimit == CrcCalculatorStream.UnsetLengthLimit)
-                    return _innerStream.Length;
-                else return _lengthLimit;
+                    return _innerStream.Length; else return _lengthLimit;
             }
         }
 
@@ -657,7 +650,7 @@ namespace MonoGame.Utilities.Deflate
         /// <param name="offset">N/A</param>
         /// <param name="origin">N/A</param>
         /// <returns>N/A</returns>
-        public override long Seek(long offset, System.IO.SeekOrigin origin) { throw new NotSupportedException(); }
+        public override long Seek(long offset, SeekOrigin origin) { throw new NotSupportedException(); }
 
         /// <summary>
         /// This method always throws <see cref="NotSupportedException"/>

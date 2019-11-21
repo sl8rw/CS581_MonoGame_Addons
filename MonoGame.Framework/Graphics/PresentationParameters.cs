@@ -31,7 +31,6 @@ namespace Microsoft.Xna.Framework.Graphics
         private int backBufferWidth = GraphicsDeviceManager.DefaultBackBufferWidth;
         private IntPtr deviceWindowHandle;
         private int multiSampleCount;
-        private bool disposed;
         private bool isFullScreen;
         private bool hardwareModeSwitch = true;
 
@@ -166,7 +165,7 @@ namespace Microsoft.Xna.Framework.Graphics
             depthStencilFormat = DepthFormat.None;
             multiSampleCount = 0;
             PresentationInterval = PresentInterval.Default;
-            DisplayOrientation = Microsoft.Xna.Framework.DisplayOrientation.Default;
+            DisplayOrientation = DisplayOrientation.Default;
         }
 
         /// <summary>

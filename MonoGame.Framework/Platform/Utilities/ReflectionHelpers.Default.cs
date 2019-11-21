@@ -14,7 +14,7 @@ namespace MonoGame.Utilities
 
             static SizeOf() { _sizeOf = Marshal.SizeOf<T>(); }
 
-            static public int Get() { return _sizeOf; }
+            public static int Get() { return _sizeOf; }
         }
 
         /// <summary>

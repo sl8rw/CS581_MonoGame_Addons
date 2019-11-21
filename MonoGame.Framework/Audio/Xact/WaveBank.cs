@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using System.Text;
 
 namespace Microsoft.Xna.Framework.Audio
 {
@@ -56,11 +57,7 @@ namespace Microsoft.Xna.Framework.Audio
             public int LoopLength;
         }
 
-        private const int Flag_EntryNames = 0x00010000; // Bank includes entry names
         private const int Flag_Compact = 0x00020000; // Bank uses compact format
-        private const int Flag_SyncDisabled = 0x00040000; // Bank is disabled for audition sync
-        private const int Flag_SeekTables = 0x00080000; // Bank includes seek tables.
-        private const int Flag_Mask = 0x000F0000;
 
         /// <summary>
         ///
@@ -148,14 +145,10 @@ namespace Microsoft.Xna.Framework.Audio
 
             if((wavebankheader.Version == 2) || (wavebankheader.Version == 3))
             {
-                wavebankdata.BankName = System.Text.Encoding.UTF8
-                    .GetString(reader.ReadBytes(16), 0, 16)
-                    .Replace("\0", string.Empty);
+                wavebankdata.BankName = Encoding.UTF8.GetString(reader.ReadBytes(16), 0, 16).Replace("\0", string.Empty);
             } else
             {
-                wavebankdata.BankName = System.Text.Encoding.UTF8
-                    .GetString(reader.ReadBytes(64), 0, 64)
-                    .Replace("\0", string.Empty);
+                wavebankdata.BankName = Encoding.UTF8.GetString(reader.ReadBytes(64), 0, 64).Replace("\0", string.Empty);
             }
 
             _bankName = wavebankdata.BankName;

@@ -95,9 +95,6 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </summary>
         internal int MaxTextureAnisotropy { get; private set; }
 
-        // The highest possible MSCount
-        private const int MultiSampleCountLimit = 32;
-
         private int _maxMultiSampleCount;
 
         internal int MaxMultiSampleCount { get { return _maxMultiSampleCount; } }

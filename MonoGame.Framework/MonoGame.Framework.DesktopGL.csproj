@@ -36,7 +36,6 @@ This package provides you with MonoGame Framework that uses OpenGL for rendering
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Platform\Input\KeysHelper.cs" />
     <Compile Include="Platform\TitleContainer.Desktop.cs" />
     <Compile Include="Platform\Audio\OggStream.cs" />
     <Compile Include="Platform\Graphics\OpenGL.Common.cs" />
@@ -71,6 +70,7 @@ This package provides you with MonoGame Framework that uses OpenGL for rendering
 
     <Compile Include="..\ThirdParty\NVorbis\NVorbis\**\*.cs" LinkBase="ThirdParty\NVorbis" />
     <Compile Remove="..\ThirdParty\NVorbis\NVorbis\Properties\AssemblyInfo.cs" />
+    <Compile Remove="..\ThirdParty\StbImageWriteSharp\src\StbImageWriteSharp\MemoryStats.cs" />
   </ItemGroup>
 
   <ItemGroup>

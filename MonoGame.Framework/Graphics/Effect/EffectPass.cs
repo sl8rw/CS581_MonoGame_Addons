@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 
 namespace Microsoft.Xna.Framework.Graphics
@@ -66,7 +67,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
             if(_effect.CurrentTechnique == null)
             {
-                throw new System.ArgumentException("invalid effect parameter string.");
+                throw new ArgumentException("invalid effect parameter string.");
             }
             var current = _effect.CurrentTechnique;
             _effect.OnApply();

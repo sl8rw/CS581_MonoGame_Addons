@@ -48,7 +48,7 @@ namespace Microsoft.Xna.Framework.Graphics
             set
             {
                 if(value == null)
-                    throw new System.ArgumentException("invalid effect parameter string.");
+                    throw new ArgumentException("invalid effect parameter string.");
                 else
                 {
                     _currentTechnique = value;
@@ -232,7 +232,7 @@ namespace Microsoft.Xna.Framework.Graphics
             base.Dispose(disposing);
         }
 
-        internal protected override void GraphicsDeviceResetting()
+        protected internal override void GraphicsDeviceResetting()
         {
             for(var i = 0; i < ConstantBuffers.Length; i++)
                 ConstantBuffers[i].Clear();
@@ -436,13 +436,11 @@ namespace Microsoft.Xna.Framework.Graphics
 #endif
 
                         case EffectParameterType.Single:
-                        {
                             var buffer = new float[rowCount * columnCount];
                             for(var j = 0; j < buffer.Length; j++)
                                 buffer[j] = reader.ReadSingle();
                             data = buffer;
                             break;
-                        }
 
                         case EffectParameterType.String:
                             // TODO: We have not investigated what a string

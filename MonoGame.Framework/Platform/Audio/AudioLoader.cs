@@ -163,7 +163,6 @@ namespace Microsoft.Xna.Framework.Audio
                 switch(chunkType)
                 {
                     case "fmt ":
-                    {
                         audioFormat = reader.ReadInt16(); // 2
                         channels = reader.ReadInt16(); // 4
                         frequency = reader.ReadInt32();  // 8
@@ -184,14 +183,13 @@ namespace Microsoft.Xna.Framework.Audio
                             {
                                 if(reader.BaseStream.CanSeek)
                                     reader.BaseStream.Seek(extraDataSize, SeekOrigin.Current);
-                                    else
+                                else
                                 {
                                     for(int i = 0; i < extraDataSize; ++i)
                                         reader.ReadByte();
                                 }
                             }
                         }
-                    }
                         break;
                     case "fact":
                         if(audioFormat == FormatIma4)

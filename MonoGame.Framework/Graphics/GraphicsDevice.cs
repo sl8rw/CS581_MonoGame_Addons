@@ -101,15 +101,11 @@ namespace Microsoft.Xna.Framework.Graphics
         private Shader _vertexShader;
         private bool _vertexShaderDirty;
 
-        private bool VertexShaderDirty { get { return _vertexShaderDirty; } }
-
         /// <summary>
         /// The active pixel shader.
         /// </summary>
         private Shader _pixelShader;
         private bool _pixelShaderDirty;
-
-        private bool PixelShaderDirty { get { return _pixelShaderDirty; } }
 
         private readonly ConstantBufferCollection _vertexConstantBuffers = new ConstantBufferCollection(ShaderStage.Vertex,
                                                                                                         16);

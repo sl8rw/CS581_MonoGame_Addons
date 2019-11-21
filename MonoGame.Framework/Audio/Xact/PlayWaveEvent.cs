@@ -144,10 +144,9 @@ namespace Microsoft.Xna.Framework.Audio
                         break;
 
                     case VariationType.RandomNoImmediateRepeats:
-                    {
                         if(_weights == null || trackCount == 1)
                             _wavIndex = XactHelpers.Random.Next() % trackCount;
-                            else
+                        else
                         {
                             var last = _wavIndex;
                             var sum = XactHelpers.Random.Next(_totalWeights);
@@ -165,7 +164,6 @@ namespace Microsoft.Xna.Framework.Audio
                                 _wavIndex = (_wavIndex + 1) % trackCount;
                         }
                         break;
-                    }
 
                     case VariationType.Shuffle:
                         // TODO: Need some sort of deck implementation.

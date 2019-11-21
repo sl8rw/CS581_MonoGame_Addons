@@ -286,7 +286,7 @@ namespace MonoGame.OpenAL
 
         internal static void DeleteBuffers(int[] buffers) { DeleteBuffers(buffers.Length, ref buffers[0]); }
 
-        internal unsafe static void DeleteBuffers(int n, ref int buffers)
+        internal static unsafe void DeleteBuffers(int n, ref int buffers)
         {
             fixed(int* pbuffers = &buffers)
             {
@@ -316,7 +316,7 @@ namespace MonoGame.OpenAL
         internal static d_algenbuffers alGenBuffers = FuncLoader.LoadFunction<d_algenbuffers>(NativeLibrary,
                                                                                               "alGenBuffers");
 
-        internal unsafe static void GenBuffers(int count, out int[] buffers)
+        internal static unsafe void GenBuffers(int count, out int[] buffers)
         {
             buffers = new int[count];
             fixed(int* ptr = &buffers[0])
@@ -483,7 +483,7 @@ namespace MonoGame.OpenAL
             }
         }
 
-        internal unsafe static void SourceQueueBuffer(int sourceId, int buffer)
+        internal static unsafe void SourceQueueBuffer(int sourceId, int buffer)
         { AL.alSourceQueueBuffers(sourceId, 1, &buffer); }
 
 [CLSCompliant(false)]

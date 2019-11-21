@@ -18,8 +18,6 @@ namespace Microsoft.Xna.Framework.Graphics
 
         public event EventHandler<EventArgs> ContentLost;
 
-        private bool SuppressEventHandlerWarningsUntilEventsAreProperlyImplemented() { return ContentLost != null; }
-
         public RenderTarget2D(GraphicsDevice graphicsDevice,
                               int width,
                               int height,

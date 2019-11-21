@@ -29,6 +29,7 @@
 
 using System;
 using System.IO;
+using System.Text;
 
 namespace MonoGame.Utilities.Deflate
 {
@@ -36,27 +37,27 @@ namespace MonoGame.Utilities.Deflate
     /// A class for compressing and decompressing GZIP streams.
     /// </summary>
     /// <remarks>
-    /// <para> The <c>GZipStream</c> is a <see href="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator</see> on
-    /// a<see cref="Stream"/>. It adds GZIP compression or decompression to any stream.</para> <para> Like the
-    /// <c>System.IO.Compression.GZipStream</c> in the .NET Base Class Library,
+    /// <para>The <c>GZipStream</c> is a <see href="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator</see> on
+    /// a<see cref="Stream"/>. It adds GZIP compression or decompression to any stream.</para> <para>Like
+    /// the<c>System.IO.Compression.GZipStream</c> in the .NET Base Class Library,
     /// the<c>MonoGame.Utilities.Deflate.GZipStream</c> can compress while writing, or decompress while reading, but not
     /// vice versa.  The compression method used is GZIP, which is documented in <see
     /// href="http://www.ietf.org/rfc/rfc1952.txt">IETF RFC 1952</see>, "GZIP file format specification version
-    /// 4.3".</para> <para> A <c>GZipStream</c> can be used to decompress data (through <c>Read()</c>) or to compress
-    /// data (through <c>Write()</c>), but not both.</para> <para> If you wish to use the <c>GZipStream</c> to compress
+    /// 4.3".</para> <para>A <c>GZipStream</c> can be used to decompress data (through <c>Read()</c>) or to compress
+    /// data (through <c>Write()</c>), but not both.</para> <para>If you wish to use the <c>GZipStream</c> to compress
     /// data, you must wrap it around a write-able stream. As you call <c>Write()</c> on the <c>GZipStream</c>, the data
     /// will be compressed into the GZIP format.  If you want to decompress data, you must wrap the <c>GZipStream</c>
     /// around a readable stream that contains an IETF RFC 1952-compliant stream.  The data will be decompressed as you
-    /// call<c>Read()</c> on the <c>GZipStream</c>.</para> <para> Though the GZIP format allows data from multiple files
+    /// call<c>Read()</c> on the <c>GZipStream</c>.</para> <para>Though the GZIP format allows data from multiple files
     /// to be concatenated together, this stream handles only a single segment of GZIP format, typically representing a
-    /// single file.</para> <para> This class is similar to <see cref="ZlibStream"/> and <see
+    /// single file.</para> <para>This class is similar to <see cref="ZlibStream"/> and <see
     /// cref="DeflateStream"/>.<c>ZlibStream</c> handles RFC1950-compliant streams.  <see cref="DeflateStream"/> handles
     /// RFC1951-compliant streams. This class handles RFC1952-compliant streams.</para>
     /// </remarks>
     ///
     /// <seealso cref="DeflateStream"/>
     /// <seealso cref="ZlibStream"/>
-    public class GZipStream : System.IO.Stream
+    public class GZipStream : Stream
     {
         // GZip format
         // source: http://tools.ietf.org/html/rfc1952
@@ -100,11 +101,11 @@ namespace MonoGame.Utilities.Deflate
         /// </summary>
         ///
         /// <remarks>
-        /// <para> The GZIP format allows for each file to optionally have an associated comment stored with the file. 
+        /// <para>The GZIP format allows for each file to optionally have an associated comment stored with the file. 
         /// The comment is encoded with the ISO-8859-1 code page.  To include a comment in a GZIP stream you create, set
-        /// this property before calling <c>Write()</c> for the first time on the<c>GZipStream</c>.</para> <para> When
+        /// this property before calling <c>Write()</c> for the first time on the<c>GZipStream</c>.</para> <para>When
         /// using <c>GZipStream</c> to decompress, you can retrieve this property after the first call to <c>Read()</c>.
-        ///  If no comment has been set in the GZIP bytestream, the Comment property will return <c>null</c>
+        /// If no comment has been set in the GZIP bytestream, the Comment property will return <c>null</c>
         /// (<c>Nothing</c> in VB).</para>
         /// </remarks>
         public String Comment
@@ -123,11 +124,11 @@ namespace MonoGame.Utilities.Deflate
         /// </summary>
         ///
         /// <remarks>
-        /// <para> The GZIP format optionally allows each file to have an associated filename.  When compressing data
-        /// (through <c>Write()</c>), set this FileName before calling <c>Write()</c> the first time on the
-        /// <c>GZipStream</c>. The actual filename is encoded into the GZIP bytestream with the ISO-8859-1 code page,
+        /// <para>The GZIP format optionally allows each file to have an associated filename.  When compressing data
+        /// (through <c>Write()</c>), set this FileName before calling <c>Write()</c> the first time on
+        /// the<c>GZipStream</c>. The actual filename is encoded into the GZIP bytestream with the ISO-8859-1 code page,
         /// according to RFC 1952. It is the application's responsibility to insure that the FileName can be encoded and
-        /// decoded correctly with this code page.</para> <para> When decompressing (through <c>Read()</c>), you can
+        /// decoded correctly with this code page.</para> <para>When decompressing (through <c>Read()</c>), you can
         /// retrieve this value any time after the first <c>Read()</c>.  In the case where there was no filename encoded
         /// into the GZIP bytestream, the property will return <c>null</c> (<c>Nothing</c> in VB).</para>
         /// </remarks>
@@ -187,19 +188,19 @@ namespace MonoGame.Utilities.Deflate
         /// Create a <c>GZipStream</c> using the specified <c>CompressionMode</c>.
         /// </summary>
         /// <remarks>
-        /// <para> When mode is <c>CompressionMode.Compress</c>, the <c>GZipStream</c> will use the default compression
-        /// level.</para> <para> As noted in the class documentation, the <c>CompressionMode</c> (Compress or
-        /// Decompress) also establishes the "direction" of the stream.  A<c>GZipStream</c> with
-        /// <c>CompressionMode.Compress</c> works only through<c>Write()</c>.  A <c>GZipStream</c>
-        /// with<c>CompressionMode.Decompress</c> works only through <c>Read()</c>.</para>
+        /// <para>When mode is <c>CompressionMode.Compress</c>, the <c>GZipStream</c> will use the default compression
+        /// level.</para> <para>As noted in the class documentation, the <c>CompressionMode</c> (Compress or Decompress)
+        /// also establishes the "direction" of the stream.  A<c>GZipStream</c> with<c>CompressionMode.Compress</c>
+        /// works only through<c>Write()</c>.  A <c>GZipStream</c> with<c>CompressionMode.Decompress</c> works only
+        /// through <c>Read()</c>.</para>
         /// </remarks>
         ///
         /// <example>
-        /// This example shows how to use a GZipStream to compress data. <code> using (System.IO.Stream input =
+        /// This example shows how to use a GZipStream to compress data. <code>using (System.IO.Stream input =
         /// System.IO.File.OpenRead(fileToCompress)) { using (var raw = System.IO.File.Create(outputFile)) { using
         /// (Stream compressor = new GZipStream(raw, CompressionMode.Compress)) { byte[] buffer = new
         /// byte[WORKING_BUFFER_SIZE]; int n; while ((n= input.Read(buffer, 0, buffer.Length)) != 0) {
-        /// compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB"> Dim outputFile As String = (fileToCompress
+        /// compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB">Dim outputFile As String = (fileToCompress
         /// &amp; ".compressed") Using input As Stream = File.OpenRead(fileToCompress) Using raw As FileStream =
         /// File.Create(outputFile) Using compressor As Stream = New GZipStream(raw, CompressionMode.Compress) Dim
         /// buffer As Byte() = New Byte(4096) {} Dim n As Integer = -1 Do While (n &lt;&gt; 0) If (n &gt; 0) Then
@@ -208,13 +209,13 @@ namespace MonoGame.Utilities.Deflate
         /// </example>
         ///
         /// <example>
-        /// This example shows how to use a GZipStream to uncompress a file. <code> private void GunZipFile(string
+        /// This example shows how to use a GZipStream to uncompress a file. <code>private void GunZipFile(string
         /// filename) { if (!filename.EndsWith(".gz)) throw new ArgumentException("filename"); var DecompressedFile =
         /// filename.Substring(0,filename.Length-3); byte[] working = new byte[WORKING_BUFFER_SIZE]; int n= 1; using
         /// (System.IO.Stream input = System.IO.File.OpenRead(filename)) { using (Stream decompressor= new
         /// MonoGame.Utilities.Deflate.GZipStream(input, CompressionMode.Decompress, true)) { using (var output =
         /// System.IO.File.Create(DecompressedFile)) { while (n !=0) { n= decompressor.Read(working, 0, working.Length);
-        /// if (n > 0) { output.Write(working, 0, n); } } } } } }</code> <code lang="VB"> Private Sub GunZipFile(ByVal
+        /// if (n > 0) { output.Write(working, 0, n); } } } } } }</code> <code lang="VB">Private Sub GunZipFile(ByVal
         /// filename as String) If Not (filename.EndsWith(".gz)) Then Throw New ArgumentException("filename") End If Dim
         /// DecompressedFile as String = filename.Substring(0,filename.Length-3) Dim working(WORKING_BUFFER_SIZE) as
         /// Byte Dim n As Integer = 1 Using input As Stream = File.OpenRead(filename) Using decompressor As Stream = new
@@ -232,18 +233,18 @@ namespace MonoGame.Utilities.Deflate
         /// <c>CompressionLevel</c>.
         /// </summary>
         /// <remarks>
-        /// <para> The <c>CompressionMode</c> (Compress or Decompress) also establishes the "direction" of the stream. 
-        /// A <c>GZipStream</c> with<c>CompressionMode.Compress</c> works only through <c>Write()</c>. 
-        /// A<c>GZipStream</c> with <c>CompressionMode.Decompress</c> works only through <c>Read()</c>.</para>
+        /// <para>The <c>CompressionMode</c> (Compress or Decompress) also establishes the "direction" of the stream.  A
+        /// <c>GZipStream</c> with<c>CompressionMode.Compress</c> works only through <c>Write()</c>.  A<c>GZipStream</c>
+        /// with <c>CompressionMode.Decompress</c> works only through <c>Read()</c>.</para>
         /// </remarks>
         ///
         /// <example>
-        /// This example shows how to use a <c>GZipStream</c> to compress a file into a .gz file. <code> using
+        /// This example shows how to use a <c>GZipStream</c> to compress a file into a .gz file. <code>using
         /// (System.IO.Stream input = System.IO.File.OpenRead(fileToCompress)) { using (var raw =
         /// System.IO.File.Create(fileToCompress + ".gz")) { using (Stream compressor = new GZipStream(raw,
         /// CompressionMode.Compress, CompressionLevel.BestCompression)) { byte[] buffer = new
         /// byte[WORKING_BUFFER_SIZE]; int n; while ((n= input.Read(buffer, 0, buffer.Length)) != 0) {
-        /// compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB"> Using input As Stream =
+        /// compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB">Using input As Stream =
         /// File.OpenRead(fileToCompress) Using raw As FileStream = File.Create(fileToCompress &amp; ".gz") Using
         /// compressor As Stream = New GZipStream(raw, CompressionMode.Compress, CompressionLevel.BestCompression) Dim
         /// buffer As Byte() = New Byte(4096) {} Dim n As Integer = -1 Do While (n &lt;&gt; 0) If (n &gt; 0) Then
@@ -265,16 +266,16 @@ namespace MonoGame.Utilities.Deflate
         /// </summary>
         ///
         /// <remarks>
-        /// <para> This constructor allows the application to request that the captive stream remain open after the
+        /// <para>This constructor allows the application to request that the captive stream remain open after the
         /// deflation or inflation occurs.  By default, after<c>Close()</c> is called on the stream, the captive stream
         /// is also closed. In some cases this is not desired, for example if the stream is a memory stream that will be
         /// re-read after compressed data has been written to it.  Specify true for the <paramref name="leaveOpen"/>
-        /// parameter to leave the stream open.</para> <para> The <see cref="CompressionMode"/> (Compress or Decompress)
+        /// parameter to leave the stream open.</para> <para>The <see cref="CompressionMode"/> (Compress or Decompress)
         /// also establishes the "direction" of the stream.  A <c>GZipStream</c> with<c>CompressionMode.Compress</c>
         /// works only through <c>Write()</c>.  A <c>GZipStream</c> with <c>CompressionMode.Decompress</c> works only
-        /// through <c>Read()</c>.</para> <para> The <c>GZipStream</c> will use the default compression level. If you
+        /// through <c>Read()</c>.</para> <para>The <c>GZipStream</c> will use the default compression level. If you
         /// want to specify the compression level, see <see cref="GZipStream(Stream, CompressionMode, CompressionLevel,
-        /// bool)"/>.</para> <para> See the other overloads of this constructor for example code.</para>
+        /// bool)"/>.</para> <para>See the other overloads of this constructor for example code.</para>
         /// </remarks>
         ///
         /// <param name="stream">
@@ -302,22 +303,22 @@ namespace MonoGame.Utilities.Deflate
         /// </summary>
         ///
         /// <remarks>
-        /// <para> This constructor allows the application to request that the captive stream remain open after the
+        /// <para>This constructor allows the application to request that the captive stream remain open after the
         /// deflation or inflation occurs.  By default, after<c>Close()</c> is called on the stream, the captive stream
         /// is also closed. In some cases this is not desired, for example if the stream is a memory stream that will be
         /// re-read after compressed data has been written to it.  Specify true for the <paramref name="leaveOpen"/>
-        /// parameter to leave the stream open.</para> <para> As noted in the class documentation, the
-        /// <c>CompressionMode</c> (Compress or Decompress) also establishes the "direction" of the stream. 
-        /// A<c>GZipStream</c> with <c>CompressionMode.Compress</c> works only through<c>Write()</c>.  A
-        /// <c>GZipStream</c> with <c>CompressionMode.Decompress</c> works only through <c>Read()</c>.</para>
+        /// parameter to leave the stream open.</para> <para>As noted in the class documentation,
+        /// the<c>CompressionMode</c> (Compress or Decompress) also establishes the "direction" of the stream. 
+        /// A<c>GZipStream</c> with <c>CompressionMode.Compress</c> works only through<c>Write()</c>. 
+        /// A<c>GZipStream</c> with <c>CompressionMode.Decompress</c> works only through <c>Read()</c>.</para>
         /// </remarks>
         ///
         /// <example>
-        /// This example shows how to use a <c>GZipStream</c> to compress data. <code> using (System.IO.Stream input =
+        /// This example shows how to use a <c>GZipStream</c> to compress data. <code>using (System.IO.Stream input =
         /// System.IO.File.OpenRead(fileToCompress)) { using (var raw = System.IO.File.Create(outputFile)) { using
         /// (Stream compressor = new GZipStream(raw, CompressionMode.Compress, CompressionLevel.BestCompression, true))
         /// { byte[] buffer = new byte[WORKING_BUFFER_SIZE]; int n; while ((n= input.Read(buffer, 0, buffer.Length)) !=
-        /// 0) { compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB"> Dim outputFile As String =
+        /// 0) { compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB">Dim outputFile As String =
         /// (fileToCompress &amp; ".compressed") Using input As Stream = File.OpenRead(fileToCompress) Using raw As
         /// FileStream = File.Create(outputFile) Using compressor As Stream = New GZipStream(raw,
         /// CompressionMode.Compress, CompressionLevel.BestCompression, True) Dim buffer As Byte() = New Byte(4096) {}
@@ -336,7 +337,7 @@ namespace MonoGame.Utilities.Deflate
         /// <summary>
 /// This property sets the flush behavior on the stream.
 /// </summary>
-        virtual public FlushType FlushMode
+        public virtual FlushType FlushMode
         {
             get { return (this._baseStream._flushMode); }
             set
@@ -352,10 +353,10 @@ namespace MonoGame.Utilities.Deflate
         /// </summary>
         ///
         /// <remarks>
-        /// <para> The working buffer is used for all stream operations.  The default size is 1024 bytes.  The minimum
+        /// <para>The working buffer is used for all stream operations.  The default size is 1024 bytes.  The minimum
         /// size is 128 bytes. You may get better performance with a larger buffer.  Then again, you might not.  You
-        /// would have to test it.</para> <para> Set this before the first call to <c>Read()</c> or <c>Write()</c> on
-        /// the stream. If you try to set it afterwards, it will throw.</para>
+        /// would have to test it.</para> <para>Set this before the first call to <c>Read()</c> or <c>Write()</c> on the
+        /// stream. If you try to set it afterwards, it will throw.</para>
         /// </remarks>
         public int BufferSize
         {
@@ -376,12 +377,12 @@ namespace MonoGame.Utilities.Deflate
         /// <summary>
         /// Returns the total number of bytes input so far.
         /// </summary>
-        virtual public long TotalIn { get { return this._baseStream._z.TotalBytesIn; } }
+        public virtual long TotalIn { get { return this._baseStream._z.TotalBytesIn; } }
 
         /// <summary>
         /// Returns the total number of bytes output so far.
         /// </summary>
-        virtual public long TotalOut { get { return this._baseStream._z.TotalBytesOut; } }
+        public virtual long TotalOut { get { return this._baseStream._z.TotalBytesOut; } }
 
         #endregion
 
@@ -391,8 +392,8 @@ namespace MonoGame.Utilities.Deflate
 /// Dispose the stream.
 /// </summary>
         /// <remarks>
-/// <para> This may or may not result in a <c>Close()</c> call on the captive stream.  See the constructors that
-/// have a <c>leaveOpen</c> parameter for more information.</para> <para> This method may be invoked in two
+/// <para>This may or may not result in a <c>Close()</c> call on the captive stream.  See the constructors that
+/// have a <c>leaveOpen</c> parameter for more information.</para> <para>This method may be invoked in two
 /// distinct scenarios.  If disposing == true, the method has been called directly or indirectly by a user's
 /// code, for example via the public Dispose() method. In this case, both managed and unmanaged resources can be
 /// referenced and disposed.  If disposing == false, the method has been called by the runtime from inside the
@@ -491,9 +492,9 @@ namespace MonoGame.Utilities.Deflate
         {
             get
             {
-                if(this._baseStream._streamMode == MonoGame.Utilities.Deflate.ZlibBaseStream.StreamMode.Writer)
+                if(this._baseStream._streamMode == ZlibBaseStream.StreamMode.Writer)
                     return this._baseStream._z.TotalBytesOut + _headerByteCount;
-                if(this._baseStream._streamMode == MonoGame.Utilities.Deflate.ZlibBaseStream.StreamMode.Reader)
+                if(this._baseStream._streamMode == ZlibBaseStream.StreamMode.Reader)
                     return this._baseStream._z.TotalBytesIn + this._baseStream._gzipHeaderByteCount;
                 return 0;
             }
@@ -510,7 +511,7 @@ namespace MonoGame.Utilities.Deflate
         /// </remarks>
         ///
         /// <example>
-        /// <code> byte[] working = new byte[WORKING_BUFFER_SIZE]; using (System.IO.Stream input =
+        /// <code>byte[] working = new byte[WORKING_BUFFER_SIZE]; using (System.IO.Stream input =
         /// System.IO.File.OpenRead(_CompressedFile)) { using (Stream decompressor= new
         /// MonoGame.Utilities.Deflate.GZipStream(input, CompressionMode.Decompress, true)) { using (var output =
         /// System.IO.File.Create(_DecompressedFile)) { int n; while ((n= decompressor.Read(working, 0, working.Length))
@@ -558,11 +559,11 @@ namespace MonoGame.Utilities.Deflate
         /// </summary>
         ///
         /// <remarks>
-        /// <para> If you wish to use the <c>GZipStream</c> to compress data while writing, you can create a
-        /// <c>GZipStream</c> with <c>CompressionMode.Compress</c>, and a writable output stream.  Then call
-        /// <c>Write()</c> on that <c>GZipStream</c>, providing uncompressed data as input.  The data sent to the output
-        /// stream will be the compressed form of the data written.</para> <para> A <c>GZipStream</c> can be used for
-        /// <c>Read()</c> or <c>Write()</c>, but not both. Writing implies compression.  Reading implies
+        /// <para>If you wish to use the <c>GZipStream</c> to compress data while writing, you can create
+        /// a<c>GZipStream</c> with <c>CompressionMode.Compress</c>, and a writable output stream.  Then
+        /// call<c>Write()</c> on that <c>GZipStream</c>, providing uncompressed data as input.  The data sent to the
+        /// output stream will be the compressed form of the data written.</para> <para>A <c>GZipStream</c> can be used
+        /// for<c>Read()</c> or <c>Write()</c>, but not both. Writing implies compression.  Reading implies
         /// decompression.</para>
         /// </remarks>
         /// <param name="buffer">The buffer holding data to write to the stream.</param>
@@ -572,7 +573,7 @@ namespace MonoGame.Utilities.Deflate
         {
             if(_disposed)
                 throw new ObjectDisposedException(nameof(GZipStream));
-            if(_baseStream._streamMode == MonoGame.Utilities.Deflate.ZlibBaseStream.StreamMode.Undefined)
+            if(_baseStream._streamMode == ZlibBaseStream.StreamMode.Undefined)
             {
                 //Console.WriteLine("GZipStream: First write");
                 if(_baseStream._wantCompress)
@@ -590,12 +591,12 @@ namespace MonoGame.Utilities.Deflate
         #endregion
 
 
-        internal static readonly System.DateTime _unixEpoch = new System.DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        internal static readonly DateTime _unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 #if SILVERLIGHT || NETCF
         internal static readonly System.Text.Encoding iso8859dash1 = new Ionic.Encoding.Iso8859Dash1Encoding();
 #else
 
-        internal static readonly System.Text.Encoding iso8859dash1 = System.Text.Encoding.GetEncoding("iso-8859-1");
+        internal static readonly Encoding iso8859dash1 = Encoding.GetEncoding("iso-8859-1");
 #endif
 
 
@@ -628,7 +629,7 @@ namespace MonoGame.Utilities.Deflate
             // mtime
             if(!LastModified.HasValue)
                 LastModified = DateTime.Now;
-            System.TimeSpan delta = LastModified.Value - _unixEpoch;
+            TimeSpan delta = LastModified.Value - _unixEpoch;
             Int32 timet = (Int32)delta.TotalSeconds;
             Array.Copy(BitConverter.GetBytes(timet), 0, header, i, 4);
             i += 4;
@@ -684,7 +685,7 @@ namespace MonoGame.Utilities.Deflate
         {
             using(var ms = new MemoryStream())
             {
-                System.IO.Stream compressor =
+                Stream compressor =
                     new GZipStream(ms, CompressionMode.Compress, CompressionLevel.BestCompression);
                 ZlibBaseStream.CompressString(s, compressor);
                 return ms.ToArray();
@@ -712,7 +713,7 @@ namespace MonoGame.Utilities.Deflate
         {
             using(var ms = new MemoryStream())
             {
-                System.IO.Stream compressor =
+                Stream compressor =
                     new GZipStream(ms, CompressionMode.Compress, CompressionLevel.BestCompression);
 
                 ZlibBaseStream.CompressBuffer(b, compressor);
@@ -757,9 +758,9 @@ namespace MonoGame.Utilities.Deflate
         /// <returns>The data in uncompressed form</returns>
         public static byte[] UncompressBuffer(byte[] compressed)
         {
-            using(var input = new System.IO.MemoryStream(compressed))
+            using(var input = new MemoryStream(compressed))
             {
-                System.IO.Stream decompressor =
+                Stream decompressor =
                     new GZipStream(input, CompressionMode.Decompress);
 
                 return ZlibBaseStream.UncompressBuffer(compressed, decompressor);

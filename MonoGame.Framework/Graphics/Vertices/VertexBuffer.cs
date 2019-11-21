@@ -62,7 +62,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// <summary>
         /// The GraphicsDevice is resetting, so GPU resources must be recreated.
         /// </summary>
-        internal protected override void GraphicsDeviceResetting() { PlatformGraphicsDeviceResetting(); }
+        protected internal override void GraphicsDeviceResetting() { PlatformGraphicsDeviceResetting(); }
 
         /// <summary>
         /// Get the vertex data froom this VertexBuffer.
@@ -80,8 +80,8 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </remarks>
         ///
         /// <remarks>
-        /// <p>Using this operation it is easy to get certain vertex elements from a VertexBuffer.</p> <p> For example
-        /// to get the texture coordinates from a VertexBuffer of <see cref="VertexPositionTexture"/> you can call 
+        /// <p>Using this operation it is easy to get certain vertex elements from a VertexBuffer.</p> <p>For example to
+        /// get the texture coordinates from a VertexBuffer of <see cref="VertexPositionTexture"/> you can call 
         /// GetData(4 * 3, data, elementCount, 20). 'data'should be an array of <see cref="Vector2"/> in this example.
         /// The offsetInBytes is the number of bytes taken up by the <see cref="VertexPositionTexture.Position"/> of the
         /// vertex. For vertexStride we pass the size of a <see cref="VertexPositionTexture"/>.</p>
@@ -150,7 +150,7 @@ namespace Microsoft.Xna.Framework.Graphics
         /// </param>
         /// <remarks>
         /// If <c>T</c> is <c>VertexPositionTexture</c>, but you want to set only the position component of the vertex
-        /// data, you would call this method as follows: <code> Vector3[] positions = new Vector3[numVertices];
+        /// data, you would call this method as follows: <code>Vector3[] positions = new Vector3[numVertices];
         /// vertexBuffer.SetData(0, positions, 0, numVertices, vertexBuffer.VertexDeclaration.VertexStride);</code> 
         /// Continuing from the previous example, if you want to set only the texture coordinate component of the vertex
         /// data, you would call this method as follows (note the use of <paramref name="offsetInBytes"/>: <code>

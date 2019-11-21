@@ -30,7 +30,7 @@ namespace MonoGame.OpenGL
             // GL entry points must be loaded after the GL context creation, otherwise some Windows drivers will return only GL 1.3 compatible functions
             try
             {
-                OpenGL.GL.LoadEntryPoints();
+                GL.LoadEntryPoints();
             } catch(EntryPointNotFoundException)
             {
                 throw new PlatformNotSupportedException("MonoGame requires OpenGL 3.0 compatible drivers, or either ARB_framebuffer_object or EXT_framebuffer_object extensions. " +

@@ -2,6 +2,7 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Utilities;
 using System;
 using System.Collections;
@@ -80,12 +81,12 @@ namespace Microsoft.Xna.Framework.Content
                 var hBasicEffectReader = new BasicEffectReader();
                 var hVertexBufferReader = new VertexBufferReader();
                 var hAlphaTestEffectReader = new AlphaTestEffectReader();
-                var hEnumSpriteEffectsReader = new EnumReader<Graphics.SpriteEffects>();
+                var hEnumSpriteEffectsReader = new EnumReader<SpriteEffects>();
                 var hArrayFloatReader = new ArrayReader<float>();
                 var hArrayVector2Reader = new ArrayReader<Vector2>();
                 var hListVector2Reader = new ListReader<Vector2>();
                 var hArrayMatrixReader = new ArrayReader<Matrix>();
-                var hEnumBlendReader = new EnumReader<Graphics.Blend>();
+                var hEnumBlendReader = new EnumReader<Blend>();
                 var hNullableRectReader = new NullableReader<Rectangle>();
                 var hEffectMaterialReader = new EffectMaterialReader();
                 var hExternalReferenceReader = new ExternalReferenceReader();

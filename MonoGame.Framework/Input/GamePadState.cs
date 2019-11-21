@@ -127,13 +127,13 @@ namespace Microsoft.Xna.Framework.Input
             result |= ThumbSticks._virtualButtons;
 
             if(DPad.Down == ButtonState.Pressed)
-                result |= Microsoft.Xna.Framework.Input.Buttons.DPadDown;
+                result |= Input.Buttons.DPadDown;
             if(DPad.Up == ButtonState.Pressed)
-                result |= Microsoft.Xna.Framework.Input.Buttons.DPadUp;
+                result |= Input.Buttons.DPadUp;
             if(DPad.Left == ButtonState.Pressed)
-                result |= Microsoft.Xna.Framework.Input.Buttons.DPadLeft;
+                result |= Input.Buttons.DPadLeft;
             if(DPad.Right == ButtonState.Pressed)
-                result |= Microsoft.Xna.Framework.Input.Buttons.DPadRight;
+                result |= Input.Buttons.DPadRight;
 
             return result;
         }

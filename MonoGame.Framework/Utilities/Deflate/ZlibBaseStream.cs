@@ -25,7 +25,9 @@
 // ------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace MonoGame.Utilities.Deflate
 {
@@ -36,7 +38,7 @@ namespace MonoGame.Utilities.Deflate
         GZIP = 1952
     }
 
-    internal class ZlibBaseStream : System.IO.Stream
+    internal class ZlibBaseStream : Stream
     {
         protected internal ZlibCodec _z = null; // deferred init... new ZlibCodec();
 
@@ -50,7 +52,7 @@ namespace MonoGame.Utilities.Deflate
         protected internal int _bufferSize = ZlibConstants.WorkingBufferSizeDefault;
         protected internal byte[] _buf1 = new byte[1];
 
-        protected internal System.IO.Stream _stream;
+        protected internal Stream _stream;
         protected internal CompressionStrategy Strategy = CompressionStrategy.Default;
 
         // workitem 7159
@@ -70,7 +72,7 @@ namespace MonoGame.Utilities.Deflate
             }
         }
 
-        public ZlibBaseStream(System.IO.Stream stream,
+        public ZlibBaseStream(Stream stream,
                               CompressionMode compressionMode,
                               CompressionLevel level,
                               ZlibStreamFlavor flavor,
@@ -126,7 +128,7 @@ namespace MonoGame.Utilities.Deflate
         }
 
 
-        public override void Write(System.Byte[] buffer, int offset, int count)
+        public override void Write(byte[] buffer, int offset, int count)
         {
             // workitem 7159
             // calculate the CRC on the unccompressed data  (before writing)
@@ -305,13 +307,13 @@ namespace MonoGame.Utilities.Deflate
 
         public override void Flush() { _stream.Flush(); }
 
-        public override System.Int64 Seek(System.Int64 offset, System.IO.SeekOrigin origin)
+        public override long Seek(long offset, SeekOrigin origin)
         {
             throw new NotImplementedException();
             //_outStream.Seek(offset, origin);
         }
 
-        public override void SetLength(System.Int64 value) { _stream.SetLength(value); }
+        public override void SetLength(long value) { _stream.SetLength(value); }
 
 
 #if NOT
@@ -331,7 +333,7 @@ namespace MonoGame.Utilities.Deflate
 
         private string ReadZeroTerminatedString()
         {
-            var list = new System.Collections.Generic.List<byte>();
+            var list = new List<byte>();
             bool done = false;
             do
             {
@@ -396,7 +398,7 @@ namespace MonoGame.Utilities.Deflate
         }
 
 
-        public override System.Int32 Read(System.Byte[] buffer, System.Int32 offset, System.Int32 count)
+        public override int Read(byte[] buffer, int offset, int count)
         {
             // According to MS documentation, any implementation of the IO.Stream.Read function must:
             // (a) throw an exception if offset & count reference an invalid part of the buffer,
@@ -513,13 +515,13 @@ namespace MonoGame.Utilities.Deflate
         }
 
 
-        public override System.Boolean CanRead { get { return this._stream.CanRead; } }
+        public override bool CanRead { get { return this._stream.CanRead; } }
 
-        public override System.Boolean CanSeek { get { return this._stream.CanSeek; } }
+        public override bool CanSeek { get { return this._stream.CanSeek; } }
 
-        public override System.Boolean CanWrite { get { return this._stream.CanWrite; } }
+        public override bool CanWrite { get { return this._stream.CanWrite; } }
 
-        public override System.Int64 Length { get { return _stream.Length; } }
+        public override long Length { get { return _stream.Length; } }
 
         public override long Position
         {
@@ -537,7 +539,7 @@ namespace MonoGame.Utilities.Deflate
 
         public static void CompressString(String s, Stream compressor)
         {
-            byte[] uncompressed = System.Text.Encoding.UTF8.GetBytes(s);
+            byte[] uncompressed = Encoding.UTF8.GetBytes(s);
             using(compressor)
             {
                 compressor.Write(uncompressed, 0, uncompressed.Length);
@@ -557,7 +559,7 @@ namespace MonoGame.Utilities.Deflate
         {
             // workitem 8460
             byte[] working = new byte[1024];
-            var encoding = System.Text.Encoding.UTF8;
+            var encoding = Encoding.UTF8;
             using(var output = new MemoryStream())
             {
                 using(decompressor)

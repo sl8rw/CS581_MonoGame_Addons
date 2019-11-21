@@ -10,8 +10,6 @@ namespace Microsoft.Xna.Framework.Graphics
 
         private ShaderStage _stage;
 
-        private ShaderStage Stage { get { return this._stage; } }
-
         private int _valid;
 
         internal ConstantBufferCollection(ShaderStage stage, int maxBuffers)

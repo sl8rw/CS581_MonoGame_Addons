@@ -2,6 +2,7 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using System;
 using System.Collections.Generic;
 
 namespace Microsoft.Xna.Framework.Input
@@ -326,7 +327,7 @@ namespace Microsoft.Xna.Framework.Input
         public void GetPressedKeys(Keys[] keys)
         {
             if(keys == null)
-                throw new System.ArgumentNullException(nameof(keys));
+                throw new ArgumentNullException(nameof(keys));
 
             uint count = CountBits(keys0) +
                 CountBits(keys1) +
@@ -338,8 +339,8 @@ namespace Microsoft.Xna.Framework.Input
                 CountBits(keys7);
             if(count > keys.Length)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(keys),
-                                                             "The supplied array cannot fit the number of pressed keys. Call GetPressedKeyCount() to get the number of pressed keys.");
+                throw new ArgumentOutOfRangeException(nameof(keys),
+                                                      "The supplied array cannot fit the number of pressed keys. Call GetPressedKeyCount() to get the number of pressed keys.");
             }
 
             int index = 0;

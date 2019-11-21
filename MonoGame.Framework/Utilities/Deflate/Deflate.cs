@@ -150,7 +150,7 @@ namespace MonoGame.Utilities.Deflate
 
         private CompressFunc DeflateFunction;
 
-        private static readonly System.String[] _ErrorMessage = new System.String[]
+        private static readonly string[] _ErrorMessage = new string[]
         {
             "need dictionary",
             "stream end",

@@ -351,9 +351,6 @@ internal static class Sdl
             public uint TimeStamp;
             public uint WindowID;
             public EventId EventID;
-            private byte padding1;
-            private byte padding2;
-            private byte padding3;
             public int Data1;
             public int Data2;
         }
@@ -675,9 +672,6 @@ internal static class Sdl
             public uint WindowID;
             public uint Which;
             public byte State;
-            private byte _padding1;
-            private byte _padding2;
-            private byte _padding3;
             public int X;
             public int Y;
             public int Xrel;
@@ -782,8 +776,6 @@ internal static class Sdl
             public uint WindowId;
             public byte State;
             public byte Repeat;
-            private byte padding2;
-            private byte padding3;
             public Keysym Keysym;
         }
 

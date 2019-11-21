@@ -26,6 +26,7 @@
 
 
 using System;
+using System.IO;
 
 namespace MonoGame.Utilities.Deflate
 {
@@ -34,12 +35,12 @@ namespace MonoGame.Utilities.Deflate
     /// </summary>
     ///
     /// <remarks>
-    /// <para> The DeflateStream is a <see href="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator</see> on a
-    /// <see cref="System.IO.Stream"/>.  It adds DEFLATE compression or decompression to any stream.</para> <para> Using
-    /// this stream, applications can compress or decompress data via stream<c>Read</c> and <c>Write</c> operations. 
-    /// Either compresssion or decompression can occur through either reading or writing. The compression format used is
+    /// <para>The DeflateStream is a <see href="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator</see> on a<see
+    /// cref="System.IO.Stream"/>.  It adds DEFLATE compression or decompression to any stream.</para> <para>Using this
+    /// stream, applications can compress or decompress data via stream<c>Read</c> and <c>Write</c> operations.  Either
+    /// compresssion or decompression can occur through either reading or writing. The compression format used is
     /// DEFLATE, which is documented in <see href="http://www.ietf.org/rfc/rfc1951.txt">IETF RFC 1951</see>, "DEFLATE
-    /// Compressed Data Format Specification version 1.3.".</para> <para> This class is similar to <see
+    /// Compressed Data Format Specification version 1.3.".</para> <para>This class is similar to <see
     /// cref="ZlibStream"/>, except that<c>ZlibStream</c> adds the <see href="http://www.ietf.org/rfc/rfc1950.txt">RFC
     /// 1950 - ZLIB</see> framing bytes to a compressed stream when compressing, or expects the RFC1950 framing bytes
     /// when decompressing. The <c>DeflateStream</c> does not.</para>
@@ -47,10 +48,10 @@ namespace MonoGame.Utilities.Deflate
     ///
     /// <seealso cref="ZlibStream"/>
     /// <seealso cref="GZipStream"/>
-    public class DeflateStream : System.IO.Stream
+    public class DeflateStream : Stream
     {
         internal ZlibBaseStream _baseStream;
-        internal System.IO.Stream _innerStream;
+        internal Stream _innerStream;
         bool _disposed;
 
         /// <summary>
@@ -64,11 +65,11 @@ namespace MonoGame.Utilities.Deflate
         ///
         /// <example>
         /// This example uses a DeflateStream to compress data from a file, and writes the compressed data to another
-        /// file. <code> using (System.IO.Stream input = System.IO.File.OpenRead(fileToCompress)) { using (var raw =
+        /// file. <code>using (System.IO.Stream input = System.IO.File.OpenRead(fileToCompress)) { using (var raw =
         /// System.IO.File.Create(fileToCompress + ".deflated")) { using (Stream compressor = new DeflateStream(raw,
         /// CompressionMode.Compress)) { byte[] buffer = new byte[WORKING_BUFFER_SIZE]; int n; while ((n=
         /// input.Read(buffer, 0, buffer.Length)) != 0) { compressor.Write(buffer, 0, n); } } } }</code> <code
-        /// lang="VB"> Using input As Stream = File.OpenRead(fileToCompress) Using raw As FileStream =
+        /// lang="VB">Using input As Stream = File.OpenRead(fileToCompress) Using raw As FileStream =
         /// File.Create(fileToCompress &amp; ".deflated") Using compressor As Stream = New DeflateStream(raw,
         /// CompressionMode.Compress) Dim buffer As Byte() = New Byte(4096) {} Dim n As Integer = -1 Do While (n
         /// &lt;&gt; 0) If (n &gt; 0) Then compressor.Write(buffer, 0, n) End If n = input.Read(buffer, 0,
@@ -76,10 +77,7 @@ namespace MonoGame.Utilities.Deflate
         /// </example>
         /// <param name="stream">The stream which will be read or written.</param>
         /// <param name="mode">Indicates whether the DeflateStream will compress or decompress.</param>
-        public DeflateStream(System.IO.Stream stream, CompressionMode mode) : this(stream,
-                                                                                   mode,
-                                                                                   CompressionLevel.Default,
-                                                                                   false)
+        public DeflateStream(Stream stream, CompressionMode mode) : this(stream, mode, CompressionLevel.Default, false)
         { }
 
         /// <summary>
@@ -87,17 +85,17 @@ namespace MonoGame.Utilities.Deflate
         /// </summary>
         ///
         /// <remarks>
-        /// <para> When mode is <c>CompressionMode.Decompress</c>, the level parameter is ignored.  The "captive" stream
+        /// <para>When mode is <c>CompressionMode.Decompress</c>, the level parameter is ignored.  The "captive" stream
         /// will be closed when the DeflateStream is closed.</para>
         /// </remarks>
         ///
         /// <example>
         /// This example uses a DeflateStream to compress data from a file, and writes   the compressed data to another
-        /// file. <code> using (System.IO.Stream input = System.IO.File.OpenRead(fileToCompress)) { using (var raw =
+        /// file. <code>using (System.IO.Stream input = System.IO.File.OpenRead(fileToCompress)) { using (var raw =
         /// System.IO.File.Create(fileToCompress + ".deflated")) { using (Stream compressor = new DeflateStream(raw,
         /// CompressionMode.Compress, CompressionLevel.BestCompression)) { byte[] buffer = new
         /// byte[WORKING_BUFFER_SIZE]; int n= -1; while (n != 0) { if (n &gt; 0) compressor.Write(buffer, 0, n); n=
-        /// input.Read(buffer, 0, buffer.Length); } } } }</code> <code lang="VB"> Using input As Stream =
+        /// input.Read(buffer, 0, buffer.Length); } } } }</code> <code lang="VB">Using input As Stream =
         /// File.OpenRead(fileToCompress) Using raw As FileStream = File.Create(fileToCompress &amp; ".deflated") Using
         /// compressor As Stream = New DeflateStream(raw, CompressionMode.Compress, CompressionLevel.BestCompression)
         /// Dim buffer As Byte() = New Byte(4096) {} Dim n As Integer = -1 Do While (n &lt;&gt; 0) If (n &gt; 0) Then
@@ -107,10 +105,10 @@ namespace MonoGame.Utilities.Deflate
         /// <param name="stream">The stream to be read or written while deflating or inflating.</param>
         /// <param name="mode">Indicates whether the <c>DeflateStream</c> will compress or decompress.</param>
         /// <param name="level">A tuning knob to trade speed for effectiveness.</param>
-        public DeflateStream(System.IO.Stream stream, CompressionMode mode, CompressionLevel level) : this(stream,
-                                                                                                           mode,
-                                                                                                           level,
-                                                                                                           false)
+        public DeflateStream(Stream stream, CompressionMode mode, CompressionLevel level) : this(stream,
+                                                                                                 mode,
+                                                                                                 level,
+                                                                                                 false)
         { }
 
         /// <summary>
@@ -119,11 +117,11 @@ namespace MonoGame.Utilities.Deflate
         /// </summary>
         ///
         /// <remarks>
-        /// <para> This constructor allows the application to request that the captive stream remain open after the
+        /// <para>This constructor allows the application to request that the captive stream remain open after the
         /// deflation or inflation occurs.  By default, after<c>Close()</c> is called on the stream, the captive stream
         /// is also closed. In some cases this is not desired, for example if the stream is a memory stream that will be
         /// re-read after compression.  Specify true for the <paramref name="leaveOpen"/> parameter to leave the stream
-        /// open.</para> <para> The <c>DeflateStream</c> will use the default compression level.</para> <para> See the
+        /// open.</para> <para>The <c>DeflateStream</c> will use the default compression level.</para> <para>See the
         /// other overloads of this constructor for example code.</para>
         /// </remarks>
         ///
@@ -139,10 +137,10 @@ namespace MonoGame.Utilities.Deflate
         /// <param name="leaveOpen">
         /// true if the application would like the stream to remain open after inflation/deflation.
         /// </param>
-        public DeflateStream(System.IO.Stream stream, CompressionMode mode, bool leaveOpen) : this(stream,
-                                                                                                   mode,
-                                                                                                   CompressionLevel.Default,
-                                                                                                   leaveOpen)
+        public DeflateStream(Stream stream, CompressionMode mode, bool leaveOpen) : this(stream,
+                                                                                         mode,
+                                                                                         CompressionLevel.Default,
+                                                                                         leaveOpen)
         { }
 
         /// <summary>
@@ -152,7 +150,7 @@ namespace MonoGame.Utilities.Deflate
         /// </summary>
         ///
         /// <remarks>
-        /// <para> When mode is <c>CompressionMode.Decompress</c>, the level parameter is ignored.</para> <para> This
+        /// <para>When mode is <c>CompressionMode.Decompress</c>, the level parameter is ignored.</para> <para>This
         /// constructor allows the application to request that the captive stream remain open after the deflation or
         /// inflation occurs.  By default, after<c>Close()</c> is called on the stream, the captive stream is also
         /// closed. In some cases this is not desired, for example if the stream is a<see
@@ -162,12 +160,12 @@ namespace MonoGame.Utilities.Deflate
         ///
         /// <example>
         /// This example shows how to use a <c>DeflateStream</c> to compress data from   a file, and store the
-        /// compressed data into another file. <code> using (var output = System.IO.File.Create(fileToCompress +
+        /// compressed data into another file. <code>using (var output = System.IO.File.Create(fileToCompress +
         /// ".deflated")) { using (System.IO.Stream input = System.IO.File.OpenRead(fileToCompress)) { using (Stream
         /// compressor = new DeflateStream(output, CompressionMode.Compress, CompressionLevel.BestCompression, true)) {
         /// byte[] buffer = new byte[WORKING_BUFFER_SIZE]; int n= -1; while (n != 0) { if (n &gt; 0)
         /// compressor.Write(buffer, 0, n); n= input.Read(buffer, 0, buffer.Length); } } } // can write additional data
-        /// to the output stream here }</code> <code lang="VB"> Using output As FileStream = File.Create(fileToCompress
+        /// to the output stream here }</code> <code lang="VB">Using output As FileStream = File.Create(fileToCompress
         /// &amp; ".deflated") Using input As Stream = File.OpenRead(fileToCompress) Using compressor As Stream = New
         /// DeflateStream(output, CompressionMode.Compress, CompressionLevel.BestCompression, True) Dim buffer As Byte()
         /// = New Byte(4096) {} Dim n As Integer = -1 Do While (n &lt;&gt; 0) If (n &gt; 0) Then
@@ -178,7 +176,7 @@ namespace MonoGame.Utilities.Deflate
         /// <param name="mode">Indicates whether the DeflateStream will compress or decompress.</param>
         /// <param name="leaveOpen">true if the application would like the stream to remain open after inflation/deflation.</param>
         /// <param name="level">A tuning knob to trade speed for effectiveness.</param>
-        public DeflateStream(System.IO.Stream stream, CompressionMode mode, CompressionLevel level, bool leaveOpen)
+        public DeflateStream(Stream stream, CompressionMode mode, CompressionLevel level, bool leaveOpen)
         {
             _innerStream = stream;
             _baseStream = new ZlibBaseStream(stream, mode, level, ZlibStreamFlavor.DEFLATE, leaveOpen);
@@ -192,7 +190,7 @@ namespace MonoGame.Utilities.Deflate
         /// <remarks>
 /// See the ZLIB documentation for the meaning of the flush behavior.
 /// </remarks>
-        virtual public FlushType FlushMode
+        public virtual FlushType FlushMode
         {
             get { return (this._baseStream._flushMode); }
             set
@@ -208,10 +206,10 @@ namespace MonoGame.Utilities.Deflate
         /// </summary>
         ///
         /// <remarks>
-        /// <para> The working buffer is used for all stream operations.  The default size is 1024 bytes.  The minimum
+        /// <para>The working buffer is used for all stream operations.  The default size is 1024 bytes.  The minimum
         /// size is 128 bytes. You may get better performance with a larger buffer.  Then again, you might not.  You
-        /// would have to test it.</para> <para> Set this before the first call to <c>Read()</c> or <c>Write()</c> on
-        /// the stream. If you try to set it afterwards, it will throw.</para>
+        /// would have to test it.</para> <para>Set this before the first call to <c>Read()</c> or <c>Write()</c> on the
+        /// stream. If you try to set it afterwards, it will throw.</para>
         /// </remarks>
         public int BufferSize
         {
@@ -250,12 +248,12 @@ namespace MonoGame.Utilities.Deflate
         /// <summary>
         /// Returns the total number of bytes input so far.
         /// </summary>
-        virtual public long TotalIn { get { return this._baseStream._z.TotalBytesIn; } }
+        public virtual long TotalIn { get { return this._baseStream._z.TotalBytesIn; } }
 
         /// <summary>
         /// Returns the total number of bytes output so far.
         /// </summary>
-        virtual public long TotalOut { get { return this._baseStream._z.TotalBytesOut; } }
+        public virtual long TotalOut { get { return this._baseStream._z.TotalBytesOut; } }
 
         #endregion
 
@@ -264,8 +262,8 @@ namespace MonoGame.Utilities.Deflate
         /// Dispose the stream.
         /// </summary>
         /// <remarks>
-        /// <para> This may or may not result in a <c>Close()</c> call on the captive stream.  See the constructors that
-        /// have a <c>leaveOpen</c> parameter for more information.</para> <para> Application code won't call this code
+        /// <para>This may or may not result in a <c>Close()</c> call on the captive stream.  See the constructors that
+        /// have a <c>leaveOpen</c> parameter for more information.</para> <para>Application code won't call this code
         /// directly.  This method may be invoked in two distinct scenarios.  If disposing == true, the method has been
         /// called directly or indirectly by a user's code, for example via the public Dispose() method. In this case,
         /// both managed and unmanaged resources can be referenced and disposed.  If disposing == false, the method has
@@ -361,9 +359,9 @@ namespace MonoGame.Utilities.Deflate
         {
             get
             {
-                if(this._baseStream._streamMode == MonoGame.Utilities.Deflate.ZlibBaseStream.StreamMode.Writer)
+                if(this._baseStream._streamMode == ZlibBaseStream.StreamMode.Writer)
                     return this._baseStream._z.TotalBytesOut;
-                if(this._baseStream._streamMode == MonoGame.Utilities.Deflate.ZlibBaseStream.StreamMode.Reader)
+                if(this._baseStream._streamMode == ZlibBaseStream.StreamMode.Reader)
                     return this._baseStream._z.TotalBytesIn;
                 return 0;
             }
@@ -374,13 +372,13 @@ namespace MonoGame.Utilities.Deflate
         /// Read data from the stream.
         /// </summary>
         /// <remarks>
-        /// <para> If you wish to use the <c>DeflateStream</c> to compress data while reading, you can create a
-        /// <c>DeflateStream</c> with<c>CompressionMode.Compress</c>, providing an uncompressed data stream. Then call
+        /// <para>If you wish to use the <c>DeflateStream</c> to compress data while reading, you can create
+        /// a<c>DeflateStream</c> with<c>CompressionMode.Compress</c>, providing an uncompressed data stream. Then call
         /// Read() on that <c>DeflateStream</c>, and the data read will be compressed as you read.  If you wish to use
         /// the <c>DeflateStream</c> to decompress data while reading, you can create a <c>DeflateStream</c>
         /// with<c>CompressionMode.Decompress</c>, providing a readable compressed data stream.  Then call Read() on
-        /// that <c>DeflateStream</c>, and the data read will be decompressed as you read.</para> <para> A
-        /// <c>DeflateStream</c> can be used for <c>Read()</c> or <c>Write()</c>, but not both.</para>
+        /// that <c>DeflateStream</c>, and the data read will be decompressed as you read.</para>
+        /// <para>A<c>DeflateStream</c> can be used for <c>Read()</c> or <c>Write()</c>, but not both.</para>
         /// </remarks>
         /// <param name="buffer">The buffer into which the read data should be placed.</param>
         /// <param name="offset">the offset within that data array to put the first byte read.</param>
@@ -400,7 +398,7 @@ namespace MonoGame.Utilities.Deflate
         /// <param name="offset">this is irrelevant, since it will always throw!</param>
         /// <param name="origin">this is irrelevant, since it will always throw!</param>
         /// <returns>irrelevant!</returns>
-        public override long Seek(long offset, System.IO.SeekOrigin origin) { throw new NotImplementedException(); }
+        public override long Seek(long offset, SeekOrigin origin) { throw new NotImplementedException(); }
 
         /// <summary>
         /// Calling this method always throws a <see cref="NotImplementedException"/>.
@@ -412,15 +410,15 @@ namespace MonoGame.Utilities.Deflate
         /// Write data to the stream.
         /// </summary>
         /// <remarks>
-        /// <para> If you wish to use the <c>DeflateStream</c> to compress data while writing, you can create a
-        /// <c>DeflateStream</c> with<c>CompressionMode.Compress</c>, and a writable output stream.  Then
+        /// <para>If you wish to use the <c>DeflateStream</c> to compress data while writing, you can create
+        /// a<c>DeflateStream</c> with<c>CompressionMode.Compress</c>, and a writable output stream.  Then
         /// call<c>Write()</c> on that <c>DeflateStream</c>, providing uncompressed data as input.  The data sent to the
         /// output stream will be the compressed form of the data written.  If you wish to use the <c>DeflateStream</c>
         /// to decompress data while writing, you can create a <c>DeflateStream</c>
         /// with<c>CompressionMode.Decompress</c>, and a writable output stream.  Then call <c>Write()</c> on that
         /// stream, providing previously compressed data. The data sent to the output stream will be the decompressed
-        /// form of the data written.</para> <para> A <c>DeflateStream</c> can be used for <c>Read()</c> or
-        /// <c>Write()</c>, but not both.</para>
+        /// form of the data written.</para> <para>A <c>DeflateStream</c> can be used for <c>Read()</c>
+        /// or<c>Write()</c>, but not both.</para>
         /// </remarks>
         ///
         /// <param name="buffer">The buffer holding data to write to the stream.</param>
@@ -455,9 +453,9 @@ namespace MonoGame.Utilities.Deflate
         /// <returns>The string in compressed form</returns>
         public static byte[] CompressString(String s)
         {
-            using(var ms = new System.IO.MemoryStream())
+            using(var ms = new MemoryStream())
             {
-                System.IO.Stream compressor =
+                Stream compressor =
                     new DeflateStream(ms, CompressionMode.Compress, CompressionLevel.BestCompression);
                 ZlibBaseStream.CompressString(s, compressor);
                 return ms.ToArray();
@@ -485,9 +483,9 @@ namespace MonoGame.Utilities.Deflate
         /// <returns>The data in compressed form</returns>
         public static byte[] CompressBuffer(byte[] b)
         {
-            using(var ms = new System.IO.MemoryStream())
+            using(var ms = new MemoryStream())
             {
-                System.IO.Stream compressor =
+                Stream compressor =
                     new DeflateStream(ms, CompressionMode.Compress, CompressionLevel.BestCompression);
 
                 ZlibBaseStream.CompressBuffer(b, compressor);
@@ -512,9 +510,9 @@ namespace MonoGame.Utilities.Deflate
         /// <returns>The uncompressed string</returns>
         public static String UncompressString(byte[] compressed)
         {
-            using(var input = new System.IO.MemoryStream(compressed))
+            using(var input = new MemoryStream(compressed))
             {
-                System.IO.Stream decompressor =
+                Stream decompressor =
                     new DeflateStream(input, CompressionMode.Decompress);
 
                 return ZlibBaseStream.UncompressString(compressed, decompressor);
@@ -538,9 +536,9 @@ namespace MonoGame.Utilities.Deflate
         /// <returns>The data in uncompressed form</returns>
         public static byte[] UncompressBuffer(byte[] compressed)
         {
-            using(var input = new System.IO.MemoryStream(compressed))
+            using(var input = new MemoryStream(compressed))
             {
-                System.IO.Stream decompressor =
+                Stream decompressor =
                     new DeflateStream(input, CompressionMode.Decompress);
 
                 return ZlibBaseStream.UncompressBuffer(compressed, decompressor);

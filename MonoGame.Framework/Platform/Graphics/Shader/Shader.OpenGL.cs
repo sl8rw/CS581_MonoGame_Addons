@@ -3,8 +3,10 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using MonoGame.OpenGL;
+using MonoGame.Utilities;
 using System;
 using System.Diagnostics;
+using System.Text;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
@@ -20,9 +22,9 @@ namespace Microsoft.Xna.Framework.Graphics
 
         private void PlatformConstruct(bool isVertexShader, byte[] shaderBytecode)
         {
-            _glslCode = System.Text.Encoding.ASCII.GetString(shaderBytecode);
+            _glslCode = Encoding.ASCII.GetString(shaderBytecode);
 
-            HashKey = MonoGame.Utilities.Hash.ComputeHash(shaderBytecode);
+            HashKey = Hash.ComputeHash(shaderBytecode);
         }
 
         internal int GetShaderHandle()

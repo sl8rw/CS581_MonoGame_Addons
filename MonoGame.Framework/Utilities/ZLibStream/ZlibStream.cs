@@ -97,16 +97,16 @@ namespace MonoGame.Utilities
     /// Represents a Zlib stream for compression or decompression.
     /// </summary>
     /// <remarks>
-    /// <para> The ZlibStream is a <see href="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator</see> on a <see
+    /// <para>The ZlibStream is a <see href="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator</see> on a <see
     /// cref="System.IO.Stream"/>.  It adds ZLIB compression or decompression to any stream.</para> <para>Using this
     /// stream, applications can compress or decompress data via stream <c>Read()</c> and <c>Write()</c> operations. 
     /// Either compression or decompression can occur through either reading or writing. The compression format used is
     /// ZLIB, which is documented in <see href="http://www.ietf.org/rfc/rfc1950.txt">IETF RFC 1950</see>, "ZLIB
     /// Compressed Data Format Specification version 3.3". This implementation of ZLIB always uses DEFLATE as the
     /// compression method.  (see <see href="http://www.ietf.org/rfc/rfc1951.txt">IETF RFC 1951</see>, "DEFLATE
-    /// Compressed Data Format Specification version 1.3.")</para> <para> The ZLIB format allows for varying compression
+    /// Compressed Data Format Specification version 1.3.")</para> <para>The ZLIB format allows for varying compression
     /// methods, window sizes, and dictionaries. This implementation always uses the DEFLATE compression method, a
-    /// preset dictionary, and 15 window bits by default.</para> <para> This class is similar to DeflateStream, except
+    /// preset dictionary, and 15 window bits by default.</para> <para>This class is similar to DeflateStream, except
     /// that it adds the RFC1950 header and trailer bytes to a compressed stream when compressing, or expects the
     /// RFC1950 header and trailer bytes when decompressing.  It is also similar to the<see cref="GZipStream"/>.</para>
     /// </remarks>
@@ -120,17 +120,17 @@ namespace MonoGame.Utilities
         /// Create a <c>ZlibStream</c> using the specified <c>CompressionMode</c>.
         /// </summary>
         /// <remarks>
-        /// <para> When mode is <c>CompressionMode.Compress</c>, the <c>ZlibStream</c> will use the default compression
+        /// <para>When mode is <c>CompressionMode.Compress</c>, the <c>ZlibStream</c> will use the default compression
         /// level. The "captive" stream will be closed when the <c>ZlibStream</c> is closed.</para>
         /// </remarks>
         ///
         /// <example>
         /// This example uses a <c>ZlibStream</c> to compress a file, and writes the compressed data to another file.
-        /// <code> using (System.IO.Stream input = System.IO.File.OpenRead(fileToCompress)) { using (var raw =
+        /// <code>using (System.IO.Stream input = System.IO.File.OpenRead(fileToCompress)) { using (var raw =
         /// System.IO.File.Create(fileToCompress + ".zlib")) { using (Stream compressor = new ZlibStream(raw,
         /// CompressionMode.Compress)) { byte[] buffer = new byte[WORKING_BUFFER_SIZE]; int n; while ((n=
         /// input.Read(buffer, 0, buffer.Length)) != 0) { compressor.Write(buffer, 0, n); } } } }</code> <code
-        /// lang="VB"> Using input As Stream = File.OpenRead(fileToCompress) Using raw As FileStream =
+        /// lang="VB">Using input As Stream = File.OpenRead(fileToCompress) Using raw As FileStream =
         /// File.Create(fileToCompress &amp; ".zlib") Using compressor As Stream = New ZlibStream(raw,
         /// CompressionMode.Compress) Dim buffer As Byte() = New Byte(4096) {} Dim n As Integer = -1 Do While (n
         /// &lt;&gt; 0) If (n &gt; 0) Then compressor.Write(buffer, 0, n) End If n = input.Read(buffer, 0,
@@ -139,11 +139,7 @@ namespace MonoGame.Utilities
         ///
         /// <param name="stream">The stream which will be read or written.</param>
         /// <param name="mode">Indicates whether the ZlibStream will compress or decompress.</param>
-        public ZlibStream(System.IO.Stream stream, CompressionMode mode) : this(stream,
-                                                                                mode,
-                                                                                CompressionLevel.Default,
-                                                                                false)
-        { }
+        public ZlibStream(Stream stream, CompressionMode mode) : this(stream, mode, CompressionLevel.Default, false) { }
 
         /// <summary>
         /// Create a <c>ZlibStream</c> using the specified <c>CompressionMode</c> and   the specified
@@ -151,17 +147,17 @@ namespace MonoGame.Utilities
         /// </summary>
         ///
         /// <remarks>
-        /// <para> When mode is <c>CompressionMode.Decompress</c>, the level parameter is ignored. The "captive" stream
+        /// <para>When mode is <c>CompressionMode.Decompress</c>, the level parameter is ignored. The "captive" stream
         /// will be closed when the <c>ZlibStream</c> is closed.</para>
         /// </remarks>
         ///
         /// <example>
         /// This example uses a <c>ZlibStream</c> to compress data from a file, and writes the   compressed data to
-        /// another file. <code> using (System.IO.Stream input = System.IO.File.OpenRead(fileToCompress)) { using (var
+        /// another file. <code>using (System.IO.Stream input = System.IO.File.OpenRead(fileToCompress)) { using (var
         /// raw = System.IO.File.Create(fileToCompress + ".zlib")) { using (Stream compressor = new ZlibStream(raw,
         /// CompressionMode.Compress, CompressionLevel.BestCompression)) { byte[] buffer = new
         /// byte[WORKING_BUFFER_SIZE]; int n; while ((n= input.Read(buffer, 0, buffer.Length)) != 0) {
-        /// compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB"> Using input As Stream =
+        /// compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB">Using input As Stream =
         /// File.OpenRead(fileToCompress) Using raw As FileStream = File.Create(fileToCompress &amp; ".zlib") Using
         /// compressor As Stream = New ZlibStream(raw, CompressionMode.Compress, CompressionLevel.BestCompression) Dim
         /// buffer As Byte() = New Byte(4096) {} Dim n As Integer = -1 Do While (n &lt;&gt; 0) If (n &gt; 0) Then
@@ -172,10 +168,10 @@ namespace MonoGame.Utilities
         /// <param name="stream">The stream to be read or written while deflating or inflating.</param>
         /// <param name="mode">Indicates whether the ZlibStream will compress or decompress.</param>
         /// <param name="level">A tuning knob to trade speed for effectiveness.</param>
-        public ZlibStream(System.IO.Stream stream, CompressionMode mode, CompressionLevel level) : this(stream,
-                                                                                                        mode,
-                                                                                                        level,
-                                                                                                        false)
+        public ZlibStream(Stream stream, CompressionMode mode, CompressionLevel level) : this(stream,
+                                                                                              mode,
+                                                                                              level,
+                                                                                              false)
         { }
 
         /// <summary>
@@ -184,12 +180,12 @@ namespace MonoGame.Utilities
         /// </summary>
         ///
         /// <remarks>
-        /// <para> When mode is <c>CompressionMode.Compress</c>, the <c>ZlibStream</c> will use the default compression
-        /// level.</para> <para> This constructor allows the application to request that the captive stream remain open
+        /// <para>When mode is <c>CompressionMode.Compress</c>, the <c>ZlibStream</c> will use the default compression
+        /// level.</para> <para>This constructor allows the application to request that the captive stream remain open
         /// after the deflation or inflation occurs.  By default, after<c>Close()</c> is called on the stream, the
         /// captive stream is also closed. In some cases this is not desired, for example if the stream is a<see
         /// cref="System.IO.MemoryStream"/> that will be re-read after compression.  Specify true for the <paramref
-        /// name="leaveOpen"/> parameter to leave the stream open.</para> <para> See the other overloads of this
+        /// name="leaveOpen"/> parameter to leave the stream open.</para> <para>See the other overloads of this
         /// constructor for example code.</para>
         /// </remarks>
         ///
@@ -201,10 +197,10 @@ namespace MonoGame.Utilities
         /// <param name="leaveOpen">
         /// true if the application would like the stream to remain open after inflation/deflation.
         /// </param>
-        public ZlibStream(System.IO.Stream stream, CompressionMode mode, bool leaveOpen) : this(stream,
-                                                                                                mode,
-                                                                                                CompressionLevel.Default,
-                                                                                                leaveOpen)
+        public ZlibStream(Stream stream, CompressionMode mode, bool leaveOpen) : this(stream,
+                                                                                      mode,
+                                                                                      CompressionLevel.Default,
+                                                                                      leaveOpen)
         { }
 
         /// <summary>
@@ -214,23 +210,23 @@ namespace MonoGame.Utilities
         /// </summary>
         ///
         /// <remarks>
-        /// <para> This constructor allows the application to request that the captive stream remain open after the
+        /// <para>This constructor allows the application to request that the captive stream remain open after the
         /// deflation or inflation occurs.  By default, after <c>Close()</c> is called on the stream, the captive stream
         /// is also closed. In some cases this is not desired, for example if the stream is a <see
         /// cref="System.IO.MemoryStream"/> that will be re-read after compression.  Specify true for the <paramref
-        /// name="leaveOpen"/> parameter to leave the stream open.</para> <para> When mode is
-        /// <c>CompressionMode.Decompress</c>, the level parameter is ignored.</para>
+        /// name="leaveOpen"/> parameter to leave the stream open.</para> <para>When mode
+        /// is<c>CompressionMode.Decompress</c>, the level parameter is ignored.</para>
         /// </remarks>
         ///
         /// <example>
         /// This example shows how to use a ZlibStream to compress the data from a file, and store the result into
-        /// another file. The filestream remains open to allow additional data to be written to it. <code> using (var
+        /// another file. The filestream remains open to allow additional data to be written to it. <code>using (var
         /// output = System.IO.File.Create(fileToCompress + ".zlib")) { using (System.IO.Stream input =
         /// System.IO.File.OpenRead(fileToCompress)) { using (Stream compressor = new ZlibStream(output,
         /// CompressionMode.Compress, CompressionLevel.BestCompression, true)) { byte[] buffer = new
         /// byte[WORKING_BUFFER_SIZE]; int n; while ((n= input.Read(buffer, 0, buffer.Length)) != 0) {
         /// compressor.Write(buffer, 0, n); } } } // can write additional data to the output stream here }</code> <code
-        /// lang="VB"> Using output As FileStream = File.Create(fileToCompress &amp; ".zlib") Using input As Stream =
+        /// lang="VB">Using output As FileStream = File.Create(fileToCompress &amp; ".zlib") Using input As Stream =
         /// File.OpenRead(fileToCompress) Using compressor As Stream = New ZlibStream(output, CompressionMode.Compress,
         /// CompressionLevel.BestCompression, True) Dim buffer As Byte() = New Byte(4096) {} Dim n As Integer = -1 Do
         /// While (n &lt;&gt; 0) If (n &gt; 0) Then compressor.Write(buffer, 0, n) End If n = input.Read(buffer, 0,
@@ -250,7 +246,7 @@ namespace MonoGame.Utilities
         /// A tuning knob to trade speed for effectiveness. This parameter is effective only when mode is
         /// <c>CompressionMode.Compress</c>.
         /// </param>
-        public ZlibStream(System.IO.Stream stream, CompressionMode mode, CompressionLevel level, bool leaveOpen)
+        public ZlibStream(Stream stream, CompressionMode mode, CompressionLevel level, bool leaveOpen)
         { _baseStream = new ZlibBaseStream(stream, mode, level, ZlibStreamFlavor.ZLIB, leaveOpen); }
 
         #region Zlib properties
@@ -259,7 +255,7 @@ namespace MonoGame.Utilities
 /// This property sets the flush behavior on the stream. Sorry, though, not sure exactly how to describe all the
 /// various settings.
 /// </summary>
-        virtual public FlushType FlushMode
+        public virtual FlushType FlushMode
         {
             get { return (this._baseStream._flushMode); }
             set
@@ -275,10 +271,10 @@ namespace MonoGame.Utilities
         /// </summary>
         ///
         /// <remarks>
-        /// <para> The working buffer is used for all stream operations.  The default size is 1024 bytes. The minimum
+        /// <para>The working buffer is used for all stream operations.  The default size is 1024 bytes. The minimum
         /// size is 128 bytes. You may get better performance with a larger buffer.  Then again, you might not.  You
-        /// would have to test it.</para> <para> Set this before the first call to <c>Read()</c> or <c>Write()</c> on
-        /// the stream. If you try to set it afterwards, it will throw.</para>
+        /// would have to test it.</para> <para>Set this before the first call to <c>Read()</c> or <c>Write()</c> on the
+        /// stream. If you try to set it afterwards, it will throw.</para>
         /// </remarks>
         public int BufferSize
         {
@@ -298,12 +294,12 @@ namespace MonoGame.Utilities
         /// <summary>
         /// Returns the total number of bytes input so far.
         /// </summary>
-        virtual public long TotalIn { get { return this._baseStream._z.TotalBytesIn; } }
+        public virtual long TotalIn { get { return this._baseStream._z.TotalBytesIn; } }
 
         /// <summary>
         /// Returns the total number of bytes output so far.
         /// </summary>
-        virtual public long TotalOut { get { return this._baseStream._z.TotalBytesOut; } }
+        public virtual long TotalOut { get { return this._baseStream._z.TotalBytesOut; } }
 
         #endregion
 
@@ -313,8 +309,8 @@ namespace MonoGame.Utilities
 /// Dispose the stream.
 /// </summary>
         /// <remarks>
-/// <para> This may or may not result in a <c>Close()</c> call on the captive stream.  See the constructors that
-/// have a <c>leaveOpen</c> parameter for more information.</para> <para> This method may be invoked in two
+/// <para>This may or may not result in a <c>Close()</c> call on the captive stream.  See the constructors that
+/// have a <c>leaveOpen</c> parameter for more information.</para> <para>This method may be invoked in two
 /// distinct scenarios.  If disposing == true, the method has been called directly or indirectly by a user's
 /// code, for example via the public Dispose() method. In this case, both managed and unmanaged resources can be
 /// referenced and disposed.  If disposing == false, the method has been called by the runtime from inside the
@@ -424,12 +420,12 @@ namespace MonoGame.Utilities
         /// </summary>
         ///
         /// <remarks>
-        /// <para> If you wish to use the <c>ZlibStream</c> to compress data while reading, you can create a
-        /// <c>ZlibStream</c> with <c>CompressionMode.Compress</c>, providing an uncompressed data stream.  Then call
-        /// <c>Read()</c> on that<c>ZlibStream</c>, and the data read will be compressed.  If you wish to use the
-        /// <c>ZlibStream</c> to decompress data while reading, you can create a <c>ZlibStream</c> with
-        /// <c>CompressionMode.Decompress</c>, providing a readable compressed data stream.  Then call <c>Read()</c> on
-        /// that<c>ZlibStream</c>, and the data will be decompressed as it is read.</para> <para> A <c>ZlibStream</c>
+        /// <para>If you wish to use the <c>ZlibStream</c> to compress data while reading, you can create
+        /// a<c>ZlibStream</c> with <c>CompressionMode.Compress</c>, providing an uncompressed data stream.  Then
+        /// call<c>Read()</c> on that<c>ZlibStream</c>, and the data read will be compressed.  If you wish to use
+        /// the<c>ZlibStream</c> to decompress data while reading, you can create a <c>ZlibStream</c>
+        /// with<c>CompressionMode.Decompress</c>, providing a readable compressed data stream.  Then call <c>Read()</c>
+        /// on that<c>ZlibStream</c>, and the data will be decompressed as it is read.</para> <para>A <c>ZlibStream</c>
         /// can be used for <c>Read()</c> or <c>Write()</c>, but not both.</para>
         /// </remarks>
         ///
@@ -462,7 +458,7 @@ namespace MonoGame.Utilities
         /// </param>
         ///
         /// <returns>nothing. This method always throws.</returns>
-        public override long Seek(long offset, System.IO.SeekOrigin origin) { throw new NotSupportedException(); }
+        public override long Seek(long offset, SeekOrigin origin) { throw new NotSupportedException(); }
 
         /// <summary>
         /// Calling this method always throws a <see cref="NotSupportedException"/>.
@@ -477,14 +473,14 @@ namespace MonoGame.Utilities
         /// </summary>
         ///
         /// <remarks>
-        /// <para> If you wish to use the <c>ZlibStream</c> to compress data while writing, you can create a
-        /// <c>ZlibStream</c> with <c>CompressionMode.Compress</c>, and a writable output stream.  Then call
-        /// <c>Write()</c> on that<c>ZlibStream</c>, providing uncompressed data as input.  The data sent to the output
-        /// stream will be the compressed form of the data written.  If you wish to use the <c>ZlibStream</c> to
+        /// <para>If you wish to use the <c>ZlibStream</c> to compress data while writing, you can create
+        /// a<c>ZlibStream</c> with <c>CompressionMode.Compress</c>, and a writable output stream.  Then
+        /// call<c>Write()</c> on that<c>ZlibStream</c>, providing uncompressed data as input.  The data sent to the
+        /// output stream will be the compressed form of the data written.  If you wish to use the <c>ZlibStream</c> to
         /// decompress data while writing, you can create a <c>ZlibStream</c> with <c>CompressionMode.Decompress</c>,
         /// and a writable output stream.  Then call <c>Write()</c> on that stream, providing previously compressed
-        /// data. The data sent to the output stream will be the decompressed form of the data written.</para> <para> A
-        /// <c>ZlibStream</c> can be used for <c>Read()</c> or <c>Write()</c>, but not both.</para>
+        /// data. The data sent to the output stream will be the decompressed form of the data written.</para>
+        /// <para>A<c>ZlibStream</c> can be used for <c>Read()</c> or <c>Write()</c>, but not both.</para>
         /// </remarks>
         /// <param name="buffer">The buffer holding data to write to the stream.</param>
         /// <param name="offset">the offset within that data array to find the first byte to write.</param>
@@ -673,7 +669,7 @@ namespace MonoGame.Utilities
     /// href="http://www.ietf.org/rfc/rfc1951.txt">RFC 1951 - DEFLATE</see>.
     /// </remarks>
 
-    sealed internal class ZlibCodec
+    internal sealed class ZlibCodec
     {
         /// <summary>
         /// The buffer from which data is taken.
@@ -726,7 +722,7 @@ namespace MonoGame.Utilities
         /// <summary>
         /// used for diagnostics, when something goes wrong!
         /// </summary>
-        internal System.String Message;
+        internal string Message;
 
         internal DeflateManager dstate;
         internal InflateManager istate;
@@ -878,7 +874,7 @@ namespace MonoGame.Utilities
         /// AvailableBytesOut  before calling this method.
         /// </remarks>
         /// <example>
-        /// <code> private void InflateBuffer() { int bufferSize = 1024; byte[] buffer = new byte[bufferSize]; ZlibCodec
+        /// <code>private void InflateBuffer() { int bufferSize = 1024; byte[] buffer = new byte[bufferSize]; ZlibCodec
         /// decompressor = new ZlibCodec();  Console.WriteLine("\n============================================");
         /// Console.WriteLine("Size of Buffer to Inflate: {0} bytes.", CompressedBytes.Length); MemoryStream ms = new
         /// MemoryStream(DecompressedBytes);  int rc = decompressor.InitializeInflate();  decompressor.InputBuffer =
@@ -893,7 +889,7 @@ namespace MonoGame.Utilities
         /// ZlibConstants.Z_STREAM_END &amp;&amp; rc != ZlibConstants.Z_OK) throw new Exception("inflating: " +
         /// decompressor.Message);  if (buffer.Length - decompressor.AvailableBytesOut &gt; 0) ms.Write(buffer, 0,
         /// buffer.Length - decompressor.AvailableBytesOut); } while (decompressor.AvailableBytesIn &gt; 0 ||
-        /// decompressor.AvailableBytesOut == 0);  decompressor.EndInflate(); } </code>
+        /// decompressor.AvailableBytesOut == 0);  decompressor.EndInflate(); }</code>
         /// </example>
         /// <param name="flush">The flush to use when inflating.</param>
         /// <returns>Z_OK if everything goes well.</returns>
@@ -940,7 +936,7 @@ namespace MonoGame.Utilities
         /// The codec will use the MAX window bits and the default level of compression.
         /// </remarks>
         /// <example>
-        /// <code> int bufferSize = 40000; byte[] CompressedBytes = new byte[bufferSize]; byte[] DecompressedBytes = new
+        /// <code>int bufferSize = 40000; byte[] CompressedBytes = new byte[bufferSize]; byte[] DecompressedBytes = new
         /// byte[bufferSize];  ZlibCodec compressor = new ZlibCodec(); 
         /// compressor.InitializeDeflate(CompressionLevel.Default);  compressor.InputBuffer =
         /// System.Text.ASCIIEncoding.ASCII.GetBytes(TextToCompress); compressor.NextIn = 0; compressor.AvailableBytesIn
@@ -948,7 +944,7 @@ namespace MonoGame.Utilities
         /// compressor.AvailableBytesOut = CompressedBytes.Length;  while (compressor.TotalBytesIn !=
         /// TextToCompress.Length &amp;&amp; compressor.TotalBytesOut &lt; bufferSize) {
         /// compressor.Deflate(FlushType.None); }  while (true) { int rc= compressor.Deflate(FlushType.Finish); if (rc
-        /// == ZlibConstants.Z_STREAM_END) break; }  compressor.EndDeflate(); </code>
+        /// == ZlibConstants.Z_STREAM_END) break; }  compressor.EndDeflate();</code>
         /// </example>
         /// <returns>Z_OK if all goes well. You generally don't need to check the return code.</returns>
         internal int InitializeDeflate() { return _InternalInitializeDeflate(true); }
@@ -1039,7 +1035,7 @@ namespace MonoGame.Utilities
         /// You must have set InputBuffer and OutputBuffer before calling this method.
         /// </remarks>
         /// <example>
-        /// <code> private void DeflateBuffer(CompressionLevel level) { int bufferSize = 1024; byte[] buffer = new
+        /// <code>private void DeflateBuffer(CompressionLevel level) { int bufferSize = 1024; byte[] buffer = new
         /// byte[bufferSize]; ZlibCodec compressor = new ZlibCodec(); 
         /// Console.WriteLine("\n============================================"); Console.WriteLine("Size of Buffer to
         /// Deflate: {0} bytes.", UncompressedBytes.Length); MemoryStream ms = new MemoryStream();  int rc =
@@ -1202,7 +1198,7 @@ namespace MonoGame.Utilities
         GZIP = 1952
     }
 
-    internal class ZlibBaseStream : System.IO.Stream
+    internal class ZlibBaseStream : Stream
     {
         protected internal ZlibCodec _z = null; // deferred init... new ZlibCodec();
 
@@ -1216,7 +1212,7 @@ namespace MonoGame.Utilities
         protected internal int _bufferSize = ZlibConstants.WorkingBufferSizeDefault;
         protected internal byte[] _buf1 = new byte[1];
 
-        protected internal System.IO.Stream _stream;
+        protected internal Stream _stream;
         protected internal CompressionStrategy Strategy = CompressionStrategy.Default;
 
         // workitem 7159
@@ -1236,7 +1232,7 @@ namespace MonoGame.Utilities
             }
         }
 
-        internal ZlibBaseStream(System.IO.Stream stream,
+        internal ZlibBaseStream(Stream stream,
                                 CompressionMode compressionMode,
                                 CompressionLevel level,
                                 ZlibStreamFlavor flavor,
@@ -1291,7 +1287,7 @@ namespace MonoGame.Utilities
             }
         }
 
-        public override void Write(System.Byte[] buffer, int offset, int count)
+        public override void Write(byte[] buffer, int offset, int count)
         {
             // workitem 7159
             // calculate the CRC on the unccompressed data  (before writing)
@@ -1331,133 +1327,15 @@ namespace MonoGame.Utilities
             } while (!done);
         }
 
-
-        private void finish()
-        {
-            if(_z == null)
-                return;
-
-            if(_streamMode == StreamMode.Writer)
-            {
-                bool done = false;
-                do
-                {
-                    _z.OutputBuffer = workingBuffer;
-                    _z.NextOut = 0;
-                    _z.AvailableBytesOut = _workingBuffer.Length;
-                    int rc = (_wantCompress) ? _z.Deflate(FlushType.Finish) : _z.Inflate(FlushType.Finish);
-
-                    if(rc != ZlibConstants.Z_STREAM_END && rc != ZlibConstants.Z_OK)
-                    {
-                        string verb = $"{((_wantCompress ? "de" : "in"))}flating";
-                        if(_z.Message == null)
-                            throw new ZlibException($"{verb}: (rc = {rc})");
-                        else
-                            throw new ZlibException($"{verb}: {_z.Message}");
-                    }
-
-                    if(_workingBuffer.Length - _z.AvailableBytesOut > 0)
-                    {
-                        _stream.Write(_workingBuffer, 0, _workingBuffer.Length - _z.AvailableBytesOut);
-                    }
-
-                    done = _z.AvailableBytesIn == 0 && _z.AvailableBytesOut != 0;
-                    // If GZIP and de-compress, we're done when 8 bytes remain.
-                    if(_flavor == ZlibStreamFlavor.GZIP && !_wantCompress)
-                        done = (_z.AvailableBytesIn == 8 && _z.AvailableBytesOut != 0);
-                } while (!done);
-
-                Flush();
-
-                // workitem 7159
-                if(_flavor == ZlibStreamFlavor.GZIP)
-                {
-                    if(_wantCompress)
-                    {
-                        // Emit the GZIP trailer: CRC32 and  size mod 2^32
-                        int c1 = crc.Crc32Result;
-                        _stream.Write(BitConverter.GetBytes(c1), 0, 4);
-                        int c2 = (Int32)(crc.TotalBytesRead & 0x00000000FFFFFFFF);
-                        _stream.Write(BitConverter.GetBytes(c2), 0, 4);
-                    } else
-                    {
-                        throw new ZlibException("Writing with decompression is not supported.");
-                    }
-                }
-            }
-            // workitem 7159
- else if(_streamMode == StreamMode.Reader)
-            {
-                if(_flavor == ZlibStreamFlavor.GZIP)
-                {
-                    if(!_wantCompress)
-                    {
-                        // workitem 8501: handle edge case (decompress empty stream)
-                        if(_z.TotalBytesOut == 0L)
-                            return;
-
-                        // Read and potentially verify the GZIP trailer:
-                        // CRC32 and size mod 2^32
-                        byte[] trailer = new byte[8];
-
-                        // workitems 8679 & 12554
-                        if(_z.AvailableBytesIn < 8)
-                        {
-                            // Make sure we have read to the end of the stream
-                            Array.Copy(_z.InputBuffer, _z.NextIn, trailer, 0, _z.AvailableBytesIn);
-                            int bytesNeeded = 8 - _z.AvailableBytesIn;
-                            int bytesRead = _stream.Read(trailer, _z.AvailableBytesIn, bytesNeeded);
-                            if(bytesNeeded != bytesRead)
-                            {
-                                throw new ZlibException($"Missing or incomplete GZIP trailer. Expected 8 bytes, got {_z.AvailableBytesIn + bytesRead}.");
-                            }
-                        } else
-                        {
-                            Array.Copy(_z.InputBuffer, _z.NextIn, trailer, 0, trailer.Length);
-                        }
-
-                        Int32 crc32_expected = BitConverter.ToInt32(trailer, 0);
-                        Int32 crc32_actual = crc.Crc32Result;
-                        Int32 isize_expected = BitConverter.ToInt32(trailer, 4);
-                        Int32 isize_actual = (Int32)(_z.TotalBytesOut & 0x00000000FFFFFFFF);
-
-                        if(crc32_actual != crc32_expected)
-                            throw new ZlibException($"Bad CRC32 in GZIP trailer. (actual({crc32_actual:X8})!=expected({crc32_expected:X8}))");
-
-                        if(isize_actual != isize_expected)
-                            throw new ZlibException($"Bad size in GZIP trailer. (actual({isize_actual})!=expected({isize_expected}))");
-                    } else
-                    {
-                        throw new ZlibException("Reading with compression is not supported.");
-                    }
-                }
-            }
-        }
-
-
-        private void end()
-        {
-            if(z == null)
-                return;
-            if(_wantCompress)
-            {
-                _z.EndDeflate();
-            } else
-            {
-                _z.EndInflate();
-            }
-            _z = null;
-        }
-
         public override void Flush() { _stream.Flush(); }
 
-        public override System.Int64 Seek(System.Int64 offset, System.IO.SeekOrigin origin)
+        public override long Seek(long offset, SeekOrigin origin)
         {
             throw new NotImplementedException();
             //_outStream.Seek(offset, origin);
         }
 
-        public override void SetLength(System.Int64 value) { _stream.SetLength(value); }
+        public override void SetLength(long value) { _stream.SetLength(value); }
 
 
 #if NOT
@@ -1477,7 +1355,7 @@ namespace MonoGame.Utilities
 
         private string ReadZeroTerminatedString()
         {
-            var list = new System.Collections.Generic.List<byte>();
+            var list = new List<byte>();
             bool done = false;
             do
             {
@@ -1542,7 +1420,7 @@ namespace MonoGame.Utilities
         }
 
 
-        public override System.Int32 Read(System.Byte[] buffer, System.Int32 offset, System.Int32 count)
+        public override int Read(byte[] buffer, int offset, int count)
         {
             // According to MS documentation, any implementation of the IO.Stream.Read function must:
             // (a) throw an exception if offset & count reference an invalid part of the buffer,
@@ -1659,13 +1537,13 @@ namespace MonoGame.Utilities
         }
 
 
-        public override System.Boolean CanRead { get { return this._stream.CanRead; } }
+        public override bool CanRead { get { return this._stream.CanRead; } }
 
-        public override System.Boolean CanSeek { get { return this._stream.CanSeek; } }
+        public override bool CanSeek { get { return this._stream.CanSeek; } }
 
-        public override System.Boolean CanWrite { get { return this._stream.CanWrite; } }
+        public override bool CanWrite { get { return this._stream.CanWrite; } }
 
-        public override System.Int64 Length { get { return _stream.Length; } }
+        public override long Length { get { return _stream.Length; } }
 
         public override long Position
         {
@@ -1683,7 +1561,7 @@ namespace MonoGame.Utilities
 
         internal static void CompressString(String s, Stream compressor)
         {
-            byte[] uncompressed = System.Text.Encoding.UTF8.GetBytes(s);
+            byte[] uncompressed = Encoding.UTF8.GetBytes(s);
             using(compressor)
             {
                 compressor.Write(uncompressed, 0, uncompressed.Length);
@@ -1703,7 +1581,7 @@ namespace MonoGame.Utilities
         {
             // workitem 8460
             byte[] working = new byte[1024];
-            var encoding = System.Text.Encoding.UTF8;
+            var encoding = Encoding.UTF8;
             using(var output = new MemoryStream())
             {
                 using(decompressor)
@@ -1908,7 +1786,7 @@ namespace MonoGame.Utilities
     /// <summary>
     /// A general purpose exception class for exceptions in the Zlib library.
     /// </summary>
-    internal class ZlibException : System.Exception
+    internal class ZlibException : Exception
     {
         /// <summary>
         /// The ZlibException class captures exception information generated by the Zlib library.
@@ -1919,7 +1797,7 @@ namespace MonoGame.Utilities
         /// This ctor collects a message attached to the exception.
         /// </summary>
         /// <param name="s">the message for the exception.</param>
-        internal ZlibException(System.String s) : base(s) { }
+        internal ZlibException(string s) : base(s) { }
     }
 
 
@@ -1960,10 +1838,7 @@ namespace MonoGame.Utilities
         /// The number of characters read. The number will be less than or equal to   count depending on the data
         /// available in the source TextReader. Returns -1   if the end of the stream is reached.
         /// </returns>
-        internal static System.Int32 ReadInput(System.IO.TextReader sourceTextReader,
-                                               byte[] target,
-                                               int start,
-                                               int count)
+        internal static int ReadInput(TextReader sourceTextReader, byte[] target, int start, int count)
         {
             // Returns 0 bytes if not enough space in target
             if(target.Length == 0)
@@ -1983,12 +1858,10 @@ namespace MonoGame.Utilities
         }
 
 
-        internal static byte[] ToByteArray(System.String sourceString)
-        { return System.Text.UTF8Encoding.UTF8.GetBytes(sourceString); }
+        internal static byte[] ToByteArray(string sourceString) { return Encoding.UTF8.GetBytes(sourceString); }
 
 
-        internal static char[] ToCharArray(byte[] byteArray)
-        { return System.Text.UTF8Encoding.UTF8.GetChars(byteArray); }
+        internal static char[] ToCharArray(byte[] byteArray) { return Encoding.UTF8.GetChars(byteArray); }
     }
 
     internal static class InternalConstants
@@ -2724,10 +2597,10 @@ namespace MonoGame.Utilities
 /// Calculates the Adler32 checksum.
 /// </summary>
         /// <remarks>
-/// <para> This is used within ZLIB.  You probably don't need to use this directly.</para>
+/// <para>This is used within ZLIB.  You probably don't need to use this directly.</para>
 /// </remarks>
         /// <example>
-/// To compute an Adler32 checksum on a byte array:  <code> var adler = Adler.Adler32(0, null, 0, 0); adler =
+/// To compute an Adler32 checksum on a byte array:  <code>var adler = Adler.Adler32(0, null, 0, 0); adler =
 /// Adler.Adler32(adler, buffer, index, length);</code>
 /// </example>
         internal static uint Adler32(uint adler, byte[] buf, int index, int len)
@@ -3845,7 +3718,7 @@ namespace MonoGame.Utilities
 
                 // Create a new node father of n and m
                 tree[node * 2] = unchecked((short)(tree[n * 2] + tree[m * 2]));
-                s.depth[node] = (sbyte)(System.Math.Max((byte)s.depth[n], (byte)s.depth[m]) + 1);
+                s.depth[node] = (sbyte)(Math.Max((byte)s.depth[n], (byte)s.depth[m]) + 1);
                 tree[n * 2 + 1] = tree[m * 2 + 1] = (short)node;
 
                 // and insert the new node in the heap
@@ -3922,14 +3795,9 @@ namespace MonoGame.Utilities
         private const int MANY = 1440;
 
         private const int Z_OK = 0;
-        private const int Z_STREAM_END = 1;
-        private const int Z_NEED_DICT = 2;
-        private const int Z_ERRNO = -1;
-        private const int Z_STREAM_ERROR = -2;
         private const int Z_DATA_ERROR = -3;
         private const int Z_MEM_ERROR = -4;
         private const int Z_BUF_ERROR = -5;
-        private const int Z_VERSION_ERROR = -6;
 
         internal const int fixed_bl = 9;
         internal const int fixed_bd = 5;
@@ -6047,12 +5915,12 @@ namespace MonoGame.Utilities
         internal int end;                                 // one byte after sliding window
         internal int readAt;                              // window read pointer
         internal int writeAt;                             // window write pointer
-        internal System.Object checkfn;                   // check function
+        internal object checkfn;                   // check function
         internal uint check;                              // check on output
 
         internal InfTree inftree = new InfTree();
 
-        internal InflateBlocks(ZlibCodec codec, System.Object checkfn, int w)
+        internal InflateBlocks(ZlibCodec codec, object checkfn, int w)
         {
             _codec = codec;
             hufts = new int[MANY * 3];
@@ -7865,19 +7733,19 @@ namespace MonoGame.Utilities
     /// A class for compressing and decompressing GZIP streams.
     /// </summary>
     /// <remarks>
-    /// <para> The <c>GZipStream</c> is a <see href="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator</see> on
-    /// a<see cref="Stream"/>. It adds GZIP compression or decompression to any stream.</para> <para> Like the
-    /// <c>System.IO.Compression.GZipStream</c> in the .NET Base Class Library, the<c>Ionic.Zlib.GZipStream</c> can
+    /// <para>The <c>GZipStream</c> is a <see href="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator</see> on
+    /// a<see cref="Stream"/>. It adds GZIP compression or decompression to any stream.</para> <para>Like
+    /// the<c>System.IO.Compression.GZipStream</c> in the .NET Base Class Library, the<c>Ionic.Zlib.GZipStream</c> can
     /// compress while writing, or decompress while reading, but not vice versa.  The compression method used is GZIP,
     /// which is documented in <see href="http://www.ietf.org/rfc/rfc1952.txt">IETF RFC 1952</see>, "GZIP file format
-    /// specification version 4.3".</para> <para> A <c>GZipStream</c> can be used to decompress data (through
-    /// <c>Read()</c>) or to compress data (through <c>Write()</c>), but not both.</para> <para> If you wish to use the
-    /// <c>GZipStream</c> to compress data, you must wrap it around a write-able stream. As you call <c>Write()</c> on
-    /// the <c>GZipStream</c>, the data will be compressed into the GZIP format.  If you want to decompress data, you
-    /// must wrap the <c>GZipStream</c> around a readable stream that contains an IETF RFC 1952-compliant stream.  The
-    /// data will be decompressed as you call<c>Read()</c> on the <c>GZipStream</c>.</para> <para> Though the GZIP
-    /// format allows data from multiple files to be concatenated together, this stream handles only a single segment of
-    /// GZIP format, typically representing a single file.</para>
+    /// specification version 4.3".</para> <para>A <c>GZipStream</c> can be used to decompress data
+    /// (through<c>Read()</c>) or to compress data (through <c>Write()</c>), but not both.</para> <para>If you wish to
+    /// use the<c>GZipStream</c> to compress data, you must wrap it around a write-able stream. As you call
+    /// <c>Write()</c> on the <c>GZipStream</c>, the data will be compressed into the GZIP format.  If you want to
+    /// decompress data, you must wrap the <c>GZipStream</c> around a readable stream that contains an IETF RFC 1952-
+    /// compliant stream.  The data will be decompressed as you call<c>Read()</c> on the <c>GZipStream</c>.</para>
+    /// <para>Though the GZIP format allows data from multiple files to be concatenated together, this stream handles
+    /// only a single segment of GZIP format, typically representing a single file.</para>
     /// </remarks>
     internal class GZipStream : Stream
     {
@@ -7923,11 +7791,11 @@ namespace MonoGame.Utilities
         /// </summary>
         ///
         /// <remarks>
-        /// <para> The GZIP format allows for each file to optionally have an associated comment stored with the file. 
+        /// <para>The GZIP format allows for each file to optionally have an associated comment stored with the file. 
         /// The comment is encoded with the ISO-8859-1 code page.  To include a comment in a GZIP stream you create, set
-        /// this property before calling <c>Write()</c> for the first time on the<c>GZipStream</c>.</para> <para> When
+        /// this property before calling <c>Write()</c> for the first time on the<c>GZipStream</c>.</para> <para>When
         /// using <c>GZipStream</c> to decompress, you can retrieve this property after the first call to <c>Read()</c>.
-        ///  If no comment has been set in the GZIP bytestream, the Comment property will return <c>null</c>
+        /// If no comment has been set in the GZIP bytestream, the Comment property will return <c>null</c>
         /// (<c>Nothing</c> in VB).</para>
         /// </remarks>
         internal String Comment
@@ -7946,11 +7814,11 @@ namespace MonoGame.Utilities
         /// </summary>
         ///
         /// <remarks>
-        /// <para> The GZIP format optionally allows each file to have an associated filename.  When compressing data
-        /// (through <c>Write()</c>), set this FileName before calling <c>Write()</c> the first time on the
-        /// <c>GZipStream</c>. The actual filename is encoded into the GZIP bytestream with the ISO-8859-1 code page,
+        /// <para>The GZIP format optionally allows each file to have an associated filename.  When compressing data
+        /// (through <c>Write()</c>), set this FileName before calling <c>Write()</c> the first time on
+        /// the<c>GZipStream</c>. The actual filename is encoded into the GZIP bytestream with the ISO-8859-1 code page,
         /// according to RFC 1952. It is the application's responsibility to insure that the FileName can be encoded and
-        /// decoded correctly with this code page.</para> <para> When decompressing (through <c>Read()</c>), you can
+        /// decoded correctly with this code page.</para> <para>When decompressing (through <c>Read()</c>), you can
         /// retrieve this value any time after the first <c>Read()</c>.  In the case where there was no filename encoded
         /// into the GZIP bytestream, the property will return <c>null</c> (<c>Nothing</c> in VB).</para>
         /// </remarks>
@@ -8010,19 +7878,19 @@ namespace MonoGame.Utilities
         /// Create a <c>GZipStream</c> using the specified <c>CompressionMode</c>.
         /// </summary>
         /// <remarks>
-        /// <para> When mode is <c>CompressionMode.Compress</c>, the <c>GZipStream</c> will use the default compression
-        /// level.</para> <para> As noted in the class documentation, the <c>CompressionMode</c> (Compress or
-        /// Decompress) also establishes the "direction" of the stream.  A<c>GZipStream</c> with
-        /// <c>CompressionMode.Compress</c> works only through<c>Write()</c>.  A <c>GZipStream</c>
-        /// with<c>CompressionMode.Decompress</c> works only through <c>Read()</c>.</para>
+        /// <para>When mode is <c>CompressionMode.Compress</c>, the <c>GZipStream</c> will use the default compression
+        /// level.</para> <para>As noted in the class documentation, the <c>CompressionMode</c> (Compress or Decompress)
+        /// also establishes the "direction" of the stream.  A<c>GZipStream</c> with<c>CompressionMode.Compress</c>
+        /// works only through<c>Write()</c>.  A <c>GZipStream</c> with<c>CompressionMode.Decompress</c> works only
+        /// through <c>Read()</c>.</para>
         /// </remarks>
         ///
         /// <example>
-        /// This example shows how to use a GZipStream to compress data. <code> using (System.IO.Stream input =
+        /// This example shows how to use a GZipStream to compress data. <code>using (System.IO.Stream input =
         /// System.IO.File.OpenRead(fileToCompress)) { using (var raw = System.IO.File.Create(outputFile)) { using
         /// (Stream compressor = new GZipStream(raw, CompressionMode.Compress)) { byte[] buffer = new
         /// byte[WORKING_BUFFER_SIZE]; int n; while ((n= input.Read(buffer, 0, buffer.Length)) != 0) {
-        /// compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB"> Dim outputFile As String = (fileToCompress
+        /// compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB">Dim outputFile As String = (fileToCompress
         /// &amp; ".compressed") Using input As Stream = File.OpenRead(fileToCompress) Using raw As FileStream =
         /// File.Create(outputFile) Using compressor As Stream = New GZipStream(raw, CompressionMode.Compress) Dim
         /// buffer As Byte() = New Byte(4096) {} Dim n As Integer = -1 Do While (n &lt;&gt; 0) If (n &gt; 0) Then
@@ -8031,13 +7899,13 @@ namespace MonoGame.Utilities
         /// </example>
         ///
         /// <example>
-        /// This example shows how to use a GZipStream to uncompress a file. <code> private void GunZipFile(string
+        /// This example shows how to use a GZipStream to uncompress a file. <code>private void GunZipFile(string
         /// filename) { if (!filename.EndsWith(".gz)) throw new ArgumentException("filename"); var DecompressedFile =
         /// filename.Substring(0,filename.Length-3); byte[] working = new byte[WORKING_BUFFER_SIZE]; int n= 1; using
         /// (System.IO.Stream input = System.IO.File.OpenRead(filename)) { using (Stream decompressor= new
         /// Ionic.Zlib.GZipStream(input, CompressionMode.Decompress, true)) { using (var output =
         /// System.IO.File.Create(DecompressedFile)) { while (n !=0) { n= decompressor.Read(working, 0, working.Length);
-        /// if (n > 0) { output.Write(working, 0, n); } } } } } }</code> <code lang="VB"> Private Sub GunZipFile(ByVal
+        /// if (n > 0) { output.Write(working, 0, n); } } } } } }</code> <code lang="VB">Private Sub GunZipFile(ByVal
         /// filename as String) If Not (filename.EndsWith(".gz)) Then Throw New ArgumentException("filename") End If Dim
         /// DecompressedFile as String = filename.Substring(0,filename.Length-3) Dim working(WORKING_BUFFER_SIZE) as
         /// Byte Dim n As Integer = 1 Using input As Stream = File.OpenRead(filename) Using decompressor As Stream = new
@@ -8056,18 +7924,18 @@ namespace MonoGame.Utilities
         /// <c>CompressionLevel</c>.
         /// </summary>
         /// <remarks>
-        /// <para> The <c>CompressionMode</c> (Compress or Decompress) also establishes the "direction" of the stream. 
-        /// A <c>GZipStream</c> with<c>CompressionMode.Compress</c> works only through <c>Write()</c>. 
-        /// A<c>GZipStream</c> with <c>CompressionMode.Decompress</c> works only through <c>Read()</c>.</para>
+        /// <para>The <c>CompressionMode</c> (Compress or Decompress) also establishes the "direction" of the stream.  A
+        /// <c>GZipStream</c> with<c>CompressionMode.Compress</c> works only through <c>Write()</c>.  A<c>GZipStream</c>
+        /// with <c>CompressionMode.Decompress</c> works only through <c>Read()</c>.</para>
         /// </remarks>
         ///
         /// <example>
-        /// This example shows how to use a <c>GZipStream</c> to compress a file into a .gz file. <code> using
+        /// This example shows how to use a <c>GZipStream</c> to compress a file into a .gz file. <code>using
         /// (System.IO.Stream input = System.IO.File.OpenRead(fileToCompress)) { using (var raw =
         /// System.IO.File.Create(fileToCompress + ".gz")) { using (Stream compressor = new GZipStream(raw,
         /// CompressionMode.Compress, CompressionLevel.BestCompression)) { byte[] buffer = new
         /// byte[WORKING_BUFFER_SIZE]; int n; while ((n= input.Read(buffer, 0, buffer.Length)) != 0) {
-        /// compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB"> Using input As Stream =
+        /// compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB">Using input As Stream =
         /// File.OpenRead(fileToCompress) Using raw As FileStream = File.Create(fileToCompress &amp; ".gz") Using
         /// compressor As Stream = New GZipStream(raw, CompressionMode.Compress, CompressionLevel.BestCompression) Dim
         /// buffer As Byte() = New Byte(4096) {} Dim n As Integer = -1 Do While (n &lt;&gt; 0) If (n &gt; 0) Then
@@ -8089,16 +7957,16 @@ namespace MonoGame.Utilities
         /// </summary>
         ///
         /// <remarks>
-        /// <para> This constructor allows the application to request that the captive stream remain open after the
+        /// <para>This constructor allows the application to request that the captive stream remain open after the
         /// deflation or inflation occurs.  By default, after<c>Close()</c> is called on the stream, the captive stream
         /// is also closed. In some cases this is not desired, for example if the stream is a memory stream that will be
         /// re-read after compressed data has been written to it.  Specify true for the <paramref name="leaveOpen"/>
-        /// parameter to leave the stream open.</para> <para> The <see cref="CompressionMode"/> (Compress or Decompress)
+        /// parameter to leave the stream open.</para> <para>The <see cref="CompressionMode"/> (Compress or Decompress)
         /// also establishes the "direction" of the stream.  A <c>GZipStream</c> with<c>CompressionMode.Compress</c>
         /// works only through <c>Write()</c>.  A <c>GZipStream</c> with <c>CompressionMode.Decompress</c> works only
-        /// through <c>Read()</c>.</para> <para> The <c>GZipStream</c> will use the default compression level. If you
+        /// through <c>Read()</c>.</para> <para>The <c>GZipStream</c> will use the default compression level. If you
         /// want to specify the compression level, see <see cref="GZipStream(Stream, CompressionMode, CompressionLevel,
-        /// bool)"/>.</para> <para> See the other overloads of this constructor for example code.</para>
+        /// bool)"/>.</para> <para>See the other overloads of this constructor for example code.</para>
         /// </remarks>
         ///
         /// <param name="stream">
@@ -8126,22 +7994,22 @@ namespace MonoGame.Utilities
         /// </summary>
         ///
         /// <remarks>
-        /// <para> This constructor allows the application to request that the captive stream remain open after the
+        /// <para>This constructor allows the application to request that the captive stream remain open after the
         /// deflation or inflation occurs.  By default, after<c>Close()</c> is called on the stream, the captive stream
         /// is also closed. In some cases this is not desired, for example if the stream is a memory stream that will be
         /// re-read after compressed data has been written to it.  Specify true for the <paramref name="leaveOpen"/>
-        /// parameter to leave the stream open.</para> <para> As noted in the class documentation, the
-        /// <c>CompressionMode</c> (Compress or Decompress) also establishes the "direction" of the stream. 
-        /// A<c>GZipStream</c> with <c>CompressionMode.Compress</c> works only through<c>Write()</c>.  A
-        /// <c>GZipStream</c> with <c>CompressionMode.Decompress</c> works only through <c>Read()</c>.</para>
+        /// parameter to leave the stream open.</para> <para>As noted in the class documentation,
+        /// the<c>CompressionMode</c> (Compress or Decompress) also establishes the "direction" of the stream. 
+        /// A<c>GZipStream</c> with <c>CompressionMode.Compress</c> works only through<c>Write()</c>. 
+        /// A<c>GZipStream</c> with <c>CompressionMode.Decompress</c> works only through <c>Read()</c>.</para>
         /// </remarks>
         ///
         /// <example>
-        /// This example shows how to use a <c>GZipStream</c> to compress data. <code> using (System.IO.Stream input =
+        /// This example shows how to use a <c>GZipStream</c> to compress data. <code>using (System.IO.Stream input =
         /// System.IO.File.OpenRead(fileToCompress)) { using (var raw = System.IO.File.Create(outputFile)) { using
         /// (Stream compressor = new GZipStream(raw, CompressionMode.Compress, CompressionLevel.BestCompression, true))
         /// { byte[] buffer = new byte[WORKING_BUFFER_SIZE]; int n; while ((n= input.Read(buffer, 0, buffer.Length)) !=
-        /// 0) { compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB"> Dim outputFile As String =
+        /// 0) { compressor.Write(buffer, 0, n); } } } }</code> <code lang="VB">Dim outputFile As String =
         /// (fileToCompress &amp; ".compressed") Using input As Stream = File.OpenRead(fileToCompress) Using raw As
         /// FileStream = File.Create(outputFile) Using compressor As Stream = New GZipStream(raw,
         /// CompressionMode.Compress, CompressionLevel.BestCompression, True) Dim buffer As Byte() = New Byte(4096) {}
@@ -8160,7 +8028,7 @@ namespace MonoGame.Utilities
         /// <summary>
 /// This property sets the flush behavior on the stream.
 /// </summary>
-        virtual internal FlushType FlushMode
+        internal virtual FlushType FlushMode
         {
             get { return (this._baseStream._flushMode); }
             set
@@ -8176,10 +8044,10 @@ namespace MonoGame.Utilities
         /// </summary>
         ///
         /// <remarks>
-        /// <para> The working buffer is used for all stream operations.  The default size is 1024 bytes.  The minimum
+        /// <para>The working buffer is used for all stream operations.  The default size is 1024 bytes.  The minimum
         /// size is 128 bytes. You may get better performance with a larger buffer.  Then again, you might not.  You
-        /// would have to test it.</para> <para> Set this before the first call to <c>Read()</c> or <c>Write()</c> on
-        /// the stream. If you try to set it afterwards, it will throw.</para>
+        /// would have to test it.</para> <para>Set this before the first call to <c>Read()</c> or <c>Write()</c> on the
+        /// stream. If you try to set it afterwards, it will throw.</para>
         /// </remarks>
         internal int BufferSize
         {
@@ -8200,12 +8068,12 @@ namespace MonoGame.Utilities
         /// <summary>
         /// Returns the total number of bytes input so far.
         /// </summary>
-        virtual internal long TotalIn { get { return this._baseStream._z.TotalBytesIn; } }
+        internal virtual long TotalIn { get { return this._baseStream._z.TotalBytesIn; } }
 
         /// <summary>
         /// Returns the total number of bytes output so far.
         /// </summary>
-        virtual internal long TotalOut { get { return this._baseStream._z.TotalBytesOut; } }
+        internal virtual long TotalOut { get { return this._baseStream._z.TotalBytesOut; } }
 
         #endregion
 
@@ -8215,8 +8083,8 @@ namespace MonoGame.Utilities
 /// Dispose the stream.
 /// </summary>
         /// <remarks>
-/// <para> This may or may not result in a <c>Close()</c> call on the captive stream.  See the constructors that
-/// have a <c>leaveOpen</c> parameter for more information.</para> <para> This method may be invoked in two
+/// <para>This may or may not result in a <c>Close()</c> call on the captive stream.  See the constructors that
+/// have a <c>leaveOpen</c> parameter for more information.</para> <para>This method may be invoked in two
 /// distinct scenarios.  If disposing == true, the method has been called directly or indirectly by a user's
 /// code, for example via the internal Dispose() method. In this case, both managed and unmanaged resources can
 /// be referenced and disposed.  If disposing == false, the method has been called by the runtime from inside
@@ -8334,7 +8202,7 @@ namespace MonoGame.Utilities
         /// </remarks>
         ///
         /// <example>
-        /// <code> byte[] working = new byte[WORKING_BUFFER_SIZE]; using (System.IO.Stream input =
+        /// <code>byte[] working = new byte[WORKING_BUFFER_SIZE]; using (System.IO.Stream input =
         /// System.IO.File.OpenRead(_CompressedFile)) { using (Stream decompressor= new Ionic.Zlib.GZipStream(input,
         /// CompressionMode.Decompress, true)) { using (var output = System.IO.File.Create(_DecompressedFile)) { int n;
         /// while ((n= decompressor.Read(working, 0, working.Length)) !=0) { output.Write(working, 0, n); } } } }</code>
@@ -8381,11 +8249,11 @@ namespace MonoGame.Utilities
         /// </summary>
         ///
         /// <remarks>
-        /// <para> If you wish to use the <c>GZipStream</c> to compress data while writing, you can create a
-        /// <c>GZipStream</c> with <c>CompressionMode.Compress</c>, and a writable output stream.  Then call
-        /// <c>Write()</c> on that <c>GZipStream</c>, providing uncompressed data as input.  The data sent to the output
-        /// stream will be the compressed form of the data written.</para> <para> A <c>GZipStream</c> can be used for
-        /// <c>Read()</c> or <c>Write()</c>, but not both. Writing implies compression.  Reading implies
+        /// <para>If you wish to use the <c>GZipStream</c> to compress data while writing, you can create
+        /// a<c>GZipStream</c> with <c>CompressionMode.Compress</c>, and a writable output stream.  Then
+        /// call<c>Write()</c> on that <c>GZipStream</c>, providing uncompressed data as input.  The data sent to the
+        /// output stream will be the compressed form of the data written.</para> <para>A <c>GZipStream</c> can be used
+        /// for<c>Read()</c> or <c>Write()</c>, but not both. Writing implies compression.  Reading implies
         /// decompression.</para>
         /// </remarks>
         /// <param name="buffer">The buffer holding data to write to the stream.</param>
@@ -8413,8 +8281,8 @@ namespace MonoGame.Utilities
         #endregion
 
 
-        internal static readonly System.DateTime _unixEpoch = new System.DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-        internal static readonly System.Text.Encoding iso8859dash1 = new Iso88591Encoding();
+        internal static readonly DateTime _unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        internal static readonly Encoding iso8859dash1 = new Iso88591Encoding();
 
         private int EmitHeader()
         {
@@ -8445,7 +8313,7 @@ namespace MonoGame.Utilities
             // mtime
             if(!LastModified.HasValue)
                 LastModified = DateTime.Now;
-            System.TimeSpan delta = LastModified.Value - _unixEpoch;
+            TimeSpan delta = LastModified.Value - _unixEpoch;
             Int32 timet = (Int32)delta.TotalSeconds;
             Array.Copy(BitConverter.GetBytes(timet), 0, header, i, 4);
             i += 4;
@@ -8501,7 +8369,7 @@ namespace MonoGame.Utilities
         {
             using(var ms = new MemoryStream())
             {
-                System.IO.Stream compressor =
+                Stream compressor =
                     new GZipStream(ms, CompressionMode.Compress, CompressionLevel.BestCompression);
                 ZlibBaseStream.CompressString(s, compressor);
                 return ms.ToArray();
@@ -8529,7 +8397,7 @@ namespace MonoGame.Utilities
         {
             using(var ms = new MemoryStream())
             {
-                System.IO.Stream compressor =
+                Stream compressor =
                     new GZipStream(ms, CompressionMode.Compress, CompressionLevel.BestCompression);
 
                 ZlibBaseStream.CompressBuffer(b, compressor);
@@ -8574,9 +8442,9 @@ namespace MonoGame.Utilities
         /// <returns>The data in uncompressed form</returns>
         internal static byte[] UncompressBuffer(byte[] compressed)
         {
-            using(var input = new System.IO.MemoryStream(compressed))
+            using(var input = new MemoryStream(compressed))
             {
-                System.IO.Stream decompressor =
+                Stream decompressor =
                     new GZipStream(input, CompressionMode.Decompress);
 
                 return ZlibBaseStream.UncompressBuffer(compressed, decompressor);
@@ -8663,7 +8531,7 @@ namespace MonoGame.Utilities
 
         private CompressFunc DeflateFunction;
 
-        private static readonly System.String[] _ErrorMessage = new System.String[]
+        private static readonly string[] _ErrorMessage = new string[]
         {
             "need dictionary",
             "stream end",
@@ -10386,7 +10254,7 @@ namespace MonoGame.Utilities
         /// </summary>
         /// <param name="input">The stream over which to calculate the CRC32</param>
         /// <returns>the CRC32 calculation</returns>
-        internal Int32 GetCrc32(System.IO.Stream input) { return GetCrc32AndCopy(input, null); }
+        internal Int32 GetCrc32(Stream input) { return GetCrc32AndCopy(input, null); }
 
         /// <summary>
         /// Returns the CRC32 for the specified stream, and writes the input into the output stream.
@@ -10394,7 +10262,7 @@ namespace MonoGame.Utilities
         /// <param name="input">The stream over which to calculate the CRC32</param>
         /// <param name="output">The stream into which to deflate the input</param>
         /// <returns>the CRC32 calculation</returns>
-        internal Int32 GetCrc32AndCopy(System.IO.Stream input, System.IO.Stream output)
+        internal Int32 GetCrc32AndCopy(Stream input, Stream output)
         {
             if(input == null)
                 throw new Exception("The input stream must not be null.");
@@ -10488,7 +10356,7 @@ namespace MonoGame.Utilities
         /// Process a run of N identical bytes into the CRC.
         /// </summary>
         /// <remarks>
-        /// <para> This method serves as an optimization for updating the CRC when a run of identical bytes is found.
+        /// <para>This method serves as an optimization for updating the CRC when a run of identical bytes is found.
         /// Rather than passing in a buffer of length n, containing all identical bytes b, this method accepts the byte
         /// value and the length of the (virtual) buffer - the length of the run.</para>
         /// </remarks>
@@ -10687,7 +10555,7 @@ namespace MonoGame.Utilities
         /// specify true if the instance should reverse data bits.
         /// </param>
         /// <remarks>
-        /// <para> In the CRC-32 used by BZip2, the bits are reversed. Therefore if you want a CRC32 with compatibility
+        /// <para>In the CRC-32 used by BZip2, the bits are reversed. Therefore if you want a CRC32 with compatibility
         /// with BZip2, you should pass true here. In the CRC-32 used by GZIP and PKZIP, the bits are not reversed;
         /// Therefore if you want a CRC32 with compatibility with those, you should pass false.</para>
         /// </remarks>
@@ -10708,7 +10576,7 @@ namespace MonoGame.Utilities
         /// </param>
         ///
         /// <remarks>
-        /// <para> In the CRC-32 used by BZip2, the bits are reversed. Therefore if you want a CRC32 with compatibility
+        /// <para>In the CRC-32 used by BZip2, the bits are reversed. Therefore if you want a CRC32 with compatibility
         /// with BZip2, you should pass true here for the <c>reverseBits</c> parameter. In the CRC-32 used by GZIP and
         /// PKZIP, the bits are not reversed; Therefore if you want a CRC32 with compatibility with those, you should
         /// pass false for the<c>reverseBits</c> parameter.</para>
@@ -10724,7 +10592,7 @@ namespace MonoGame.Utilities
         /// Reset the CRC-32 class - clear the CRC "remainder register."
         /// </summary>
         /// <remarks>
-        /// <para> Use this when employing a single instance of this class to compute multiple, distinct CRCs on
+        /// <para>Use this when employing a single instance of this class to compute multiple, distinct CRCs on
         /// multiple, distinct data blocks.</para>
         /// </remarks>
         internal void Reset() { _register = 0xFFFFFFFFU; }
@@ -10744,16 +10612,16 @@ namespace MonoGame.Utilities
     /// </summary>
     ///
     /// <remarks>
-    /// <para> This class can be used to verify the CRC of a ZipEntry when reading from a stream, or to calculate a CRC
+    /// <para>This class can be used to verify the CRC of a ZipEntry when reading from a stream, or to calculate a CRC
     /// when writing to a stream.  The stream should be used to either read, or write, but not both.  If you intermix
-    /// reads and writes, the results are not defined.</para> <para> This class is intended primarily for use internally
+    /// reads and writes, the results are not defined.</para> <para>This class is intended primarily for use internally
     /// by the DotNetZip library.</para>
     /// </remarks>
-    internal class CrcCalculatorStream : System.IO.Stream, System.IDisposable
+    internal class CrcCalculatorStream : Stream, IDisposable
     {
         private static readonly Int64 UnsetLengthLimit = -99;
 
-        internal System.IO.Stream _innerStream;
+        internal Stream _innerStream;
         private CRC32 _Crc32;
         private Int64 _lengthLimit = -99;
         private bool _leaveOpen;
@@ -10762,42 +10630,38 @@ namespace MonoGame.Utilities
         /// The default constructor.
         /// </summary>
         /// <remarks>
-        /// <para> Instances returned from this constructor will leave the underlying stream open upon Close().  The
+        /// <para>Instances returned from this constructor will leave the underlying stream open upon Close().  The
         /// stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para>
         /// </remarks>
         /// <param name="stream">The underlying stream</param>
-        internal CrcCalculatorStream(System.IO.Stream stream) : this(true,
-                                                                     CrcCalculatorStream.UnsetLengthLimit,
-                                                                     stream,
-                                                                     null)
-        { }
+        internal CrcCalculatorStream(Stream stream) : this(true, CrcCalculatorStream.UnsetLengthLimit, stream, null) { }
 
         /// <summary>
         /// The constructor allows the caller to specify how to handle the   underlying stream at close.
         /// </summary>
         /// <remarks>
-        /// <para> The stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para>
+        /// <para>The stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para>
         /// </remarks>
         /// <param name="stream">The underlying stream</param>
         /// <param name="leaveOpen">
         /// true to leave the underlying stream open upon close of the <c>CrcCalculatorStream</c>; false otherwise.
         /// </param>
-        internal CrcCalculatorStream(System.IO.Stream stream, bool leaveOpen) : this(leaveOpen,
-                                                                                     CrcCalculatorStream.UnsetLengthLimit,
-                                                                                     stream,
-                                                                                     null)
+        internal CrcCalculatorStream(Stream stream, bool leaveOpen) : this(leaveOpen,
+                                                                           CrcCalculatorStream.UnsetLengthLimit,
+                                                                           stream,
+                                                                           null)
         { }
 
         /// <summary>
         /// A constructor allowing the specification of the length of the stream   to read.
         /// </summary>
         /// <remarks>
-        /// <para> The stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para> <para>
+        /// <para>The stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para> <para>
         /// Instances returned from this constructor will leave the underlying stream open upon Close().</para>
         /// </remarks>
         /// <param name="stream">The underlying stream</param>
         /// <param name="length">The length of the stream to slurp</param>
-        internal CrcCalculatorStream(System.IO.Stream stream, Int64 length) : this(true, length, stream, null)
+        internal CrcCalculatorStream(Stream stream, Int64 length) : this(true, length, stream, null)
         {
             if(length < 0)
                 throw new ArgumentException(nameof(length));
@@ -10808,17 +10672,17 @@ namespace MonoGame.Utilities
         /// the underlying stream open upon   Close().
         /// </summary>
         /// <remarks>
-        /// <para> The stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para>
+        /// <para>The stream uses the default CRC32 algorithm, which implies a polynomial of 0xEDB88320.</para>
         /// </remarks>
         /// <param name="stream">The underlying stream</param>
         /// <param name="length">The length of the stream to slurp</param>
         /// <param name="leaveOpen">
         /// true to leave the underlying stream open upon close of the <c>CrcCalculatorStream</c>; false otherwise.
         /// </param>
-        internal CrcCalculatorStream(System.IO.Stream stream, Int64 length, bool leaveOpen) : this(leaveOpen,
-                                                                                                   length,
-                                                                                                   stream,
-                                                                                                   null)
+        internal CrcCalculatorStream(Stream stream, Int64 length, bool leaveOpen) : this(leaveOpen,
+                                                                                         length,
+                                                                                         stream,
+                                                                                         null)
         {
             if(length < 0)
                 throw new ArgumentException(nameof(length));
@@ -10829,8 +10693,8 @@ namespace MonoGame.Utilities
         /// the underlying stream open upon   Close(), and the CRC32 instance to use.
         /// </summary>
         /// <remarks>
-        /// <para> The stream uses the specified CRC32 instance, which allows the application to specify how the CRC
-        /// gets calculated.</para>
+        /// <para>The stream uses the specified CRC32 instance, which allows the application to specify how the CRC gets
+        /// calculated.</para>
         /// </remarks>
         /// <param name="stream">The underlying stream</param>
         /// <param name="length">The length of the stream to slurp</param>
@@ -10838,10 +10702,10 @@ namespace MonoGame.Utilities
         /// true to leave the underlying stream open upon close of the <c>CrcCalculatorStream</c>; false otherwise.
         /// </param>
         /// <param name="crc32">the CRC32 instance to use to calculate the CRC32</param>
-        internal CrcCalculatorStream(System.IO.Stream stream, Int64 length, bool leaveOpen, CRC32 crc32) : this(leaveOpen,
-                                                                                                                length,
-                                                                                                                stream,
-                                                                                                                crc32)
+        internal CrcCalculatorStream(Stream stream, Int64 length, bool leaveOpen, CRC32 crc32) : this(leaveOpen,
+                                                                                                      length,
+                                                                                                      stream,
+                                                                                                      crc32)
         {
             if(length < 0)
                 throw new ArgumentException(nameof(length));
@@ -10853,7 +10717,7 @@ namespace MonoGame.Utilities
         // is no length set.  So we validate the length limit in those ctors that use an
         // explicit param, otherwise we don't validate, because it could be our special
         // value.
-        private CrcCalculatorStream(bool leaveOpen, Int64 length, System.IO.Stream stream, CRC32 crc32) : base()
+        private CrcCalculatorStream(bool leaveOpen, Int64 length, Stream stream, CRC32 crc32) : base()
         {
             _innerStream = stream;
             _Crc32 = crc32 ?? new CRC32();
@@ -10876,7 +10740,7 @@ namespace MonoGame.Utilities
         /// Provides the current CRC for all blocks slurped in.
         /// </summary>
         /// <remarks>
-        /// <para> The running total of the CRC is kept as data is written or read through the stream.  read this
+        /// <para>The running total of the CRC is kept as data is written or read through the stream.  read this
         /// property after all reads or writes to get an accurate CRC for the entire stream.</para>
         /// </remarks>
         internal Int32 Crc { get { return _Crc32.Crc32Result; } }
@@ -10885,7 +10749,7 @@ namespace MonoGame.Utilities
         /// Indicates whether the underlying stream will be left open when the   <c>CrcCalculatorStream</c> is Closed.
         /// </summary>
         /// <remarks>
-        /// <para> Set this at any point before calling <see cref="Stream.Close"/>.</para>
+        /// <para>Set this at any point before calling <see cref="Stream.Close"/>.</para>
         /// </remarks>
         internal bool LeaveOpen { get { return _leaveOpen; } set { _leaveOpen = value; } }
 
@@ -10944,7 +10808,7 @@ namespace MonoGame.Utilities
         /// Indicates whether the stream supports seeking.
         /// </summary>
         /// <remarks>
-        /// <para> Always returns false.</para>
+        /// <para>Always returns false.</para>
         /// </remarks>
         public override bool CanSeek { get { return false; } }
 
@@ -10966,8 +10830,7 @@ namespace MonoGame.Utilities
             get
             {
                 if(_lengthLimit == CrcCalculatorStream.UnsetLengthLimit)
-                    return _innerStream.Length;
-                else return _lengthLimit;
+                    return _innerStream.Length; else return _lengthLimit;
             }
         }
 
@@ -10987,7 +10850,7 @@ namespace MonoGame.Utilities
         /// <param name="offset">N/A</param>
         /// <param name="origin">N/A</param>
         /// <returns>N/A</returns>
-        public override long Seek(long offset, System.IO.SeekOrigin origin) { throw new NotSupportedException(); }
+        public override long Seek(long offset, SeekOrigin origin) { throw new NotSupportedException(); }
 
         /// <summary>
         /// This method always throws <see cref="NotSupportedException"/>

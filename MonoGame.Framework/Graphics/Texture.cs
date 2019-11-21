@@ -117,7 +117,7 @@ namespace Microsoft.Xna.Framework.Graphics
             return pitch;
         }
 
-        internal protected override void GraphicsDeviceResetting() { PlatformGraphicsDeviceResetting(); }
+        protected internal override void GraphicsDeviceResetting() { PlatformGraphicsDeviceResetting(); }
     }
 }
 

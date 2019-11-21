@@ -78,7 +78,7 @@ namespace MonoGame.Utilities.Deflate
     /// href="http://www.ietf.org/rfc/rfc1951.txt">RFC 1951 - DEFLATE</see>.
     /// </remarks>
 
-    sealed public class ZlibCodec
+    public sealed class ZlibCodec
     {
         /// <summary>
         /// The buffer from which data is taken.
@@ -131,7 +131,7 @@ namespace MonoGame.Utilities.Deflate
         /// <summary>
         /// used for diagnostics, when something goes wrong!
         /// </summary>
-        public System.String Message;
+        public string Message;
 
         internal DeflateManager dstate;
         internal InflateManager istate;
@@ -283,7 +283,7 @@ namespace MonoGame.Utilities.Deflate
         /// AvailableBytesOut  before calling this method.
         /// </remarks>
         /// <example>
-        /// <code> private void InflateBuffer() { int bufferSize = 1024; byte[] buffer = new byte[bufferSize]; ZlibCodec
+        /// <code>private void InflateBuffer() { int bufferSize = 1024; byte[] buffer = new byte[bufferSize]; ZlibCodec
         /// decompressor = new ZlibCodec();  Console.WriteLine("\n============================================");
         /// Console.WriteLine("Size of Buffer to Inflate: {0} bytes.", CompressedBytes.Length); MemoryStream ms = new
         /// MemoryStream(DecompressedBytes);  int rc = decompressor.InitializeInflate();  decompressor.InputBuffer =
@@ -298,7 +298,7 @@ namespace MonoGame.Utilities.Deflate
         /// ZlibConstants.Z_STREAM_END &amp;&amp; rc != ZlibConstants.Z_OK) throw new Exception("inflating: " +
         /// decompressor.Message);  if (buffer.Length - decompressor.AvailableBytesOut &gt; 0) ms.Write(buffer, 0,
         /// buffer.Length - decompressor.AvailableBytesOut); } while (decompressor.AvailableBytesIn &gt; 0 ||
-        /// decompressor.AvailableBytesOut == 0);  decompressor.EndInflate(); } </code>
+        /// decompressor.AvailableBytesOut == 0);  decompressor.EndInflate(); }</code>
         /// </example>
         /// <param name="flush">The flush to use when inflating.</param>
         /// <returns>Z_OK if everything goes well.</returns>
@@ -345,7 +345,7 @@ namespace MonoGame.Utilities.Deflate
         /// The codec will use the MAX window bits and the default level of compression.
         /// </remarks>
         /// <example>
-        /// <code> int bufferSize = 40000; byte[] CompressedBytes = new byte[bufferSize]; byte[] DecompressedBytes = new
+        /// <code>int bufferSize = 40000; byte[] CompressedBytes = new byte[bufferSize]; byte[] DecompressedBytes = new
         /// byte[bufferSize];  ZlibCodec compressor = new ZlibCodec(); 
         /// compressor.InitializeDeflate(CompressionLevel.Default);  compressor.InputBuffer =
         /// System.Text.ASCIIEncoding.ASCII.GetBytes(TextToCompress); compressor.NextIn = 0; compressor.AvailableBytesIn
@@ -353,7 +353,7 @@ namespace MonoGame.Utilities.Deflate
         /// compressor.AvailableBytesOut = CompressedBytes.Length;  while (compressor.TotalBytesIn !=
         /// TextToCompress.Length &amp;&amp; compressor.TotalBytesOut &lt; bufferSize) {
         /// compressor.Deflate(FlushType.None); }  while (true) { int rc= compressor.Deflate(FlushType.Finish); if (rc
-        /// == ZlibConstants.Z_STREAM_END) break; }  compressor.EndDeflate(); </code>
+        /// == ZlibConstants.Z_STREAM_END) break; }  compressor.EndDeflate();</code>
         /// </example>
         /// <returns>Z_OK if all goes well. You generally don't need to check the return code.</returns>
         public int InitializeDeflate() { return _InternalInitializeDeflate(true); }
@@ -444,7 +444,7 @@ namespace MonoGame.Utilities.Deflate
         /// You must have set InputBuffer and OutputBuffer before calling this method.
         /// </remarks>
         /// <example>
-        /// <code> private void DeflateBuffer(CompressionLevel level) { int bufferSize = 1024; byte[] buffer = new
+        /// <code>private void DeflateBuffer(CompressionLevel level) { int bufferSize = 1024; byte[] buffer = new
         /// byte[bufferSize]; ZlibCodec compressor = new ZlibCodec(); 
         /// Console.WriteLine("\n============================================"); Console.WriteLine("Size of Buffer to
         /// Deflate: {0} bytes.", UncompressedBytes.Length); MemoryStream ms = new MemoryStream();  int rc =

@@ -35,7 +35,7 @@ namespace Microsoft.Xna.Framework.Graphics
         public ModelBone Root { get; set; }
 
         /// <summary>
-        /// Custom attached object. <remarks> Skinning data is example of attached object for model.</remarks>
+        /// Custom attached object. <remarks>Skinning data is example of attached object for model.</remarks>
         /// </summary>
         public object Tag { get; set; }
 

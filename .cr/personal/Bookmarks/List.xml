@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root Type="DevExpress.CodeRush.Foundation.Markers.SolutionBookmarksContainer">
+  <Options Language="Neutral">
+    <Items>
+      <Item Id="{7f076e95-1219-4c93-ae93-5c7261785950}">
+        <Id>1</Id>
+        <File>CS581_MonoGame_Addons\MonoGame.Framework\Platform\Utilities\CurrentPlatform.cs</File>
+        <Line>25</Line>
+        <Character>34</Character>
+        <ViewportTop>11</ViewportTop>
+        <ViewportTopMax>86</ViewportTopMax>
+        <TopLine>11</TopLine>
+      </Item>
+    </Items>
+  </Options>
+</Root>
