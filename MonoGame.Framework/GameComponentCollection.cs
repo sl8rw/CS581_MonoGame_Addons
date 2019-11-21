@@ -27,7 +27,7 @@ namespace Microsoft.Xna.Framework
         /// </summary>
         protected override void ClearItems()
         {
-            for(int i = 0; i < base.Count; i++)
+            for(int i = 0; i < Count; i++)
             {
                 this.OnComponentRemoved(new GameComponentCollectionEventArgs(base[i]));
             }
@@ -36,7 +36,7 @@ namespace Microsoft.Xna.Framework
 
         protected override void InsertItem(int index, IGameComponent item)
         {
-            if(base.IndexOf(item) != -1)
+            if(IndexOf(item) != -1)
             {
                 throw new ArgumentException("Cannot Add Same Component Multiple Times");
             }

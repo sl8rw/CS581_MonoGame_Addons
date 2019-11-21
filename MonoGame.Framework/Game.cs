@@ -86,7 +86,7 @@ namespace Microsoft.Xna.Framework
 
         ~Game() { Dispose(false); }
 
-        [System.Diagnostics.Conditional("DEBUG")]
+        [Conditional("DEBUG")]
         internal void Log(string Message)
         {
             if(Platform != null)
@@ -155,7 +155,7 @@ namespace Microsoft.Xna.Framework
             }
         }
 
-        [System.Diagnostics.DebuggerNonUserCode]
+        [DebuggerNonUserCode]
         private void AssertNotDisposed()
         {
             if(_isDisposed)
@@ -550,11 +550,11 @@ if(!IsActive && (InactiveSleepTime.TotalMilliseconds >= 1.0))
             }
         }
 
-        private static readonly Action<IDrawable, GameTime> DrawAction =(drawable, gameTime) => drawable.Draw(gameTime);
+        private static readonly Action<IDrawable, GameTime> DrawAction = (drawable, gameTime) => drawable.Draw(gameTime);
 
         protected virtual void Draw(GameTime gameTime) { _drawables.ForEachFilteredItem(DrawAction, gameTime); }
 
-        private static readonly Action<IUpdateable, GameTime> UpdateAction =(updateable, gameTime) => updateable.Update(gameTime);
+        private static readonly Action<IUpdateable, GameTime> UpdateAction = (updateable, gameTime) => updateable.Update(gameTime);
 
         protected virtual void Update(GameTime gameTime) { _updateables.ForEachFilteredItem(UpdateAction, gameTime); }
 
@@ -870,7 +870,7 @@ if(!IsActive && (InactiveSleepTime.TotalMilliseconds >= 1.0))
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             { return ((System.Collections.IEnumerable)_items).GetEnumerator(); }
 
-            private static readonly Comparison<int> RemoveJournalSortComparison =(x, y) => Comparer<int>.Default
+            private static readonly Comparison<int> RemoveJournalSortComparison = (x, y) => Comparer<int>.Default
                 .Compare(y, x); // Sort high to low
 
             private void ProcessRemoveJournal()
